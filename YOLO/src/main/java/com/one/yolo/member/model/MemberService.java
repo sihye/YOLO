@@ -11,5 +11,7 @@ public interface MemberService {
 	public static final int PWD_DISAGREE=3; //비밀번호가 일치하지 않는 경우
 	
 	public int memberInsert(MemberVO vo);
-	
+	public int duplicateUserid(String userid);
+	public int loginCheck(String userid, String pwd);
+	public MemberVO selectByUserid(String userid);
 }
