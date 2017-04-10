@@ -16,10 +16,9 @@ public class LoginController {
 	private static final Logger logger
 	=LoggerFactory.getLogger(LoginController.class);
 
-	
 	@RequestMapping(value="/login.do",method=RequestMethod.GET)
 	public String login_get(){
-		logger.info("로그인 화면 보여주기");
+		logger.info("濡쒓렇�씤 �솕硫� 蹂댁뿬二쇨린");
 		
 		return "login/login";
 	}

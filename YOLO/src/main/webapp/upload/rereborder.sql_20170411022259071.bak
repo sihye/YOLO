@@ -1,0 +1,51 @@
+-- 답변글답변
+CREATE TABLE rereborder (
+	rereno  number        NOT NULL, -- 번호
+	reno    number        NOT NULL, -- 답변글번호
+	id      VARCHAR2(50)  NOT NULL, -- id
+	content CLOB          NOT NULL, -- 내용
+	regdate DATE          DEFAULT sysdate -- 날짜
+);
+
+-- 답변글답변 기본키
+CREATE UNIQUE INDEX PK_rereborder
+	ON rereborder ( -- 답변글답변
+		rereno ASC -- 번호
+	);
+
+-- 답변글답변
+ALTER TABLE rereborder
+	ADD
+		CONSTRAINT PK_rereborder -- 답변글답변 기본키
+		PRIMARY KEY (
+			rereno -- 번호
+		);
+
+-- 답변글답변
+ALTER TABLE rereborder
+	ADD
+		CONSTRAINT FK_reborder_TO_rereborder -- 답변 -> 답변글답변
+		FOREIGN KEY (
+			reno -- 답변글번호
+		)
+		REFERENCES reborder ( -- 답변
+			reno -- 답변글번호
+		)
+		 ON DELETE CASCADE;
+
+-- 답변글답변
+ALTER TABLE rereborder
+	ADD
+		CONSTRAINT FK_member_TO_rereborder -- 회원 -> 답변글답변
+		FOREIGN KEY (
+			id -- id
+		)
+		REFERENCES member ( -- 회원
+			id -- id
+		)
+	 ON DELETE CASCADE;
+
+create sequence rereborder_seq
+start with 1
+increment by 1
+nocache;
