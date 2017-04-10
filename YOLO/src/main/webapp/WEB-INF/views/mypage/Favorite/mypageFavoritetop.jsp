@@ -32,9 +32,8 @@
 		<div class="row">
 			<div class="col-md-2">
 				<ul class="nav nav-pills nav-stacked">
-					<li class="active"><a href="#">메뉴1</a></li>
-					<li><a href="#">메뉴2</a></li>
-					<li><a href="#">메뉴3</a></li>
-					<li><a href="#">메뉴4</a></li>
+					<li class="active"><a href='<c:url value="/mypage/Favorite/FavoriteClass.do"/>'>나의관심</a></li>
+					<li><a href='<c:url value="/mypage/Mybbs/qnaboard.do"/>'>내가쓴글</a></li>				
+					<li><a href='<c:url value="/mypage/message/messageSend.do"/>'>쪽지함</a></li>				
 				</ul>
 			</div>
