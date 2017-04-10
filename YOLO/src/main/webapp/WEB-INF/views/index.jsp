@@ -9,21 +9,27 @@
 <title>test1</title>
 
 <!-- Bootstrap -->
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/flexslider.css" type="text/css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<script
-	src="${pageContext.request.contextPath}/jquery/jquery-3.1.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/jquery/jquery-3.1.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.flexslider').flexslider({
+			animation : "slide"
+		});
+	})
+	
+</script>
 <style type="text/css">
 body {
 	padding-top: 100px;
@@ -32,12 +38,30 @@ body {
 #nav_top {
 	background-color: #5cd484;
 }
+
+footer {
+	background-color: #3a3a3a;
+	text-align: center;
+}
+
+.text-center {
+	text-decoration: none;
+}
+
+.footerText {
+	color: #9a9a9a;
+}
+/* .flex-viewport{
+	width: 90%;
+	margin: 0 auto;
+} */
 </style>
 </head>
 <body>
 
 	<!-- container-fluid 꽉차게 하는거 -->
 	<div class="container">
+		<!-- top nav 로고, 검색, 로그인 -->
 		<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
 			id="nav_top">
 			<!-- 모바일 화면에서 사이트 로고가 들어가는 부분과 모바일 상태에서 아이콘 처리하는 부분 -->
@@ -64,26 +88,119 @@ body {
 					style="color: white; font-size: 1.5em; padding-top: 12px;"></i></a>
 			</div>
 			<div class="col-md-5 col-md-offset-2"></div>
-			<div class="collapse navbar-collapse navbar-ex1-collapse col-sm-6">
+			<!-- 로그인부분 -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse col-sm-1" style="margin-right: 20px;">
 				<span>로그인</span>
+			</div>
+			<div class="collapse navbar-collapse navbar-ex1-collapse col-sm-1">
+				<span>회원가입</span>
 			</div>
 			<!-- /.navbar-collapse -->
 		</nav>
+		<!-- 분류카테고리 -->
 		<div class="dropdown">
-			<a data-toggle="dropdown" href="#">여기를 클릭하세요.</a>
-			<ul class="dropdown-menu" role="menu">
-				<li role="presentation"><a role="menuitem" tabindex="-1"
-					href="#">메뉴 1</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1"
-					href="#">메뉴 2</a></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1"
-					href="#">메뉴 3</a></li>
-				<li role="presentation" class="divider"></li>
-				<li role="presentation"><a role="menuitem" tabindex="-1"
-					href="#">분리된 메뉴 </a></li>
+			<ul class="nav nav-pills">
+				<li class="dropdown"><a data-toggle="dropdown" href="#">라이프스타일<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a role="menuitem" href="#">독서/글쓰기</a></li>
+						<li><a role="menuitem" href="#">사진/영상</a></li>
+						<li><a role="menuitem" href="#">요리/베이킹</a></li>
+						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
+					</ul></li>
+				<li class="dropdown"><a data-toggle="dropdown" href="#">어학<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a role="menuitem" href="#">메뉴 1</a></li>
+						<li><a role="menuitem" href="#">메뉴 2</a></li>
+						<li><a role="menuitem" href="#">메뉴 3</a></li>
+						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
+					</ul></li>
+				<li class="dropdown"><a data-toggle="dropdown" href="#">뷰티<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a role="menuitem" href="#">메뉴 1</a></li>
+						<li><a role="menuitem" href="#">메뉴 2</a></li>
+						<li><a role="menuitem" href="#">메뉴 3</a></li>
+						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
+					</ul></li>
+				<li class="dropdown"><a data-toggle="dropdown" href="#">여기클릭
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a role="menuitem" href="#">메뉴 1</a></li>
+						<li><a role="menuitem" href="#">메뉴 2</a></li>
+						<li><a role="menuitem" href="#">메뉴 3</a></li>
+						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
+					</ul></li>
 			</ul>
 		</div>
 
+		<!-- 이미지 슬라이드 -->
+		<%-- 		<div class="flexslider">
+  <ul class="slides">
+    <li>
+      <img src="${pageContext.request.contextPath}/img/0M0B0169.jpg" />
+    </li>
+    <li>
+      <img src="${pageContext.request.contextPath}/img/index1.jpg" />
+    </li>
+    <li>
+      <img src="${pageContext.request.contextPath}/img/index2 (1).jpg" />
+    </li>
+  </ul>
+</div> --%>
+
+		<!-- Place somewhere in the <body> of your page -->
+		
+
+
+		<!-- 섬네일 게시판 -->
+
+
+
 	</div>
+	<div class="flexslider">
+			<ul class="slides">
+				<li><img
+					src="${pageContext.request.contextPath}/img/index2 (1).jpg" /></li>
+				<li><img
+					src="${pageContext.request.contextPath}/img/index1.jpg" /></li>
+				<li><img
+					src="${pageContext.request.contextPath}/img/0M0B0169.jpg" /></li>
+			</ul>
+		</div>
+	<!-- bottom -->
+	<footer>
+		<div>
+			<div id="footer-menu">
+				<a href="#" class="text-center">서비스 소개</a> <a href="#"
+					class="text-center">뉴스</a> <a href="#" class="text-center">이용안내</a>
+				<a href="#" class="text-center">개인정보 취급방침</a> <a href="#"
+					class="text-center">이용약관</a>
+			</div>
+
+			<div>
+				<a href="#" target="_blank"> <img
+					src="http://moccozy.blob.core.windows.net/icon/icon_facebook.png"
+					width="35" height="32" class="socialIcon m-sm" />
+				</a> <a href="#" target="_blank"> <img
+					src="http://moccozy.blob.core.windows.net/icon/icon_Instagram.png"
+					width="35" height="35" class="socialIcon m-sm" />
+				</a> <a href="#" target="_blank"> <img
+					src="http://moccozy.blob.core.windows.net/icon/icon_blog.png"
+					width="35" height="36" class="socialIcon m-sm" />
+				</a>
+			</div>
+
+			<div class="footerText">
+				회사명 : YOLO &nbsp;|&nbsp; 대표 : 최한교 &nbsp;|&nbsp; 개인정보책임자 : 조장원
+				&nbsp;|&nbsp; 주소 : 경기도 성남시 중원구 둔촌대로 474, 3층 303호<br /> 사업자번호 :
+				169-23-00157 &nbsp;|&nbsp; 통신판매업 : 제 2016-성남중원-0001 호 &nbsp;|&nbsp;
+				고객센터 : 070-7122-9970, 010-2604-4584&nbsp;<br /> YOLO는 통신판매중개자이며
+				통신판매의 당사자가 아닙니다. 따라서 YOLO는 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.
+			</div>
+		</div>
+	</footer>
 </body>
 </html>
