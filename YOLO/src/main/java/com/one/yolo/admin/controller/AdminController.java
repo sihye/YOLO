@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-@RequestMapping(value="/admin")
+@RequestMapping(value="/admin.do")
 @Controller
 public class AdminController {
 	
@@ -15,7 +15,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/operator.do",method=RequestMethod.GET)
 	public String upfile_get(){
-		logger.info("operator È­¸é ");
+		logger.info("operator È­ï¿½ï¿½ ");
 		return "admin/operator";
 	}
 	
