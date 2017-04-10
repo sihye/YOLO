@@ -10,4 +10,6 @@ public interface MemberService {
 	public static final int ID_NONE=2;   //아이디가 없는 경우
 	public static final int PWD_DISAGREE=3; //비밀번호가 일치하지 않는 경우
 	
+	public int memberInsert(MemberVO vo);
+	
 }

@@ -14,5 +14,24 @@
 								#{kNo1},#{kNo2},#{kNo3},#{mTel},#{qQuestion},#{mQuestionanswer})
 			
 	</insert>
+	
+	<select id="duplicateUserid" parameterType="string" 
+		resultType="int" >
+		select count(*) from member
+		where m_userid=#{mUserid}
+	</select>
+	
+	<select id="selectPwdByUserid" parameterType="string" 
+		resultType="string">
+		select m_pwd from member where m_userid=#{mUserid} 
+		and m_leavedate is null
+	</select>
+	
+	<select id="selectByUserid" parameterType="string" 
+		resultType="MemberVO">
+		select * from member where m_userid=#{mUserid}
+	</select>
+	
+	
 
 </mapper>
