@@ -13,9 +13,11 @@ public class AdminController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
-	@RequestMapping(value="/upfile.do",method=RequestMethod.GET)
+	@RequestMapping(value="/operator.do",method=RequestMethod.GET)
 	public String upfile_get(){
-		logger.info("upfile 화면 출력");
-		return "admin/upfile";
+		logger.info("operator ȭ�� ");
+		return "admin/operator";
 	}
+	
+	
 }
