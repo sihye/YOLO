@@ -4,6 +4,16 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.upfile">
 
+<select id="selectByOname" parameterType="string" resultType="UpfileVO">
+	select f_no,f_filename,f_originalfilename,f_filesize from upfile where f_filename = #{fFilename}
+</select>
+<insert id="insertUpfile" parameterType="UpfileVO">
+<selectKey keyProperty="fNo" resultType="int" order="BEFORE">
+			select upfile_seq.nextval from dual
+</selectKey>
+	insert into upfile(f_no,f_filename,f_originalfilename,f_filesize)
+	values(#{fNo},#{fFilename},#{fOriginalfilename},#{fFilesize})
+</insert>
 </mapper>
 
 
