@@ -30,10 +30,5 @@ public class FavoriteController {
 		
 		return "mypage/Favorite/seeClass";
 	}
-	@RequestMapping("/Payment.do")
-	public String Payment(){
-		logger.info("Payment 화면 보여주기");
-		
-		return "mypage/Favorite/Payment";
-	}
+
 }

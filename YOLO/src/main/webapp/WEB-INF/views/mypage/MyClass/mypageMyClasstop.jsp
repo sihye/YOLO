@@ -7,8 +7,8 @@
 			<div class="col-md-2">
 				<ul class="nav nav-pills nav-stacked">
 					<li><a href='<c:url value="/mypage/Favorite/FavoriteClass.do"/>'>나의관심</a></li>
-					<li><a href='<c:url value="/mypage/MyClass/HostClass.do"/>'>나의클래스</a></li>
-					<li class="active"><a href='<c:url value="/mypage/Mybbs/qnaboard.do"/>'>내가쓴글</a></li>				
+					<li class="active"><a href='<c:url value="/mypage/MyClass/HostClass.do"/>'>나의클래스</a></li>
+					<li><a href='<c:url value="/mypage/Mybbs/qnaboard.do"/>'>내가쓴글</a></li>				
 					<li><a href='<c:url value="/mypage/message/messageSend.do"/>'>쪽지함</a></li>				
 				</ul>
 			</div>
