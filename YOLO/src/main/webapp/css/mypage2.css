@@ -6,10 +6,10 @@ input,select,button{vertical-align:middle}
 address,cite,code,dfn,em,th,var{font-style:normal;font-weight:normal}
 ol,ul,li{list-style:none}
 
-#date_sort{clear:both;background:rgb(247, 247, 247);border:1px solid rgb(199, 199, 199);width:818px;height:80px;margin-bottom:6px;padding-top:15px}
+#date_sort{clear:both;background:rgb(247, 247, 247);border:1px solid rgb(199, 199, 199);width:945px;height:90px;margin-bottom:6px;padding-top:15px}
 #date_sort.bd_other{border-top-color:#444;border-left:none;border-right:none}
-#date_sort p{background:url(//pics.gmkt.kr/pc/ko/net/myg/img_myg.png) no-repeat 0px -227px;margin:8px 20px 0px 21px;width:52px;height:11px;float:left;display:inline}
-#date_sort p.bg_none{background:none;color:#777;font-size:11px;font-weight:bold;letter-spacing:-1px}
+#date_sort label{margin-left: 20px;margin-right: 10px}
+
 
 .btn_s_gray10{background:url(//pics.gmkt.kr/pc/ko/net/myg/button/btn_gray_right_10.png) no-repeat right 0px;height:22px;padding-right:22px;display:inline-block}
 .btn_s_gray10 span{background:url(//pics.gmkt.kr/pc/ko/net/myg/button/btn_gray_left.png) no-repeat 0px 0px;height:22px;color:rgb(68, 68, 68);line-height:22px;letter-spacing:-1px;padding-left:11px;font-size:11px;display:inline-block;cursor:pointer;_line-height:23px}
