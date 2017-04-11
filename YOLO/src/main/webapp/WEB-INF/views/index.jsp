@@ -9,26 +9,32 @@
 <title>test1</title>
 
 <!-- Bootstrap -->
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/flexslider.css" type="text/css">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/flexslider.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<script src="${pageContext.request.contextPath}/jquery/jquery-3.1.1.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/jquery/jquery-3.1.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/jquery.flexslider-min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/jquery.flexslider-min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$('.flexslider').flexslider({
 			animation : "slide"
 		});
 	})
-	
 </script>
 <style type="text/css">
 body {
@@ -51,14 +57,22 @@ footer {
 .footerText {
 	color: #9a9a9a;
 }
-/* .flex-viewport{
-	width: 90%;
-	margin: 0 auto;
-} */
+
+.dropdown {
+	
+}
+
+#nav_top {
+	margin-bottom: 0;
+}
+
+.flex-viewport {
+	height: 550px;
+	position: relative;
+}
 </style>
 </head>
 <body>
-
 	<!-- container-fluid 꽉차게 하는거 -->
 	<div class="container">
 		<!-- top nav 로고, 검색, 로그인 -->
@@ -80,52 +94,83 @@ footer {
 
 			<div class="collapse navbar-collapse navbar-ex1-collapse col-sm-6">
 				<form class="navbar-form navbar-left" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
+					<div class="input-group custom-search-form">
+						<input type="text" class="form-control"
+							placeholder="Class Search..."> <span
+							class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<i class="fa fa-search" style="color: gray"></i>
+							</button>
+						</span>
 					</div>
 				</form>
-				<a href="#"><i class="fa fa-search" aria-hidden="true"
-					style="color: white; font-size: 1.5em; padding-top: 12px;"></i></a>
 			</div>
 			<div class="col-md-5 col-md-offset-2"></div>
 			<!-- 로그인부분 -->
-			<div class="collapse navbar-collapse navbar-ex1-collapse col-sm-1" style="margin-right: 20px;">
+			<div class="collapse navbar-collapse navbar-ex1-collapse col-sm-1"
+				style="margin-right: 20px; margin-top: 13px; font-size: 1.05em; font-weight: bold; color: white;">
 				<span>로그인</span>
 			</div>
-			<div class="collapse navbar-collapse navbar-ex1-collapse col-sm-1">
+			<div class="collapse navbar-collapse navbar-ex1-collapse col-sm-1"
+				style="margin-right: 20px; margin-top: 13px; font-size: 1.05em; font-weight: bold; color: white;">
 				<span>회원가입</span>
 			</div>
 			<!-- /.navbar-collapse -->
 		</nav>
-		<!-- 분류카테고리 -->
+	</div>
+
+	<div class="flexslider">
+		<ul class="slides">
+			<li><img
+				src="${pageContext.request.contextPath}/img/index2 (1).jpg" /></li>
+			<li><img src="${pageContext.request.contextPath}/img/index1.jpg" /></li>
+			<li><img
+				src="${pageContext.request.contextPath}/img/0M0B0169.jpg" /></li>
+		</ul>
+	</div>
+	<!-- 분류카테고리 -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-1 dropdown"></div>
+			<div class="col-md-1 dropdown"></div>
+			<div class="col-md-1 dropdown"></div>
+			<div class="col-md-1 dropdown"></div>
+			<div class="col-md-1 dropdown"></div>
+			<div class="col-md-1 dropdown"></div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="col-md-2"></div>
 		<div class="dropdown">
 			<ul class="nav nav-pills">
-				<li class="dropdown"><a data-toggle="dropdown" href="#">라이프스타일<span
-						class="caret"></span></a>
+				<li class="dropdown col-md-2"><a data-toggle="dropdown"
+					href="#">라이프스타일<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a role="menuitem" href="#">독서/글쓰기</a></li>
 						<li><a role="menuitem" href="#">사진/영상</a></li>
 						<li><a role="menuitem" href="#">요리/베이킹</a></li>
 						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
 					</ul></li>
-				<li class="dropdown"><a data-toggle="dropdown" href="#">어학<span
-						class="caret"></span></a>
+				<li class="dropdown col-md-2"><a data-toggle="dropdown"
+					href="#">어학<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a role="menuitem" href="#">메뉴 1</a></li>
 						<li><a role="menuitem" href="#">메뉴 2</a></li>
 						<li><a role="menuitem" href="#">메뉴 3</a></li>
 						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
 					</ul></li>
-				<li class="dropdown"><a data-toggle="dropdown" href="#">뷰티<span
-						class="caret"></span></a>
+				<li class="dropdown col-md-2"><a data-toggle="dropdown"
+					href="#">뷰티<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a role="menuitem" href="#">메뉴 1</a></li>
 						<li><a role="menuitem" href="#">메뉴 2</a></li>
 						<li><a role="menuitem" href="#">메뉴 3</a></li>
 						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
 					</ul></li>
-				<li class="dropdown"><a data-toggle="dropdown" href="#">여기클릭
-						<span class="caret"></span>
+				<li class="dropdown col-md-2"><a data-toggle="dropdown"
+					href="#">여기클릭 <span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a role="menuitem" href="#">메뉴 1</a></li>
@@ -135,41 +180,29 @@ footer {
 					</ul></li>
 			</ul>
 		</div>
-
-		<!-- 이미지 슬라이드 -->
-		<%-- 		<div class="flexslider">
-  <ul class="slides">
-    <li>
-      <img src="${pageContext.request.contextPath}/img/0M0B0169.jpg" />
-    </li>
-    <li>
-      <img src="${pageContext.request.contextPath}/img/index1.jpg" />
-    </li>
-    <li>
-      <img src="${pageContext.request.contextPath}/img/index2 (1).jpg" />
-    </li>
-  </ul>
-</div> --%>
-
-		<!-- Place somewhere in the <body> of your page -->
-		
-
-
-		<!-- 섬네일 게시판 -->
-
-
-
+		<div class="col-md-2"></div>
 	</div>
-	<div class="flexslider">
-			<ul class="slides">
-				<li><img
-					src="${pageContext.request.contextPath}/img/index2 (1).jpg" /></li>
-				<li><img
-					src="${pageContext.request.contextPath}/img/index1.jpg" /></li>
-				<li><img
-					src="${pageContext.request.contextPath}/img/0M0B0169.jpg" /></li>
-			</ul>
+	
+	<div class="container">
+	<!-- 게시판 반복~! -->
+		<div class="row">
+			<div class="col-sm-6 col-md-3">
+				<div class="thumbnail">
+					<img src="DSC_6305.jpg" alt="...">
+					<div class="caption">
+						<h3>제목</h3>
+						<p>내용도 넣을 수 있다.</p>
+						<p>
+							<a href="#" class="btn btn-primary" role="button">Button</a> <a
+								href="#" class="btn btn-default" role="button">Button</a>
+						</p>
+					</div>
+				</div>
+			</div>
 		</div>
+		
+	</div>
+
 	<!-- bottom -->
 	<footer>
 		<div>
