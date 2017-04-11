@@ -48,15 +48,11 @@ $(document).ready(function(){
 	   <option value="">
 	   	카테고리 선택
 	   </option>
-		<option value="1">
-			안녕하세요
-		</option>
-		<option value="1">
-			반가워요
-		</option>
-		<option value="1">
-			처음뵙겠습니다.
-		</option>
+	   <c:forEach var="vo" items="${list }">
+	   <option value="${vo.kNo }">
+	   	${vo.kName }
+	   </option>
+		</c:forEach>
 		</select>
 		</div>
 	   <div class="form-group">

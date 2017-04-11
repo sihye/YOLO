@@ -1,7 +1,6 @@
 package com.one.yolo.admin.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.one.yolo.admin.model.OperAtorService;
 import com.one.yolo.admin.model.OperAtorVO;
+import com.one.yolo.category.model.CategoryDAO;
+import com.one.yolo.category.model.CategoryService;
+import com.one.yolo.category.model.CategoryVO;
 import com.one.yolo.upfile.model.UpfileService;
 import com.one.yolo.upfile.model.UpfileVO;
 
@@ -32,9 +34,16 @@ public class AdminController {
 	@Autowired
 	private OperAtorService operAtorservice;
 	
+	@Autowired
+	private CategoryService categoryservice;
+	
 	@RequestMapping(value="/operator.do",method=RequestMethod.GET)
-	public String upfile_get(){
+	public String upfile_get(Model model){
 		logger.info("operator_get");
+		List<CategoryVO> list = categoryservice.selectAll();
+		
+		model.addAttribute("list",list);
+		
 		return "admin/operator";
 	}
 
@@ -42,16 +51,15 @@ public class AdminController {
 	public String upfile_post(HttpServletRequest request ,@ModelAttribute OperAtorVO vo){
 		logger.info("upfile =={}",vo);
 		UpfileVO upfilevo = upFileservice.fileUpload(request);
-		vo.setkNo(1);
-		System.out.println("ÄÁÆ®·Ñ·¯¿¡¼­ÀÇ vo="+upfilevo.getfNo());
+		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ vo="+upfilevo.getfNo());
 		vo.setfNo(upfilevo.getfNo());
-		System.out.println("¼ÂÆÃÈÄ¿¡ °ª = " + vo.getfNo());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½ï¿½ = " + vo.getfNo());
 		int cnt = operAtorservice.insertOperAtor(vo);
 		
 		if(cnt>0){
-			logger.info("ÀÚ·á ÀúÀå ¼º°ø!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			logger.info("ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		}else{
-			logger.info("ÀÚ·á ÀúÀå ½ÇÆÐ!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			logger.info("ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		}
 	
 		return "admin/operator";
