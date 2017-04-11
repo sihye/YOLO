@@ -42,7 +42,7 @@ body {
 }
 
 #nav_top {
-	background-color: #5cd484;
+	background-color: #337ab7;
 }
 
 footer {
