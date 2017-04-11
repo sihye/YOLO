@@ -5,19 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link href="../css/bootstrap.min.css" rel="stylesheet">
-  <link href="../css/bootstrap-select.min.css" rel="stylesheet" type="text/css"  />
-  <script type="text/javascript" src="../jquery/jquery-3.1.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/bootstrap-select.min.js" ></script>
+
+
+<link href="<c:url value='/css/bootstrap.min.css'/>" rel="stylesheet">
+<link href="<c:url value='/css/bootstrap-select.min.css'/>" rel="stylesheet" type="text/css"  />
+<script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.1.min.js'/>"></script>
+<script src="<c:url value='/js/bootstrap.min.js'/>"></script>
+<script src="<c:url value='/js/bootstrap-select.min.js'/>" ></script>
+  
 <script type="text/javascript">
-$(window).on('load', function ()
-		{
-			$('.selectpicker').selectpicker(
-			{
-				'selectedText': 'cat'
-		 	});
-		});
+
 $(document).ready(function(){
 	$("#frm1").submit(function(event){
 		if($("#Select1").val()==""){
@@ -36,7 +33,6 @@ $(document).ready(function(){
 <title>Insert title here</title>
 </head>
 <body>
-
 	<div class="container">
 	<h2>배너등록</h2>
 	<form class="form-inline" role="form" name="frm1" id="frm1" method="post" action='<c:url value="/admin/operator.do"/>' enctype="multipart/form-data">
@@ -76,5 +72,3 @@ $(document).ready(function(){
 	</form>
 </div>
 		
-</body>
-</html>

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.one.yolo.admin.model.OperAtorService;
 import com.one.yolo.admin.model.OperAtorVO;
-import com.one.yolo.category.model.CategoryDAO;
 import com.one.yolo.category.model.CategoryService;
 import com.one.yolo.category.model.CategoryVO;
 import com.one.yolo.upfile.model.UpfileService;
@@ -65,6 +64,10 @@ public class AdminController {
 		return "admin/operator";
 	}
 	
+	@RequestMapping(value="/opmain.do")
+	public String main(){
+		return "admin/opmain";
+	}
 
 	
 	
