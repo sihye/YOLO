@@ -3,7 +3,7 @@
 <%@ include file="mypageMYBBStop.jsp"%>
 			<div class="col-md-10">
 				<ul class="nav nav-tabs nav-justified">
-					<li><a href='<c:url value="/mypage/Mybbs/qnaboard.do"/>'>문의/답글</a></li>
+					<li><a href='<c:url value="/mypage/Mybbs/qnaboard.do"/>'>문의/답변</a></li>
 					<li class="active"><a href='<c:url value="/mypage/Mybbs/reviewboard.do"/>'>후기</a></li>			
 				</ul>
 			</div>
