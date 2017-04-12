@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="mypageMYBBStop.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/mypage2.css" />
@@ -58,27 +59,15 @@
       </tr>
     </thead>
     <tbody>
+    <c:forEach var="map" items="${alist }">
       <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
+        <td>${map.CQ_NO }</td>
+        <td>${map.C_NAME }</td>
+        <td>${map["CQ_CONTENT"] }</td>
+        <td>${map.C_REGDATE }</td>
+        <td>처리중</td>
       </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-        <td>mary@example.com</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-        <td>july@example.com</td>
-        <td>july@example.com</td>
-      </tr>
+    </c:forEach>  
     </tbody>
   </table>
 </div>

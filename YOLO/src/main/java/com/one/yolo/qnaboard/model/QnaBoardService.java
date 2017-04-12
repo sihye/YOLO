@@ -1,5 +1,8 @@
 package com.one.yolo.qnaboard.model;
 
-public interface QnaBoardService {
+import java.util.List;
+import java.util.Map;
 
+public interface QnaBoardService {
+	public List<Map<String, Object>> selectQnaBoard();
 }

@@ -3,11 +3,18 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.qnaboard">
-	<resultMap type="ClassVO" id="classResult">
-		<id column="C_NAME" property="className" 
-			jdbcType="VACHER"/>				
+	<resultMap type="hashmap" id="QnaBoardResult">
+		<id column="CQ_NO" property="CQ_NO" 
+			jdbcType="BIGINT"/>
+		<result column="C_NAME" property="C_NAME" 
+			jdbcType="VARCHAR"/>
+		<result column="C_REGDATE" property="C_REGDATE" 
+			jdbcType="TIMESTAMP"/>
+		<result column="CQ_CONTENT" property="CQ_CONTENT" 
+			jdbcType="CLOB" javaType="java.lang.String"/>		
 	</resultMap>
-	<select id="selectQnaBoard" resultMap="classResult">
+	
+	<select id="selectQnaBoard" resultType="QnaBoardResult">
 		select*from qnaboard
 	</select>
 </mapper>
