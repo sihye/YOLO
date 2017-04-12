@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.qnaboard">
+	<resultMap type="ClassVO" id="classResult">
+		<id column="C_NAME" property="className" 
+			jdbcType="VACHER"/>				
+	</resultMap>
+	<select id="selectQnaBoard" resultMap="classResult">
+		select*from qnaboard
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
