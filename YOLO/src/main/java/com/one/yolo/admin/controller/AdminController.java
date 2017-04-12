@@ -1,6 +1,7 @@
 package com.one.yolo.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,33 +41,43 @@ public class AdminController {
 	public String upfile_get(Model model){
 		logger.info("operator_get");
 		List<CategoryVO> list = categoryservice.selectAll();
-		
+		List<Map<String,Object>> map = operAtorservice.selectJoin();
 		model.addAttribute("list",list);
-		
+		model.addAttribute("map",map);
 		return "admin/operator";
 	}
 
 	@RequestMapping(value="/operator.do",method=RequestMethod.POST)
-	public String upfile_post(HttpServletRequest request ,@ModelAttribute OperAtorVO vo){
+	public String upfile_post(HttpServletRequest request ,@ModelAttribute OperAtorVO vo,Model model){
 		logger.info("upfile =={}",vo);
 		UpfileVO upfilevo = upFileservice.fileUpload(request);
 		System.out.println("��Ʈ�ѷ������� vo="+upfilevo.getfNo());
 		vo.setfNo(upfilevo.getfNo());
 		System.out.println("�����Ŀ� �� = " + vo.getfNo());
 		int cnt = operAtorservice.insertOperAtor(vo);
-		
+		String msg="",url="/admin/operator.do";
 		if(cnt>0){
-			logger.info("�ڷ� ���� ����!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			msg="등록성공 !";
 		}else{
-			logger.info("�ڷ� ���� ����!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			msg="등록실패 !";
 		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
 	
-		return "admin/operator";
+		return "common/message";
 	}
 	
-	@RequestMapping(value="/opmain.do")
-	public String main(){
-		return "admin/opmain";
+	@RequestMapping(value="/opmain.do", method=RequestMethod.GET)
+	
+		public String main_get(Model model){
+			logger.info("operator_get");
+			List<CategoryVO> list = categoryservice.selectAll();
+			List<Map<String,Object>> map = operAtorservice.selectJoin();
+			model.addAttribute("list",list);
+			model.addAttribute("map",map);
+			
+			return "admin/operator";
+		
 	}
 
 	

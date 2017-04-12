@@ -10,7 +10,9 @@
 insert into operator(op_no,f_no,k_no,op_showflag)
 values(#{opNo},#{fNo},#{kNo},#{opShowflag})
 </insert>
-
+<select id="opSelectJoin" resultType="hashmap">
+select *from operatorJoin
+</select>
 
 </mapper>
 

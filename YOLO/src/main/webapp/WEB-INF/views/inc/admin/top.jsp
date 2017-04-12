@@ -30,11 +30,7 @@
 	href="<c:url value='../startbootstrap-sb-admin-2-gh-pages/dist/css/sb-admin-2.css'/>"
 	rel="stylesheet">
 
-<!-- Morris Charts CSS -->
-<!--     <link href="../vendor/morrisjs/morris.css" rel="stylesheet"> -->
-<link
-	href="<c:url value='../startbootstrap-sb-admin-2-gh-pages/vendor/morrisjs/morris.css' />"
-	rel="stylesheet">
+
 
 <!-- Custom Fonts -->
 <!--   <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -44,8 +40,7 @@
 	 
 	<!-- jQuery -->
 		<!--   <script src="../vendor/jquery/jquery.min.js"></script> -->
-		<script
-			src="<c:url value='../startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.min.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.1.min.js'/>"></script>
 
 		<!-- Bootstrap Core JavaScript -->
 		<!--     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script> -->
@@ -72,8 +67,14 @@
 		<!--     <script src="../dist/js/sb-admin-2.js"></script> -->
 		<script
 			src="<c:url value='../startbootstrap-sb-admin-2-gh-pages/dist/js/sb-admin-2.js'/>"></script>
-		
-			
+		<style type="text/css">
+footer {
+	background-color: #3a3a3a;
+	text-align: center;
+}
+
+
+</style>	
 </head>
 <body>
 
@@ -135,5 +136,6 @@
 			</div>
 			<!-- /.sidebar-collapse -->
 		</div>
+		
 		
 
