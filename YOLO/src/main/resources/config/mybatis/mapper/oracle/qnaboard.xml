@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.qnaboard">
+	<resultMap type="hashmap" id="QnaBoardResult">
+		<result column="CQ_CONTENT" property="CQ_CONTENT" 
+			jdbcType="CLOB" javaType="java.lang.String"/>		
+	</resultMap>
+	
+	<select id="selectQnaBoard" resultMap="QnaBoardResult">
+		select*from qnaboard
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
