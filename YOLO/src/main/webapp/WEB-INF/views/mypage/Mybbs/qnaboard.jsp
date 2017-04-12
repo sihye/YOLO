@@ -61,10 +61,10 @@
     <tbody>
     <c:forEach var="map" items="${alist }">
       <tr>
-        <td>${map.CQ_NO }</td>
-        <td>${map.C_NAME }</td>
+        <td>${map["CQ_NO"] }</td>
+        <td>${map["C_NAME"] }</td>
         <td>${map["CQ_CONTENT"] }</td>
-        <td>${map.C_REGDATE }</td>
+        <td>${map["C_REGDATE"] }</td>
         <td>처리중</td>
       </tr>
     </c:forEach>  
