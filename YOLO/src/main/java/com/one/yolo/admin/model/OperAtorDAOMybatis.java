@@ -22,6 +22,17 @@ public class OperAtorDAOMybatis extends SqlSessionDaoSupport implements OperAtor
 	public List<Map<String, Object>> selectJoin() {
 		return getSqlSession().selectList(namespace+".opSelectJoin");
 	}
+
+	@Override
+	public int delupdate(int op_no) {
+		return getSqlSession().update(namespace+".delUpdateOperAtor",op_no);
+	}
+
+	@Override
+	public OperAtorVO selectByNo(int op_no) {
+		return getSqlSession().selectOne(namespace+".selectByNo",op_no);
+	}
+	
 	
 	
 	

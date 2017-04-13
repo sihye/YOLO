@@ -6,4 +6,6 @@ public interface UpfileService {
 	public UpfileVO selectByOname(String fileName);
 	public int insertUpfile(UpfileVO vo);
 	public UpfileVO fileUpload(HttpServletRequest request);
+	public String getUploadPath(HttpServletRequest request);
+	public UpfileVO selectByFno(int no);
 }

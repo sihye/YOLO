@@ -124,4 +124,12 @@ public class UpfileServiceImpl implements UpfileService{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		return sdf.format(date);
 	}
+
+	@Override
+	public UpfileVO selectByFno(int no) {
+		return dao.selectByFno(no);
+	}
+	
+	
+	
 }

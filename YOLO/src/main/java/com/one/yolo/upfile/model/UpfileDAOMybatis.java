@@ -17,8 +17,14 @@ public class UpfileDAOMybatis extends SqlSessionDaoSupport implements UpfileDAO{
 	
 	@Override
 	public int insertUpfile(UpfileVO vo) {
-		System.out.println("upfilevo 실행됬수다!!!!!!!!!!!");
+	
 		return getSqlSession().insert(namespace+".insertUpfile",vo);
+	}
+
+
+	@Override
+	public UpfileVO selectByFno(int no) {
+		return getSqlSession().selectOne(namespace+".selectByNo",no);
 	}
 
 	
