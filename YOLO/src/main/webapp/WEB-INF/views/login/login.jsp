@@ -49,7 +49,23 @@
 	<div class="form-group">
 		<label for="userid">&nbsp;&nbsp;&nbsp;아이디</label> <input type="text" class="form-control"
 			placeholder="이름"><br><br>
-		<label for="pwd">비밀번호</label> <input type="text" class="form-control"
-			placeholder="이름">	
+		<label for="pwd">비밀번호</label> <input type="password" class="form-control"
+			placeholder="비밀번호"><br>
 	</div>
+	<br>
+	<div class="checkbox" style="margin-top: 5px">
+		<label> <input type="checkbox" value="아이디 저장" style="margin-left: 160px"> 아이디 저장
+		</label>
+	</div>
+	<br>
+	<div style="margin-left: 70px;margin-top: 5px">
+		<button type="submit" class="btn btn-primary btn-sm">로그인</button>
+		<button type="button" class="btn btn-primary btn-sm">회원가입</button>
+	</div>
+	<div style="margin-left: 80px;margin-top: 5px">
+		<a href="#">아이디 찾기</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+		<a href="#">비밀번호 찾기</a>
+	</div>
+	
+
 </form>
