@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class QnaBoardDAOMybatis extends SqlSessionDaoSupport implements QnaBoardDAO {
+	
 	private String namespace="config.mybatis.mapper.oracle.qnaboard";
 	
 	@Override

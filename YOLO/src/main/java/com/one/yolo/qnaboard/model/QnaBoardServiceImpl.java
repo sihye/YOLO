@@ -11,6 +11,7 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 	
 	@Autowired
 	private QnaBoardDAO qnaboardDao;
+	
 	@Override
 	public List<Map<String, Object>> selectQnaBoard() {
 		return qnaboardDao.selectQnaBoard();

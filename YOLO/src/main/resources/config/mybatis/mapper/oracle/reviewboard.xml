@@ -3,7 +3,14 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.reviewboard">
-
+	<resultMap type="hashmap" id="ReviewBoarddResult">
+		<result column="CB_CONTENT" property="CB_CONTENT" 
+			jdbcType="CLOB" javaType="java.lang.String"/>		
+	</resultMap>
+	
+	<select id="selectReviewBoard" resultMap="ReviewBoarddResult">
+		select*from reviewboard
+	</select>
 </mapper>
 
 
