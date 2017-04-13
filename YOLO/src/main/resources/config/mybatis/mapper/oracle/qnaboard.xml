@@ -8,8 +8,26 @@
 			jdbcType="CLOB" javaType="java.lang.String"/>		
 	</resultMap>
 	
-	<select id="selectQnaBoard" resultMap="QnaBoardResult">
-		select*from qnaboard
+	<sql id="searchWhere">
+		<if test="searchKeyword !=null and searchKeyword !=''
+		 and searchStartDate !=null and searchStartDate !=''
+		 and searchEndDate !=null and searchEndDate !=''">
+			where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+			and C_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD') 
+			and to_date(#{searchEndDate},'YYYY-MM-DD')+1
+		</if>
+		<if test="searchKeyword !=null and searchKeyword !=''">
+			where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+		</if>
+		<if test="searchStartDate !=null and searchStartDate !=''
+		 and searchEndDate !=null and searchEndDate !=''">
+			where C_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD') 
+			and to_date(#{searchEndDate},'YYYY-MM-DD')+1
+		</if>
+	</sql>
+	<select id="selectQnaBoard" parameterType="SearchVO" resultMap="QnaBoardResult">
+		select*from qnaboard	
+		<include refid="searchWhere"></include>
 	</select>
 </mapper>
 

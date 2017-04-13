@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.one.yolo.common.SearchVO;
 import com.one.yolo.qnaboard.model.QnaBoardService;
 import com.one.yolo.reviewboard.model.ReviewBoardService;
 
@@ -26,10 +28,11 @@ public class MybbsController {
 	private ReviewBoardService reviewboardService;
 	
 	@RequestMapping("/qnaboard.do")
-	public String qnaboard(Model model){
-		logger.info("qnaboard 화면 보여주기");
+	public String qnaboard(@ModelAttribute SearchVO searchVO, Model model){
 		
-		List<Map<String, Object>> alist = qnaboardService.selectQnaBoard();
+		logger.info("qnaboard 화면 보여주기 ,파라미터 searchVO={}",searchVO);
+		
+		List<Map<String, Object>> alist = qnaboardService.selectQnaBoard(searchVO);
 		logger.info("문의게시판 조회 결과 alist.size()={}",alist.size());
 		
 		model.addAttribute("alist",alist);
