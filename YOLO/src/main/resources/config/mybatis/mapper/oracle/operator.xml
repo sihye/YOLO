@@ -11,7 +11,16 @@ insert into operator(op_no,f_no,k_no,op_showflag)
 values(#{opNo},#{fNo},#{kNo},#{opShowflag})
 </insert>
 <select id="opSelectJoin" resultType="hashmap">
-select *from operatorJoin
+select *from operatorJoin order by op_no
+</select>
+<update id="delUpdateOperAtor" parameterType="int">
+update operator
+set op_showflag ='',f_no=1
+where op_no= #{no}
+</update>
+
+<select id="selectByNo" parameterType="int" resultType="OperAtorVO">
+	select *from operator where op_no=#{no}
 </select>
 
 </mapper>

@@ -131,6 +131,8 @@ footer {
 						</ul> <!-- /.nav-second-level --></li>
 					<li><a href="<c:url value='/admin/operator.do'/>"><i
 							class="fa fa-dashboard fa-fw"></i>결제관리</a></li>
+					<li><a href="<c:url value='/admin/operator.do'/>"><i
+							class="fa fa-dashboard fa-fw"></i>클래스 신고내역</a></li>
 
 				</ul>
 			</div>

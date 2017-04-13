@@ -1,5 +1,6 @@
 package com.one.yolo.admin.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.one.yolo.admin.model.OperAtorService;
 import com.one.yolo.admin.model.OperAtorVO;
@@ -51,9 +53,7 @@ public class AdminController {
 	public String upfile_post(HttpServletRequest request ,@ModelAttribute OperAtorVO vo,Model model){
 		logger.info("upfile =={}",vo);
 		UpfileVO upfilevo = upFileservice.fileUpload(request);
-		System.out.println("��Ʈ�ѷ������� vo="+upfilevo.getfNo());
 		vo.setfNo(upfilevo.getfNo());
-		System.out.println("�����Ŀ� �� = " + vo.getfNo());
 		int cnt = operAtorservice.insertOperAtor(vo);
 		String msg="",url="/admin/operator.do";
 		if(cnt>0){
@@ -71,13 +71,52 @@ public class AdminController {
 	
 		public String main_get(Model model){
 			logger.info("operator_get");
-			List<CategoryVO> list = categoryservice.selectAll();
 			List<Map<String,Object>> map = operAtorservice.selectJoin();
-			model.addAttribute("list",list);
+			
 			model.addAttribute("map",map);
 			
 			return "admin/operator";
 		
+	}
+	
+	@RequestMapping("/delBn.do")
+	public String dleupdate(@RequestParam int no, HttpServletRequest request, Model model){
+		logger.info("삭제 처리를 위한 update작업 int no = {}",no);
+		OperAtorVO opvo = operAtorservice.selectByNo(no);
+		logger.info("operator select 결과 fno ={}",opvo.getfNo());
+		int fileNo = opvo.getfNo();
+		UpfileVO fvo = upFileservice.selectByFno(fileNo);
+		String oldFileName=fvo.getfFilename();
+		logger.info("old파일 네임 = {}",oldFileName);
+		
+		//=> [2] 기존 파일이 있다면 삭제
+		if(oldFileName!=null && !oldFileName.isEmpty()){
+			String upPath = upFileservice.getUploadPath(request);
+			File oldFile = new File(upPath, oldFileName);
+			if(oldFile.exists()){
+				boolean bool =oldFile.delete();
+				logger.info("기존 파일 삭제 여부:{}", bool);
+			}
+		}
+		int result = operAtorservice.delupdate(no);
+		String msg = "",url="/admin/opmain.do";
+		if(result >0){
+			msg = "삭제 완료했습니다.";
+		}else{
+			msg="삭제 실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+		
+	}
+	@RequestMapping("/insertBn.do")
+	public String insertBn(Model model ){
+		List<CategoryVO> list = categoryservice.selectAll();
+		model.addAttribute("list",list);
+		return "admin/operatorInsert";
 	}
 
 	

@@ -20,6 +20,19 @@ public class OperAtorServiceImpl implements OperAtorService {
 	public List<Map<String, Object>> selectJoin() {
 		return dao.selectJoin();
 	}
+
+	@Override
+	public int delupdate(int op_no) {
+		
+		return dao.delupdate(op_no);
+	}
+
+	@Override
+	public OperAtorVO selectByNo(int op_no) {
+		return dao.selectByNo(op_no);
+	}
+	
+	
 	
 	
 }
