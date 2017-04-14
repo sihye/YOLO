@@ -17,5 +17,9 @@ public class QnaBoardDAOMybatis extends SqlSessionDaoSupport implements QnaBoard
 	public List<Map<String, Object>> selectQnaBoard(SearchVO searchVO) {
 		return getSqlSession().selectList(namespace+".selectQnaBoard",searchVO);
 	}
+	public int selectTotalRecord(SearchVO searchVo){
+		return getSqlSession().selectOne(namespace
+				+".selectTotalRecord", searchVo);
+	}
 
 }

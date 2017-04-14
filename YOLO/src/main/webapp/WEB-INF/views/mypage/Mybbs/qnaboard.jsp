@@ -308,11 +308,23 @@ header, footer, aside, nav, section, article {
             $("#searchStartDate").datepicker( "option", "maxDate", endDate );
  
         }
-
+        function pageFunc(curPage){
+    		document.frmPage.currentPage.value=curPage;
+    		frmPage.submit();
+    	}
             
         </script>
 
-
+<!-- 페이징 처리를 위한 form 태그 -->
+<form name="frmPage" method="post" 
+	action= '<c:url value="/mypage/Mybbs/qnaboard.do" />'>
+	<input type="text" name="currentPage">
+	<input type="text" name="searchCondition" 
+		value="${param.searchCondition }">
+	<input type="text" name="searchKeyword" value="${param.searchKeyword}">
+	<input type="text" name="searchStartDate" value="${param.searchStartDate}">
+	<input type="text" name="searchEndDate" value="${param.searchEndDate}">
+</form>
 
 
 <div class="col-md-10">
@@ -391,8 +403,8 @@ header, footer, aside, nav, section, article {
 				</tr>
 			<tbody>
 		</table>
+			
 	</form>
-
 	<br>
 	<!-- //기간별조회 -->
 	<table class="table table-hover">
@@ -418,4 +430,34 @@ header, footer, aside, nav, section, article {
 		</tbody>
 	</table>
 </div>
+<div class="divPage">
+	<!-- 페이지 번호 추가 -->		
+	<!-- 이전 블럭으로 이동 ◀-->
+	<c:if test="${pagingInfo.firstPage>1 }">	
+		<a href="#" onclick="pageFunc(${pagingInfo.firstPage-1})">
+			<img src='<c:url value="/img/first.JPG"/>' alt="이전블럭으로">
+		</a>					
+	</c:if>
+						
+	<!-- [1][2][3][4][5][6][7][8][9][10] -->
+	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+		<c:if test="${i==pagingInfo.currentPage }">
+			<span style="color: blue;font-weight: bold;">${i }</span>
+		</c:if>
+		<c:if test="${i!=pagingInfo.currentPage }">
+			<a href="#" onclick="pageFunc(${i})">[${i}]</a>		
+		</c:if>	
+	</c:forEach>
+	
+	<!-- 다음 블럭으로 이동 ▶-->
+	<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}" >
+		<a href="#" onclick="pageFunc(${pagingInfo.lastPage+1})">
+			<img src='<c:url value="/img/last.JPG"/>' alt="다음블럭으로">
+		</a>					
+	</c:if>
+	
+	<!--  페이지 번호 끝 -->
+</div>
+
+	
 <%@ include file="../mypagebottom.jsp"%>
