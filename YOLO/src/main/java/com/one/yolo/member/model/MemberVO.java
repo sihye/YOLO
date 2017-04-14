@@ -25,6 +25,7 @@ public class MemberVO {
 	private String mTel3;
 	private int qQuestionno;
 	private String mQuestionanswer;
+	
 	public String getmUserid() {
 		return mUserid;
 	}
