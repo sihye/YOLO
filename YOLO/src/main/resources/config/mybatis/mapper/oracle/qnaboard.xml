@@ -34,7 +34,28 @@
 
 	</sql>
 	<select id="selectQnaBoard" parameterType="SearchVO" resultMap="QnaBoardResult">
-		select*from qnaboard
+		<!-- select*from qnaboard
+		<include refid="searchWhere"></include> -->
+		select CQ_NO, C_NO,M_USERID, CQ_CONTENT, CQ_REPAYCHECK, CQ_SECRETCHECK,
+			CQ_DELFLAG, C_REGDATE, C_NAME
+		from
+		(
+		    select rownum as RNUM ,LIST.*
+		    from
+		    (
+		        select * from qnaboard 
+		        <include refid="searchWhere"></include>
+		    )LIST
+		)	
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectTotalRecord" parameterType="SearchVO"
+		resultType="int">
+		select count(*) from qnaboard 
 		<include refid="searchWhere"></include>
 	</select>
 </mapper>

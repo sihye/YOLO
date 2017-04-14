@@ -7,4 +7,5 @@ import com.one.yolo.common.SearchVO;
 
 public interface QnaBoardDAO {
 	public List<Map<String, Object>> selectQnaBoard(SearchVO searchVO);
+	public int selectTotalRecord(SearchVO searchVo);
 }

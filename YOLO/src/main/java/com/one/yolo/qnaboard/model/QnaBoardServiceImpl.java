@@ -18,5 +18,8 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 	public List<Map<String, Object>> selectQnaBoard(SearchVO searchVO) {
 		return qnaboardDao.selectQnaBoard(searchVO);
 	}
+	public int selectTotalRecord(SearchVO searchVo){
+		return qnaboardDao.selectTotalRecord(searchVo);
+	}
 	
 }
