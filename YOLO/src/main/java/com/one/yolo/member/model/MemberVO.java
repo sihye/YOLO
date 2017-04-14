@@ -6,19 +6,23 @@ public class MemberVO {
 	
 	private String mUserid;
 	private int mgNo2;
-	private int mN0;
+	private int mNo;
 	private String mPwd;
 	private String mName;
-	private String mEmail;
+	private String mEmail1;
+	private String mEmail2;
 	private String mAddress;
-	private String mBankName;
+	private String mAddressdetail;
+	private String mBankname;
 	private String mAccount;
 	private Timestamp mJoindate;
 	private Timestamp mLeavedate;
 	private int kNo1;
 	private int kNo2;
 	private int kNo3;
-	private String mTel;
+	private String mTel1;
+	private String mTel2;
+	private String mTel3;
 	private int qQuestionno;
 	private String mQuestionanswer;
 	public String getmUserid() {
@@ -33,11 +37,11 @@ public class MemberVO {
 	public void setMgNo2(int mgNo2) {
 		this.mgNo2 = mgNo2;
 	}
-	public int getmN0() {
-		return mN0;
+	public int getmNo() {
+		return mNo;
 	}
-	public void setmN0(int mN0) {
-		this.mN0 = mN0;
+	public void setmNo(int mNo) {
+		this.mNo = mNo;
 	}
 	public String getmPwd() {
 		return mPwd;
@@ -51,11 +55,17 @@ public class MemberVO {
 	public void setmName(String mName) {
 		this.mName = mName;
 	}
-	public String getmEmail() {
-		return mEmail;
+	public String getmEmail1() {
+		return mEmail1;
 	}
-	public void setmEmail(String mEmail) {
-		this.mEmail = mEmail;
+	public void setmEmail1(String mEmail1) {
+		this.mEmail1 = mEmail1;
+	}
+	public String getmEmail2() {
+		return mEmail2;
+	}
+	public void setmEmail2(String mEmail2) {
+		this.mEmail2 = mEmail2;
 	}
 	public String getmAddress() {
 		return mAddress;
@@ -63,11 +73,17 @@ public class MemberVO {
 	public void setmAddress(String mAddress) {
 		this.mAddress = mAddress;
 	}
-	public String getmBankName() {
-		return mBankName;
+	public String getmAddressdetail() {
+		return mAddressdetail;
 	}
-	public void setmBankName(String mBankName) {
-		this.mBankName = mBankName;
+	public void setmAddressdetail(String mAddressdetail) {
+		this.mAddressdetail = mAddressdetail;
+	}
+	public String getmBankname() {
+		return mBankname;
+	}
+	public void setmBankname(String mBankname) {
+		this.mBankname = mBankname;
 	}
 	public String getmAccount() {
 		return mAccount;
@@ -105,11 +121,23 @@ public class MemberVO {
 	public void setkNo3(int kNo3) {
 		this.kNo3 = kNo3;
 	}
-	public String getmTel() {
-		return mTel;
+	public String getmTel1() {
+		return mTel1;
 	}
-	public void setmTel(String mTel) {
-		this.mTel = mTel;
+	public void setmTel1(String mTel1) {
+		this.mTel1 = mTel1;
+	}
+	public String getmTel2() {
+		return mTel2;
+	}
+	public void setmTel2(String mTel2) {
+		this.mTel2 = mTel2;
+	}
+	public String getmTel3() {
+		return mTel3;
+	}
+	public void setmTel3(String mTel3) {
+		this.mTel3 = mTel3;
 	}
 	public int getqQuestionno() {
 		return qQuestionno;
@@ -125,13 +153,14 @@ public class MemberVO {
 	}
 	@Override
 	public String toString() {
-		return "MemberVO [mUserid=" + mUserid + ", mgNo2=" + mgNo2 + ", mN0=" + mN0 + ", mPwd=" + mPwd + ", mName="
-				+ mName + ", mEmail=" + mEmail + ", mAddress=" + mAddress + ", mBankName=" + mBankName + ", mAccount="
-				+ mAccount + ", mJoindate=" + mJoindate + ", mLeavedate=" + mLeavedate + ", kNo1=" + kNo1 + ", kNo2="
-				+ kNo2 + ", kNo3=" + kNo3 + ", mTel=" + mTel + ", qQuestionno=" + qQuestionno + ", mQuestionanswer="
-				+ mQuestionanswer + "]";
+		return "MemberVO [mUserid=" + mUserid + ", mgNo2=" + mgNo2 + ", mNo=" + mNo + ", mPwd=" + mPwd + ", mName="
+				+ mName + ", mEmail1=" + mEmail1 + ", mEmail2=" + mEmail2 + ", mAddress=" + mAddress
+				+ ", mAddressdetail=" + mAddressdetail + ", mBankname=" + mBankname + ", mAccount=" + mAccount
+				+ ", mJoindate=" + mJoindate + ", mLeavedate=" + mLeavedate + ", kNo1=" + kNo1 + ", kNo2=" + kNo2
+				+ ", kNo3=" + kNo3 + ", mTel1=" + mTel1 + ", mTel2=" + mTel2 + ", mTel3=" + mTel3 + ", qQuestionno="
+				+ qQuestionno + ", mQuestionanswer=" + mQuestionanswer + "]";
 	}
-
+	
 	
 	
 }

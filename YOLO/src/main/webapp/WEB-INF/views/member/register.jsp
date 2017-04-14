@@ -19,9 +19,51 @@
 	href="${pageContext.request.contextPath}/css/bootstrap-select.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
-</head>
+<script type="text/javascript" src='<c:url value="/jquery/jquery-3.1.1.min.js" />'></script>
 <script type="text/javascript" src='<c:url value="/js/member.js" />'></script>
+</head>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#name").focus();
+		
+		$("#frm1").submit(function(){
+			if($("#name").val()==''){
+				alert('이름을 입력하세요');
+				$("#name").focus();
+				return false;
+			}else if(!validate_userid($("#userid").val())){
+				alert('아이디는 영문대소문자, 숫자, 언더바만 가능합니다');
+				$("#userid").focus();
+				return false;
+			}else if(!$("#pwd").val()){
+				alert('비밀번호를 입력하세요');
+				$("#pwd").focus();
+				return false;
+			}else if($("#pwd").val()!=$("#pwd2").val()){
+				alert('비밀번호가 일치하지 않습니다');
+				$("#pwd2").focus();
+				return false;
+			}else if($("#chkId").val()!='Y'){
+				alert('아이디 중복검사를 해야 합니다.');
+				$('#btnChkId').focus();
+				return false;
+			}else if(!validate_hp($("#hp2").val()) || 
+					!validate_hp($("#hp3").val())){
+				alert('휴대폰은 숫자를 입력하셔야 합니다');
+				$("#hp2").focus();
+				return false;
+			}	
+		});
+		
+		$("#btnChkId").click(function(){
+			window.open("<c:url value='/member/checkUserid.do?userid="+$("#userid").val()+ "'/>", 'chk',
+			'width=400,height=300,left=10,top=10,location=yes,resizable=yes');
+		});
+		
+	});
+	
+</script>
 
 
 <style type="text/css">
@@ -57,6 +99,12 @@
 <script>
 	document.write(maxChecked);
 </script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+
+<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
+
 <article>
 <div class="divForm">
 	<form id="frm1" name="frm1" method="post"
@@ -66,30 +114,30 @@
 
 
 			<div>
-				<label for="name">성명</label> <input type="text" name="name"
-					id="name" style="ime-mode: active">
+				<label for="name">성명</label> 
+				<input type="text" name="name" id="name" style="ime-mode: active">
 			</div>
 			<div>
-				<label for="userid">회원ID</label> <input type="text" name="userid"
-					id="userid" style="ime-mode: inactive">&nbsp; <input
-					type="button" value="중복확인" id="btnChkId" title="새창열림">
+				<label for="userid">회원ID</label> 
+				<input type="text" name="userid" id="userid" style="ime-mode: inactive">&nbsp; 
+				<input type="button" value="중복확인" id="btnChkId" title="새창열림">
 			</div>
 			<div>
-				<label for="pwd">비밀번호</label> <input type="Password" name="pwd"
-					id="pwd">
+				<label for="pwd">비밀번호</label> 
+				<input type="Password" name="pwd" id="pwd">
 			</div>
 			<div>
-				<label for="pwd2">비밀번호 확인</label> <input type="Password" name="pwd2"
-					id="pwd2">
+				<label for="pwd2">비밀번호 확인</label> 
+				<input type="Password" name="pwd2" id="pwd2">
 			</div>
 			<div>
-				<label for="zipcode">주소</label> <input type="text" name="zipcode"
-					id="zipcode" ReadOnly title="우편번호" class="width_80"> <input
-					type="Button" value="우편번호 찾기" id="btnZipcode" title="새창열림"><br />
-				<span class="sp1">&nbsp;</span> <input type="text" name="address"
-					ReadOnly title="주소" class="width_350"><br /> <span
-					class="sp1">&nbsp;</span> <input type="text" name="addressDetail"
-					title="상세주소" class="width_350">
+				<label for="zipcode">주소</label> 
+				<input type="text" name="zipcode" id="zipcode" ReadOnly title="우편번호" class="width_80 postcodify_postcode"> 
+				<input type="Button" value="우편번호 찾기" id="postcodify_search_button" title="새창열림"><br />
+				<span class="sp1">&nbsp;</span> 
+				<input type="text" name="address" ReadOnly title="주소" class="width_350 postcodify_address"><br /> 
+				<span class="sp1">&nbsp;</span> 
+				<input type="text" name="addressDetail" title="상세주소" class="width_350 postcodify_details">
 			</div>
 			<div>
 				<label for="hp1">핸드폰</label>&nbsp; <select name="hp1" id="hp1"
@@ -100,9 +148,9 @@
 					<option value="017">017</option>
 					<option value="018">018</option>
 					<option value="019">019</option>
-				</select> - <input type="text" name="hp2" id="hp2" maxlength="4"
-					title="휴대폰 가운데자리" class="width_80">- <input type="text"
-					name="hp3" id="hp3" maxlength="4" title="휴대폰 뒷자리" class="width_80">
+				</select> - 
+				<input type="text" name="hp2" id="hp2" maxlength="4" title="휴대폰 가운데자리" class="width_80">- 
+				<input type="text" name="hp3" id="hp3" maxlength="4" title="휴대폰 뒷자리" class="width_80">
 			</div>
 			<div>
 				<label for="email1">이메일 주소</label> <input type="text" name="email1"
@@ -123,8 +171,8 @@
 			
 				<FORM action=# method=post name=Check>
 				<label for="hobby">라이프 스타일</label>
-					<input name=program value='프로그램' onclick=CountChecked(this) type=checkbox>독서/글쓰기 
-					<input name=program value='디자인' onclick=CountChecked(this) type=checkbox>봉사활동
+					<input name='book' value='독서/글쓰기' onclick=CountChecked(this) type=checkbox>독서/글쓰기 
+					<input name=design value='디자인' onclick=CountChecked(this) type=checkbox>봉사활동
 					<input name=program value='웹표준' onclick=CountChecked(this) type=checkbox>바리스타/바텐더 
 					<input name=allow value='웹접근성' onclick=CountChecked(this) type=checkbox>반려동물<BR> 
 					<input name=css value='CSS' onclick=CountChecked(this) type=checkbox>사진/영상

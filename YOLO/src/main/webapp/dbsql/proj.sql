@@ -7,6 +7,7 @@ CREATE TABLE membergroup (
 	MG_NAME VARCHAR2(500) NOT NULL  -- 멤버명
 );
 
+
 -- 멤버구분 기본키
 CREATE UNIQUE INDEX PK_membergroup
 	ON membergroup ( -- 멤버구분
@@ -28,8 +29,10 @@ CREATE TABLE Member (
 	M_NO             NUMBER        NOT NULL, -- 회원번호
 	M_PWD            VARCHAR2(500) NOT NULL, -- 비밀번호
 	M_NAME           VARCHAR2(500) NOT NULL, -- 이름
-	M_EMAIL          VARCHAR2(500) NULL,     -- 이메일
+	M_EMAIL1         VARCHAR2(500) NULL,     -- 이메일
+	M_EMAIL2         VARCHAR2(500) NULL,     -- 이메일2
 	M_ADDRESS        VARCHAR2(500) NULL,     -- 주소
+	M_ADDRESSDETAIL  VARCHAR2(500) NULL,     -- 주소
 	M_BANKNAME       VARCHAR2(500) NULL,     -- 은행명
 	M_ACCOUNT        VARCHAR2(500) NULL,     -- 계좌번호
 	M_JOINDATE       DATE          DEFAULT sysdate NULL     , -- 가입일
@@ -37,7 +40,9 @@ CREATE TABLE Member (
 	K_NO1            NUMBER        NULL,     -- 카테고리번호1
 	K_NO2            NUMBER        NULL,     -- 카테고리번호2
 	K_NO3            NUMBER        NOT NULL, -- 카테고리번호3
-	M_TEL            VARCHAR2(500) NULL,     -- 핸드폰
+	M_TEL1           VARCHAR2(500) NULL,     -- 핸드폰
+	M_TEL2           VARCHAR2(500) NULL,     -- 핸드폰
+	M_TEL3           VARCHAR2(500) NULL,     -- 핸드폰
 	Q_QUESTIONNO     NUMBER        NOT NULL, -- 질문번호
 	M_QUESTIONANSWER VARCHAR2(500) NULL      -- 질문답
 );
@@ -121,24 +126,26 @@ ALTER TABLE category
 
 -- 클래스
 CREATE TABLE Class (
-	C_NO          NUMBER        NOT NULL, -- 클래스번호
-	M_USERID      VARCHAR2(500) NOT NULL, -- 호스트아이디
-	K_NO          NUMBER        NOT NULL, -- 카테고리번호
-	C_NAME        VARCHAR2(500) NOT NULL, -- 클래스명
-	C_PRICE       NUMBER        DEFAULT 0 NULL     , -- 비용
-	C_GOAL        VARCHAR2(500) NULL,     -- 목표
-	C_TARGET      VARCHAR2(500) NULL,     -- 대상
-	C_SPEVIALTY   VARCHAR2(500) NULL,     -- 특기사항
-	C_DETAILINFO  VARCHAR2(500) NULL,     -- 상세정보
-	C_PALCE       VARCHAR2(500) NOT NULL, -- 장소
-	C_LOCATION    VARCHAR2(500) NOT NULL, -- 좌표
-	C_MAINIMG     VARCHAR2(500) NULL,     -- 메인이미지
-	C_DETAILIMG1  VARCHAR2(500) NULL,     -- 상세이미지1
-	C_DETAILIMG2  VARCHAR2(500) NULL,     -- 상세이미지2
-	C_DETAILIMG3  VARCHAR2(500) NULL,     -- 상세이미지3
-	C_PAYMENTWAY  VARCHAR2(500) NULL,     -- 결제방법
-	C_MAXPERSON   VARCHAR2(500) NULL,     -- 최대인원
-	C_RETURNCHECK VARCHAR2(500) NULL      -- 신고유무
+	C_NO         NUMBER        NOT NULL, -- 클래스번호
+	M_USERID     VARCHAR2(500) NOT NULL, -- 호스트아이디
+	K_NO         NUMBER        NOT NULL, -- 카테고리번호
+	C_NAME       VARCHAR2(500) NOT NULL, -- 클래스명
+	C_PRICE      NUMBER        DEFAULT 0 NULL     , -- 비용
+	C_GOAL       VARCHAR2(500) NULL,     -- 목표
+	C_TARGET     VARCHAR2(500) NULL,     -- 대상
+	C_SPEVIALTY  VARCHAR2(500) NULL,     -- 특기사항
+	C_DETAILINFO VARCHAR2(500) NULL,     -- 상세정보
+	C_PALCE      VARCHAR2(500) NOT NULL, -- 장소
+	C_LOCATION   VARCHAR2(500) NOT NULL, -- 좌표
+	C_MAINIMG    VARCHAR2(500) NULL,     -- 메인이미지
+	C_DETAILIMG1 VARCHAR2(500) NULL,     -- 상세이미지1
+	C_DETAILIMG2 VARCHAR2(500) NULL,     -- 상세이미지2
+	C_DETAILIMG3 VARCHAR2(500) NULL,     -- 상세이미지3
+	C_PAYMENTWAY VARCHAR2(500) NULL,     -- 결제방법
+	C_MAXPERSON  VARCHAR2(500) NULL,     -- 최대인원
+	C_HITS       NUMBER        NOT NULL, -- 조회수
+	C_DEL        VARCHAR2(5)   NOT NULL, -- 삭제여부
+	C_REGDATE    DATE          NOT NULL  -- 등록일
 );
 
 -- 클래스 기본키
@@ -155,6 +162,27 @@ ALTER TABLE Class
 			C_NO -- 클래스번호
 		);
 
+-- 클래스
+ALTER TABLE Class
+	ADD
+		CONSTRAINT FK_Member_TO_Class -- 회원 -> 클래스
+		FOREIGN KEY (
+			M_USERID -- 호스트아이디
+		)
+		REFERENCES Member ( -- 회원
+			M_USERID -- 아이디
+		);
+
+-- 클래스
+ALTER TABLE Class
+	ADD
+		CONSTRAINT FK_category_TO_Class -- 카테고리 -> 클래스
+		FOREIGN KEY (
+			K_NO -- 카테고리번호
+		)
+		REFERENCES category ( -- 카테고리
+			K_NO -- 카테고리번호
+		);
 -- 클래스예약
 CREATE TABLE booking (
 	BK_NO       NUMBER        NOT NULL, -- 예약번호
@@ -164,6 +192,7 @@ CREATE TABLE booking (
 	BK_DATE     DATE          DEFAULT sysdate NULL     , -- 예약일
 	BK_ENDCHECK VARCHAR2(500) DEFAULT 'N'  NULL     -- 종료유무
 );
+
 
 -- 클래스예약 기본키
 CREATE UNIQUE INDEX PK_booking
@@ -183,10 +212,14 @@ ALTER TABLE booking
 CREATE TABLE classschedule (
 	SC_NO        NUMBER        NOT NULL, -- 스케줄번호
 	C_NO         NUMBER        NOT NULL, -- 클래스번호
+	SC_CODE      VARCHAR2(500) NOT NULL, -- 스케줄구분
+	SC_STARTDATE VARCHAR2(500) NULL,     -- 시작일
+	SC_ENDDATE   VARCHAR2(500) NULL,     -- 종료일
 	SC_WEEK      VARCHAR2(500) NULL,     -- 요일
 	SC_STARTTIME VARCHAR2(500) NULL,     -- 시작시간
 	SC_ENDTIME   VARCHAR2(500) NULL      -- 종료시간
 );
+
 
 -- 스케줄 기본키
 CREATE UNIQUE INDEX PK_classschedule
@@ -200,6 +233,17 @@ ALTER TABLE classschedule
 		CONSTRAINT PK_classschedule -- 스케줄 기본키
 		PRIMARY KEY (
 			SC_NO -- 스케줄번호
+		);
+
+-- 스케줄
+ALTER TABLE classschedule
+	ADD
+		CONSTRAINT FK_Class_TO_classschedule -- 클래스 -> 스케줄
+		FOREIGN KEY (
+			C_NO -- 클래스번호
+		)
+		REFERENCES Class ( -- 클래스
+			C_NO -- 클래스번호
 		);
 
 -- 업로드파일
@@ -312,6 +356,7 @@ CREATE TABLE message (
 	MS_REGDATE DATE         DEFAULT sysdate NULL      -- 등록일
 );
 
+
 -- 쪽지 기본키
 CREATE UNIQUE INDEX PK_message
 	ON message ( -- 쪽지
@@ -339,6 +384,7 @@ CREATE TABLE boardgroup  (
 	BG_REGDATE      DATE          DEFAULT sysdate NULL     , -- 등록일
 	BG_EDITDATE     DATE          DEFAULT sysdate NULL  -- 최종수정일
 );
+
 
 -- 게시판분류 기본키
 CREATE UNIQUE INDEX PK_boardgroup 
@@ -409,9 +455,9 @@ ALTER TABLE useboard
 -- 찜하기
 CREATE TABLE shoppingbasket   (
 	SB_NO      NUMBER        NOT NULL, -- 찜번호
-	SC_NO      NUMBER        NOT NULL, -- 스케줄번호
 	SB_USERID  VARCHAR2(500) NOT NULL, -- 아이디
-	SC_REGDATE DATE         DEFAULT sysdate NULL      -- 등록일
+	C_NO       NUMBER        NULL,     -- 클래스번호
+	SC_REGDATE DATE          DEFAULT sysdate  NULL-- 등록일
 );
 
 -- 찜하기 기본키
@@ -426,6 +472,28 @@ ALTER TABLE shoppingbasket
 		CONSTRAINT PK_shoppingbasket   -- 찜하기 기본키
 		PRIMARY KEY (
 			SB_NO -- 찜번호
+		);
+
+-- 찜하기
+ALTER TABLE shoppingbasket  
+	ADD
+		CONSTRAINT FK_Member_TO_shoppingbasket   -- 회원 -> 찜하기
+		FOREIGN KEY (
+			SB_USERID -- 아이디
+		)
+		REFERENCES Member ( -- 회원
+			M_USERID -- 아이디
+		);
+
+-- 찜하기
+ALTER TABLE shoppingbasket  
+	ADD
+		CONSTRAINT FK_Class_TO_shoppingbasket   -- 클래스 -> 찜하기
+		FOREIGN KEY (
+			C_NO -- 클래스번호
+		)
+		REFERENCES Class ( -- 클래스
+			C_NO -- 클래스번호
 		);
 
 -- 결제
@@ -857,3 +925,164 @@ ALTER TABLE messagemaga
 		REFERENCES Member ( -- 회원
 			M_USERID -- 아이디
 		);
+-- 신고
+CREATE TABLE notify (
+	C_NO      NUMBER        NOT NULL, -- 클래스번호
+	N_CODE    VARCHAR2(500) NOT NULL, -- 신고항목
+	N_CONTENT VARCHAR2(500) NOT NULL  -- 신고내용
+);
+
+-- 신고 기본키
+CREATE UNIQUE INDEX PK_notify
+	ON notify ( -- 신고
+		C_NO ASC -- 클래스번호
+	);
+
+-- 신고
+ALTER TABLE notify
+	ADD
+		CONSTRAINT PK_notify -- 신고 기본키
+		PRIMARY KEY (
+			C_NO -- 클래스번호
+		);
+
+-- 신고
+ALTER TABLE notify
+	ADD
+		CONSTRAINT FK_Class_TO_notify -- 클래스 -> 신고
+		FOREIGN KEY (
+			C_NO -- 클래스번호
+		)
+		REFERENCES Class ( -- 클래스
+			C_NO -- 클래스번호
+		);
+create sequence BOARDGROUP_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+create sequence BOOKING_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+create sequence CATEGORY_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+create sequence CATEGORYGROUP_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+
+create sequence CLASS_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+		
+create sequence CLASSBOARD_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;		
+
+create sequence CLASSQNABOARD_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+
+create sequence CLASSQNAREPAY_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+
+create sequence CLASSSCHEDULE_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+
+create sequence MEMBER_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+create sequence MEMBERGROUP_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+
+create sequence MESSAGE_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+
+create sequence NOTICEBOARD_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+		
+
+create sequence OPERATOR_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+
+create sequence PAYMENT_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+
+create sequence PAYMENTCANCEL_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+
+create sequence QUESTION_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+create sequence SHOPPINGBASKET_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+create sequence UPFILE_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+
+create sequence USEBOARD_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;

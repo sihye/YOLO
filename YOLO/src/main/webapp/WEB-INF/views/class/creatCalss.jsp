@@ -20,7 +20,7 @@
 
 <!--[if IE]>
 		<script type="text/javascript">
-			 var console = { log: function() {} };
+			 var console = { log: function() {} };d
 		</script>
 	<![endif]-->
 
