@@ -27,7 +27,13 @@ $(document).ready(function(){
 			alert("보여주기 여부를 선택해주세요!");
 			event.preventDefault();
 		}
+		
 	});
+		  $("#btClose").click(function() {
+			  opener.location.href="<c:url value='/admin/operator.do'/>";
+			  self.close();
+		}); 
+	 
 });
 
 </script>
@@ -35,14 +41,20 @@ $(document).ready(function(){
 <title></title>
 </head>
 <body>
+<c:if test="${result == 1 }">
+<script type="text/javascript">
+ alert('${msg }' );
+ opener.location.href="<c:url value='/admin/operator.do'/>";
+ self.close();
+</script>
+</c:if>
 <div class="container" id="cont1">
-	<h2>메인 배너 관리</h2>
+	<h2>메인 배너 수정</h2>
 	<br><br>
-	
 		
-	<form class="form-inline" role="form" name="frm1" id="frm1" method="post" action='<c:url value="/admin/operator.do"/>' enctype="multipart/form-data">
+	<form class="form-inline" role="form" name="frm1" id="frm1" method="post" action='<c:url value="/admin/operatorInsert.do"/>' enctype="multipart/form-data">
 	  <div class="form-group">
-	  
+	  <input type="hidden" id="opNo" id="opNo" name="opNo" value="${param.no }"> 
 	   <label>배너이미지 올리기 &nbsp; - &nbsp;&nbsp;&nbsp; </label>
 	  </div>
 	  <div class="form-group">
@@ -73,7 +85,8 @@ $(document).ready(function(){
 	    <label class="sr-only" for="File"></label>
 	    <input type="file" id="upfile" name="upfile" style="width: 250px">
 	 	 </div>
-		&nbsp;&nbsp;&nbsp;  <input type="submit" value="저장하기">
+		&nbsp;&nbsp;&nbsp;  <input type="submit" id="btSubmit" value="저장하기">
+		<input type="button" id="btClose" value="취소(창닫기)">
 	  </div>
 	</form>
 	

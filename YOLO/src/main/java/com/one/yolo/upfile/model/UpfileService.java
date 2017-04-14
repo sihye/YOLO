@@ -8,4 +8,5 @@ public interface UpfileService {
 	public UpfileVO fileUpload(HttpServletRequest request);
 	public String getUploadPath(HttpServletRequest request);
 	public UpfileVO selectByFno(int no);
+	public int deleteByFno(int no);
 }

@@ -31,6 +31,12 @@ public class OperAtorServiceImpl implements OperAtorService {
 	public OperAtorVO selectByNo(int op_no) {
 		return dao.selectByNo(op_no);
 	}
+
+	@Override
+	public Map<String, Object> opjoinSelectByOpno(int no) {
+		return dao.opjoinSelectByOpno(no);
+	}
+	
 	
 	
 	

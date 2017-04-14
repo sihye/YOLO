@@ -18,6 +18,9 @@
 <select id="selectByFno" parameterType="int" resultType="UpfileVO">
 	select f_no,f_filename,f_originalfilename,f_filesize from upfile where f_no=#{fileNo}
 </select>
+<delete id="delectByFno" parameterType="int">
+delete upfile where f_no =#{fileNo}
+</delete>
 
 </mapper>
 
