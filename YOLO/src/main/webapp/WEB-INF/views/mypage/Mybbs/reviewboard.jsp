@@ -380,11 +380,11 @@ header, footer, aside, nav, section, article {
 							</span> 
 						</div>
 						<div class="search" style="margin-top: 10px;">
-							<select class="selec" id="SearchKind" name="SearchKind"><option
-									selected="selected" value="T">제목</option>
-								<option value="TC">제목+내용</option>
-							</select> <input class="txt" id="SearchText" name="SearchText" type="text"
-								value="" /> <input type="submit" value="조회하기">
+							<select class="selec" id="searchCondition" name="searchCondition"><option
+									selected="selected" value="C_NAME">클래스명</option>
+								<option value="CB_CONTENT">내용</option>
+							</select> <input class="txt" id="searchKeyword" name="searchKeyword" type="text"/> 
+							<input type="submit" value="조회하기">
 						</div>
 					</td>
 				</tr>

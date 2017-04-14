@@ -4,29 +4,37 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.qnaboard">
 	<resultMap type="hashmap" id="QnaBoardResult">
-		<result column="CQ_CONTENT" property="CQ_CONTENT" 
-			jdbcType="CLOB" javaType="java.lang.String"/>		
+		<result column="CQ_CONTENT" property="CQ_CONTENT" jdbcType="CLOB"
+			javaType="java.lang.String" />
 	</resultMap>
-	
+
 	<sql id="searchWhere">
-		<if test="searchKeyword !=null and searchKeyword !=''
-		 and searchStartDate !=null and searchStartDate !=''
-		 and searchEndDate !=null and searchEndDate !=''">
-			where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
-			and C_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD') 
+		<choose>
+			<when test="searchKeyword !=null and searchKeyword !=''" >
+				where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+			</when>
+			<when test="searchStartDate !=null and searchStartDate !=''
+			 and searchEndDate !=null and searchEndDate !=''" >
+				where C_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
+				and to_date(#{searchEndDate},'YYYY-MM-DD')+1
+			</when>
+			<when test="searchKeyword !=null and searchKeyword !=''
+			 and searchStartDate !=null and searchStartDate !=''
+		 	and searchEndDate !=null and searchEndDate !=''" >
+				where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+			and
+			C_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
 			and to_date(#{searchEndDate},'YYYY-MM-DD')+1
-		</if>
-		<if test="searchKeyword !=null and searchKeyword !=''">
-			where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
-		</if>
-		<if test="searchStartDate !=null and searchStartDate !=''
-		 and searchEndDate !=null and searchEndDate !=''">
-			where C_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD') 
-			and to_date(#{searchEndDate},'YYYY-MM-DD')+1
-		</if>
+			</when>
+			<otherwise>
+			
+			</otherwise>
+
+		</choose>
+
 	</sql>
 	<select id="selectQnaBoard" parameterType="SearchVO" resultMap="QnaBoardResult">
-		select*from qnaboard	
+		select*from qnaboard
 		<include refid="searchWhere"></include>
 	</select>
 </mapper>

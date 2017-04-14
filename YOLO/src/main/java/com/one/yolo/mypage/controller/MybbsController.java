@@ -39,10 +39,10 @@ public class MybbsController {
 		return "mypage/Mybbs/qnaboard";
 	}
 	@RequestMapping("/reviewboard.do")
-	public String reviewboard(Model model){
-		logger.info("reviewboard 화면 보여주기");
+	public String reviewboard(@ModelAttribute SearchVO searchVO,Model model){
+		logger.info("reviewboard 화면 보여주기,파라미터 searchVO={}",searchVO);
 		
-		List<Map<String, Object>> alist = reviewboardService.selectReviewBoard();
+		List<Map<String, Object>> alist = reviewboardService.selectReviewBoard(searchVO);
 		logger.info("후기게시판 조회 결과 alist.size()={}",alist.size());
 		
 		model.addAttribute("alist",alist);
