@@ -11,7 +11,7 @@
 			insert into member(m_userid,mg_no2,m_no,m_pwd,m_name,m_email1,m_email2,m_address,m_addressdetail,
 								k_no1,k_no2,k_no3,m_tel1,m_tel2,m_tel3,q_questionno,m_questionanswer)
 			values(#{mUserid},#{mgNo2},#{mNo},#{mPwd},#{mName},#{mEmail1},#{mEmail2},#{mAddress},#{mAddressdetail},
-								#{kNo1},#{kNo2},5,#{mTel1},#{mTel2},#{mTel3},5,#{mQuestionanswer})
+								#{kNo1},#{kNo2},#{kNo3},#{mTel1},#{mTel2},#{mTel3},#{qQuestionno},#{mQuestionanswer})
 			
 	</insert>
 	

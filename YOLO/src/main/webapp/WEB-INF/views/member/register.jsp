@@ -168,53 +168,48 @@
 				<label for="hobby">관심사</label> 3개까지 선택 가능
 			</div>
 			<div>
-			
-				<FORM action=# method=post name=Check>
+				<FORM action=# method=post name="kNo3">
 				<label for="hobby">라이프 스타일</label>
-					<input name='book' value='독서/글쓰기' onclick=CountChecked(this) type=checkbox>독서/글쓰기 
-					<input name=design value='디자인' onclick=CountChecked(this) type=checkbox>봉사활동
-					<input name=program value='웹표준' onclick=CountChecked(this) type=checkbox>바리스타/바텐더 
-					<input name=allow value='웹접근성' onclick=CountChecked(this) type=checkbox>반려동물<BR> 
-					<input name=css value='CSS' onclick=CountChecked(this) type=checkbox>사진/영상
-					<input name=html value='HTML' onclick=CountChecked(this) type=checkbox>요리/베이킹 
-					<input name=community value='커뮤니티' onclick=CountChecked(this) type=checkbox>라이프 스타일 기타<br><br>
+					<input value='1' onclick=CountChecked(this) type=checkbox>독서/글쓰기 
+					<input value='2' onclick=CountChecked(this) type=checkbox>봉사활동
+					<input value='3' onclick=CountChecked(this) type=checkbox>바리스타/바텐더 
+					<input value='4' onclick=CountChecked(this) type=checkbox>반려동물<BR> 
+					<input value='CSS' onclick=CountChecked(this) type=checkbox>사진/영상
+					<input value='HTML' onclick=CountChecked(this) type=checkbox>요리/베이킹 
+					<input value='커뮤니티' onclick=CountChecked(this) type=checkbox>라이프 스타일 기타<br><br>
 				<label for="hobby">외국어</label>
-					<input name=program value='프로그램' onclick=CountChecked(this) type=checkbox>영어 
-					<input name=program value='디자인' onclick=CountChecked(this) type=checkbox>중국어 
-					<input name=program value='웹표준' onclick=CountChecked(this) type=checkbox>일본어
-					<input name=allow value='웹접근성' onclick=CountChecked(this) type=checkbox>외국어 기타<BR> <br>
+					<input value='프로그램' onclick=CountChecked(this) type=checkbox>영어 
+					<input value='디자인' onclick=CountChecked(this) type=checkbox>중국어 
+					<input value='웹표준' onclick=CountChecked(this) type=checkbox>일본어
+					<input value='웹접근성' onclick=CountChecked(this) type=checkbox>외국어 기타<BR> <br>
 				<label for="hobby">디자인/미술</label>
-					<input name=program value='프로그램' onclick=CountChecked(this) type=checkbox>캘리그라피
-					<input name=program value='디자인' onclick=CountChecked(this) type=checkbox>일러스트
-					<input name=allow value='웹접근성' onclick=CountChecked(this) type=checkbox>디자인 기타<BR> <br>
+					<input value='프로그램' onclick=CountChecked(this) type=checkbox>캘리그라피
+					<input value='디자인' onclick=CountChecked(this) type=checkbox>일러스트
+					<input value='웹접근성' onclick=CountChecked(this) type=checkbox>디자인 기타<BR> <br>
 				<label for="hobby">음악/공연</label>
-					<input name=program value='프로그램' onclick=CountChecked(this) type=checkbox>피아노
-					<input name=program value='디자인' onclick=CountChecked(this) type=checkbox>기타/우쿨렐라
-					<input name=program value='프로그램' onclick=CountChecked(this) type=checkbox>보컬
-					<input name=program value='디자인' onclick=CountChecked(this) type=checkbox>댄스/무용
-					<input name=allow value='웹접근성' onclick=CountChecked(this) type=checkbox>음악/공연 기타<BR> <br>
+					<input value='프로그램' onclick=CountChecked(this) type=checkbox>피아노
+					<input value='디자인' onclick=CountChecked(this) type=checkbox>기타/우쿨렐라
+					<input value='프로그램' onclick=CountChecked(this) type=checkbox>보컬
+					<input value='디자인' onclick=CountChecked(this) type=checkbox>댄스/무용
+					<input value='웹접근성' onclick=CountChecked(this) type=checkbox>음악/공연 기타<BR> <br>
 				<label for="hobby">뷰티/미용</label>
-					<input name=program value='프로그램' onclick=CountChecked(this) type=checkbox>헤어
-					<input name=program value='디자인' onclick=CountChecked(this) type=checkbox>네일
-					<input name=program value='프로그램' onclick=CountChecked(this) type=checkbox>메이크업
-					<input name=allow value='웹접근성' onclick=CountChecked(this) type=checkbox>뷰티/미용 기타<BR> <br>
+					<input value='프로그램' onclick=CountChecked(this) type=checkbox>헤어
+					<input value='디자인' onclick=CountChecked(this) type=checkbox>네일
+					<input value='프로그램' onclick=CountChecked(this) type=checkbox>메이크업
+					<input value='웹접근성' onclick=CountChecked(this) type=checkbox>뷰티/미용 기타<BR> <br>
 				<label for="hobby">스포츠</label>
-					<input name=program value='프로그램' onclick=CountChecked(this) type=checkbox>축구
-					<input name=program value='디자인' onclick=CountChecked(this) type=checkbox>야구
-					<input name=program value='프로그램' onclick=CountChecked(this) type=checkbox>테니스
-					<input name=program value='디자인' onclick=CountChecked(this) type=checkbox>요가
-					<input name=allow value='웹접근성' onclick=CountChecked(this) type=checkbox>스포츠 기타<BR> <br>
+					<input value='프로그램' onclick=CountChecked(this) type=checkbox>축구
+					<input value='디자인' onclick=CountChecked(this) type=checkbox>야구
+					<input value='프로그램' onclick=CountChecked(this) type=checkbox>테니스
+					<input value='디자인' onclick=CountChecked(this) type=checkbox>요가
+					<input value='웹접근성' onclick=CountChecked(this) type=checkbox>스포츠 기타<BR> <br>
 				</FORM>
 				
 			</div>
 			<div>
-				<label for="email1">비밀번호 찾기 질문</label> 
-				<select name="qQu">
-					<c:forEach var="vo" items="${alist}">
-						<option value="${vo.qno }">${vo.qname}</option>
-						<option value="1">뭐시 중헌디</option>
-					</c:forEach>
-				</select>
+				<label for="qQuestionno">비밀번호 찾기 질문</label> 
+				<c:import url="/question/questionList.do"></c:import><br>
+				비밀번호 분실시 본인 확인을 위해 사용될 질문입니다
 
 				<!-- <label for="email1">비밀번호 찾기 질문</label>
 				<select name="question">
@@ -225,7 +220,7 @@
 			</div>
 			<div>
 				<label for="email1">비밀번호 찾기 답</label>
-				<input type="text"><br>
+				<input type="text" name="mQuestionanswer"><br>
 				비밀번호 분실시 본인 인증을 위한 답변을 입력해 주세요
 			</div>
 

@@ -55,7 +55,7 @@
 	
 	
 </script>
-
+</head>
 <style type="text/css">
 	.width_80{
 		width:80px;
