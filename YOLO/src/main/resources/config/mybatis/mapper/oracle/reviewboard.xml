@@ -34,7 +34,27 @@
 	</sql>
 	
 	<select id="selectReviewBoard" parameterType="SearchVO" resultMap="ReviewBoarddResult">
-		select*from reviewboard
+		<!-- select*from reviewboard
+		<include refid="searchWhere"></include> -->
+		select CB_NO, C_NO,M_USERID,CB_TITLE,CB_CONTENT, CB_GRADE,
+			CB_FILENAME, CB_REGDATE, C_NAME
+		from
+		(
+		    select rownum as RNUM ,LIST.*
+		    from
+		    (
+		        select * from reviewboard 
+		        <include refid="searchWhere"></include>
+		    )LIST
+		)	
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	<select id="selectTotalRecord" parameterType="SearchVO"
+		resultType="int">
+		select count(*) from reviewboard 
 		<include refid="searchWhere"></include>
 	</select>
 </mapper>

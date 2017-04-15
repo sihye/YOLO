@@ -16,4 +16,8 @@ public class ReviewBoardDAOMybatis extends SqlSessionDaoSupport implements Revie
 	public List<Map<String, Object>> selectReviewBoard(SearchVO searchVO){
 		return getSqlSession().selectList(namespace+".selectReviewBoard",searchVO);
 	}
+	public int selectTotalRecord(SearchVO searchVo){
+		return getSqlSession().selectOne(namespace
+				+".selectTotalRecord", searchVo);
+	}
 }
