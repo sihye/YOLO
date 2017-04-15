@@ -48,24 +48,38 @@ public class AdminController {
 		model.addAttribute("map",map);
 		return "admin/operator";
 	}
-
-	@RequestMapping(value="/operator.do",method=RequestMethod.POST)
+	
+	@RequestMapping(value="/operatorInsert.do",method=RequestMethod.GET)
+	public String insertBn(Model model ){
+		List<CategoryVO> list = categoryservice.selectAll();
+		model.addAttribute("list",list);
+		return "admin/operatorInsert";
+	}
+	
+	@RequestMapping(value="/operatorInsert.do",method=RequestMethod.POST)
 	public String upfile_post(HttpServletRequest request ,@ModelAttribute OperAtorVO vo,Model model){
 		logger.info("upfile =={}",vo);
 		UpfileVO upfilevo = upFileservice.fileUpload(request);
 		vo.setfNo(upfilevo.getfNo());
 		int cnt = operAtorservice.insertOperAtor(vo);
-		String msg="",url="/admin/operator.do";
+		String msg="";
+		int result = 0;
 		if(cnt>0){
 			msg="등록성공 !";
+			result = 1;
 		}else{
 			msg="등록실패 !";
 		}
+		
+		model.addAttribute("result",result);
 		model.addAttribute("msg",msg);
-		model.addAttribute("url",url);
 	
-		return "common/message";
+		return "admin/operatorInsert";
+		
 	}
+	
+	
+
 	
 	@RequestMapping(value="/opmain.do", method=RequestMethod.GET)
 	
@@ -99,6 +113,8 @@ public class AdminController {
 			}
 		}
 		int result = operAtorservice.delupdate(no);
+		upFileservice.deleteByFno(fileNo);
+	
 		String msg = "",url="/admin/opmain.do";
 		if(result >0){
 			msg = "삭제 완료했습니다.";
@@ -112,11 +128,66 @@ public class AdminController {
 		return "common/message";
 		
 	}
-	@RequestMapping("/insertBn.do")
-	public String insertBn(Model model ){
+	
+	@RequestMapping(value="/editBn.do",method=RequestMethod.GET)
+	public String edit_get(@RequestParam int no,Model model){
+		logger.info("edit get 방식 - no = {}",no);
+		Map<String, Object> map = operAtorservice.opjoinSelectByOpno(no);
+		logger.info("select 후");
 		List<CategoryVO> list = categoryservice.selectAll();
+
 		model.addAttribute("list",list);
-		return "admin/operatorInsert";
+		model.addAttribute("map",map);
+	
+		return "admin/operatorEdit";
+		
+	}
+	
+	
+	@RequestMapping(value="/editBn.do",method=RequestMethod.POST)
+	public String edit_get(HttpServletRequest request ,@ModelAttribute OperAtorVO vo,Model model){
+		UpfileVO upvo
+		= upFileservice.fileUpload(request);
+		OperAtorVO opvo = operAtorservice.selectByNo(vo.getOpNo());
+		UpfileVO oldupvo = upFileservice.selectByFno(opvo.getfNo());
+		String msg = "";
+		int result = 0;
+		int cnt = 0;
+		if(upvo!=null){
+			String oldFileName=oldupvo.getfFilename();
+			vo.setfNo(upvo.getfNo());
+			logger.info("old파일 네임 = {}",oldFileName);
+			//=> [2] 기존 파일이 있다면 삭제
+			if(oldFileName!=null && !oldFileName.isEmpty()){
+				String upPath = upFileservice.getUploadPath(request);
+				File oldFile = new File(upPath, oldFileName);
+				if(oldFile.exists()){
+					boolean bool =oldFile.delete();
+					logger.info("기존 파일 삭제 여부:{}", bool);
+					vo.setfNo(upvo.getfNo());
+					cnt = operAtorservice.insertOperAtor(vo);
+					upFileservice.deleteByFno(oldupvo.getfNo());
+				}
+			}
+				
+		}else{
+			vo.setfNo(oldupvo.getfNo());
+			cnt = operAtorservice.insertOperAtor(vo);
+		}
+		
+		
+		if(cnt>0){
+			msg="수정에 성공하였습니다.";
+			result=1;
+		}else{
+			msg ="수정에 실패하였습니다.";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("result",result);
+		
+		return "admin/operatorEdit";
+		
 	}
 
 	

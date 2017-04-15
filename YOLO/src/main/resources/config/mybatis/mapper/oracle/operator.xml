@@ -3,15 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.operator">
-<insert id="insertOperAtor" parameterType="OperAtorVO">
-<selectKey keyProperty="opNo" resultType="int" order="BEFORE">
-	select operator_seq.nextval from dual
-</selectKey>
-insert into operator(op_no,f_no,k_no,op_showflag)
-values(#{opNo},#{fNo},#{kNo},#{opShowflag})
-</insert>
+<update id="insertOperAtor" parameterType="OperAtorVO">
+update operator
+set f_no=#{fNo}, k_no=#{kNo},op_showflag=#{opShowflag}
+where op_no=#{opNo}
+</update>
 <select id="opSelectJoin" resultType="hashmap">
 select *from operatorJoin order by op_no
+</select>
+<select id="opjoinSelectByOpno" resultType="hashmap">
+select *from operatorJoin where op_no = #{no}
 </select>
 <update id="delUpdateOperAtor" parameterType="int">
 update operator

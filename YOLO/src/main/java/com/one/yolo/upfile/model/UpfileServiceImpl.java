@@ -129,6 +129,12 @@ public class UpfileServiceImpl implements UpfileService{
 	public UpfileVO selectByFno(int no) {
 		return dao.selectByFno(no);
 	}
+
+	@Override
+	public int deleteByFno(int no) {
+		return dao.deleteByFno(no);
+	}
+	
 	
 	
 	

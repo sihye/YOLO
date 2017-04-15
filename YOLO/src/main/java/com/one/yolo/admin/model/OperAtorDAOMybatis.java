@@ -14,7 +14,6 @@ public class OperAtorDAOMybatis extends SqlSessionDaoSupport implements OperAtor
 
 	@Override
 	public int insertOperAtor(OperAtorVO vo) {
-		
 		return getSqlSession().insert(namespace+".insertOperAtor",vo);
 	}
 
@@ -32,6 +31,12 @@ public class OperAtorDAOMybatis extends SqlSessionDaoSupport implements OperAtor
 	public OperAtorVO selectByNo(int op_no) {
 		return getSqlSession().selectOne(namespace+".selectByNo",op_no);
 	}
+
+	@Override
+	public Map<String, Object> opjoinSelectByOpno(int no) {
+		return getSqlSession().selectOne(namespace+".opjoinSelectByOpno",no);
+	}
+	
 	
 	
 	
