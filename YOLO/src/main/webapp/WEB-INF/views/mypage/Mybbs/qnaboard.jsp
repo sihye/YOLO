@@ -10,17 +10,11 @@
 <style>
 
 /* Default */
-input[type=text], input[type=password] {
+/* input[type=text], input[type=password] {
 	font-family: "Malgun Gothic", "맑은 고딕", Dotum, "돋움", Arial, sans-serif
-}
+} */
 
-* {
-	margin: 0;
-	padding: 0;
-	font-family: "Malgun Gothic", "맑은 고딕", Dotum, "돋움", Arial, sans-serif
-}
-
-body {
+/* body {
 	font-size: 12px;
 	color: #555;
 	background: transparent;
@@ -29,11 +23,15 @@ body {
 	-webkit-text-size-adjust: none;
 	-moz-text-size-adjust: none;
 	-ms-text-size-adjust: none
+} */
+* {
+	margin: 0;
+	padding: 0;
+	/* font-family: "Malgun Gothic", "맑은 고딕", Dotum, "돋움", Arial, sans-serif */
 }
 
-ol, ul {
-	list-style: none
-}
+
+
 
 table {
 	table-layout: fixed;
@@ -96,6 +94,9 @@ button::-moz-focus-inner {
 
 header, footer, aside, nav, section, article {
 	display: block
+}
+ol, ul {
+	list-style: none
 }
 
 .clearfix {
