@@ -307,10 +307,23 @@ header, footer, aside, nav, section, article {
             $("#searchStartDate").datepicker( "option", "maxDate", endDate );
 
         }
-
+        function pageFunc(curPage){
+    		document.frmPage.currentPage.value=curPage;
+    		frmPage.submit();
+    	}
             
         </script>
 
+<!-- 페이징 처리를 위한 form 태그 -->
+<form name="frmPage" method="post"
+	action='<c:url value="/mypage/Mybbs/reviewboard.do" />'>
+	<input type="hidden" name="currentPage"> <input type="hidden"
+		name="searchCondition" value="${param.searchCondition }"> <input
+		type="hidden" name="searchKeyword" value="${param.searchKeyword}">
+	<input type="hidden" name="searchStartDate"
+		value="${param.searchStartDate}"> <input type="hidden"
+		name="searchEndDate" value="${param.searchEndDate}">
+</form>
 
 
 
@@ -414,5 +427,38 @@ header, footer, aside, nav, section, article {
 			</c:forEach>
 		</tbody>
 	</table>
+</div>
+<div class="divPage" style="text-align: center">
+	<!-- 페이지 번호 추가 -->
+	<!-- 이전 블럭으로 이동 ◀-->
+	<nav>
+		<ul class="pagination">
+
+			<c:if test="${pagingInfo.firstPage>1 }">
+				<li><a href="#" aria-label="Previous" 
+				onclick="pageFunc(${pagingInfo.firstPage-1})">
+				<span aria-hidden="true">&laquo;</span></a></li>
+			</c:if>
+
+			<c:forEach var="i" begin="${pagingInfo.firstPage }"
+				end="${pagingInfo.lastPage }">
+				<c:if test="${i==pagingInfo.currentPage }">
+					<li class="active"><a href="#"> ${i}<span class="sr-only">${i }</span></a></li>
+				</c:if>
+				<c:if test="${i!=pagingInfo.currentPage }">
+					<li><a href="#" onclick="pageFunc(${i})">${i}</a></li>
+				</c:if>
+			</c:forEach>
+
+			<!-- 다음 블럭으로 이동 ▶-->
+			<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
+				<li><a href="#" aria-label="Previous" 
+				onclick="pageFunc(${pagingInfo.lastPage+1})">
+				<span aria-hidden="true">&raquo;</span></a></li>			
+			</c:if>
+
+			<!--  페이지 번호 끝 -->
+		</ul>
+	</nav>
 </div>
 <%@ include file="../mypagebottom.jsp"%>

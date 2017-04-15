@@ -7,4 +7,5 @@ import com.one.yolo.common.SearchVO;
 
 public interface ReviewBoardDAO {
 	public List<Map<String, Object>> selectReviewBoard(SearchVO searchVO);
+	public int selectTotalRecord(SearchVO searchVo);
 }

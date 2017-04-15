@@ -16,5 +16,7 @@ public class ReviewBoardServiceImpl implements ReviewBoardService{
 	public List<Map<String, Object>> selectReviewBoard(SearchVO searchVO){
 		return reviewboardDao.selectReviewBoard(searchVO);
 	}
-		
+	public int selectTotalRecord(SearchVO searchVo){
+		return reviewboardDao.selectTotalRecord(searchVo);
+	}	
 }

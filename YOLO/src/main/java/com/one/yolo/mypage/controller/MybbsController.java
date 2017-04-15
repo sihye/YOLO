@@ -46,11 +46,11 @@ public class MybbsController {
 
 		List<Map<String, Object>> alist = qnaboardService.selectQnaBoard(searchVO);
 		logger.info("문의게시판 조회 결과 alist.size()={}",alist.size());
-		
+
 		int totalRecord =qnaboardService.selectTotalRecord(searchVO);
 		logger.info("글목록 조회-전체레코드 개수조회 결과, totalRecord={}",			
 				totalRecord);
-		
+
 		pagingInfo.setTotalRecord(totalRecord);
 
 		model.addAttribute("alist",alist);
@@ -60,11 +60,28 @@ public class MybbsController {
 	@RequestMapping("/reviewboard.do")
 	public String reviewboard(@ModelAttribute SearchVO searchVO,Model model){
 		logger.info("reviewboard 화면 보여주기,파라미터 searchVO={}",searchVO);
+		//[1] PaginationInfo 객체 생성 
+		//=> firstRecordIndex 를 계산하기 위함
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		pagingInfo.setCurrentPage(searchVO.getCurrentPage());
+
+		//[2] SearchVO 값 셋팅
+		searchVO.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		searchVO.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 
 		List<Map<String, Object>> alist = reviewboardService.selectReviewBoard(searchVO);
 		logger.info("후기게시판 조회 결과 alist.size()={}",alist.size());
+		
+		int totalRecord =reviewboardService.selectTotalRecord(searchVO);
+		logger.info("글목록 조회-전체레코드 개수조회 결과, totalRecord={}",			
+				totalRecord);
+
+		pagingInfo.setTotalRecord(totalRecord);
 
 		model.addAttribute("alist",alist);
+		model.addAttribute("pagingInfo", pagingInfo);
 		return "mypage/Mybbs/reviewboard";
 	}
 }

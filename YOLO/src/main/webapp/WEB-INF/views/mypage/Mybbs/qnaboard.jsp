@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="mypageMYBBStop.jsp"%>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
@@ -316,14 +316,14 @@ header, footer, aside, nav, section, article {
         </script>
 
 <!-- 페이징 처리를 위한 form 태그 -->
-<form name="frmPage" method="post" 
-	action= '<c:url value="/mypage/Mybbs/qnaboard.do" />'>
-	<input type="text" name="currentPage">
-	<input type="text" name="searchCondition" 
-		value="${param.searchCondition }">
-	<input type="text" name="searchKeyword" value="${param.searchKeyword}">
-	<input type="text" name="searchStartDate" value="${param.searchStartDate}">
-	<input type="text" name="searchEndDate" value="${param.searchEndDate}">
+<form name="frmPage" method="post"
+	action='<c:url value="/mypage/Mybbs/qnaboard.do" />'>
+	<input type="hidden" name="currentPage"> <input type="hidden"
+		name="searchCondition" value="${param.searchCondition }"> <input
+		type="hidden" name="searchKeyword" value="${param.searchKeyword}">
+	<input type="hidden" name="searchStartDate"
+		value="${param.searchStartDate}"> <input type="hidden"
+		name="searchEndDate" value="${param.searchEndDate}">
 </form>
 
 
@@ -396,14 +396,14 @@ header, footer, aside, nav, section, article {
 							<select class="selec" id="searchCondition" name="searchCondition"><option
 									selected="selected" value="C_NAME">클래스명</option>
 								<option value="CQ_CONTENT">내용</option>
-							</select> <input class="txt" id="searchKeyword" name="searchKeyword" type="text"/> 
-							<input type="submit" value="조회하기">
+							</select> <input class="txt" id="searchKeyword" name="searchKeyword"
+								type="text" /> <input type="submit" value="조회하기">
 						</div>
 					</td>
 				</tr>
 			<tbody>
 		</table>
-			
+
 	</form>
 	<br>
 	<!-- //기간별조회 -->
@@ -430,34 +430,40 @@ header, footer, aside, nav, section, article {
 		</tbody>
 	</table>
 </div>
-<div class="divPage">
-	<!-- 페이지 번호 추가 -->		
+
+<div class="divPage" style="text-align: center">
+	<!-- 페이지 번호 추가 -->
 	<!-- 이전 블럭으로 이동 ◀-->
-	<c:if test="${pagingInfo.firstPage>1 }">	
-		<a href="#" onclick="pageFunc(${pagingInfo.firstPage-1})">
-			<img src='<c:url value="/img/first.JPG"/>' alt="이전블럭으로">
-		</a>					
-	</c:if>
-						
-	<!-- [1][2][3][4][5][6][7][8][9][10] -->
-	<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
-		<c:if test="${i==pagingInfo.currentPage }">
-			<span style="color: blue;font-weight: bold;">${i }</span>
-		</c:if>
-		<c:if test="${i!=pagingInfo.currentPage }">
-			<a href="#" onclick="pageFunc(${i})">[${i}]</a>		
-		</c:if>	
-	</c:forEach>
-	
-	<!-- 다음 블럭으로 이동 ▶-->
-	<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}" >
-		<a href="#" onclick="pageFunc(${pagingInfo.lastPage+1})">
-			<img src='<c:url value="/img/last.JPG"/>' alt="다음블럭으로">
-		</a>					
-	</c:if>
-	
-	<!--  페이지 번호 끝 -->
+	<nav>
+		<ul class="pagination">
+
+			<c:if test="${pagingInfo.firstPage>1 }">
+				<li><a href="#" aria-label="Previous" 
+				onclick="pageFunc(${pagingInfo.firstPage-1})">
+				<span aria-hidden="true">&laquo;</span></a></li>
+			</c:if>
+
+			<c:forEach var="i" begin="${pagingInfo.firstPage }"
+				end="${pagingInfo.lastPage }">
+				<c:if test="${i==pagingInfo.currentPage }">
+					<li class="active"><a href="#"> ${i}<span class="sr-only">${i }</span></a></li>
+				</c:if>
+				<c:if test="${i!=pagingInfo.currentPage }">
+					<li><a href="#" onclick="pageFunc(${i})">${i}</a></li>
+				</c:if>
+			</c:forEach>
+
+			<!-- 다음 블럭으로 이동 ▶-->
+			<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
+				<li><a href="#" aria-label="Previous" 
+				onclick="pageFunc(${pagingInfo.lastPage+1})">
+				<span aria-hidden="true">&raquo;</span></a></li>			
+			</c:if>
+
+			<!--  페이지 번호 끝 -->
+		</ul>
+	</nav>
 </div>
 
-	
+
 <%@ include file="../mypagebottom.jsp"%>
