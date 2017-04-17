@@ -32,6 +32,11 @@
 		select * from member where m_userid=#{mUserid}
 	</select>
 	
+	<select id="MemberselectByAll" resultType="MemberVO">
+		select *from member order by m_no
+	
+	</select>
+	
 	
 
 </mapper>

@@ -20,6 +20,8 @@ import com.one.yolo.admin.model.OperAtorService;
 import com.one.yolo.admin.model.OperAtorVO;
 import com.one.yolo.category.model.CategoryService;
 import com.one.yolo.category.model.CategoryVO;
+import com.one.yolo.member.model.MemberService;
+import com.one.yolo.member.model.MemberVO;
 import com.one.yolo.upfile.model.UpfileService;
 import com.one.yolo.upfile.model.UpfileVO;
 
@@ -38,6 +40,10 @@ public class AdminController {
 	
 	@Autowired
 	private CategoryService categoryservice;
+	
+	@Autowired 
+	private MemberService memberService;
+	
 	
 	@RequestMapping(value="/operator.do",method=RequestMethod.GET)
 	public String upfile_get(Model model){
@@ -141,6 +147,7 @@ public class AdminController {
 	
 		return "admin/operatorEdit";
 		
+		
 	}
 	
 	
@@ -190,6 +197,14 @@ public class AdminController {
 		
 	}
 
-	
+	@RequestMapping(value="/operatorMember.do",method=RequestMethod.GET)
+	public String operatorMember_get(Model model){
+		List<MemberVO> memberList = memberService.MemberselectByAll();
+		List<CategoryVO> categoryList=categoryservice.selectAll();
+		
+		model.addAttribute("memberList",memberList);
+		model.addAttribute("categoryList",categoryList);
+		return "/admin/operatorMember";
+	}
 	
 }
