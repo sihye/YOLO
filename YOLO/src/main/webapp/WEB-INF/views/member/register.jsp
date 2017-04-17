@@ -203,8 +203,14 @@
 					<input value='프로그램' onclick=CountChecked(this) type=checkbox>테니스
 					<input value='디자인' onclick=CountChecked(this) type=checkbox>요가
 					<input value='웹접근성' onclick=CountChecked(this) type=checkbox>스포츠 기타<BR> <br> -->
-				<label for="category">비밀번호 찾기 질문</label> 
-					<c:import url="/category/categoryList.do"></c:import><br>
+				<c:forEach var="cg" items="${cgList }">
+					<label for="hobby">${cg.kgName}</label>	
+					<c:forEach var="c" items="${cList }">
+						<c:if test ="${cg.kgNo == c.kgNo}">
+							<input value='${c.kNo}' onclick=CountChecked(this) type=checkbox>${c.kName}
+						</c:if>
+					</c:forEach><br>
+				</c:forEach>
 				</FORM>
 				
 			</div>
