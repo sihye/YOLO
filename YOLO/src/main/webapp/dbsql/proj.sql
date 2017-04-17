@@ -37,9 +37,9 @@ CREATE TABLE Member (
 	M_ACCOUNT        VARCHAR2(500) NULL,     -- 계좌번호
 	M_JOINDATE       DATE          DEFAULT sysdate NULL     , -- 가입일
 	M_LEAVEDATE      DATE          NULL,     -- 탈퇴일
-	K_NO1            NUMBER        NULL,     -- 카테고리번호1
+	K_NO1            NUMBER        NOT NULL,     -- 카테고리번호1
 	K_NO2            NUMBER        NULL,     -- 카테고리번호2
-	K_NO3            NUMBER        NOT NULL, -- 카테고리번호3
+	K_NO3            NUMBER        NULL, -- 카테고리번호3
 	M_TEL1           VARCHAR2(500) NULL,     -- 핸드폰
 	M_TEL2           VARCHAR2(500) NULL,     -- 핸드폰
 	M_TEL3           VARCHAR2(500) NULL,     -- 핸드폰
