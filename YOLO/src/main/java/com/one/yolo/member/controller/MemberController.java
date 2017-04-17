@@ -28,7 +28,7 @@ public class MemberController {
 
 	
 	
-	@RequestMapping(value="/register.do",method=RequestMethod.POST)
+	@RequestMapping(value="/register.do",method=RequestMethod.GET)
 	public String register(){
 		
 		return "member/register";
