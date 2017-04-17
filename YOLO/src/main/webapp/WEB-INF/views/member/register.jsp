@@ -169,7 +169,7 @@
 			</div>
 			<div>
 				<FORM action=# method=post name="kNo">
-				<label for="hobby">라이프 스타일</label>
+				<!-- <label for="hobby">라이프 스타일</label>
 					<input value='kNo' onclick=CountChecked(this) type=checkbox>독서/글쓰기 
 					<input value='kNo' onclick=CountChecked(this) type=checkbox>봉사활동
 					<input value='kNo' onclick=CountChecked(this) type=checkbox>바리스타/바텐더 
@@ -202,7 +202,9 @@
 					<input value='디자인' onclick=CountChecked(this) type=checkbox>야구
 					<input value='프로그램' onclick=CountChecked(this) type=checkbox>테니스
 					<input value='디자인' onclick=CountChecked(this) type=checkbox>요가
-					<input value='웹접근성' onclick=CountChecked(this) type=checkbox>스포츠 기타<BR> <br>
+					<input value='웹접근성' onclick=CountChecked(this) type=checkbox>스포츠 기타<BR> <br> -->
+				<label for="category">비밀번호 찾기 질문</label> 
+					<c:import url="/category/categoryList.do"></c:import><br>
 				</FORM>
 				
 			</div>
@@ -210,13 +212,6 @@
 				<label for="qQuestionno">비밀번호 찾기 질문</label> 
 				<c:import url="/question/questionList.do"></c:import><br>
 				비밀번호 분실시 본인 확인을 위해 사용될 질문입니다
-
-				<!-- <label for="email1">비밀번호 찾기 질문</label>
-				<select name="question">
-					<option value="nate.com">뭐시 중헌디</option>
-					<option value="hanmail.net">쫄리면 뒤지시던가</option>
-					<option value="nate.com">살려는 드릴게</option>
-				</select><br>비밀번호 분실시 본인 확인을 위해 사용될 질문입니다 -->
 			</div>
 			<div>
 				<label for="email1">비밀번호 찾기 답</label>
