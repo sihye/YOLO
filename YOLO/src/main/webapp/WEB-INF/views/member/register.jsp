@@ -170,8 +170,9 @@
 			<div>
 				<FORM action=# method=post name="kNo3">
 				<label for="hobby">라이프 스타일</label>
+					<input type="checkbox">
 					<input value='1' onclick=CountChecked(this) type=checkbox>독서/글쓰기 
-					<input value='2' onclick=CountChecked(this) type=checkbox>봉사활동
+					<input value='2' onclick=CountChecked(this) type=checkbox >봉사활동
 					<input value='3' onclick=CountChecked(this) type=checkbox>바리스타/바텐더 
 					<input value='4' onclick=CountChecked(this) type=checkbox>반려동물<BR> 
 					<input value='CSS' onclick=CountChecked(this) type=checkbox>사진/영상

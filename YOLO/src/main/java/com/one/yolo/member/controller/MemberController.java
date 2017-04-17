@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.one.yolo.member.model.MemberService;
 import com.one.yolo.member.model.MemberVO;
 
+import oracle.net.aso.k;
+
 
 
 @Controller
@@ -25,10 +27,41 @@ public class MemberController {
 	private MemberService memberService;
 
 	
-	@RequestMapping("/register.do")
-	public void register(){
+	
+	@RequestMapping(value="/register.do",method=RequestMethod.POST)
+	public String register(){
+		
+		return "member/register";
+	}
+
+	
+	
+	
+	@RequestMapping(value="/register.do",method=RequestMethod.POST)
+	public String register(@ModelAttribute MemberVO vo, @RequestParam int[] kNo){
 		logger.info("회원가입 화면 보여주기");
 
+		if(kNo !=null){
+			if(kNo[0]>0){ 
+				vo.setkNo1(kNo[0]);
+			}
+			if(kNo[1]>0){
+				vo.setkNo2(kNo[1]);
+			}
+			if(kNo[2]>0){
+				vo.setkNo3(kNo[2]);
+			}
+			
+		}
+		
+		int cnt = memberService.memberInsert(vo);
+		String msg ="", url ="/index.do";
+		if(cnt>0){
+			msg ="회원가입 완료";
+		}else{
+			msg ="회원가입 실패";
+		}
+		return "common/message";
 	}
 	
 	@RequestMapping("/join.do")
