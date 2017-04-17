@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.favoriteclass">
+	<select id="selectFavoriteClass" parameterType="SearchVO" resultType="map">
+		select SB_NO, C_NO,SB_USERID, SC_REGDATE, C_PALCE, C_PRICE,
+			C_PAYMENTWAY, C_NAME
+		from
+		(
+		    select rownum as RNUM ,LIST.*
+		    from
+		    (
+		        select * from favoriteclass 
+		       <!--  where C_NAME=#{userid} -->
+		    )LIST
+		)	
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectTotalRecord" parameterType="SearchVO"
+		resultType="int">
+		select count(*) from favoriteclass 
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
