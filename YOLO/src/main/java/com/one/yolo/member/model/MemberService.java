@@ -1,5 +1,7 @@
 package com.one.yolo.member.model;
 
+import java.util.List;
+
 public interface MemberService {
 	//아이디 중복확인에서 사용하는 상수
 	public static final int EXIST_ID=1;  //이미 해당 아이디가 존재함
@@ -14,4 +16,6 @@ public interface MemberService {
 	public int duplicateUserid(String userid);
 	public int loginCheck(String userid, String pwd);
 	public MemberVO selectByUserid(String userid);
+	
+	public List<MemberVO> MemberselectByAll();
 }

@@ -4,9 +4,13 @@
 
 <script type="text/javascript">
 
-function delFunc(delNo) { 
-	location.href="/mypage/Favorite/FavoriteClassdelete.do?SB_NO="+delNo;
+function delNoFunc(delNo) { 
+	location.href='<c:url value="/mypage/Favorite/FavoriteClassdeleteNo.do?SB_NO='+delNo+'" />';
 }
+
+function delIdFunc() { 
+	location.href='<c:url value="/mypage/Favorite/FavoriteClassdeleteId.do" />';
+} 
 
 
 function pageFunc(curPage){
@@ -35,6 +39,7 @@ function pageFunc(curPage){
 	<br>
 	<br>
 	<h2>관심클래스</h2>
+
 	<br>
 	<form method="post"
 		action='<c:url value="/mypage/Favorite/FavoriteClass.do" />'>
@@ -59,7 +64,7 @@ function pageFunc(curPage){
 					<td>${map["C_PAYMENTWAY"] }</td>
 					<td>${map["SC_REGDATE"] }</td>
 					<td><button id="del" class="btn btn-primary" type="button" 
-					onclick="delFunc(${map["SB_NO"] })">삭제</button></td>
+					onclick="delNoFunc(${map['SB_NO']})">삭제</button></td>
 				</tr>
 				</c:forEach>
 	
@@ -67,7 +72,8 @@ function pageFunc(curPage){
 			<tfoot>
 				<tr>
 					<td colspan="6" style="text-align: center">
-					<button id="alldel" class="btn btn-primary" type="button">관심클래스 비우기</button></td>
+					<button id="alldel" class="btn btn-primary" type="button"
+					onclick="delIdFunc()">관심클래스 비우기</button></td>
 				</tr>
 			</tfoot>
 		</table>

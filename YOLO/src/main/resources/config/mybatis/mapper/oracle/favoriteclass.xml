@@ -26,8 +26,11 @@
 		select count(*) from favoriteclass 
 		where SB_USERID=#{userid}
 	</select>
-	<delete id="deleteFavoriteClass" parameterType="int">
-		delete from board where no=#{no}
+	<delete id="deleteNoFavoriteClass" parameterType="int">
+		delete from SHOPPINGBASKET where SB_NO=#{no}
+	</delete>
+	<delete id="deleteIdFavoriteClass" parameterType="String">
+		delete from SHOPPINGBASKET where SB_USERID=#{userid}
 	</delete>
 </mapper>
 

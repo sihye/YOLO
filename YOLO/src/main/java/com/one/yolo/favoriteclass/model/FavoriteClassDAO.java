@@ -8,6 +8,8 @@ import com.one.yolo.common.SearchVO;
 public interface FavoriteClassDAO {
 	public List<Map<String, Object>> selectFavoriteClass(SearchVO searchVO);
 	public int selectTotalRecord(SearchVO searchVo);
+	public int deleteNoFavoriteClass(int no);
+	public int deleteIdFavoriteClass(String userid);
 	
 	
 }
