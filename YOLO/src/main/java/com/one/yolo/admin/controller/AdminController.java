@@ -1,6 +1,7 @@
 package com.one.yolo.admin.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,11 +16,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.one.yolo.admin.model.OperAtorService;
 import com.one.yolo.admin.model.OperAtorVO;
 import com.one.yolo.category.model.CategoryService;
 import com.one.yolo.category.model.CategoryVO;
+import com.one.yolo.common.ExcelUtil;
 import com.one.yolo.member.model.MemberService;
 import com.one.yolo.member.model.MemberVO;
 import com.one.yolo.upfile.model.UpfileService;
@@ -111,7 +114,7 @@ public class AdminController {
 		
 		//=> [2] 기존 파일이 있다면 삭제
 		if(oldFileName!=null && !oldFileName.isEmpty()){
-			String upPath = upFileservice.getUploadPath(request);
+			String upPath = upFileservice.getUploadPath(request,"File");
 			File oldFile = new File(upPath, oldFileName);
 			if(oldFile.exists()){
 				boolean bool =oldFile.delete();
@@ -166,7 +169,7 @@ public class AdminController {
 			logger.info("old파일 네임 = {}",oldFileName);
 			//=> [2] 기존 파일이 있다면 삭제
 			if(oldFileName!=null && !oldFileName.isEmpty()){
-				String upPath = upFileservice.getUploadPath(request);
+				String upPath = upFileservice.getUploadPath(request,"File");
 				File oldFile = new File(upPath, oldFileName);
 				if(oldFile.exists()){
 					boolean bool =oldFile.delete();
@@ -206,5 +209,23 @@ public class AdminController {
 		model.addAttribute("categoryList",categoryList);
 		return "/admin/operatorMember";
 	}
+	
+	
+	@RequestMapping("/excel.do")
+	public ModelAndView excel(HttpServletRequest request){
+		ExcelUtil excel = new ExcelUtil();
+		String fileName = excel.excelWrith();
+		String upPath = upFileservice.getUploadPath(request, "Excel");
+		File file = new File(upPath,fileName);
+		Map<String,Object> fileMap = new HashMap<String, Object>();
+		fileMap.put("downFile", file);
+		/*ModelAndView mav = new ModelAndView(String viewName,map model);*/
+		
+		ModelAndView mav = new ModelAndView("excelDownView",fileMap);
+		
+		return mav;
+		
+	}
+	
 	
 }
