@@ -172,26 +172,26 @@
 						• 커리큘럼, 경력, 장점을 표현해주세요.
 						• 회원님의 모꼬지의 대해 설명해주세요.
 						• 비교 선택시 중요한 정보입니다.">
-						Q.수업에 어떤 분들이 참여하면 좋을까요?
-						A. 
-						
-						Q.일정에 대해 알려주세요.(날짜, 시간, 소요시간, 횟수 등)
-						A. 
-						
-						Q.참여시 준비물이 필요한가요?
-						A. 
-						
-						Q.참여하는 인원이 보통 몇 명인가요?
-						A. 
-						
-						Q.결제는 어떤 방식으로 이루어지나요?
-						A. 
-						
-						Q.수업 내용을 소개해주세요.(커리큘럼, 결과물 등)
-						A. 
-						
-						Q. 강사님을 소개해주세요.(이력, 자기소개 등)
-						A. 
+	Q.수업에 어떤 분들이 참여하면 좋을까요?
+	A. 
+	
+	Q.일정에 대해 알려주세요.(날짜, 시간, 소요시간, 횟수 등)
+	A. 
+	
+	Q.참여시 준비물이 필요한가요?
+	A. 
+	
+	Q.참여하는 인원이 보통 몇 명인가요?
+	A. 
+	
+	Q.결제는 어떤 방식으로 이루어지나요?
+	A. 
+	
+	Q.수업 내용을 소개해주세요.(커리큘럼, 결과물 등)
+	A. 
+	
+	Q. 강사님을 소개해주세요.(이력, 자기소개 등)
+	A. 
 					</textarea>
 
 				</div>
@@ -294,8 +294,8 @@
 									}).open();
 						}
 					</script>
-					주소: <input type="text" id="add" name="cPalce1"> 
-					상세주소: <input type="text" id="addDetail" name="cPalce2">
+					주소: <input type="text" id="add" name=cplace1> 
+					상세주소: <input type="text" id="addDetail" name="cplace2">
 					좌표: <input type="text" id="location" name="cLocation">
 				</div>
 			</div>
@@ -304,19 +304,19 @@
 					<h1>갤러리</h1>
 					<p>어떤 클래스인지 미리 볼 수 있도록 사진을 보여주세요.</p>
 					<p>
-						<label for="image">커버사진:</label> <input type="file" name="cMainimg"
+						<label for="image">커버사진:</label> <input type="file" name="fileMap"
 							id="image" />
 					</p>
 					<p>
-						<label for="image">갤러리1:</label> <input type="file" name="cDetailimg1"
+						<label for="image">갤러리1:</label> <input type="file" name="fileMap"
 							id="image1" />
 					</p>
 					<p>
-						<label for="image">갤러리2:</label> <input type="file" name="cDetailimg2"
+						<label for="image">갤러리2:</label> <input type="file" name="fileMap"
 							id="image2" />
 					</p>
 					<p>
-						<label for="image">갤러리3:</label> <input type="file" name="cDetailimg3"
+						<label for="image">갤러리3:</label> <input type="file" name="fileMap"
 							id="image3" />
 					</p>
 

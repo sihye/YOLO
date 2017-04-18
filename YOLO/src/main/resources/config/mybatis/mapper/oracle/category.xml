@@ -3,11 +3,25 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.category">
+	<!-- admin -->
+	<select id="selectCategoryAll" resultType="CategoryVO">
+		select *from category order by k_name
+	</select>
+	
+	<!-- class -->
+	<select id="selCateGroupAll" resultType="CategoryGroupVO">
+		select * from
+		categorygroup order by kg_No
+	</select>
+	<select id="selectCateAll" resultType="CategoryVO">
+		select *from category
+		order by k_No
+	</select>
 
-<select id="selectCategoryAll" resultType="CategoryVO">
-select *from category order by k_name
-</select>
-
+	<select id="selCateCateGroup" resultType="CategoryVO">
+		select * from category
+		order by k_no
+	</select>
 
 </mapper>
 
