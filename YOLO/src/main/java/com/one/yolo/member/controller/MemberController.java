@@ -64,16 +64,22 @@ public class MemberController {
 	            	if(cgvo.getKgNo() == cvo.getKgNo()){
 	            		continue;
 	            	}else if(cList.size() == j+1){
-	            		cgList.remove(i);
+	            		cList.remove(i);
 	            	}
 	               
 	         }
+
 	      }
 		
 		//4. 모델통해서 넘겨주기
 		model.addAttribute("cList",cList);
 		
 		model.addAttribute("cgList",cgList);
+		
+		logger.info("cList size={}",cList.size());
+		logger.info("cgList size={}",cgList.size());
+		
+		
 		//- cgList
 
 
