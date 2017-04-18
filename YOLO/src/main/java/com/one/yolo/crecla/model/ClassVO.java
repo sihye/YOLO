@@ -1,141 +1,153 @@
 package com.one.yolo.crecla.model;
 
+import java.sql.Timestamp;
+
 public class ClassVO {
-	private int CNO;
-	private String MUSERID;
-	private int KNO;
-	private String CNAME;
-	private int CPRICE;
-	private String CGOAL;
-	private String CTARGET;
-	private String CSPEVIALTY;
-	private String CDETAILINFO;
-	private String CPALCE;
-	private String CLOCATION;
-	private String CMAINIMG;
-	private String CDETAILIMG1;
-	private String CDETAILIMG2;
-	private String CDETAILIMG3;
-	private String CPAYMENTWAY;
-	private String CMAXPERSON;
-	private String CRETURNCHECK;
-	public int getCNO() {
-		return CNO;
+	private int cNo;
+	private String mUserid;
+	private int kNo;
+	private String cName;
+	private int cPrice;//비용
+	private String cGoal; //목표
+	private String cTarget; //대상
+	private String cSpevialty;//특기사항
+	private String cDetailinfo;//상세정보
+	private String cPalce;//장소
+	private String cLocation;//좌표
+	private String cMainimg;//커버이미지
+	private String cDetailimg1;//상세1
+	private String cDetailimg2;//상세2
+	private String cDetailimg3;//상세3
+	private String cPaymentway;//결제방법
+	private String cMaxperson;//최대인원
+	private Timestamp cRegdate;//등록일
+	private int cHits;//조회수
+	private String cDel;//삭제여부
+	
+	public int getcNo() {
+		return cNo;
 	}
-	public void setCNO(int cNO) {
-		CNO = cNO;
+	public void setcNo(int cNo) {
+		this.cNo = cNo;
 	}
-	public String getMUSERID() {
-		return MUSERID;
+	public String getmUserid() {
+		return mUserid;
 	}
-	public void setMUSERID(String mUSERID) {
-		MUSERID = mUSERID;
+	public void setmUserid(String mUserid) {
+		this.mUserid = mUserid;
 	}
-	public int getKNO() {
-		return KNO;
+	public int getkNo() {
+		return kNo;
 	}
-	public void setKNO(int kNO) {
-		KNO = kNO;
+	public void setkNo(int kNo) {
+		this.kNo = kNo;
 	}
-	public String getCNAME() {
-		return CNAME;
+	public String getcName() {
+		return cName;
 	}
-	public void setCNAME(String cNAME) {
-		CNAME = cNAME;
+	public void setcName(String cName) {
+		this.cName = cName;
 	}
-	public int getCPRICE() {
-		return CPRICE;
+	public int getcPrice() {
+		return cPrice;
 	}
-	public void setCPRICE(int cPRICE) {
-		CPRICE = cPRICE;
+	public void setcPrice(int cPrice) {
+		this.cPrice = cPrice;
 	}
-	public String getCGOAL() {
-		return CGOAL;
+	public String getcGoal() {
+		return cGoal;
 	}
-	public void setCGOAL(String cGOAL) {
-		CGOAL = cGOAL;
+	public void setcGoal(String cGoal) {
+		this.cGoal = cGoal;
 	}
-	public String getCTARGET() {
-		return CTARGET;
+	public String getcTarget() {
+		return cTarget;
 	}
-	public void setCTARGET(String cTARGET) {
-		CTARGET = cTARGET;
+	public void setcTarget(String cTarget) {
+		this.cTarget = cTarget;
 	}
-	public String getCSPEVIALTY() {
-		return CSPEVIALTY;
+	public String getcSpevialty() {
+		return cSpevialty;
 	}
-	public void setCSPEVIALTY(String cSPEVIALTY) {
-		CSPEVIALTY = cSPEVIALTY;
+	public void setcSpevialty(String cSpevialty) {
+		this.cSpevialty = cSpevialty;
 	}
-	public String getCDETAILINFO() {
-		return CDETAILINFO;
+	public String getcDetailinfo() {
+		return cDetailinfo;
 	}
-	public void setCDETAILINFO(String cDETAILINFO) {
-		CDETAILINFO = cDETAILINFO;
+	public void setcDetailinfo(String cDetailinfo) {
+		this.cDetailinfo = cDetailinfo;
 	}
-	public String getCPALCE() {
-		return CPALCE;
+	public String getcPalce() {
+		return cPalce;
 	}
-	public void setCPALCE(String cPALCE) {
-		CPALCE = cPALCE;
+	public void setcPalce(String cPalce) {
+		this.cPalce = cPalce;
 	}
-	public String getCLOCATION() {
-		return CLOCATION;
+	public String getcLocation() {
+		return cLocation;
 	}
-	public void setCLOCATION(String cLOCATION) {
-		CLOCATION = cLOCATION;
+	public void setcLocation(String cLocation) {
+		this.cLocation = cLocation;
 	}
-	public String getCMAINIMG() {
-		return CMAINIMG;
+	public String getcMainimg() {
+		return cMainimg;
 	}
-	public void setCMAINIMG(String cMAINIMG) {
-		CMAINIMG = cMAINIMG;
+	public void setcMainimg(String cMainimg) {
+		this.cMainimg = cMainimg;
 	}
-	public String getCDETAILIMG1() {
-		return CDETAILIMG1;
+	public String getcDetailimg1() {
+		return cDetailimg1;
 	}
-	public void setCDETAILIMG1(String cDETAILIMG1) {
-		CDETAILIMG1 = cDETAILIMG1;
+	public void setcDetailimg1(String cDetailimg1) {
+		this.cDetailimg1 = cDetailimg1;
 	}
-	public String getCDETAILIMG2() {
-		return CDETAILIMG2;
+	public String getcDetailimg2() {
+		return cDetailimg2;
 	}
-	public void setCDETAILIMG2(String cDETAILIMG2) {
-		CDETAILIMG2 = cDETAILIMG2;
+	public void setcDetailimg2(String cDetailimg2) {
+		this.cDetailimg2 = cDetailimg2;
 	}
-	public String getCDETAILIMG3() {
-		return CDETAILIMG3;
+	public String getcDetailimg3() {
+		return cDetailimg3;
 	}
-	public void setCDETAILIMG3(String cDETAILIMG3) {
-		CDETAILIMG3 = cDETAILIMG3;
+	public void setcDetailimg3(String cDetailimg3) {
+		this.cDetailimg3 = cDetailimg3;
 	}
-	public String getCPAYMENTWAY() {
-		return CPAYMENTWAY;
+	public String getcPaymentway() {
+		return cPaymentway;
 	}
-	public void setCPAYMENTWAY(String cPAYMENTWAY) {
-		CPAYMENTWAY = cPAYMENTWAY;
+	public void setcPaymentway(String cPaymentway) {
+		this.cPaymentway = cPaymentway;
 	}
-	public String getCMAXPERSON() {
-		return CMAXPERSON;
+	public String getcMaxperson() {
+		return cMaxperson;
 	}
-	public void setCMAXPERSON(String cMAXPERSON) {
-		CMAXPERSON = cMAXPERSON;
+	public void setcMaxperson(String cMaxperson) {
+		this.cMaxperson = cMaxperson;
 	}
-	public String getCRETURNCHECK() {
-		return CRETURNCHECK;
+
+	public int getcHits() {
+		return cHits;
 	}
-	public void setCRETURNCHECK(String cRETURNCHECK) {
-		CRETURNCHECK = cRETURNCHECK;
+	public void setcHits(int cHits) {
+		this.cHits = cHits;
+	}
+	public String getcDel() {
+		return cDel;
+	}
+	public void setcDel(String cDel) {
+		this.cDel = cDel;
 	}
 	@Override
 	public String toString() {
-		return "ClassVO [CNO=" + CNO + ", MUSERID=" + MUSERID + ", KNO=" + KNO + ", CNAME=" + CNAME + ", CPRICE="
-				+ CPRICE + ", CGOAL=" + CGOAL + ", CTARGET=" + CTARGET + ", CSPEVIALTY=" + CSPEVIALTY + ", CDETAILINFO="
-				+ CDETAILINFO + ", CPALCE=" + CPALCE + ", CLOCATION=" + CLOCATION + ", CMAINIMG=" + CMAINIMG
-				+ ", CDETAILIMG1=" + CDETAILIMG1 + ", CDETAILIMG2=" + CDETAILIMG2 + ", CDETAILIMG3=" + CDETAILIMG3
-				+ ", CPAYMENTWAY=" + CPAYMENTWAY + ", CMAXPERSON=" + CMAXPERSON + ", CRETURNCHECK=" + CRETURNCHECK
-				+ "]";
+		return "ClassVO [cNo=" + cNo + ", mUserid=" + mUserid + ", kNo=" + kNo + ", cName=" + cName + ", cPrice="
+				+ cPrice + ", cGoal=" + cGoal + ", cTarget=" + cTarget + ", cSpevialty=" + cSpevialty + ", cDetailinfo="
+				+ cDetailinfo + ", cPalce=" + cPalce + ", cLocation=" + cLocation + ", cMainimg=" + cMainimg
+				+ ", cDetailimg1=" + cDetailimg1 + ", cDetailimg2=" + cDetailimg2 + ", cDetailimg3=" + cDetailimg3
+				+ ", cPaymentway=" + cPaymentway + ", cMaxperson=" + cMaxperson + ", cRegdate=" + cRegdate + ", cHits="
+				+ cHits + ", cDel=" + cDel + "]";
 	}
-	
+
 	
 }
