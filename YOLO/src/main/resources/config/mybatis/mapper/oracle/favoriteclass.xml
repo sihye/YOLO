@@ -12,7 +12,7 @@
 		    from
 		    (
 		        select * from favoriteclass 
-		       <!--  where C_NAME=#{userid} -->
+		        where SB_USERID=#{userid} 
 		    )LIST
 		)	
 		<![CDATA[
@@ -24,7 +24,11 @@
 	<select id="selectTotalRecord" parameterType="SearchVO"
 		resultType="int">
 		select count(*) from favoriteclass 
+		where SB_USERID=#{userid}
 	</select>
+	<delete id="deleteFavoriteClass" parameterType="int">
+		delete from board where no=#{no}
+	</delete>
 </mapper>
 
 

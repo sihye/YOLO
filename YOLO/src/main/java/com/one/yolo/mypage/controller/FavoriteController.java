@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.one.yolo.common.PaginationInfo;
 import com.one.yolo.common.SearchVO;
@@ -42,10 +43,11 @@ public class FavoriteController {
 		searchVO.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
 		searchVO.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 
-		/*//세션에 저장
+		//세션에 저장
 		HttpSession session = request.getSession();
 		session.setAttribute("userid", "hong");
-		String userid =(String)session.getAttribute("userid");*/
+		String userid =(String)session.getAttribute("userid");
+		searchVO.setUserid(userid);
 		
 
 		List<Map<String, Object>> alist = favoriteClassSerive.selectFavoriteClass(searchVO);
@@ -63,6 +65,12 @@ public class FavoriteController {
 
 		return "mypage/Favorite/FavoriteClass";
 	}
+	/*@RequestMapping("/FavoriteClassdelete.do")
+	public String FavoriteClassdelete(@RequestParam int SB_NO,Model model){
+		logger.info("찜하기 삭제 처리, 파라미터 SB_NO={} ", SB_NO);
+		
+		favoriteClassSerive.
+	}*/
 	@RequestMapping("/Favoritehost.do")
 	public String Favoritehost(){
 		logger.info("Favoritehost 화면 보여주기");
