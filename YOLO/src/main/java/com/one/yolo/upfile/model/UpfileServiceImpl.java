@@ -63,7 +63,7 @@ public class UpfileServiceImpl implements UpfileService{
 				String originalFileName = tempFile.getOriginalFilename();
 				String fileName = getUniqueFileName(originalFileName);
 				long fileSize = tempFile.getSize();				
-				String savePath = getUploadPath(request);
+				String savePath = getUploadPath(request,"File");
 				File file = new File(savePath,fileName);
 				
 				System.out.println(originalFileName+" - "+fileName+"-"+fileSize);
@@ -97,20 +97,25 @@ public class UpfileServiceImpl implements UpfileService{
 
 	}
 	
-	public String getUploadPath(HttpServletRequest request){
+	public String getUploadPath(HttpServletRequest request,String uptype){
 		String type = fileProperties.getProperty("file.upload.type");
 		
 		String upPath="";
 		if(type.equals("test")){
-			upPath=fileProperties.getProperty("file.upload.path.test");
+			if(uptype.equals("File")){
+				upPath=fileProperties.getProperty("file.upload.path.test");
+			}else if(uptype.equals("Excel")){
+				upPath=fileProperties.getProperty("excel.upload.path.test");
+			}
 		}else{
-		
 			String dir = fileProperties.getProperty("file.upload.path");
 			upPath=
 			 request.getSession().getServletContext().getRealPath(dir);
 		}
 		return upPath;
 	}
+	
+	
 	
 	
 	public String getUniqueFileName(String fName){

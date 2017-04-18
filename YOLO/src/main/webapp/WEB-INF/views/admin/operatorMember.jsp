@@ -30,10 +30,7 @@ a{
 
 <div class="container" id="cont1">
 	<h2>메인 배너 관리</h2>
-	엑셀업로드</br></br></br>
-	<form id="excelUp" name="excelUp" enctype="multipart/form-data" method="post" action="/admin/excelUpload.do" >
-    <input type="file" id="excelFile" name="excelFile"/>
-    <input type="submit" value="엑셀업로드"/> 
+
     
 
 
@@ -84,7 +81,7 @@ a{
 	<hr>
 
 <label>엑셀다운로드 </label>
-<a href="<c:url value="/admin/excelDownload.do"/>">Excel Export</a>
+<a href="<c:url value="/admin/excel.do"/>">Excel Export</a>
 
 </div>
 </form>
