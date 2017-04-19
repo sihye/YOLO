@@ -1,6 +1,7 @@
 package com.one.yolo.noticeboard.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,12 @@ public class NoticeboardServiceImpl
 	@Autowired
 	private NoticeboardDAO dao;
 
-	@Override
+	/*@Override
 	public List<NoticeboardVO> selectNoticeboard() {
 		return dao.selectNoticeboard();
-	}
-	/*@Override
+	}*/
+	
+	@Override
 	public List<NoticeboardVO> selectNoticeboard(SearchVO searchVo) {
 		return dao.selectNoticeboard(searchVo);
 	}
@@ -26,8 +28,8 @@ public class NoticeboardServiceImpl
 	@Override
 	public int selectTotalRecord(SearchVO searchVo) {
 		return dao.selectTotalRecord(searchVo);
-	}*/
-	
+	}
+
 	@Override
 	public int insertNoticboard(NoticeboardVO vo) {
 		return dao.insertNoticboard(vo);

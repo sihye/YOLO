@@ -3,20 +3,28 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.noticeboard">
-	<select id="selectNotice" resultType="NoticeboardVO">
+	<sql id="searchWhere">
+		<if test="searchKeyword !=null and searchKeyword !=''">
+			where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+		</if>
+	</sql>
+	
+	<!-- <select id="selectNotice" resultType="NoticeboardVO">
 		select * from noticeboard
-	</select>
-	<!-- <select id="selectNotice" parameterType="SearchVO" resultType="NoticeboardVO">
-		select rownum as RNUM ,LIST.*
+	</select> -->
+	
+	<select id="selectNotice" parameterType="SearchVO" resultType="NoticeboardVO">
+		select NB_NO,M_USERID,BG_NO,NB_TITLE,NB_CONTENT
 		from
 		(
 		    select rownum as RNUM ,LIST.*
 		    from
 		    (
-		       select * from noticeboard
+		        select * from noticeboard
 		        <include refid="searchWhere"></include>
+		        order by nb_no desc
 		    )LIST
-		)	
+		)
 		<![CDATA[
 		where RNUM>#{firstRecordIndex} 
 		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
@@ -26,7 +34,7 @@
 	<select id="selectTotalRecord" parameterType="SearchVO" resultType="int">
 		select count(*) from noticeboard
 		<include refid="searchWhere"></include>
-	</select> -->
+	</select> 	
 	
 	<insert id="insertNotice" parameterType="NoticeboardVO">
 		<selectKey keyProperty="nbNo" resultType="int" order="BEFORE">

@@ -12,6 +12,29 @@
 <link rel="stylesheet" type="text/css" href='<c:url value="/css/formLayout.css"/>' />
 <link rel="stylesheet" type="text/css" href='<c:url value="/css/mystyle.css"/>' />
 
+<!-- Bootstrap -->
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/jquery/jquery-3.1.1.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+	function pageFunc(curPage) {
+		document.frmPage.currentPage.value=curPage;
+		frmPage.submit();
+	}
+</script>
 
 <style type="text/css">
 	body{
@@ -20,19 +43,21 @@
 	 }	
 </style>
 
-<%-- <script type="text/javascript">
-	function pageFunc(curPage) {
-		document.frmPage.currentPage.value=curPage;
-		frmPage.submit();
-	}
-</script>
-
 <!-- 페이징 처리를 위한 form 시작-->
-<form name="frmPage" method="post" action='<c:url value="/noticeboard/list.do"/>'>
-	<input type="text" name="searchKeyword" value="${param.searchKeyword }">
+
+<form name="frmPage" method="post" 
+	action='<c:url value="/noticeboard/list.do"/>'>
 	<input type="text" name="currentPage">
+	<input type="text" name="searchCondition" value="${param.searchCondition }">
+	<input type="text" name="searchKeyword" value="${param.searchKeyword}">
 </form>
-<!-- 페이징 처리 form 끝 -->	 --%>
+
+<c:if test="${!empty param.searchKeyword }">
+	<p>검색어 : ${param.searchKeyword}, 
+	${pagingInfo.totalRecord}건 검색되었습니다</p>
+</c:if>
+
+<!-- 페이징 처리 form 끝 -->	
 
 </head>	
 <body>
@@ -60,7 +85,13 @@
 	    <th scope="col">조회수</th>
 	  </tr>
 	</thead> 
-	<tbody> 
+	<tbody>
+	  <c:if test="${empty nList}">
+	  	<tr>
+	  		<td colspan="6" class="align_center">
+	  			데이터가 존재하지 않습니다.</td>
+	  	</tr>
+	  </c:if> 
 	  <!--게시판 내용 반복문 시작  -->
 	  <c:forEach var="vo" items="${nList }">	
 		<tr  style="text-align:center">
@@ -80,7 +111,7 @@
 </table>	   
 </div>
 
-<%-- 	<div class="divPage" style="text-align: center">
+<div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->
 	<!-- 이전 블럭으로 이동 ◀-->
 	<nav>
@@ -112,7 +143,33 @@
 			<!--  페이지 번호 끝 -->
 		</ul>
 	</nav>
-</div> --%>
+</div>
+
+<div class="divSearch">
+   	<form name="frmSearch" method="post" 
+   		action="<c:url value='/noticeboard/list.do' />" >
+        <select name="searchCondition"><!-- ${vo.nbTitle} -->
+            <option value="nb_title" 
+            	<c:if test="${'nb_title'==param.searchCondition }">
+            		selected            	
+            	</c:if>
+            	>제목</option><!-- ${vo.nbContent} -->
+            <option value="nb_content" 
+            	<c:if test="${'nb_content'==param.searchCondition }">
+            		selected            	
+            	</c:if>
+            >내용</option><!-- ${vo.mUserid} -->
+            <option value="m_userid" 
+            	<c:if test="${'m_userid'==param.searchCondition }">
+            		selected            	
+            	</c:if>
+            >작성자</option>
+        </select>   
+        <input type="text" name="searchKeyword" title="검색어 입력"
+        	value="${param.searchKeyword }">   
+		<input type="submit" value="검색">
+    </form>
+</div>
 
 
 <div class="divBtn">

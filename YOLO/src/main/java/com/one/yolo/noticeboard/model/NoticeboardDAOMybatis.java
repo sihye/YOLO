@@ -1,6 +1,7 @@
 package com.one.yolo.noticeboard.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -12,16 +13,22 @@ public class NoticeboardDAOMybatis extends SqlSessionDaoSupport
 	implements NoticeboardDAO{
 	
 	private String namespace="config.mybatis.mapper.oracle.noticeboard";
-
-	/*@Override
-	public List<NoticeboardVO> selectNoticeboard(SearchVO searchVo){
+	
+	
+/*	@Override
+	public List<NoticeboardVO> selectNoticeboard() {
 		return getSqlSession().selectList(namespace+".selectNotice");
+	}
+*/
+	@Override
+	public List<NoticeboardVO> selectNoticeboard(SearchVO searchVo){
+		return getSqlSession().selectList(namespace+".selectNotice", searchVo);
 	}
 
 	@Override
 	public int selectTotalRecord(SearchVO searchVo) {
-		return getSqlSession().selectOne(namespace+".selectTotalRecord");
-	}*/
+		return getSqlSession().selectOne(namespace+".selectTotalRecord", searchVo);
+	}
 	
 	@Override
 	public int insertNoticboard(NoticeboardVO vo){
@@ -43,10 +50,6 @@ public class NoticeboardDAOMybatis extends SqlSessionDaoSupport
 		return getSqlSession().update(namespace+".updateNotice", vo);
 	}
 
-	@Override
-	public List<NoticeboardVO> selectNoticeboard() {
-		return getSqlSession().selectList(namespace+".selectNotice");
-	}
 
 
 	
