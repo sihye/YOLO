@@ -1,5 +1,7 @@
 package com.one.yolo.member.model;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -27,5 +29,12 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport implements MemberDAO{
 	public MemberVO selectByUserid(String userid) {
 		return getSqlSession().selectOne(namespace+".selectByUserid", userid);
 	}
+
+	@Override
+	public List<MemberVO> MemberselectByAll() {
+		
+		return getSqlSession().selectList(namespace+".MemberselectByAll");
+	}
+	
 	
 }

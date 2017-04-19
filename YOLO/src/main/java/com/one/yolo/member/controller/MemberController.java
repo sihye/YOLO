@@ -41,6 +41,7 @@ public class MemberController {
 	public String register(Model model){
 		logger.info("회원가입 화면 보여주기");
 		
+
 		List<CategoryVO> cList
 		=categoryService.selectAll();
 		
@@ -84,6 +85,7 @@ public class MemberController {
 
 
 		//5. 리턴 -> register 뷰파일
+
 		return "member/register";
 	}
 

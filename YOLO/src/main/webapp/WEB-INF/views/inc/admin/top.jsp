@@ -117,7 +117,7 @@ footer {
 
 					<li><a href="<c:url value='/admin/operator.do'/>"><i
 							class="fa fa-dashboard fa-fw"></i>메인 배너 관리</a></li>
-					<li><a href="<c:url value='/admin/operator.do'/>"><i
+					<li><a href="<c:url value='/admin/operatorMember.do'/>"><i
 							class="fa fa-dashboard fa-fw"></i>회원관리</a></li>
 					<li><a href="<c:url value='/admin/operator.do'/>"><i
 							class="fa fa-dashboard fa-fw"></i>호스트관리</a></li>
