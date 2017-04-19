@@ -58,7 +58,7 @@ public class MemberController {
 
 		//4. 카테고리 그룹이랑 카테고리 비교해서 그룹 삭제할거 삭제하기 . (list.remove(i))
 		
-		for(int i=0; i<cgList.size(); i++){    
+		/*for(int i=0; i<cgList.size(); i++){    
 	         CategoryGroupVO cgvo = cgList.get(i);      //2   //카테고리 그룹  1  
 	         for(int j=0;j<cList.size();j++){                 // 1  // 카테고리 1 1 1              0 1 2
 	        	 	CategoryVO cvo = cList.get(i);
@@ -70,7 +70,7 @@ public class MemberController {
 	               
 	         }
 
-	      }
+	      }*/
 		
 		//4. 모델통해서 넘겨주기
 		model.addAttribute("cList",cList);
@@ -96,18 +96,6 @@ public class MemberController {
 	public String register(@ModelAttribute MemberVO vo, @RequestParam int[] kNo){
 		logger.info("회원가입 화면 보여주기");
 
-		if(kNo !=null){
-			if(kNo[0]>0){ 
-				vo.setkNo1(kNo[0]);
-			}
-			if(kNo[1]>0){
-				vo.setkNo2(kNo[1]);
-			}
-			if(kNo[2]>0){
-				vo.setkNo3(kNo[2]);
-			}
-			
-		}
 		
 		int cnt = memberService.memberInsert(vo);
 		String msg ="", url ="/index.do";
@@ -121,11 +109,37 @@ public class MemberController {
 	
 	@RequestMapping("/join.do")
 	public String join(@ModelAttribute MemberVO memberVo,
-			@RequestParam(value="email3" ,required=false) String email3,Model model){
+			@RequestParam(value="email3" ,required=false) String email3,
+			@RequestParam int[] kno,Model model){
+		
+		for(int i:kno){
+			logger.info("kno="+i);
+		}
+		
+		logger.info("kno[0]="+kno[0]);
+		
+		//체크박스 처리
+		if(kno[0]!=0){
+			memberVo.setkNo1(kno[0]);
+		}else if(kno[0]!=0 && kno[1]!=0){
+			memberVo.setkNo1(kno[0]);
+			memberVo.setkNo2(kno[1]);
+		}else if(kno[0]!=0 && kno[1]!=0 && kno[2]!=0){
+			memberVo.setkNo1(kno[0]);
+			memberVo.setkNo2(kno[1]);
+			memberVo.setkNo3(kno[2]);
+		}
+		
+		logger.info("kNo1"+memberVo.getkNo1());
+		
 		//1
 		logger.info("회원가입 처리, 파라미터 vo={}", memberVo);
 		
 		//2
+				
+				
+				
+		
 				//휴대폰 입력하지 않은 경우 처리
 				String hp2=memberVo.getmTel2();
 				String hp3=memberVo.getmTel3();

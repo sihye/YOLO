@@ -207,11 +207,15 @@
 					<label for="hobby">${cg.kgName}</label>	
 					<c:forEach var="c" items="${cList }">
 						<c:if test ="${cg.kgNo == c.kgNo}">
-							<input value='${c.kNo}' onclick=CountChecked(this) type=checkbox>${c.kName}
+							<input value='${c.kNo}' onclick=CountChecked(this) 
+							type=checkbox name="kno">${c.kName}
 						</c:if>
 					</c:forEach><br>
 				</c:forEach>
 				</FORM>
+			<div> 
+				<input type="hidden" name="mgNo2" id="mgNo2" style="ime-mode: active" value="2">
+			</div>	
 				
 			</div>
 			<div>
@@ -233,7 +237,7 @@
 			</div>
 		</fieldset>
 
-		<input type="text" name="chkId" id="chkId">
+		<input type="hidden" name="chkId" id="chkId" >
 
 	</form>
 </div>

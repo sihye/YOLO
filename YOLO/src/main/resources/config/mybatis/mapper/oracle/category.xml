@@ -5,7 +5,7 @@
 <mapper namespace="config.mybatis.mapper.oracle.category">
 	<!-- admin -->
 	<select id="selectCategoryAll" resultType="CategoryVO">
-		select *from category order by k_name
+		select *from category order by k_no
 	</select>
 	
 	<!-- class -->
