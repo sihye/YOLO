@@ -571,7 +571,7 @@ ALTER TABLE operator
 CREATE TABLE messagemaga (
 	MS_NO    NUMBER             NULL, -- 쪽지번호
 	M_USERID VARCHAR2(500)      NULL, -- 받는사람
-	COL2     CLOB NULL  -- 확인여부
+	MS_CHECK VARCHAR2(500) DEFAULT 'N'  -- 확인여부
 );
 
 -- 회원
