@@ -45,5 +45,11 @@ select m_userid,m_no,(select c.k_name from category c where c.K_NO = m.k_no1)as 
 (select c.k_name from category c where c.K_NO = m.k_no2) as k_2 ,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
 from member m;
 
+select*from mypayment;
+
+CREATE OR REPLACE VIEW mypayment
+AS SELECT p.*,c.C_NAME,C_PRICE
+FROM payment p,class c
+WHERE p.C_NO=c.C_NO;
 
 

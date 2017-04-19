@@ -316,7 +316,7 @@ ol, ul {
 
 <!-- 페이징 처리를 위한 form 태그 -->
 <form name="frmPage" method="post"
-	action='<c:url value="/mypage/Mybbs/qnaboard.do" />'>
+	action='<c:url value="/mypage/MyClass/Payment.do" />'>
 	<input type="hidden" name="currentPage"> <input
 		type="hidden" name="searchKeyword" value="${param.searchKeyword}">
 	<input type="hidden" name="searchStartDate"
@@ -416,10 +416,10 @@ ol, ul {
 				<c:forEach var="map" items="${alist }">
 					<tr>
 						<td>${map["C_NAME"] }</td>
-						<td>${map["C_PALCE"] }</td>
+						<td>${map["PM_PAYMENTDATE"] }</td>
 						<td>${map["C_PRICE"] }</td>
-						<td>${map["C_PAYMENTWAY"] }</td>
-						<td>${map["SC_REGDATE"] }</td>			
+						<td>${map["PM_PAYMENTWAY"] }</td>
+						<td>결제완료</td>			
 					</tr>
 				</c:forEach>
 			</tbody>		
