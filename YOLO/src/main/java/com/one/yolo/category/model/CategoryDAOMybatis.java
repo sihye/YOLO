@@ -32,5 +32,10 @@ public class CategoryDAOMybatis extends SqlSessionDaoSupport  implements Categor
 		
 	}
 	
+	@Override
+	public String selCateNameByNo(int kNo){
+		return getSqlSession().selectOne(namespace+".selCateNameByNo",kNo);
+	}
+	
 	
 }

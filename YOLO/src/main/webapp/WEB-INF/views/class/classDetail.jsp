@@ -21,34 +21,84 @@
 hr{
 	margin-top: 2px;
 }
+#headerimg{
+	width: 100%;
+	height: 600px;
+}
+.mainImg{
+	position: relative;
+	background-image: url("../upload/${claVo.cMainimg}");
+	background-repeat: no-repeat;
+}
+.header-wrap{
+	position: absolute;
+}
+
+.container{
+	position: relative;
+	margin-top: 100px; 
+}
+#headericon{
+	float: right;
+}
+#cate{
+	border: 1px solid white;
+	position: absolute;
+	color: white;
+	font-size: 2em;
+	/* font-weight: bold; */
+	padding: 1px;
+}
+.btn{
+	background-color: rgba(0,0,0,0);
+	border-color:  rgba(0,0,0,0);
+}
+.sharerimg{
+	width: 50px;
+}
+
 </style>
 <!-- 헤더 이미지 -->
 <div class="mainImg">
-	<!-- 공유등등 -->
-	<div class="header-button-wrap">
-		<button class="header-button likeButton likeCancel"
-			id="teacher_1631_0">
+	<img id="headerimg" class="header-wrap" alt="${claVo.cName}헤더 이미지" src="<c:url value='/upload/${claVo.cMainimg}'/>">
+	<!-- 헤더아이콘 -->
+	<div class="header-wrap" id="headericon">
+		<a href="#">
 			<img src="<c:url value='/img/classDetail/icon_heart_n.png'/>">
-		</button>
+		</a>
+		<button type="button" class="btn btn-primary" data-toggle="modal"
+			data-target=".bs-example-modal-sm"><img src="<c:url value='/img/classDetail/icon_share_n.png'/>"></button>
 
-		<button class="header-button shareButton">
-			<img src="<c:url value='/img/classDetail/icon_share_n.png'/>">
-		</button>
-		<!-- 	<div class="header-button-shareBox" style="display: none;">
-		<div class="sharebox-title">모꼬지를 SNS에 공유해보세요.</div>
-		<span class="kakao" id="shareOnKakao"><em class="fa fa-comment"></em></span>
-		<span class="facebook" id="shareOnFacebook"><em
-			class="fa fa-facebook"></em></span>
-	</div> -->
-		<button class="header-button report-modal-button" data-toggle="modal"
-			data-target="#report-modal" data-keyboard="false">
+		<div class="modal fade bs-example-modal-sm" tabindex="-1"
+			role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<p>클래스를 친구와 공유해 보세요!</p>
+					<a href="http://www.facebook.com/sharer/sharer.php?u=http://localhost:9090/yolo/class/claDetail.do?cNo=${claVo.cNo }">
+						<img class="sharerimg" alt="facebook공유하기" src="<c:url value='/img/classDetail/facebook_logo.jpg'/>">
+					</a>
+					<a href="https://twitter.com/intent/tweet?url=http://localhost:9090/yolo/class/claDetail.do?cNo=${claVo.cNo }">
+						<img class="sharerimg" alt="twitter공유하기" src="<c:url value='/img/classDetail/twitter.png'/>">
+					</a>
+				</div>
+			</div>
+		</div>
+		<a>
 			<img src="<c:url value='/img/classDetail/icon_report_n.png'/>">
-		</button>
+		</a>
 	</div>
-	<!-- 공유끝 -->
+	<!-- 아이콘끝 -->
 	<!-- 카테고리 -->
+	<div id="cate" >${kName}</div>
 	<!-- 클래스 이름 -->
+	<p>${claVo.cName}</p>
 	<!--회원이미지/회원이름/등록일/조회수/결제방법  -->
+	<p>${claVo.mUserid }</p>
+	<div>등록일
+	<fmt:formatDate value="${claVo.cRegdate}" type="date" pattern="yyyy/MM/dd (E)"/>
+	| 조회  ${claVo.cHits }</<div>>
+	
+	<button> 예약하기</button>
 	<!--기본정보  -->
 	<!--  -->
 	<!--  -->
@@ -64,57 +114,45 @@ hr{
 	<hr>	
 	<div class="row">
 		<div class="col-md-3">카테고리</div>
-		<div class="col-md-4">${claVo. }</div>
+		<div class="col-md-4">${kName}</div>
 	</div>
 	<div class="row">
 		<div class="col-md-3">비용</div>
-		<div class="col-md-4">##회</div>
+		<c:if test="${claVo.cPrice==0 }"><div class="col-md-4">협의 </div></c:if>
+		<c:if test="${claVo.cPrice>0 }">	
+			<div class="col-md-4"><fmt:formatNumber pattern="#,###" value="${claVo.cPrice }"/>원/회</div>
+		</c:if>	
 	</div>
 	<div class="row">
 		<div class="col-md-3">특기사항</div>
-		<div class="col-md-4">##</div>
+		<div class="col-md-4">${claVo.cSpevialty}</div>
 	</div>
 	<div class="row">
 		<div class="col-md-3">최대인원</div>
-		<div class="col-md-4">##명 (현재 %%명 신청)</div>
+		<div class="col-md-4">${claVo.cMaxperson }명 (현재 %%명 신청)</div>
 	</div>
 	
 	<div class="contents-title">추가 정보</div><hr>
 	<div class="row">
 		<div class="col-md-3">목표</div>
-		<div class="col-md-4">기타 우크렐라</div>
+		<div class="col-md-4">${claVo.cGoal }</div>
 	</div>
 	<div class="row">
 		<div class="col-md-3">대상</div>
-		<div class="col-md-4">기타 우크렐라</div>
+		<div class="col-md-4">${claVo.cTarget }</div>
 	</div>
 
 
 	<div class="contents-title">모꼬지 소개</div><hr>
-	<pre>Q. 강사님을 소개해주세요.(이력, 자기소개 등)
-A. 실용음악기타전공, 인디밴드 및 다년간 공연 및 음반활동. 강사활동4년. 음악학원 운영 3년.
-
-Q.수업에 어떤 분들이 참여하면 좋을까요?
-A. 대학생부터 일반 성인, 직장인 모두 참여가능합니다.
-
-Q.일정에 대해 알려주세요.(날짜, 시간, 소요시간, 횟수 등)
-A. 매주 토요일 오후 4시와 일요일 오후 1시에 왕초보분들 대상으로 90분간 통기타 원데이클래스 맛보기 강습 진행합니다.
-
-Q.참여시 준비물이 필요한가요?
-A. 왼손 손톱만 짧게 자르고 오시면 됩니다.
-
-Q.참여하는 인원이 보통 몇 명인가요?
-A. 3~7명
-
-Q.결제는 어떤 방식으로 이루어지나요?
-A. 계좌이체 또는 현장결제 가능하며, 카드도 가능해요.
-
-Q.수업 내용을 자유롭게 소개해주세요.(커리큘럼, 결과물 등)
-A. 통기타의 기초지식을 알려드리고 왕초보들도 쉽게 하실 수 있는 기초곡을 함께 천천히 배워보면서 기타라는 악기에 대해 이해할 수 있도록 합니다. 전체적인 강습 후 바로 실습해보며 1:1로 돌아가며 충분한 실습시간이 주어집니다.</pre>
+	<pre>${claVo.cDetailinfo }</pre>
 	<div class="contents-title">스케줄</div><hr>
 	<div class="contents-title">갤러리</div><hr>
+	<c:if test="${!empty claVo.cDetailimg1}"><img class="img-thumbnail" alt="${claVo.cName}의 갤러리1" src="<c:url value='/upload/${claVo.cDetailimg1}'/>"> </c:if>
+	<c:if test="${!empty claVo.cDetailimg2}"><img class="img-thumbnail" alt="${claVo.cName}의 갤러리2" src="<c:url value='/upload/${claVo.cDetailimg2}'/>"> </c:if>
+	<c:if test="${!empty claVo.cDetailimg3}"><img class="img-thumbnail" alt="${claVo.cName}의 갤러리3" src="<c:url value='/upload/${claVo.cDetailimg3}'/>"> </c:if>
+	
 	<div class="contents-title">위치</div><hr>
-	<p style="font-size: 1.3em;">서울 영등포구 당산동3가 257-8 블루기타</p>
+	<p style="font-size: 1.3em;">${claVo.cPalce}</p>
 	<div id="map" style="width: 100%; height: 400px;"></div>
 	<script src="//apis.daum.net/maps/maps3.js?apikey=ae9a8f33df751fe70e8df23049bf7573&libraries=services"></script>
 	<script type="text/javascript">
@@ -143,7 +181,7 @@ A. 통기타의 기초지식을 알려드리고 왕초보들도 쉽게 하실 �
 		var geocoder = new daum.maps.services.Geocoder();
 
 		// 주소로 좌표를 검색합니다
-		geocoder.addr2coord('서울 영등포구 당산동3가 257-8',function(status, result) {
+		geocoder.addr2coord('${claVo.cPalce}',function(status, result) {
 			// 정상적으로 검색이 완료됐으면 
 			if (status === daum.maps.services.Status.OK) {
 	
@@ -159,7 +197,7 @@ A. 통기타의 기초지식을 알려드리고 왕초보들도 쉽게 하실 �
 				// 인포윈도우로 장소에 대한 설명을 표시합니다
 				var infowindow = new daum.maps.InfoWindow(
 						{
-							content : '<div style="width:150px;text-align:center;padding:6px 0;">블루기타</div>'
+							content : '<div style="width:150px;text-align:center;padding:6px 0;">${claVo.cName}</div>'
 						});
 				infowindow.open(map, marker);
 	
@@ -253,6 +291,7 @@ A. 통기타의 기초지식을 알려드리고 왕초보들도 쉽게 하실 �
 		</div>
 	</div>
 </div>
+
 
 
 

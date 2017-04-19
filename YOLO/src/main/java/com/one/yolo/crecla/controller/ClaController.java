@@ -50,41 +50,49 @@ public class ClaController {
 		return "class/creclass";
 	}
 	@RequestMapping(value="/clacre.do", method=RequestMethod.POST)
-	public String insertCla(HttpServletRequest req, @ModelAttribute ClassVO vo, @RequestParam String cplace1, @RequestParam String cplace2){
+	public String insertCla(HttpServletRequest req, @ModelAttribute ClassVO vo, @RequestParam String cplace1, @RequestParam String cplace2,
+				Model model){
 		logger.info("클래스 insert param vo={}",vo);
 		logger.info("클래스 insert param cplace1={},cplace2={}",cplace1,cplace2);
 		vo.setcPalce(cplace1+cplace2);
-
+		vo.setmUserid("hong");
+		
 		//파일 업로드 처리
 		List<Map<String, Object>> fileList= fileUploadWebUtil.fileUpload(req, FileUploadWebUtil.IMAGE_UPLOAD);
 		logger.info("업로드 이미지 filelist size={}",fileList.size());
+		
 		//업로드 완료된 경우
 		String imgUrl[]=new String [fileList.size()];
-		
-		if(fileList!=null && !fileList.isEmpty()){
-			Map<String, Object>map=fileList.get(0);
+		if(fileList!=null&&!fileList.isEmpty()){
 			for(int i=0;i<fileList.size();i++){
+				Map<String, Object> map=fileList.get(i);
 				imgUrl[i]=(String)map.get("fileName");
+				logger.info("저장 img name={}",(String)map.get("fileName"));
 			}
-		}
-		if(fileList.size()==1){
-			vo.setcMainimg(imgUrl[0]);
-		}else if(fileList.size()==2){
-			vo.setcMainimg(imgUrl[0]);
-			vo.setcDetailimg1(imgUrl[1]);
-		}else if(fileList.size()==2){
-			vo.setcMainimg(imgUrl[0]);
-			vo.setcDetailimg1(imgUrl[1]);
-			vo.setcDetailimg2(imgUrl[2]);
-		}else{
-			vo.setcMainimg(imgUrl[0]);
-			vo.setcDetailimg1(imgUrl[1]);
-			vo.setcDetailimg2(imgUrl[2]);
-			vo.setcDetailimg3(imgUrl[3]);
-
-		}
-		
-		logger.info("cla inset param vo={}",vo);
+			//img url vo setting
+			if(fileList.size()==1){
+				vo.setcMainimg(imgUrl[0]);
+				vo.setcDetailimg1("");
+				vo.setcDetailimg2("");
+				vo.setcDetailimg3("");
+			}else if(fileList.size()==2){
+				vo.setcMainimg(imgUrl[0]);
+				vo.setcDetailimg1(imgUrl[1]);
+				vo.setcDetailimg2("");
+				vo.setcDetailimg3("");
+			}else if(fileList.size()==2){
+				vo.setcMainimg(imgUrl[0]);
+				vo.setcDetailimg1(imgUrl[1]);
+				vo.setcDetailimg2(imgUrl[2]);
+				vo.setcDetailimg3("");
+			}else{
+				vo.setcMainimg(imgUrl[0]);
+				vo.setcDetailimg1(imgUrl[1]);
+				vo.setcDetailimg2(imgUrl[2]);
+				vo.setcDetailimg3(imgUrl[3]);
+			}
+		}		
+		logger.info("cla inset param vo(셋팅완료)={}",vo);
 		
 		int cnt=claService.claInsert(vo);
 		String msg="",url="/class/clacre.do";
@@ -96,6 +104,8 @@ public class ClaController {
 		}else{
 			msg="클래스 등록 실패! 다시 시도해 주세요 ^^";		
 		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
 		return "common/message";
 	}
 	
@@ -103,7 +113,9 @@ public class ClaController {
 	public String claDetail(int cNo, Model model){
 		logger.info("클래스 디테일 파람no={}",cNo);
 		ClassVO vo=claService.selClass(cNo);
+		String kName=cService.selCateNameByNo(vo.getkNo());
 		model.addAttribute("claVo", vo);
+		model.addAttribute("kName", kName);
 		return "class/classDetail";
 	}
 	

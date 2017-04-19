@@ -23,7 +23,6 @@ public class ClassVO {
 	private Timestamp cRegdate;//등록일
 	private int cHits;//조회수
 	private String cDel;//삭제여부
-	
 	public int getcNo() {
 		return cNo;
 	}
@@ -126,7 +125,12 @@ public class ClassVO {
 	public void setcMaxperson(String cMaxperson) {
 		this.cMaxperson = cMaxperson;
 	}
-
+	public Timestamp getcRegdate() {
+		return cRegdate;
+	}
+	public void setcRegdate(Timestamp cRegdate) {
+		this.cRegdate = cRegdate;
+	}
 	public int getcHits() {
 		return cHits;
 	}
@@ -148,6 +152,7 @@ public class ClassVO {
 				+ ", cPaymentway=" + cPaymentway + ", cMaxperson=" + cMaxperson + ", cRegdate=" + cRegdate + ", cHits="
 				+ cHits + ", cDel=" + cDel + "]";
 	}
-
+	
+	
 	
 }

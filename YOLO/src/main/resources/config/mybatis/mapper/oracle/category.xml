@@ -22,6 +22,11 @@
 		select * from category
 		order by k_no
 	</select>
+	
+	<select id="selCateNameByNo" parameterType="int" resultType="string">
+		select k_name from category
+			where k_no=#{kNo}
+	</select>
 
 
 </mapper>

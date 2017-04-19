@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.class">
+	<insert id="claInsert" parameterType="ClassVO" >
+		<selectKey keyProperty="cNo" resultType="int" order="BEFORE">
+			select CLASS_seq.nextval from dual
+		</selectKey>
+		insert into class (c_no,m_userid,k_no,c_name,c_price,c_goal,c_target,c_spevialty,c_detailinfo,C_PALCE,c_location,c_mainimg,
+ 		c_detailimg1,c_detailimg2,c_detailimg3,c_maxperson,C_PAYMENTWAY)
+			values(#{cNo},#{mUserid},#{kNo},#{cName},#{cPrice},#{cGoal},#{cTarget},#{cSpevialty},#{cDetailinfo},#{cPalce},#{cLocation},
+			#{cMainimg},#{cDetailimg1},#{cDetailimg2},#{cDetailimg3},#{cMaxperson},#{cPaymentway})
+	</insert>
+	<select id="selClass" parameterType="int" resultType="ClassVO">
+		select * from class where c_no=#{c_no}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
