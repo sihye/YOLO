@@ -65,6 +65,14 @@ public class MemberServiceImpl implements MemberService{
 	public List<Map<String, Object>> ExcelMemberView() {
 		return memberDao.ExcelMemberView();
 	}
+
+	@Override
+	public List<Map<String, Object>> OperatorMemberView() {
+
+		return memberDao.OperatorMemberView();
+	}
+	
+	
 	
 	
 	

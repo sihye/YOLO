@@ -205,11 +205,10 @@ public class AdminController {
 
 	@RequestMapping(value="/operatorMember.do",method=RequestMethod.GET)
 	public String operatorMember_get(Model model){
-		List<MemberVO> memberList = memberService.MemberselectByAll();
-		List<CategoryVO> categoryList=categoryservice.selectAll();
+		List<Map<String, Object>> alist = memberService.OperatorMemberView();
 		
-		model.addAttribute("memberList",memberList);
-		model.addAttribute("categoryList",categoryList);
+		model.addAttribute("listMap",alist);
+		
 		return "/admin/operatorMember";
 	}
 	

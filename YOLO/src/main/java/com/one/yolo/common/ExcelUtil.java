@@ -30,7 +30,7 @@ public class ExcelUtil {
 	@Autowired
 	MemberService memberService;
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	private static final Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
 	@SuppressWarnings("deprecation")
 	public String excelWrith(){
@@ -41,6 +41,17 @@ public class ExcelUtil {
 		System.out.println("++++++++++++++++++++++++++++맵실행 후");
 		
 		HSSFSheet sheet = workbook.createSheet("회원");
+
+		sheet.setColumnWidth((short)0, (short)4000); // 1000이 열 너비 3.14
+		sheet.setColumnWidth((short)1, (short)4000); // 1000이 열 너비 3.14
+		sheet.setColumnWidth((short)2, (short)4000); // 1000이 열 너비 3.14
+		sheet.setColumnWidth((short)3, (short)4000); // 1000이 열 너비 3.14
+		sheet.setColumnWidth((short)4, (short)7000); // 1000이 열 너비 3.14
+		sheet.setColumnWidth((short)5, (short)10000); // 1000이 열 너비 3.14
+		sheet.setColumnWidth((short)6, (short)7000); // 1000이 열 너비 3.14
+		sheet.setColumnWidth((short)7, (short)7000); // 1000이 열 너비 3.14
+		sheet.setColumnWidth((short)8, (short)7000); // 1000이 열 너비 3.14
+		sheet.setColumnWidth((short)9, (short)7000); // 1000이 열 너비 3.14
 
 		//Font 설정.
 		HSSFFont font = workbook.createFont();
@@ -59,6 +70,7 @@ public class ExcelUtil {
 		HSSFCell cell1 = row.createCell((short)0 );
 		cell1.setCellValue("NO");
 		cell1.setCellStyle(titlestyle);
+		
 
 		HSSFCell cell2 = row.createCell((short)1);
 		cell2.setCellValue("아이디");
@@ -118,11 +130,11 @@ public class ExcelUtil {
 		    
 		    cell2 = row.createCell((short)1);
 		    cell2.setCellValue(map.get("M_USERID")+"");
-		    cell2.setCellStyle(style);
+		    cell2.setCellStyle(styleCenter);
 		    
 		    cell3 = row.createCell((short)2);
 		    cell3.setCellValue(map.get("M_NAME")+"");
-		    cell3.setCellStyle(style);
+		    cell3.setCellStyle(styleCenter);
 		    
 		    cell4 = row.createCell((short)3);
 		    if(map.get("M_TEL1")!= null){
@@ -130,7 +142,7 @@ public class ExcelUtil {
 		    }else{
 		    	cell4.setCellValue("");
 		    }
-		    cell4.setCellStyle(style);
+		    cell4.setCellStyle(styleCenter);
 	
 		    
 		    cell5 = row.createCell((short)4);
@@ -140,7 +152,7 @@ public class ExcelUtil {
 		    	cell5.setCellValue("");
 		    }
 		    
-		    cell5.setCellStyle(style);
+		    cell5.setCellStyle(styleCenter);
 		    
 		    cell6 = row.createCell((short)5);
 		    if(map.get("M_ADDRESS")!=null){
@@ -152,13 +164,13 @@ public class ExcelUtil {
 		    }else{
 		    	cell6.setCellValue("");
 		    }
-		    cell6.setCellStyle(style);
+		    cell6.setCellStyle(styleCenter);
 		    
 		    
 		    
 		    cell7 = row.createCell((short)6);
 		    cell7.setCellValue(sdf.format(map.get("M_JOINDATE")));
-		    cell7.setCellStyle(style);
+		    cell7.setCellStyle(styleCenter);
 		    
 		    
 		    
@@ -168,7 +180,7 @@ public class ExcelUtil {
 		    }else{
 		    	cell8.setCellValue("");
 		    }
-		    cell8.setCellStyle(style);
+		    cell8.setCellStyle(styleCenter);
 		    
 		    
 		    cell9 = row.createCell((short)8);
@@ -177,7 +189,7 @@ public class ExcelUtil {
 		    }else{
 		    	cell9.setCellValue("");
 		    }
-		    cell9.setCellStyle(style);
+		    cell9.setCellStyle(styleCenter);
 		    
 		    
 		    cell10 = row.createCell((short)9);
@@ -186,7 +198,7 @@ public class ExcelUtil {
 		    }else{
 		    	cell10.setCellValue("");
 		    }
-		    cell10.setCellStyle(style);
+		    cell10.setCellStyle(styleCenter);
 		   
 		    
 		}

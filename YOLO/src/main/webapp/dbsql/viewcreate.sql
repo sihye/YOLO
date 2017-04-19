@@ -27,7 +27,7 @@ create view ExcelMemberView
 as
 select m.M_NO,M_USERID, m.M_NAME, m.M_TEL1, m.M_TEL2, m.M_TEL3, m.M_EMAIL1, m.M_EMAIL2, m.M_ADDRESS, m.M_ADDRESSDETAIL, m.M_JOINDATE,
 (select c.k_name from category c where c.K_NO = m.k_no1) as k_1,(select c.k_name from category c where c.K_NO = m.k_no2) as k2,(select c.k_name from category c where c.K_NO = m.k_no3) as k3
-from member m;
+from member m where m.mg_no2 = 2
 
 
 
@@ -41,9 +41,7 @@ where o.K_NO = cg.K_NO and o.F_NO = up.F_NO
 
 create view operatorMemberView
 as
-select m_userid,m_no,(select c.k_name from category c where c.K_NO = m.k_no1)as k_1 ,
+select m_userid,m_no,m_name,m_joindate,(select c.k_name from category c where c.K_NO = m.k_no1)as k_1 ,
 (select c.k_name from category c where c.K_NO = m.k_no2) as k_2 ,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
 from member m;
-
-
 

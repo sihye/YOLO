@@ -25,14 +25,25 @@ a{
 	color: black;
 }
 
+
+#frm1{
+	width: 500px; 
+	margin: 0 auto;
+}
+#searchSel{
+	margin : 0 auto;
+}
 </style>
 
 
 <div class="container" id="cont1">
 	<h2>메인 배너 관리</h2>
 
-    
+    <br><br>
 
+
+<label>엑셀다운로드 </label>
+<a href="<c:url value="/admin/excel.do"/>">Excel Export</a>
 
 	<table class="table table-hover">
   		<tr>
@@ -44,45 +55,64 @@ a{
   			<th>관심목록2</th>
   			<th>관심목록3</th>
   		</tr>
-  		<c:forEach var="memberVo" items="${memberList }">
+  		<c:forEach var="map" items="${listMap }">
   		<tr>
-  			<td>${memberVo.mNo}</td>
-  			<td><a href="#">${memberVo.mName}</a></td>
-  			<td>${memberVo.mUserid}</td>
-  			<td><fmt:formatDate value="${memberVo.mJoindate }" pattern="yyyy-MM-dd"/></td>
-  			
-  			<c:set var="cg1" value=""/>
-  			<c:forEach var="categoryVo" items="${categoryList }">
-  			<c:if test="${memberVo.kNo1 eq categoryVo.kNo }">
-  			<c:set var="cg1" value="${categoryVo.kName }"/>
-  			</c:if>
- 			</c:forEach>
- 			<td>${cg1 }</td>
- 			
- 			<c:set var="cg2" value=""/>
-  			<c:forEach var="categoryVo" items="${categoryList }">
-  			<c:if test="${memberVo.kNo2 eq categoryVo.kNo }">
-  			<c:set var="cg2" value="${categoryVo.kName }"/>
-  			</c:if>
- 			</c:forEach>
- 			<td>${cg2 }</td>
- 			
- 			<c:set var="cg3" value=""/>
-  			<c:forEach var="categoryVo" items="${categoryList }">
-  			<c:if test="${memberVo.kNo3 eq categoryVo.kNo }">
-  			<c:set var="cg3" value="${categoryVo.kName }"/>
-  			</c:if>
- 			</c:forEach>
- 			<td>${cg3 }</td>
-
+  			<td>${map["M_NO"]}</td>
+  			<td><a href="#">${map["M_NAME"]}</a></td>
+  			<td>${map["M_USERID"]}</td>
+  			<td><fmt:formatDate value="${map['M_JOINDATE'] }" pattern="yyyy-MM-dd"/></td>
+ 			<td>${map["K_1"] }</td>
+ 			<td>${map["K_2"] }</td>
+ 			<td>${map["K_3"] }</td>
 
 		</c:forEach>  		
 	</table>	
 	<hr>
-
-<label>엑셀다운로드 </label>
-<a href="<c:url value="/admin/excel.do"/>">Excel Export</a>
-
+	
+	
+  
+	<%-- <form class="form-inline" role="form" name="frm1" id="frm1" method="post" action='<c:url value="/admin/operatorInsert.do"/>' enctype="multipart/form-data">
+	  <div class="form-group">
+	  </div>
+	  <div class="form-group">
+	   <select id="Select1" name="kNo" class="selectpicker" style="height:30px">
+	   <option value="">
+	   	검색 목록
+	   </option>
+	   <option value="M_USERID">
+	   ID 검색
+	   </option>
+	   <option value="M_NAME">
+	   이름 검색
+	   </option>
+		</select>
+		</div>
+	   <div class="form-group">
+	   <input type="text"> 
+		
+		<input type="submit" id="btSubmit" value="검색">
+		
+	  </div>
+	</form> --%>
+	
+	<form  id="frm1" name ="frm1" method="post" action="" >
+		<select id="searchSel" name="searchSel" style="height: 26px">
+			<option value="">
+				선택하세요
+			</option>
+			<option value="M_USERID">
+			ID 검색
+			</option>
+			<option value="M_NAME">
+			이름 검색
+			</option>
+		</select>
+		<input type="text"  id = "keyword" name="keyword"  style="height: 25px">
+		<input type="submit" value="검색"  style="height: 25px">
+	</form>
+	
+	
+	
 </div>
 </form>
 

@@ -41,5 +41,10 @@
 		select *from EXCELMEMBERVIEW order by m_no
 	</select>
 	
+	<select id="OperatorMemberView" resultType="hashmap">
+		select *from operatorMemberView order by m_no
+	</select>
+	
+	
 
 </mapper>

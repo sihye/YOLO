@@ -10,4 +10,6 @@ public interface MemberDAO {
 	public MemberVO selectByUserid(String userid);
 	public List<MemberVO> MemberselectByAll();
 	public List<Map<String, Object>> ExcelMemberView();
+	public List<Map<String, Object>> OperatorMemberView();
+
 }
