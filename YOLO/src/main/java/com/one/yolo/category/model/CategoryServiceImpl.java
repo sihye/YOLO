@@ -13,6 +13,19 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<CategoryVO> selectAll(){
 		return dao.selectAll();
 	}
-	
+	@Override
+	public List<CategoryVO> selectCateAll() {
+		return dao.selectCateAll();
+	}
+
+	@Override
+	public List<CategoryGroupVO> selCateGroupAll() {
+		return dao.selCateGroupAll();
+	}
+
+	@Override
+	public List<CategoryVO> selCateByCateGroup() {
+		return dao.selCateByCateGroup();
+	}
 	
 }

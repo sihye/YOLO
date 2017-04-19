@@ -14,6 +14,23 @@ public class CategoryDAOMybatis extends SqlSessionDaoSupport  implements Categor
 	public List<CategoryVO> selectAll() {
 		return getSqlSession().selectList(namespace+".selectCategoryAll");
 	}
+
+
+	@Override
+	public List<CategoryVO> selectCateAll() {
+		return getSqlSession().selectList(namespace+".selectCateAll");
+	}
+
+	@Override
+	public List<CategoryGroupVO> selCateGroupAll() {
+		return getSqlSession().selectList(namespace+".selCateGroupAll");
+	}
+
+	@Override
+	public List<CategoryVO> selCateByCateGroup() {
+		return getSqlSession().selectList(namespace+".selCateByCateGroup");
+		
+	}
 	
 	
 }

@@ -23,4 +23,14 @@ public class FavoriteClassDAOMybatis extends SqlSessionDaoSupport implements Fav
 				+".selectTotalRecord", searchVo);
 	}
 
+	@Override
+	public int deleteNoFavoriteClass(int no) {
+		return getSqlSession().delete(namespace+".deleteNoFavoriteClass",no);
+	}
+	
+	@Override
+	public int deleteIdFavoriteClass(String userid) {
+		return getSqlSession().delete(namespace+".deleteIdFavoriteClass",userid);
+	}
+
 }

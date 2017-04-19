@@ -180,6 +180,12 @@ values(SHOPPINGBASKET_seq.nextval,'kim',1,sysdate);
 insert into shoppingbasket
 (SB_NO,SB_USERID,C_NO,SC_REGDATE)
 values(SHOPPINGBASKET_seq.nextval,'chang',1,sysdate);
+insert into shoppingbasket
+(SB_NO,SB_USERID,C_NO,SC_REGDATE)
+values(SHOPPINGBASKET_seq.nextval,'hong',2,sysdate);
+insert into shoppingbasket
+(SB_NO,SB_USERID,C_NO,SC_REGDATE)
+values(SHOPPINGBASKET_seq.nextval,'hong',3,sysdate);
 
 
 -- ∞·¡¶

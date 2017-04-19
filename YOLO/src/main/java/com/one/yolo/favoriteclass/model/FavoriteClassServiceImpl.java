@@ -19,4 +19,13 @@ public class FavoriteClassServiceImpl implements FavoriteClassService{
 	public int selectTotalRecord(SearchVO searchVo){
 		return favoriteClassDao.selectTotalRecord(searchVo);
 	}
+	@Override
+	public int deleteNoFavoriteClass(int no) {
+		return favoriteClassDao.deleteNoFavoriteClass(no);
+	}
+	@Override
+	public int deleteIdFavoriteClass(String userid) {
+		return favoriteClassDao.deleteIdFavoriteClass(userid);
+	}
+	
 }

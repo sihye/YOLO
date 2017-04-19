@@ -3,10 +3,21 @@
 <%@ include file="mypageFavoritetop.jsp"%>
 
 <script type="text/javascript">
+
+function delNoFunc(delNo) { 
+	location.href='<c:url value="/mypage/Favorite/FavoriteClassdeleteNo.do?SB_NO='+delNo+'" />';
+}
+
+function delIdFunc() { 
+	location.href='<c:url value="/mypage/Favorite/FavoriteClassdeleteId.do" />';
+} 
+
+
 function pageFunc(curPage){
 	document.frmPage.currentPage.value=curPage;
 	frmPage.submit();
 }
+
 </script>
 <!-- 페이징 처리를 위한 form 태그 -->
 <form name="frmPage" method="post"
@@ -29,6 +40,7 @@ function pageFunc(curPage){
 	<br>
 	<br>
 	<h2>관심클래스</h2>
+
 	<br>
 	<form method="post"
 		action='<c:url value="/mypage/Favorite/FavoriteClass.do" />'>
@@ -52,7 +64,8 @@ function pageFunc(curPage){
 					<td>${map["C_PRICE"] }</td>
 					<td>${map["C_PAYMENTWAY"] }</td>
 					<td>${map["SC_REGDATE"] }</td>
-					<td><button class="btn btn-primary" type="submit">삭제</button></td>
+					<td><button id="del" class="btn btn-primary" type="button" 
+					onclick="delNoFunc(${map['SB_NO']})">삭제</button></td>
 				</tr>
 				</c:forEach>
 	
@@ -60,7 +73,8 @@ function pageFunc(curPage){
 			<tfoot>
 				<tr>
 					<td colspan="6" style="text-align: center">
-					<button class="btn btn-primary" type="submit">관심클래스 비우기</button></td>
+					<button id="alldel" class="btn btn-primary" type="button"
+					onclick="delIdFunc()">관심클래스 비우기</button></td>
 				</tr>
 			</tfoot>
 		</table>
