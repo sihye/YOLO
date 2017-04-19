@@ -15,6 +15,10 @@ public class NoticeboardServiceImpl
 	private NoticeboardDAO dao;
 
 	@Override
+	public List<NoticeboardVO> selectNoticeboard() {
+		return dao.selectNoticeboard();
+	}
+	/*@Override
 	public List<NoticeboardVO> selectNoticeboard(SearchVO searchVo) {
 		return dao.selectNoticeboard(searchVo);
 	}
@@ -22,7 +26,7 @@ public class NoticeboardServiceImpl
 	@Override
 	public int selectTotalRecord(SearchVO searchVo) {
 		return dao.selectTotalRecord(searchVo);
-	}
+	}*/
 	
 	@Override
 	public int insertNoticboard(NoticeboardVO vo) {
@@ -44,5 +48,6 @@ public class NoticeboardServiceImpl
 		return dao.updateNotice(vo);
 	}
 
+	
 
 }

@@ -13,7 +13,7 @@ public class NoticeboardDAOMybatis extends SqlSessionDaoSupport
 	
 	private String namespace="config.mybatis.mapper.oracle.noticeboard";
 
-	@Override
+	/*@Override
 	public List<NoticeboardVO> selectNoticeboard(SearchVO searchVo){
 		return getSqlSession().selectList(namespace+".selectNotice");
 	}
@@ -21,7 +21,7 @@ public class NoticeboardDAOMybatis extends SqlSessionDaoSupport
 	@Override
 	public int selectTotalRecord(SearchVO searchVo) {
 		return getSqlSession().selectOne(namespace+".selectTotalRecord");
-	}
+	}*/
 	
 	@Override
 	public int insertNoticboard(NoticeboardVO vo){
@@ -41,6 +41,11 @@ public class NoticeboardDAOMybatis extends SqlSessionDaoSupport
 	@Override
 	public int updateNotice(NoticeboardVO vo) {
 		return getSqlSession().update(namespace+".updateNotice", vo);
+	}
+
+	@Override
+	public List<NoticeboardVO> selectNoticeboard() {
+		return getSqlSession().selectList(namespace+".selectNotice");
 	}
 
 

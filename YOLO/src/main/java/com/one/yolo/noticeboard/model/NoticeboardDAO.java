@@ -5,8 +5,9 @@ import java.util.List;
 import com.one.yolo.common.SearchVO;
 
 public interface NoticeboardDAO {
-	public List<NoticeboardVO> selectNoticeboard(SearchVO searchVo);
-	public int selectTotalRecord(SearchVO searchVo);
+	public List<NoticeboardVO> selectNoticeboard();
+	//public List<NoticeboardVO> selectNoticeboard(SearchVO searchVo);
+	//public int selectTotalRecord(SearchVO searchVo);
 	public int insertNoticboard(NoticeboardVO vo);
 	public NoticeboardVO selectNo(int no);
 	public int updateReadCount(int no);

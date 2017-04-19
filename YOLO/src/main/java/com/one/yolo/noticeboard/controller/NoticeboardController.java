@@ -29,28 +29,30 @@ public class NoticeboardController {
 	private NoticeboardService noticeboardService;
 	
 	@RequestMapping("/list.do")
-	public String noticeboardlist(@ModelAttribute SearchVO searchVo,Model model){
-		logger.info("noticeboardlist화면목록  searchVo={}", searchVo);
+	public String noticeboardlist(/*@ModelAttribute SearchVO searchVo,*/Model model){
+		logger.info("noticeboardlist화면목록 ");
+		/*logger.info("noticeboardlist화면목록  searchVo={}", searchVo);*/
 		
-		PaginationInfo pagingInfo = new PaginationInfo();
+		/*PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(com.one.yolo.common.Utility.BLOCKSIZE);
 		pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 		
 		searchVo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());*/
 		
-		List<NoticeboardVO> nList = noticeboardService.selectNoticeboard(searchVo);
+		List<NoticeboardVO> nList = noticeboardService.selectNoticeboard();
+		/*List<NoticeboardVO> nList = noticeboardService.selectNoticeboard(searchVo);
 		logger.info("조회 결과 list.size()={}", nList.size());
 		
 		int totalRecord =noticeboardService.selectTotalRecord(searchVo);
 		logger.info("조회 전체레코드 개수조회 결과, totalRecord={}",
 				totalRecord);
 		
-		pagingInfo.setTotalRecord(totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);*/
 		
 		model.addAttribute("nList",nList);
-		model.addAttribute("pagingInfo",pagingInfo);
+	//	model.addAttribute("pagingInfo",pagingInfo);
 		
 		return "noticeboard/list";
 	}

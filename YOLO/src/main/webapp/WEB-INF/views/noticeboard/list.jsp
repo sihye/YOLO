@@ -20,7 +20,7 @@
 	 }	
 </style>
 
-<script type="text/javascript">
+<%-- <script type="text/javascript">
 	function pageFunc(curPage) {
 		document.frmPage.currentPage.value=curPage;
 		frmPage.submit();
@@ -32,7 +32,7 @@
 	<input type="text" name="searchKeyword" value="${param.searchKeyword }">
 	<input type="text" name="currentPage">
 </form>
-<!-- 페이징 처리 form 끝 -->	
+<!-- 페이징 처리 form 끝 -->	 --%>
 
 </head>	
 <body>
@@ -80,7 +80,7 @@
 </table>	   
 </div>
 
-	<div class="divPage" style="text-align: center">
+<%-- 	<div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->
 	<!-- 이전 블럭으로 이동 ◀-->
 	<nav>
@@ -112,7 +112,7 @@
 			<!--  페이지 번호 끝 -->
 		</ul>
 	</nav>
-</div>
+</div> --%>
 
 
 <div class="divBtn">
