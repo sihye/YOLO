@@ -16,7 +16,7 @@
 	</insert>
 	
 	<select id="duplicateUserid" parameterType="string" 
-		resultType="int" >
+		resultType="int">
 		select count(*) from member
 		where m_userid=#{mUserid}
 	</select>
@@ -34,9 +34,12 @@
 	
 	<select id="MemberselectByAll" resultType="MemberVO">
 		select *from member order by m_no
-	
 	</select>
 	
+	
+	<select id="ExcelMemberView" resultType="hashmap">
+		select *from EXCELMEMBERVIEW order by m_no
+	</select>
 	
 
 </mapper>

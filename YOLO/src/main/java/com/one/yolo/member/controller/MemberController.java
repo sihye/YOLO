@@ -1,5 +1,7 @@
 package com.one.yolo.member.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.one.yolo.category.model.CategoryService;
+import com.one.yolo.category.model.CategoryVO;
+import com.one.yolo.categorygroup.model.CategoryGroupService;
+import com.one.yolo.categorygroup.model.CategoryGroupVO;
 import com.one.yolo.member.model.MemberService;
 import com.one.yolo.member.model.MemberVO;
-
-import oracle.net.aso.k;
-
 
 
 @Controller
@@ -25,15 +28,64 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private CategoryService categoryService;
+	
+	@Autowired
+	private CategoryGroupService categoryGroupService;
 
 	
 	
-	@RequestMapping(value="/register.do",method=RequestMethod.GET)
-	public String register(){
+	@RequestMapping(value="/register.do", method=RequestMethod.GET)
+	public String register(Model model){
+		logger.info("회원가입 화면 보여주기");
 		
 
-	
+		List<CategoryVO> cList
+		=categoryService.selectAll();
 		
+		List<CategoryGroupVO> cgList
+		=categoryGroupService.selectAll();
+		
+		//카테고리 그룹
+		
+		//1. 카테고리 그룹 model 
+		
+		//2. 위로 올라가서 카테고리 그룹 autowired받고
+		
+		//3. List 에 조회결과 받기 
+
+		//4. 카테고리 그룹이랑 카테고리 비교해서 그룹 삭제할거 삭제하기 . (list.remove(i))
+		
+		for(int i=0; i<cgList.size(); i++){    
+	         CategoryGroupVO cgvo = cgList.get(i);      //2   //카테고리 그룹  1  
+	         for(int j=0;j<cList.size();j++){                 // 1  // 카테고리 1 1 1              0 1 2
+	        	 	CategoryVO cvo = cList.get(i);
+	            	if(cgvo.getKgNo() == cvo.getKgNo()){
+	            		continue;
+	            	}else if(cList.size() == j+1){
+	            		cList.remove(i);
+	            	}
+	               
+	         }
+
+	      }
+		
+		//4. 모델통해서 넘겨주기
+		model.addAttribute("cList",cList);
+		
+		model.addAttribute("cgList",cgList);
+		
+		logger.info("cList size={}",cList.size());
+		logger.info("cgList size={}",cgList.size());
+		
+		
+		//- cgList
+
+
+		//5. 리턴 -> register 뷰파일
+
 		return "member/register";
 	}
 

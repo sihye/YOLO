@@ -48,6 +48,9 @@ public class AdminController {
 	private MemberService memberService;
 	
 	
+	@Autowired
+	ExcelUtil excelUtil;
+	
 	@RequestMapping(value="/operator.do",method=RequestMethod.GET)
 	public String upfile_get(Model model){
 		logger.info("operator_get");
@@ -213,8 +216,8 @@ public class AdminController {
 	
 	@RequestMapping("/excel.do")
 	public ModelAndView excel(HttpServletRequest request){
-		ExcelUtil excel = new ExcelUtil();
-		String fileName = excel.excelWrith();
+		//ExcelUtil excel = new ExcelUtil();
+		String fileName = excelUtil.excelWrith();
 		String upPath = upFileservice.getUploadPath(request, "Excel");
 		File file = new File(upPath,fileName);
 		Map<String,Object> fileMap = new HashMap<String, Object>();

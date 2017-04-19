@@ -31,6 +31,12 @@ public class CategoryVO {
 	public void setkName(String kName) {
 		this.kName = kName;
 	}
+	@Override
+	public String toString() {
+		return "CategoryVO [kNo=" + kNo + ", kgNo=" + kgNo + ", kCode=" + kCode + ", kName=" + kName + "]";
+	}
+	
+	
 	
 	
 }
