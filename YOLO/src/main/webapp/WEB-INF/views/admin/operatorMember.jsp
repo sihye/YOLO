@@ -126,7 +126,18 @@ function setSearchDate(start){
 
 <script type="text/javascript">
 $(document).ready(function() {
-	$(".clearfix").hide();
+	
+	if($("#searchCondition").val()=='M_JOINDATE'){
+		$("#searchKeyword").hide();
+		$(".clearfix").show();
+	}else{
+		$("#searchKeyword").show();
+		$("#searchStartDate").val('');
+		$("#searchEndDate").val('');
+		$(".clearfix").hide();
+	}
+	
+	
 	
 	
 	$("#searchCondition").change(function() {
@@ -311,27 +322,27 @@ a{
 	<div class ="divlist">
 	<form  id="frm1" name ="frm1" method="post" action="" >
 		<select id="searchCondition" name="searchCondition" style="height: 26px">
-			<option value="M_USERID">
+			<option value="M_USERID" <c:if test="${param.searchCondition eq 'M_USERID' }" >selected="selected"</c:if>>
 			ID 검색
 			</option>
-			<option value="M_NAME">
+			<option value="M_NAME" <c:if test="${param.searchCondition eq 'M_NAME' }" >selected="selected"</c:if>>
 			이름 검색
 			</option>
-			<option value="M_JOINDATE">
-			날짜 검색
+			<option value="M_JOINDATE" <c:if test="${param.searchCondition eq 'M_JOINDATE' }" >selected="selected"</c:if>>
+			가입일 검색
 			</option> 
 		</select>
-		<input type="text"  id = "searchKeyword" name="searchKeyword" style="height: 25px">
+		<input type="text"  id = "searchKeyword" name="searchKeyword" style="height: 25px" value="${param.searchKeyword}">
 			<div class="clearfix">
 							<!-- 시작일 -->
 							<span class="dset"> <input type="text"
 								class="datepicker inpType" name="searchStartDate"
-								id="searchStartDate">
+								id="searchStartDate" value="${param.searchStartDate}">
 							</span> <span class="demi">~</span>
 							<!-- 종료일 -->
 							<span class="dset"> <input type="text"
 								class="datepicker inpType" name="searchEndDate"
-								id="searchEndDate">
+								id="searchEndDate" value="${param.searchEndDate}">
 							</span>
 			</div>
 		<input type="submit" value="검색"  style="height: 25px">
