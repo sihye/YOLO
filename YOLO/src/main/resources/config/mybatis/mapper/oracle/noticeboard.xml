@@ -14,7 +14,7 @@
 	</select> -->
 	
 	<select id="selectNotice" parameterType="SearchVO" resultType="NoticeboardVO">
-		select NB_NO,M_USERID,BG_NO,NB_TITLE,NB_CONTENT
+		select *
 		from
 		(
 		    select rownum as RNUM ,LIST.*
