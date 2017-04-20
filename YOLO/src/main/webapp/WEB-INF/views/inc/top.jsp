@@ -120,28 +120,32 @@ footer {
 			</div>
 			<!-- 로그인부분 -->
 			<!-- 로그인 전 -->
-			<!-- 			<div class="collapse navbar-collapse navbar-ex1-collapse col-sm-1"
+			<c:if test="${!empty sessionScope.userid }">
+				<div class="collapse navbar-collapse navbar-ex1-collapse col-sm-1"
 				style="margin-right: 20px; margin-top: 13px; font-size: 1.05em; font-weight: bold; color: white;">
 				<span>로그인</span>
 			</div>
 			<div class="collapse navbar-collapse navbar-ex1-collapse col-sm-1"
 				style="margin-right: 20px; margin-top: 13px; font-size: 1.05em; font-weight: bold; color: white;">
 				<span>회원가입</span>
-			</div> -->
-			<!-- 로그인 후 -->
-			<img src="${pageContext.request.contextPath}/img/0M0B0169.jpg"
-				alt="마이프로필" class="img-circle">
-			<div class="dropdown " id="login" style="width: 50px; margin: 0">
-				<a data-toggle="dropdown" href="#" style="color: white;">김시혜</a>
-				<ul class="dropdown-menu" role="menu">
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="${pageContext.request.contextPath}/mypage/Favorite/FavoriteClass.do">마이페이지</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="#">쪽지함</a></li>
-					<li role="presentation" class="divider"></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">로그아웃</a></li>
-				</ul>
 			</div>
+			</c:if>
+			<!-- 로그인 후 -->
+			<c:if test="${!empty sessionScope.userid }">
+				<img src="${pageContext.request.contextPath}/img/0M0B0169.jpg"
+					alt="마이프로필" class="img-circle">
+				<div class="dropdown " id="login" style="width: 50px; margin: 0">
+					<a data-toggle="dropdown" href="#" style="color: white;">김시혜</a>
+					<ul class="dropdown-menu" role="menu">
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="${pageContext.request.contextPath}/mypage/Favorite/FavoriteClass.do">마이페이지</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="#">쪽지함</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">로그아웃</a></li>
+					</ul>
+				</div>
+			</c:if>
 	</div>
 
 	<!-- /.navbar-collapse -->
