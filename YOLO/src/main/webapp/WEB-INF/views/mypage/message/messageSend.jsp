@@ -50,6 +50,7 @@
 					<div class="col-md-1">
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">받는사람</button>
 						
+						
 					</div>
 				</div>
 			</div>
