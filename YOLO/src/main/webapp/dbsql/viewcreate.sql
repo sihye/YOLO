@@ -16,7 +16,7 @@ WHERE a.C_NO=c.C_NO;
 
 select*from favoriteclass;
 CREATE OR REPLACE VIEW favoriteclass
-AS select sb.*,c.C_NAME,c.C_PALCE,c.C_PRICE,c.C_PAYMENTWAY
+AS select sb.*,c.C_NAME,c.C_PLACE,c.C_PRICE,c.C_PAYMENTWAY
 from MEMBER m,CLASS c,SHOPPINGBASKET sb
 where m.M_USERID = sb.SB_USERID
 and c.C_NO = sb.C_NO;
