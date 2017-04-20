@@ -44,6 +44,7 @@ public class NoticeboardController {
 		/*List<NoticeboardVO> nList = noticeboardService.selectNoticeboard();*/
 		List<NoticeboardVO> nList = noticeboardService.selectNoticeboard(searchVo);
 		logger.info("조회 결과 nList.size()={}", nList.size());
+		logger.info("조회 결과 nList={}", nList);
 		
 		int totalRecord =noticeboardService.selectTotalRecord(searchVo);
 		logger.info("조회 전체레코드 개수조회 결과, totalRecord={}",

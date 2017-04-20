@@ -4,10 +4,12 @@
 	<footer>
 		<div>
 			<div id="footer-menu">
-				<a href="#" class="text-center">서비스 소개</a> <a href="#"
-					class="text-center">뉴스</a> <a href="#" class="text-center">이용안내</a>
-				<a href="#" class="text-center">개인정보 취급방침</a> <a href="#"
-					class="text-center">이용약관</a>
+				<a href="#" class="text-center">서비스 소개</a> 
+				<a href="#"class="text-center">뉴스</a> 
+				<a href="#" class="text-center">이용안내</a>
+				<a href="<c:url value='/noticeboard/list.do'/>" class="text-center" >공지사항</a>
+				<a href="#" class="text-center">개인정보 취급방침</a> 
+				<a href="#" class="text-center">이용약관</a>
 			</div>
 
 			<div>

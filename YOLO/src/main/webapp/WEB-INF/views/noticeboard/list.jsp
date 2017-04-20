@@ -1,33 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-<!DOCTYPE HTML>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href='<c:url value="/css/mainstyle.css"/>' />
-<link rel="stylesheet" type="text/css" href='<c:url value="/css/clear.css"/>' />
-<link rel="stylesheet" type="text/css" href='<c:url value="/css/formLayout.css"/>' />
-<link rel="stylesheet" type="text/css" href='<c:url value="/css/mystyle.css"/>' />
-
-<!-- Bootstrap -->
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/jquery/jquery-3.1.1.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
-
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../inc/top.jsp" %>		
 
 <script type="text/javascript">
 	function pageFunc(curPage) {
@@ -37,19 +10,29 @@
 </script>
 
 <style type="text/css">
-	body{
-		padding:5px;
-		margin:5px;
-	 }	
+	.divList{
+		margin:20px 0;
+		margin-left: 200px;
+		margin-right: 200px;
+		font-size: 1.5em;
+	}
+	
+	.align_center{
+	text-align: center;
+	}
+	
+	.divSearch{
+	text-align:center;		
+	padding:10px 0 5px 0;
+	}	
 </style>
 
 <!-- 페이징 처리를 위한 form 시작-->
-
 <form name="frmPage" method="post" 
 	action='<c:url value="/noticeboard/list.do"/>'>
-	<input type="text" name="currentPage">
-	<input type="text" name="searchCondition" value="${param.searchCondition }">
-	<input type="text" name="searchKeyword" value="${param.searchKeyword}">
+	<input type="hidden" name="currentPage">
+	<input type="hidden" name="searchCondition" value="${param.searchCondition }">
+	<input type="hidden" name="searchKeyword" value="${param.searchKeyword}">
 </form>
 
 <c:if test="${!empty param.searchKeyword }">
@@ -59,30 +42,26 @@
 
 <!-- 페이징 처리 form 끝 -->	
 
+<!-- <body> -->
+<!-- <h2>공지사항</h2> -->
 </head>	
-<body>
-<h2>공지사항</h2>
-
+<br>
+<br>
 <div class="divList">
-<table class="box2"
-	 	summary="기본 게시판에 관한 표로써, 번호, 제목, 작성자, 작성일, 조회수에 대한 정보를 제공합니다.">
-	<caption>공지사항</caption>
-	<colgroup>
-		<col style="width:10%;" />
-		<col style="width:20%;" />
-		<col style="width:30%;" />
-		<col style="width:15%;" />
-		<col style="width:15%;" />
-		<col style="width:10%;" />		
-	</colgroup>
+<h2>공지사항</h2>
+	<br>
+	<br>
+	<table class="table table-hover"
+	 	summary="공지사항 게시판이며  번호, 제목, 내용, 작성자, 작성일, 조회수에 대한 정보를 제공">
+	
 	<thead>
 	  <tr>
-	    <th scope="col">번호</th>
-	    <th scope="col">제목</th>
-	    <th scope="col">내용</th>
-	    <th scope="col">작성자</th>
-	    <th scope="col">작성일</th>
-	    <th scope="col">조회수</th>
+	    <th width="10%" style="text-align: center">번호</th>
+	    <th width="30%" style="text-align: center">제목</th>
+	    <th width="20%" style="text-align: center">내용</th>
+	    <th width="15%" style="text-align: center">작성자</th>
+	    <th width="15%" style="text-align: center">작성일</th>
+	    <th width="10%" style="text-align: center">조회수</th>
 	  </tr>
 	</thead> 
 	<tbody>
@@ -172,10 +151,10 @@
 </div>
 
 
-<div class="divBtn">
-    <a href="<c:url value='/noticeboard/write.do'/>" >추가</a>
+<div class="divBtn" style="text-align:right;">
+    <a href="<c:url value='/noticeboard/write.do'/>" >공지사항추가</a>
 </div>
-
+<%@ include file="../inc/bottom.jsp" %>
 </body>
 </html>
 
