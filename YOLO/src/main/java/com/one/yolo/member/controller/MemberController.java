@@ -117,20 +117,26 @@ public class MemberController {
 		}
 		
 		logger.info("kno[0]="+kno[0]);
+		logger.info("kno[1]="+kno[1]);
 		
 		//체크박스 처리
-		if(kno[0]!=0){
+		switch(kno.length){
+		case 1:
 			memberVo.setkNo1(kno[0]);
-		}else if(kno[0]!=0 && kno[1]!=0){
+			break;
+		case 2:
 			memberVo.setkNo1(kno[0]);
 			memberVo.setkNo2(kno[1]);
-		}else if(kno[0]!=0 && kno[1]!=0 && kno[2]!=0){
+			break;
+		case 3:
 			memberVo.setkNo1(kno[0]);
 			memberVo.setkNo2(kno[1]);
 			memberVo.setkNo3(kno[2]);
+			break;
 		}
-		
+
 		logger.info("kNo1"+memberVo.getkNo1());
+		logger.info("kNo2"+memberVo.getkNo2());
 		
 		//1
 		logger.info("회원가입 처리, 파라미터 vo={}", memberVo);

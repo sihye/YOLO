@@ -224,13 +224,10 @@
 				비밀번호 분실시 본인 확인을 위해 사용될 질문입니다
 			</div>
 			<div>
-				<label for="email1">비밀번호 찾기 답</label>
+				<label for="qQuestionanswer">비밀번호 찾기 답</label>
 				<input type="text" name="mQuestionanswer"><br>
 				비밀번호 분실시 본인 인증을 위한 답변을 입력해 주세요
 			</div>
-
-
-
 
 			<div class="center">
 				<input type="submit" id="wr_submit" value="회원가입">
