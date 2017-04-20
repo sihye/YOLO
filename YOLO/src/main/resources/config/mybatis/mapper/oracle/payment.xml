@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.payment">
+	<sql id="searchWhere">
+		<choose>
+			<when test="searchKeyword !=null and searchKeyword !=''" >
+				where C_NAME like '%'|| #{searchKeyword} ||'%'
+				and M_USERID=#{userid}
+			</when>
+			<when test="searchStartDate !=null and searchStartDate !=''
+			 and searchEndDate !=null and searchEndDate !=''" >
+				where PM_PAYMENTDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
+				and to_date(#{searchEndDate},'YYYY-MM-DD')+1 and M_USERID=#{userid}
+			</when>
+			<when test="searchKeyword !=null and searchKeyword !=''
+			 and searchStartDate !=null and searchStartDate !=''
+		 	and searchEndDate !=null and searchEndDate !=''" >
+				where C_NAME like '%'|| #{searchKeyword} ||'%'
+			and PM_PAYMENTDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
+			and to_date(#{searchEndDate},'YYYY-MM-DD')+1 and M_USERID=#{userid}
+			</when>
+			<otherwise>
+			where M_USERID=#{userid}
+			</otherwise>
+
+		</choose>
+
+	</sql>
+	<select id="selectPayment" parameterType="SearchVO" resultType="map">
+		select PM_NO, C_NO,M_USERID, PM_PAYMENTWAY, PM_PAYMENTDATE, PM_COMPLETECHECK,
+			PM_CANCELCHECK, C_PRICE, C_NAME
+		from
+		(
+		    select rownum as RNUM ,LIST.*
+		    from
+		    (
+		        select*from mypayment	       
+		        <include refid="searchWhere"></include>
+		    )LIST
+		)	
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectTotalRecord" parameterType="SearchVO"
+		resultType="int">
+		select count(*) from mypayment 
+		<include refid="searchWhere"></include>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+

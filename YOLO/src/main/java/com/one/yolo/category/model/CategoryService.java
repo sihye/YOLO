@@ -8,4 +8,5 @@ public interface CategoryService {
 	public List<CategoryVO> selectCateAll();
 	public List<CategoryGroupVO> selCateGroupAll();
 	public List<CategoryVO> selCateByCateGroup();
+	public String selCateNameByNo(int kNo);
 }

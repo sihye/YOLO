@@ -1,6 +1,7 @@
 package com.one.yolo.member.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -35,6 +36,20 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport implements MemberDAO{
 		
 		return getSqlSession().selectList(namespace+".MemberselectByAll");
 	}
+
+	@Override
+	public List<Map<String, Object>> ExcelMemberView() {
+		return getSqlSession().selectList(namespace+".ExcelMemberView");
+	}
+
+	@Override
+	public List<Map<String, Object>> OperatorMemberView() {
+		return getSqlSession().selectList(namespace+".OperatorMemberView");
+	}
+	
+	
+	
+	
 	
 	
 }

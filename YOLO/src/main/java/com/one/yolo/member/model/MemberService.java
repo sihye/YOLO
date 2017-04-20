@@ -1,6 +1,7 @@
 package com.one.yolo.member.model;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MemberService {
 	//아이디 중복확인에서 사용하는 상수
@@ -16,6 +17,8 @@ public interface MemberService {
 	public int duplicateUserid(String userid);
 	public int loginCheck(String userid, String pwd);
 	public MemberVO selectByUserid(String userid);
+	public List<MemberVO> MemberselectByAll();	
+	public List<Map<String, Object>>ExcelMemberView();
+	public List<Map<String, Object>> OperatorMemberView();
 	
-	public List<MemberVO> MemberselectByAll();
 }

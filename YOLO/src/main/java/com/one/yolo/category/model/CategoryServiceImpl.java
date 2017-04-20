@@ -27,5 +27,9 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<CategoryVO> selCateByCateGroup() {
 		return dao.selCateByCateGroup();
 	}
+	@Override
+	public String selCateNameByNo(int kNo){
+		return dao.selCateNameByNo(kNo);
+	}
 	
 }

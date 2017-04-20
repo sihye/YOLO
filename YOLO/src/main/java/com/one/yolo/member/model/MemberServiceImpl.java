@@ -1,6 +1,7 @@
 package com.one.yolo.member.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,22 @@ public class MemberServiceImpl implements MemberService{
 		
 		return memberDao.MemberselectByAll();
 	}
+
+	@Override
+	public List<Map<String, Object>> ExcelMemberView() {
+		return memberDao.ExcelMemberView();
+	}
+
+	@Override
+	public List<Map<String, Object>> OperatorMemberView() {
+
+		return memberDao.OperatorMemberView();
+	}
+	
+	
+	
+	
+	
 	
 	
 	

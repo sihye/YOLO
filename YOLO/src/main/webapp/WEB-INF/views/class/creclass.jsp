@@ -91,6 +91,9 @@
 #preview3{
 	width: 300px;
 }
+#map{
+	margin: 0 auto;
+}
 
 </style>
 </head>
@@ -132,6 +135,11 @@
 						</c:forEach>
 					</select>
 				</c:forEach>
+				<%-- <span><input type="checkbox" name="cbox" value="1" offsrc="<c:url value='/img/off.png'/>" onsrc="<c:url value='/img/on.png'/>" /> 1번 박스</span>
+				<span><input type="checkbox" name="cbox" value="2" offsrc="<c:url value='/img/off.png'/>" onsrc="<c:url value='/img/on.png'/>" /> 2번 박스</span>
+				<script>imgCbox("cbox");</script>
+				<input id="LTC09_00" type="checkbox" name="category" value="LTC09_00" />
+                <label class="midCategoryBox" for="LTC09_00"># 육아</label> --%>
 				<!-- 카테고리 셀렉트 끝 -->
 				<p>결제방법을 선택하세요.</p>
 				<div class="radio">
@@ -200,11 +208,11 @@
 				<div class="intro">
 					<h1>Scroll Down</h1>
 					<p>And it will animate down to the first section</p>
-					<input type="text" id="sample5_address" placeholder="주소"> 
+					<input type="hidden" id="sample5_address" placeholder="주소"> 
 					<input type="button" onclick="sample5_execDaumPostcode()"
 						value="주소 검색"><br>
 					<div id="map"
-						style="width: 300px; height: 300px; margin-top: 10px; display: none"></div>
+						style="width: 80%; height: 500px; margin-top: 10px; display: none"></div>
 
 					<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 					<script src="//apis.daum.net/maps/maps3.js?apikey=ae9a8f33df751fe70e8df23049bf7573&libraries=services"></script>
@@ -304,19 +312,19 @@
 					<h1>갤러리</h1>
 					<p>어떤 클래스인지 미리 볼 수 있도록 사진을 보여주세요.</p>
 					<p>
-						<label for="image">커버사진:</label> <input type="file" name="fileMap"
+						<label for="image">커버사진:</label> <input type="file" name="fileMap[0]"
 							id="image" />
 					</p>
 					<p>
-						<label for="image">갤러리1:</label> <input type="file" name="fileMap"
+						<label for="image">갤러리1:</label> <input type="file" name="fileMap[1]"
 							id="image1" />
 					</p>
 					<p>
-						<label for="image">갤러리2:</label> <input type="file" name="fileMap"
+						<label for="image">갤러리2:</label> <input type="file" name="fileMap[2]"
 							id="image2" />
 					</p>
 					<p>
-						<label for="image">갤러리3:</label> <input type="file" name="fileMap"
+						<label for="image">갤러리3:</label> <input type="file" name="fileMap[3]"
 							id="image3" />
 					</p>
 

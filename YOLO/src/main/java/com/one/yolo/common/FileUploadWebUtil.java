@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Component
 public class FileUploadWebUtil {
 	//파일업로드 관련 상수
-	public static final int FILE_UPLOAD=1;  //자료실-파일 업로드
+	public static final int FILE_UPLOAD=1;  //관리자-엑셀파일 업로드
 	public static final int IMAGE_UPLOAD=2; //상품등록-이미지 업로드
 	
 	private static final Logger logger
@@ -41,14 +41,14 @@ public class FileUploadWebUtil {
 		MultipartHttpServletRequest multiRequest
 		=(MultipartHttpServletRequest) request;
 		
-		Map<String, MultipartFile> fileMap
-			=multiRequest.getFileMap();
+		Map<String, MultipartFile> fileMap =multiRequest.getFileMap();
 		
 		//업로드한 파일들의 정보를 담을 List
 		List<Map<String, Object>> fileList
 		=new ArrayList<Map<String,Object>>();
 		
  		Iterator<String> iter = fileMap.keySet().iterator();
+
  		while(iter.hasNext()){
  			String key = iter.next();
   			MultipartFile tempFile = fileMap.get(key);
@@ -94,13 +94,16 @@ public class FileUploadWebUtil {
 			int uploadGb){
 		//파일 업로드 경로 구하기
 		String type=fileProperties.getProperty("file.upload.type");
+		logger.info("파일업로드 type={}",type);
 		
 		String upPath="", dir="";
 		if(type.equals("test")){
 			//테스트 경로
-			if(uploadGb==FILE_UPLOAD){
+			if(uploadGb==IMAGE_UPLOAD){
+				logger.info("test-imgupload 들어옴");
 				upPath=fileProperties.getProperty("file.upload.path.test");
-			}else if(uploadGb==IMAGE_UPLOAD){
+				logger.info("up path={}",upPath);
+			}else if(uploadGb==FILE_UPLOAD){
 				upPath=fileProperties.getProperty("imageFile.upload.path.test");
 			}
 		}else{
