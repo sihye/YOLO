@@ -10,5 +10,6 @@
 					<li><a href='<c:url value="/mypage/MyClass/HostClass.do"/>'>나의클래스</a></li>
 					<li><a href='<c:url value="/mypage/Mybbs/qnaboard.do"/>'>내가쓴글</a></li>				
 					<li class="active"><a href='<c:url value="/mypage/message/messageSend.do"/>'>쪽지함</a></li>					
+					<li><a href='<c:url value="/mypage/myedit/myedit.do"/>'>회원정보수정</a></li>
 				</ul>
 			</div>

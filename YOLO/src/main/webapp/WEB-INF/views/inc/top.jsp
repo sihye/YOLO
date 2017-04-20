@@ -10,7 +10,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>test1</title>
-
+<!-- ckeditor -->
+<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <!-- Bootstrap -->
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">

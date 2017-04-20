@@ -17,10 +17,16 @@ public class MessageController {
 		
 		return "mypage/message/messageSend";
 	}
-	@RequestMapping("/messageCheck.do")
-	public String messageCheck(){
-		logger.info("messageCheck 화면 보여주기");
+	@RequestMapping("/sendbox.do")
+	public String sendbox(){
+		logger.info("sendbox 화면 보여주기");
 		
-		return "mypage/message/messageCheck";
+		return "mypage/message/sendbox";
+	}
+	@RequestMapping("/getbox.do")
+	public String getbox(){
+		logger.info("getbox 화면 보여주기");
+		
+		return "mypage/message/getbox";
 	}
 }
