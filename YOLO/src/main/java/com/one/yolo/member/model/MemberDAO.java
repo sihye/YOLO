@@ -3,13 +3,17 @@ package com.one.yolo.member.model;
 import java.util.List;
 import java.util.Map;
 
+import com.one.yolo.common.SearchVO;
+
 public interface MemberDAO {
 	public int memberInsert(MemberVO vo);
 	public int duplicateUserid(String userid);
 	public String selectPwd(String userid);
 	public MemberVO selectByUserid(String userid);
 	public List<MemberVO> MemberselectByAll();
-	public List<Map<String, Object>> ExcelMemberView();
+	public List<Map<String, Object>> ExcelMemberView(SearchVO vo);
 	public List<Map<String, Object>> OperatorMemberView();
+	public List<Map<String, Object>> MemberSelectPG(SearchVO vo);
+	public int MemberSeletCount(SearchVO vo);
 
 }

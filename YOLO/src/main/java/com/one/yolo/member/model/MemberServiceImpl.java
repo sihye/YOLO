@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.one.yolo.common.SearchVO;
+
 @Service
 public class MemberServiceImpl implements MemberService{
 	
@@ -62,8 +64,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<Map<String, Object>> ExcelMemberView() {
-		return memberDao.ExcelMemberView();
+	public List<Map<String, Object>> ExcelMemberView(SearchVO vo) {
+		return memberDao.ExcelMemberView(vo);
 	}
 
 	@Override
@@ -71,6 +73,23 @@ public class MemberServiceImpl implements MemberService{
 
 		return memberDao.OperatorMemberView();
 	}
+
+	@Override
+	public List<Map<String, Object>> MemberSelectPG(SearchVO vo) {
+	
+		return memberDao.MemberSelectPG(vo);
+	}
+
+	@Override
+	public int MemberSeletCount(SearchVO vo) {
+	
+		return memberDao.MemberSeletCount(vo);
+	}
+	
+	
+	
+	
+	
 	
 	
 	

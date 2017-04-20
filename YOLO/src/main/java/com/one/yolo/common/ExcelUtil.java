@@ -33,11 +33,11 @@ public class ExcelUtil {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	private static final Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
 	@SuppressWarnings("deprecation")
-	public String excelWrith(){
+	public String excelWrith(SearchVO vo){
 		//Excel Write
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		System.out.println("++++++++++++++++++++++++++++맵실행 전");
-		List<Map<String,Object>> mMap = memberService.ExcelMemberView();
+		List<Map<String,Object>> mMap = memberService.ExcelMemberView(vo);
 		System.out.println("++++++++++++++++++++++++++++맵실행 후");
 		
 		HSSFSheet sheet = workbook.createSheet("회원");
