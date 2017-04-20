@@ -11,5 +11,6 @@ public interface MemberDAO {
 	public List<MemberVO> MemberselectByAll();
 	public List<Map<String, Object>> ExcelMemberView();
 	public List<Map<String, Object>> OperatorMemberView();
+	public int memberOut(String userid);
 
 }

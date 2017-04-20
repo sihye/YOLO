@@ -2,6 +2,10 @@ package com.one.yolo.member.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -215,5 +219,45 @@ public class MemberController {
 		logger.info("회원탈퇴화면 보여주기");
 		
 		return "member/memberOut";
+	}
+	
+	@RequestMapping(value="/memberOut.do", method=RequestMethod.POST)
+	public String edit_post(@RequestParam String pwd,
+			HttpSession session, HttpServletResponse response, 
+			Model model){
+		String userid=(String) session.getAttribute("userid");
+		logger.info("회원탈퇴 처리, 파라미터 userid={},pwd={}", userid,pwd);
+
+		int result 
+		= memberService.loginCheck(userid, pwd);
+		String msg="", url="/member/memberOut.do";
+
+		if(result==MemberService.LOGIN_OK){
+			int cnt = memberService.memberOut(userid);
+			logger.info("회원탈퇴 결과, cnt={}", cnt);
+			if(cnt>0){
+				session.invalidate();
+				
+				//쿠키 삭제
+				Cookie ck = new Cookie("ck_userid", userid);
+				ck.setPath("/");
+				ck.setMaxAge(0); 
+				response.addCookie(ck);
+				
+				msg="회원 탈퇴처리되었습니다.";
+				url="/index.do";
+			}else{
+				msg="회원탈퇴 실패";
+			}
+		}else if(result==MemberService.PWD_DISAGREE){
+			msg="비밀번호가 일치하지 않습니다.";
+		}else{
+			msg="비밀번호 체크 에러";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
 	}
 }

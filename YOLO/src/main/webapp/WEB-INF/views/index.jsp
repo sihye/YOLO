@@ -10,6 +10,9 @@
 				src="${pageContext.request.contextPath}/img/0M0B0169.jpg" /></li>
 		</ul>
 	</div>
+	
+	
+	
 	<!-- 분류카테고리 -->
 	<div class="container">
 		<div class="row">
@@ -84,6 +87,8 @@
 		</div>
 		
 	</div>
+	
+	
 <%@ include file="inc/bottom.jsp" %>
 </body>
 </html>

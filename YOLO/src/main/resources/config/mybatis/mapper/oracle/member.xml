@@ -32,6 +32,12 @@
 		select * from member where m_userid=#{mUserid}
 	</select>
 	
+	<update id="memberOut" parameterType="string">
+		update member
+		set m_leavedate=sysdate
+		where m_userid=#{mUserid}
+	</update>
+	
 	<select id="MemberselectByAll" resultType="MemberVO">
 		select *from member order by m_no
 	</select>

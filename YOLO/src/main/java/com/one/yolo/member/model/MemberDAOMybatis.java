@@ -46,6 +46,11 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport implements MemberDAO{
 	public List<Map<String, Object>> OperatorMemberView() {
 		return getSqlSession().selectList(namespace+".OperatorMemberView");
 	}
+
+	@Override
+	public int memberOut(String userid) {
+		return getSqlSession().update(namespace+".memberOut", userid);
+	}
 	
 	
 	

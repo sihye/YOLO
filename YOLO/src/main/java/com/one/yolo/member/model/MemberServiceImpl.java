@@ -71,6 +71,12 @@ public class MemberServiceImpl implements MemberService{
 
 		return memberDao.OperatorMemberView();
 	}
+
+	@Override
+	public int memberOut(String userid) {
+
+		return memberDao.memberOut(userid);
+	}
 	
 	
 	
