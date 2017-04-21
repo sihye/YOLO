@@ -152,7 +152,7 @@ hr{
 	<c:if test="${!empty claVo.cDetailimg3}"><img class="img-thumbnail" alt="${claVo.cName}의 갤러리3" src="<c:url value='/upload/${claVo.cDetailimg3}'/>"> </c:if>
 	
 	<div class="contents-title">위치</div><hr>
-	<p style="font-size: 1.3em;">${claVo.cPalce}</p>
+	<p style="font-size: 1.3em;">${claVo.cPlace}</p>
 	<div id="map" style="width: 100%; height: 400px;"></div>
 	<script src="//apis.daum.net/maps/maps3.js?apikey=ae9a8f33df751fe70e8df23049bf7573&libraries=services"></script>
 	<script type="text/javascript">
@@ -181,7 +181,7 @@ hr{
 		var geocoder = new daum.maps.services.Geocoder();
 
 		// 주소로 좌표를 검색합니다
-		geocoder.addr2coord('${claVo.cPalce}',function(status, result) {
+		geocoder.addr2coord('${claVo.cPlace}',function(status, result) {
 			// 정상적으로 검색이 완료됐으면 
 			if (status === daum.maps.services.Status.OK) {
 	
@@ -197,7 +197,7 @@ hr{
 				// 인포윈도우로 장소에 대한 설명을 표시합니다
 				var infowindow = new daum.maps.InfoWindow(
 						{
-							content : '<div style="width:150px;text-align:center;padding:6px 0;">${claVo.cName}</div>'
+							content : '<div style="width:150px;text-align:center;padding:6px 0;">${claVo.cplacedetail}</div>'
 						});
 				infowindow.open(map, marker);
 	

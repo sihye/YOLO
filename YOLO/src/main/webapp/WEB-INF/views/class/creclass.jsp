@@ -325,8 +325,8 @@
 									}).open();
 						}
 					</script>
-					주소: <input type="text" id="add" name=cplace1> 상세주소: <input
-						type="text" id="addDetail" name="cplace2"> 좌표: <input
+					주소: <input type="text" id="add" name=cPlace> 상세주소: <input
+						type="text" id="addDetail" name="cplacedetail"> 좌표: <input
 						type="text" id="location" name="cLocation">
 				</div>
 			</div>
@@ -519,7 +519,7 @@
 						function add_div(){
 							var div=document.createElement('div');							
 							div.innerHTML=document.getElementById('selDate').innerHTML;
-							document.getElementById('field').appendChild(div);
+							document.getElementById('field').append(div);
 						}
 						
 						function remove_div(obj){

@@ -12,8 +12,8 @@ public class ClassVO {
 	private String cTarget; //대상
 	private String cSpevialty;//특기사항
 	private String cDetailinfo;//상세정보
-	private String cPalce;//장소
-	private String cLocation;//좌표
+	private String cPlace;//장소
+	private String cplacedetail;//좌표
 	private String cMainimg;//커버이미지
 	private String cDetailimg1;//상세1
 	private String cDetailimg2;//상세2
@@ -77,18 +77,6 @@ public class ClassVO {
 	public void setcDetailinfo(String cDetailinfo) {
 		this.cDetailinfo = cDetailinfo;
 	}
-	public String getcPalce() {
-		return cPalce;
-	}
-	public void setcPalce(String cPalce) {
-		this.cPalce = cPalce;
-	}
-	public String getcLocation() {
-		return cLocation;
-	}
-	public void setcLocation(String cLocation) {
-		this.cLocation = cLocation;
-	}
 	public String getcMainimg() {
 		return cMainimg;
 	}
@@ -143,11 +131,24 @@ public class ClassVO {
 	public void setcDel(String cDel) {
 		this.cDel = cDel;
 	}
+
+	public String getcPlace() {
+		return cPlace;
+	}
+	public void setcPlace(String cPlace) {
+		this.cPlace = cPlace;
+	}
+	public String getCplacedetail() {
+		return cplacedetail;
+	}
+	public void setCplacedetail(String cplacedetail) {
+		this.cplacedetail = cplacedetail;
+	}
 	@Override
 	public String toString() {
 		return "ClassVO [cNo=" + cNo + ", mUserid=" + mUserid + ", kNo=" + kNo + ", cName=" + cName + ", cPrice="
 				+ cPrice + ", cGoal=" + cGoal + ", cTarget=" + cTarget + ", cSpevialty=" + cSpevialty + ", cDetailinfo="
-				+ cDetailinfo + ", cPalce=" + cPalce + ", cLocation=" + cLocation + ", cMainimg=" + cMainimg
+				+ cDetailinfo + ", cPlace=" + cPlace + ", cplacedetail=" + cplacedetail + ", cMainimg=" + cMainimg
 				+ ", cDetailimg1=" + cDetailimg1 + ", cDetailimg2=" + cDetailimg2 + ", cDetailimg3=" + cDetailimg3
 				+ ", cPaymentway=" + cPaymentway + ", cMaxperson=" + cMaxperson + ", cRegdate=" + cRegdate + ", cHits="
 				+ cHits + ", cDel=" + cDel + "]";

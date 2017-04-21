@@ -50,11 +50,8 @@ public class ClaController {
 		return "class/creclass";
 	}
 	@RequestMapping(value="/clacre.do", method=RequestMethod.POST)
-	public String insertCla(HttpServletRequest req, @ModelAttribute ClassVO vo, @RequestParam String cplace1, @RequestParam String cplace2,
-				Model model){
+	public String insertCla(HttpServletRequest req, @ModelAttribute ClassVO vo, Model model){
 		logger.info("클래스 insert param vo={}",vo);
-		logger.info("클래스 insert param cplace1={},cplace2={}",cplace1,cplace2);
-		vo.setcPalce(cplace1+cplace2);
 		vo.setmUserid("hong");
 		
 		//파일 업로드 처리
