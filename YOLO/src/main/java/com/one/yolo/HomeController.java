@@ -41,6 +41,11 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping("index2.do")
+	public void index2(){
+		
+	}
+	
 
 	
 }

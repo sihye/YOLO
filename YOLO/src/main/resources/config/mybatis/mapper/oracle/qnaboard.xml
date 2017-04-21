@@ -10,6 +10,13 @@
 
 	<sql id="searchWhere">
 		<choose>
+			<when test="searchKeyword !=null and searchKeyword !=''
+			 and searchStartDate !=null and searchStartDate !=''
+		 	and searchEndDate !=null and searchEndDate !=''" >
+			where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+			and C_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
+			and to_date(#{searchEndDate},'YYYY-MM-DD')+1
+			</when>
 			<when test="searchKeyword !=null and searchKeyword !=''" >
 				where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
 			</when>
@@ -18,14 +25,7 @@
 				where C_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
 				and to_date(#{searchEndDate},'YYYY-MM-DD')+1
 			</when>
-			<when test="searchKeyword !=null and searchKeyword !=''
-			 and searchStartDate !=null and searchStartDate !=''
-		 	and searchEndDate !=null and searchEndDate !=''" >
-				where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
-			and
-			C_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
-			and to_date(#{searchEndDate},'YYYY-MM-DD')+1
-			</when>
+			
 			<otherwise>
 			
 			</otherwise>

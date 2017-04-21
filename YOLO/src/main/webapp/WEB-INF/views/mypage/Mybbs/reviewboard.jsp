@@ -411,7 +411,7 @@ header, footer, aside, nav, section, article {
 		<thead>
 			<tr style="background: skyblue">
 				<th>번호</th>
-				<th>종류</th>
+				<th>클래스명</th>
 				<th>내용</th>
 				<th>문의일</th>
 			</tr>
