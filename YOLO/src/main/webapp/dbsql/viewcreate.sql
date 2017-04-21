@@ -1,29 +1,29 @@
 --[viewcreate.sql]
 
-select*from qnaboard;
+
 
 CREATE OR REPLACE VIEW qnaboard
 AS SELECT q.*,c.C_NAME
 FROM classqnaboard q,class c
 WHERE q.C_NO=c.C_NO;
+select*from qnaboard;
 
-select*from reviewboard;
 
 CREATE OR REPLACE VIEW reviewboard
 AS SELECT a.*,c.C_NAME
 FROM CLASSBOARD  a,class c
 WHERE a.C_NO=c.C_NO;
+select*from reviewboard;
 
+--DROP VIEW favoriteclass;
 
-DROP VIEW favoriteclass;
-select*from favoriteclass;
 CREATE OR REPLACE VIEW favoriteclass
 AS select sb.*,c.C_NAME,c.C_PLACE,c.C_PRICE,c.C_PAYMENTWAY
 from MEMBER m,CLASS c,SHOPPINGBASKET sb
 where m.M_USERID = sb.SB_USERID
 and c.C_NO = sb.C_NO;
-
-
+select*from favoriteclass;
+--commit
 
 create view ExcelMemberView
 as
@@ -48,15 +48,14 @@ select m_userid,m_no,m_name,m_joindate,(select c.k_name from category c where c.
 (select c.k_name from category c where c.K_NO = m.k_no2) as k_2 ,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
 from member m;
 
---<<<<<<< HEAD
---=======
 
-select*from mypayment;
+
+
 
 CREATE OR REPLACE VIEW mypayment
 AS SELECT p.*,c.C_NAME,C_PRICE
 FROM payment p,class c
 WHERE p.C_NO=c.C_NO;
 
--->>>>>>> branch 'master' of https://github.com/sihye/YOLO.git
+select*from mypayment;
 

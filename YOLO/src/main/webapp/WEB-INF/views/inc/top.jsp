@@ -103,7 +103,7 @@ footer {
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/index.do"
 					style="color: white; font-weight: bolder; font-size: 2EM;">YOLO
 				</a>
 			</div>

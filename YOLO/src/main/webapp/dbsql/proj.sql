@@ -123,7 +123,7 @@ ALTER TABLE category
 		PRIMARY KEY (
 			K_NO -- 카테고리번호
 		);
-
+--commit;
 -- 클래스
 CREATE TABLE Class (
 	C_NO         NUMBER        NOT NULL, -- 클래스번호
@@ -1076,7 +1076,7 @@ nocache;
 
 create sequence UPFILE_seq
 increment by 1
-start with 1
+start with 2
 nomaxvalue
 nocache;
 

@@ -119,4 +119,11 @@ public class ClaController {
 		return "class/classDetail";
 	}
 	
+
+	@RequestMapping("bsTest3.do")
+	public void test(){
+		logger.info("test확인");
+
+	}
+	
 }
