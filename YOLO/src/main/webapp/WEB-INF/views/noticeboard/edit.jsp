@@ -1,19 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-   
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<title>공지사항 글 수정</title>
-<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href='<c:url value="/css/mainstyle.css"/>' />
-<link rel="stylesheet" type="text/css" href='<c:url value="/css/clear.css"/>' />
-<link rel="stylesheet" type="text/css" href='<c:url value="/css/formLayout.css"/>' />
-<link rel="stylesheet" type="text/css" href='<c:url value="/css/mystyle.css"/>' />
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../inc/top.jsp" %>
 
-<script type="text/javascript" 
-	src='<c:url value="/jquery/jquery-3.1.1.min.js" />'></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#frmEdit').submit(function(){
@@ -28,9 +16,21 @@
 	
 </script>
 
+<style type="text/css">
+	.divForm{
+		margin:20px 0;
+		margin-left: 400px;
+		margin-right: 400px;
+		font-size: 1.5em;
+	}
+</style>
 </head>
-<body>
+<br>
+<br>
 <div class="divForm">
+<h2>공지사항수정</h2>
+<br>
+<br>
 <form id="frmEdit" name="frmEdit" method="post" 
 	action='<c:url value="/noticeboard/edit.do" />' > 
 	
@@ -40,29 +40,39 @@
         		value="${vo.bgNo}" />
             	
     <fieldset>
-	<legend>글수정</legend>
-        <div class="firstDiv">
-            <label for="title">제목</label>
-            <input type="text" id="nbTitle" name="nbTitle" 
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="title">제목</label>
+            <div class="col-sm-6">
+            <input type="text" id="nbTitle" name="nbTitle" class="form-control" placeholder="제목"
             	value="${vo.nbTitle}" />
+            </div>
         </div>
-        <div>
-            <label for="mUserid">작성자</label>
-            <input type="text" id="mUserid" name="mUserid" 
+        <br>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="mUserid">작성자</label>
+            <div class="col-sm-6">
+            <input type="text" id="mUserid" name="mUserid" class="form-control" placeholder="작성자" readonly
             	value="${vo.mUserid}"/>
+            </div>
         </div>
-        <div>  
-        	<label for="content">내용</label>        
- 			<textarea id="nbContent" name="nbContent" rows="12" cols="40">${vo.nbContent}</textarea>
+        <br>
+        <div class="form-group"> 
+        	<label class="col-sm-2 control-label" for="content">내용</label>
+        	<div class="col-sm-6">     
+ 			<textarea id="nbContent" name="nbContent" rows="12" cols="45" placeholder="내용">${vo.nbContent}</textarea>
+ 			</div>
         </div>
-        <div class="center">
-            <input type = "submit" value="수정"/>
-            <input type = "Button" value="목록" 
+        <br>
+        
+     	<div align="center">
+            <input class="btn btn-default" type = "submit" value="수정"/>
+            <input class="btn btn-default"type = "Button" value="목록" 
    onclick="location.href='<c:url value="/noticeboard/list.do"/>'" />         
         </div>
 	</fieldset>
 </form>    
 </div>
 
+<%@ include file="../inc/bottom.jsp" %>	
 </body>
 </html>

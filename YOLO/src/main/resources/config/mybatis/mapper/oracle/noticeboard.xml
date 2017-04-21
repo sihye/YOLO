@@ -3,9 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.noticeboard">
-	<sql id="searchWhere">
+	<!-- <sql id="searchWhere">
 		<if test="searchKeyword !=null and searchKeyword !=''">
 			where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+		</if>
+	</sql> -->
+	<sql id="searchWhere">
+		<if test="searchKeyword !=null and searchKeyword !=''">
+			where lower(M_USERID) like '%'|| lower(#{searchKeyword}) ||'%'
+			or lower(nb_content) like '%'|| lower(#{searchKeyword}) ||'%'
+			or lower(NB_TITLE) like '%'|| lower(#{searchKeyword}) ||'%'
 		</if>
 	</sql>
 	

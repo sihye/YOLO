@@ -13,7 +13,11 @@ public interface MemberDAO {
 	public List<MemberVO> MemberselectByAll();
 	public List<Map<String, Object>> ExcelMemberView(SearchVO vo);
 	public List<Map<String, Object>> OperatorMemberView();
+
+	public int memberOut(String userid);
+
 	public List<Map<String, Object>> MemberSelectPG(SearchVO vo);
 	public int MemberSeletCount(SearchVO vo);
+
 
 }

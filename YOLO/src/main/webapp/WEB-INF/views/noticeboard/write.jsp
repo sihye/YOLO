@@ -1,19 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<title>자료실 글쓰기 - 허브몰</title>
-<link rel="stylesheet" type="text/css" 
-	href='<c:url value="/css/mainstyle.css"/>' />
-<link rel="stylesheet" type="text/css" href='<c:url value="/css/clear.css"/>' />
-<link rel="stylesheet" type="text/css" href='<c:url value="/css/formLayout.css"/>' />
-<link rel="stylesheet" type="text/css" href='<c:url value="/css/mystyle.css"/>' />
-
-<script type="text/javascript" 
-	src='<c:url value="/jquery/jquery-3.1.1.min.js" />'></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../inc/top.jsp" %>  
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -31,30 +18,47 @@
 	});
 	
 </script>
+<style type="text/css">
+	.divForm{
+		margin:20px 0;
+		margin-left: 400px;
+		margin-right: 400px;
+		font-size: 1.5em;
+	}
+</style>
 
 </head>
-<body>
+<br>
+<br>
 <div class="divForm">
+<h2>공지사항 쓰기</h2>
+<br>
+<br>
 <form id="frmWrite" name="frmWrite" method="post" 
 	action='<c:url value="/noticeboard/write.do"/>'>
  <fieldset>
-	<legend>공지사항 쓰기</legend>
 		<%-- <input type="hidden" name="bgNo" value="${bgNo}" /> --%>
-        <div class="firstDiv">
-            <label for="title">제목</label>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="title">제목</label>
+            <div class="col-sm-6">  
             <input type="text" id="nbTitle" name="nbTitle" />
-        </div>
-        <div>
-            <label for="name">작성자</label>
+            </div>
+        </div><br>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="name">작성자</label>
+            <div class="col-sm-6">  
             <input type="text" id="mUserid" name="mUserid" />
-        </div>
-        <div>  
-        	<label for="content">내용</label>        
+            </div>
+        </div><br>
+        <div class="form-group">  
+        	<label class="col-sm-2 control-label" for="content">내용</label> 
+        	<div class="col-sm-6">        
  			<textarea id="nbContent" name="nbContent" rows="12" cols="40"></textarea>
-        </div>
-        <div class="center">
-            <input type = "submit" value="등록"/>
-            <input type = "Button" value="글목록" 
+ 			</div>
+        </div><br>
+        <div align="center">
+            <input class="btn btn-default" type = "submit" value="등록"/>
+            <input class="btn btn-default" type = "Button" value="글목록" 
             onclick
            ="location.href='<c:url value="/noticeboard/list.do"/>'" />        
         </div>
@@ -62,7 +66,7 @@
 </form>
 </div>   
 
-              
+<%@ include file="../inc/bottom.jsp" %>	              
 </body>
 </html>
 
