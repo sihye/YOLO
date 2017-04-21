@@ -420,7 +420,10 @@ header, footer, aside, nav, section, article {
 			<c:forEach var="map" items="${alist }">
 				<tr>
 					<td>${map["CB_NO"] }</td>
-					<td>${map["C_NAME"] }</td>
+					<td>
+					<a href
+				='<c:url value="/mypage/Mybbs/updateCount.do?no=${map['CB_NO'] }"/>'>
+					${map["C_NAME"] }</a></td>
 					<td>${map["CB_CONTENT"] }</td>
 					<td>${map["CB_REGDATE"] }</td>
 				</tr>

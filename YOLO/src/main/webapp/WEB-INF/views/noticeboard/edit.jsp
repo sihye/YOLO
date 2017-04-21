@@ -12,10 +12,16 @@
 			}	
 		});
 	});
-	
-	
+		
 </script>
-
+  <!-- ckeditor 반영  -->
+<script type="text/javascript">
+	CKEDITOR.replace('Contents', {
+		toolbar : 'Full',
+		uiColor : '',
+	});
+</script>
+	<!-- 화면 마진  -->
 <style type="text/css">
 	.divForm{
 		margin:20px 0;
@@ -58,8 +64,9 @@
         <br>
         <div class="form-group"> 
         	<label class="col-sm-2 control-label" for="content">내용</label>
-        	<div class="col-sm-6">     
- 			<textarea id="nbContent" name="nbContent" rows="12" cols="45" placeholder="내용">${vo.nbContent}</textarea>
+       <!-- ckeditor 반영  -->
+        	<div class="col-sm-6">   
+        	<textarea class="ckeditor" id="nbContent" name="nbContent" placeholder="내용" >${vo.nbContent}</textarea>
  			</div>
         </div>
         <br>

@@ -18,6 +18,15 @@
 	});
 	
 </script>
+
+  <!-- ckeditor 반영  -->
+<script type="text/javascript">
+	CKEDITOR.replace('Contents', {
+		toolbar : 'Full',
+		uiColor : '',
+	});
+</script>
+
 <style type="text/css">
 	.divForm{
 		margin:20px 0;
@@ -47,13 +56,15 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="name">작성자</label>
             <div class="col-sm-6">  
-            <input type="text" id="mUserid" name="mUserid" class="form-control" placeholder="작성자"/>
+            <input type="text" id="mUserid" name="mUserid" class="form-control" readonly 
+            placeholder="작성자" <%-- value="${vo.mUserid}" --%>>
             </div>
         </div><br>
         <div class="form-group">  
         	<label class="col-sm-2 control-label" for="content">내용</label> 
-        	<div class="col-sm-6">        
- 			<textarea id="nbContent" name="nbContent" rows="12" cols="40" class="form-control" placeholder="내용"></textarea>
+        	<!-- ckeditor 반영  -->
+        	<div class="col-sm-6">   
+        	<textarea class="ckeditor" id="nbContent" name="nbContent" placeholder="내용" >${vo.nbContent}</textarea>
  			</div>
         </div><br>
         <div align="center">
