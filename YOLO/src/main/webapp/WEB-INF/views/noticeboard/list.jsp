@@ -18,12 +18,13 @@
 	}
 	
 	.align_center{
-	text-align: center;
+		text-align: center;
 	}
 	
 	.divSearch{
-	text-align:center;		
-	padding:10px 0 5px 0;
+		text-align:center;		
+		padding:10px 0 5px 0;
+		font-size: 1em;
 	}	
 </style>
 
@@ -127,7 +128,7 @@
 <div class="divSearch">
    	<form name="frmSearch" method="post" 
    		action="<c:url value='/noticeboard/list.do' />" >
-        <select name="searchCondition"><!-- ${vo.nbTitle} -->
+        <%-- <select name="searchCondition"><!-- ${vo.nbTitle} -->
             <option value="nb_title" 
             	<c:if test="${'nb_title'==param.searchCondition }">
             		selected            	
@@ -143,15 +144,20 @@
             		selected            	
             	</c:if>
             >작성자</option>
-        </select>   
-        <input type="text" name="searchKeyword" title="검색어 입력"
-        	value="${param.searchKeyword }">   
-		<input type="submit" value="검색">
+        </select>  --%>
+        
+        <%-- searchCondition option 제거함 --%>
+        <input class="btn btn-default" type="text" name="searchKeyword" title="검색어 입력" placeholder="Notice Search..."
+        	value="${param.searchKeyword }">
+        <input class="btn btn-default" type="submit" value="검색">
+
+		<!-- <input type="submit" value="검색"> -->
+	
     </form>
 </div>
 
 
-<div class="divBtn" style="text-align:right;">
+<div style="text-align:right;">
     <a href="<c:url value='/noticeboard/write.do'/>" >공지사항추가</a>
 </div>
 <%@ include file="../inc/bottom.jsp" %>
