@@ -72,7 +72,7 @@ public class NoticeboardController {
 		int cnt = noticeboardService.insertNoticboard(vo);
 		logger.info("공지사항 글쓰기 결과 cnt={}",cnt);
 		
-		return "redirect:/noticeboard/list";		
+		return "redirect:/noticeboard/list.do";		
 	}
 	
 	@RequestMapping(value="updateCount.do")
@@ -128,7 +128,7 @@ public class NoticeboardController {
 		}
 		
 		NoticeboardVO vo = noticeboardService.selectNo(no);
-		logger.info("수정화면2222222222222222222222222222222222 vo={}",vo);
+		logger.info("수정화면 vo={}",vo);
 		
 		model.addAttribute("vo",vo);
 		
@@ -138,7 +138,6 @@ public class NoticeboardController {
 	@RequestMapping(value="edit.do", method=RequestMethod.POST)
 	public String edit_post(@ModelAttribute NoticeboardVO vo, 
 			Model model){
-		logger.info("수정화면1111111111111111111111111111111111111111111111111 vo={}",vo);
 		logger.info("공지사항 수정 처리, 파라미터 vo={}", vo);
 		String msg="", url="";
 			
@@ -156,10 +155,43 @@ public class NoticeboardController {
 		model.addAttribute("url", url);
 		
 		return "common/message";
-		
-		
-
+	}
 	
+	@RequestMapping(value="delete.do", method=RequestMethod.GET)
+	public String delete_get(
+			@RequestParam(value="no", defaultValue="0") int no,
+			Model model){
+		logger.info("삭제화면, 파라미터 no={}", no);
+		
+		if(no==0){
+			model.addAttribute("msg", "잘못된 url입니다");
+			model.addAttribute("url", "/noticeoard/list.do");
+			
+			return "common/message";
+		}
+		
+		return "noticeboard/delete";
+	
+	}
+	
+	@RequestMapping(value="/delete.do", method=RequestMethod.POST)
+	public String delete_post(@RequestParam (value="no", defaultValue="0") int no, 
+			Model model){
+		
+		logger.info("글 삭제 처리, 파라미터 no={}", no);
+		
+		String msg="", url="/noticeboard/delete.do?no="+no;
+		
+		int cnt = noticeboardService.deleteNoticeoard(no);			
+		logger.info("글삭제 cnt={}", cnt);
+		
+		msg="글 삭제 성공";
+		url="/noticeboard/list.do";
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";		
 	}
 	
 	

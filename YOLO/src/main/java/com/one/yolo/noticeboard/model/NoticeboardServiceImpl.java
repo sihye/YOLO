@@ -50,6 +50,11 @@ public class NoticeboardServiceImpl
 		return dao.updateNotice(vo);
 	}
 
+	@Override
+	public int deleteNoticeoard(int no) {
+		return dao.deleteNoticeoard(no);
+	}
+
 	
 
 }

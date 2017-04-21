@@ -14,5 +14,6 @@ public interface NoticeboardService {
 	public NoticeboardVO selectNo(int no);
 	public int updateReadCount(int no);
 	public int updateNotice(NoticeboardVO vo);
+	public int deleteNoticeoard(int no);
 	
 }

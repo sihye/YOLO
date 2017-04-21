@@ -41,19 +41,19 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="title">제목</label>
             <div class="col-sm-6">  
-            <input type="text" id="nbTitle" name="nbTitle" />
+            <input type="text" id="nbTitle" name="nbTitle" class="form-control" placeholder="제목"/>
             </div>
         </div><br>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="name">작성자</label>
             <div class="col-sm-6">  
-            <input type="text" id="mUserid" name="mUserid" />
+            <input type="text" id="mUserid" name="mUserid" class="form-control" placeholder="작성자"/>
             </div>
         </div><br>
         <div class="form-group">  
         	<label class="col-sm-2 control-label" for="content">내용</label> 
         	<div class="col-sm-6">        
- 			<textarea id="nbContent" name="nbContent" rows="12" cols="40"></textarea>
+ 			<textarea id="nbContent" name="nbContent" rows="12" cols="40" class="form-control" placeholder="내용"></textarea>
  			</div>
         </div><br>
         <div align="center">

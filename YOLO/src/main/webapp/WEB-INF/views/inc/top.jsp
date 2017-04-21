@@ -15,8 +15,6 @@
 <!-- Bootstrap -->
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/bootstrap-select.min.css"
-	rel="stylesheet">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/flexslider.css"
 	type="text/css">
@@ -103,7 +101,7 @@ footer {
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="${pageContext.request.contextPath}/index.do"
+				<a class="navbar-brand" href="#"
 					style="color: white; font-weight: bolder; font-size: 2EM;">YOLO
 				</a>
 			</div>
@@ -123,38 +121,29 @@ footer {
 			</div>
 			<!-- 로그인부분 -->
 			<!-- 로그인 전 -->
-			<c:if test="${empty sessionScope.userid }">
-				<div class="navbar-collapse collapse" id="navbar-collapse-content">
-					<ul class="nav navbar-nav navbar-right"
-						style="padding-right: 100px; color: white;">
-
-						<li><a href="${pageContext.request.contextPath}/login/login.do" 
-							style="color: white; font-weight: bolder; font-size: 1.3EM;">로그인</a></li>
-
-						<li><a href="${pageContext.request.contextPath}/member/register.do"" style="color: white; 
-						font-weight: bolder; font-size: 1.3EM;">회원 가입</a></li>
-
-
-					</ul>
-				</div>
-	</div>
-	</c:if>
-	<!-- 로그인 후 -->
+			<c:if test="${!empty sessionScope.userid }">
+				<div class="collapse navbar-collapse navbar-ex1-collapse col-sm-1"
+				style="margin-right: 20px; margin-top: 13px; font-size: 1.05em; font-weight: bold; color: white;">
+				<span>로그인</span>
+			</div>
+			<div class="collapse navbar-collapse navbar-ex1-collapse col-sm-1"
+				style="margin-right: 20px; margin-top: 13px; font-size: 1.05em; font-weight: bold; color: white;">
+				<span>회원가입</span>
+			</div>
+			</c:if>
+			<!-- 로그인 후 -->
 			<c:if test="${!empty sessionScope.userid }">
 				<img src="${pageContext.request.contextPath}/img/0M0B0169.jpg"
 					alt="마이프로필" class="img-circle">
-				<div class="dropdown " id="login" style="width: 200px; margin: 0;padding-left: 30px">
-					<a data-toggle="dropdown" href="#" style="color: white;"> ${sessionScope.userName} 님</a>
+				<div class="dropdown " id="login" style="width: 50px; margin: 0">
+					<a data-toggle="dropdown" href="#" style="color: white;">김시혜</a>
 					<ul class="dropdown-menu" role="menu">
 						<li role="presentation"><a role="menuitem" tabindex="-1"
 							href="${pageContext.request.contextPath}/mypage/Favorite/FavoriteClass.do">마이페이지</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1"
 							href="#">쪽지함</a></li>
 						<li role="presentation" class="divider"></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" 
-						href="${pageContext.request.contextPath}/login/logout.do">로그아웃</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" 
-						href="${pageContext.request.contextPath}/member/memberOut.do">회원탈퇴</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">로그아웃</a></li>
 					</ul>
 				</div>
 			</c:if>

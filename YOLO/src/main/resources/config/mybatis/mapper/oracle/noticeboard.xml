@@ -47,9 +47,9 @@
 		<selectKey keyProperty="nbNo" resultType="int" order="BEFORE">
 			select NOTICEBOARD_seq.nextval from dual
 		</selectKey>
-		insert into noticeboard
-		(NB_NO,M_USERID,BG_NO,NB_TITLE,NB_CONTENT)
-		values(#{nbNo},#{mUserid},3,#{nbTitle},#{nbContent})
+		 insert into noticeboard
+      	(NB_NO,M_USERID,BG_NO,NB_TITLE,NB_CONTENT)
+      	values(#{nbNo},#{mUserid},3,#{nbTitle},#{nbContent})
 	</insert>
 	
 	<select id="selectNo" parameterType="int" resultType="NoticeboardVO">
@@ -68,6 +68,10 @@
 			set NB_TITLE=#{nbTitle}, NB_CONTENT=#{nbContent}
 		where nb_no=#{nbNo}
 	</update>
+	
+	<delete id="deleteNoticeoard" parameterType="int">
+		delete from noticeboard where nb_no=#{nbNo}
+	</delete>
 	
 </mapper>
 

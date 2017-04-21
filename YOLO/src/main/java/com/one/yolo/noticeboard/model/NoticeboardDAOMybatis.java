@@ -50,6 +50,11 @@ public class NoticeboardDAOMybatis extends SqlSessionDaoSupport
 		return getSqlSession().update(namespace+".updateNotice", vo);
 	}
 
+	@Override
+	public int deleteNoticeoard(int no) {
+		return getSqlSession().update(namespace+".deleteNoticeoard", no);
+	}
+
 
 
 	
