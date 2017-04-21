@@ -246,7 +246,7 @@ select*from messagemaga;
 
 insert into messagemaga
 (MS_NO,M_USERID,MS_CHECK)
-values(4,'hong','y');
+values(1,'hong','y');
 
 insert into messagemaga
 (MS_NO,M_USERID,MS_CHECK)

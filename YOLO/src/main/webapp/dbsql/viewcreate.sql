@@ -14,6 +14,8 @@ AS SELECT a.*,c.C_NAME
 FROM CLASSBOARD  a,class c
 WHERE a.C_NO=c.C_NO;
 
+
+DROP VIEW favoriteclass;
 select*from favoriteclass;
 CREATE OR REPLACE VIEW favoriteclass
 AS select sb.*,c.C_NAME,c.C_PLACE,c.C_PRICE,c.C_PAYMENTWAY
