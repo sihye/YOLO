@@ -13,8 +13,8 @@
 	
 	
 	
-	<!-- 분류카테고리 -->
-	<div class="container">
+	<!-- 분류카테고리 --> 
+	<div class="container"> 
 		<div class="row">
 			<div class="col-md-3"></div>
 			<div class="col-md-1 dropdown"></div>
