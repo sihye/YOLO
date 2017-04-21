@@ -33,10 +33,38 @@
 		<selectKey keyProperty="mNo" resultType="int" order="BEFORE">
 			select member_seq.nextval from dual
 		</selectKey>
+			 <choose>
+			<when test="kNo2==0 and kNo3==0">
 			insert into member(m_userid,mg_no2,m_no,m_pwd,m_name,m_email1,m_email2,m_address,m_addressdetail,
-								k_no1<if test='kNo2!=null and kNo2!=""'>,k_no2</if><if test='kNo3!=null and kNo3!=""'>,k_no3</if>,m_tel1,m_tel2,m_tel3,q_questionno,m_questionanswer)
+								k_no1,,m_tel1,m_tel2,m_tel3,q_questionno,m_questionanswer)
 			values(#{mUserid},#{mgNo2},#{mNo},#{mPwd},#{mName},#{mEmail1},#{mEmail2},#{mAddress},#{mAddressdetail},
-								#{kNo1}<if test='kNo2!=null and kNo2!=""'>,#{kNo2}</if><if test='kNo3!=null and kNo3!=""'>,#{kNo3}</if>,#{mTel1},#{mTel2},#{mTel3},#{qQuestionno},#{mQuestionanswer})
+								#{kNo1},#{mTel1},#{mTel2},#{mTel3},#{qQuestionno},#{mQuestionanswer})
+			</when>
+			<when test="kNo2==0 and kNo3!=0">
+			insert into member(m_userid,mg_no2,m_no,m_pwd,m_name,m_email1,m_email2,m_address,m_addressdetail,
+								k_no1,k_no3,m_tel1,m_tel2,m_tel3,q_questionno,m_questionanswer)
+			values(#{mUserid},#{mgNo2},#{mNo},#{mPwd},#{mName},#{mEmail1},#{mEmail2},#{mAddress},#{mAddressdetail},
+								#{kNo1},#{kNo3},#{mTel1},#{mTel2},#{mTel3},#{qQuestionno},#{mQuestionanswer})
+			</when>
+			<when test="kNo2!=0 and kNo3==0">
+			insert into member(m_userid,mg_no2,m_no,m_pwd,m_name,m_email1,m_email2,m_address,m_addressdetail,
+								k_no1,k_no2,m_tel1,m_tel2,m_tel3,q_questionno,m_questionanswer)
+			values(#{mUserid},#{mgNo2},#{mNo},#{mPwd},#{mName},#{mEmail1},#{mEmail2},#{mAddress},#{mAddressdetail},
+								#{kNo1},#{kNo2},#{mTel1},#{mTel2},#{mTel3},#{qQuestionno},#{mQuestionanswer})
+			</when>
+			
+			<when test="kNo2!=0 and kNo3!=0">
+			insert into member(m_userid,mg_no2,m_no,m_pwd,m_name,m_email1,m_email2,m_address,m_addressdetail,
+								k_no1,k_no2,k_no3,m_tel1,m_tel2,m_tel3,q_questionno,m_questionanswer)
+			values(#{mUserid},#{mgNo2},#{mNo},#{mPwd},#{mName},#{mEmail1},#{mEmail2},#{mAddress},#{mAddressdetail},
+								#{kNo1},#{kNo2},#{kNo3},#{mTel1},#{mTel2},#{mTel3},#{qQuestionno},#{mQuestionanswer})
+			</when>
+			<otherwise>
+			
+			</otherwise>
+
+		</choose>
+
 			
 	</insert>
 	
@@ -56,12 +84,6 @@
 		resultType="MemberVO">
 		select * from member where m_userid=#{mUserid}
 	</select>
-	
-	<update id="memberOut" parameterType="string">
-		update member
-		set m_leavedate=sysdate
-		where m_userid=#{mUserid}
-	</update>
 	
 	<select id="MemberselectByAll" resultType="MemberVO">
 		select *from member order by m_no

@@ -74,7 +74,7 @@ public class AdminController {
 	@RequestMapping(value="/operatorInsert.do",method=RequestMethod.POST)
 	public String upfile_post(HttpServletRequest request ,@ModelAttribute OperAtorVO vo,Model model){
 		logger.info("upfile =={}",vo);
-		UpfileVO upfilevo = upFileservice.fileUpload(request);
+		UpfileVO upfilevo = upFileservice.fileUpload(request,UpfileService.UP_FILE);
 		vo.setfNo(upfilevo.getfNo());
 		int cnt = operAtorservice.insertOperAtor(vo);
 		String msg="";
@@ -163,7 +163,7 @@ public class AdminController {
 	@RequestMapping(value="/editBn.do",method=RequestMethod.POST)
 	public String edit_get(HttpServletRequest request ,@ModelAttribute OperAtorVO vo,Model model){
 		UpfileVO upvo
-		= upFileservice.fileUpload(request);
+		= upFileservice.fileUpload(request,UpfileService.UP_FILE);
 		OperAtorVO opvo = operAtorservice.selectByNo(vo.getOpNo());
 		UpfileVO oldupvo = upFileservice.selectByFno(opvo.getfNo());
 		String msg = "";
@@ -254,9 +254,62 @@ public class AdminController {
 		/*ModelAndView mav = new ModelAndView(String viewName,map model);*/
 		
 		ModelAndView mav = new ModelAndView("excelDownView",fileMap);
-		
 		return mav;
+	}
 		
+	
+/*	if(upvo!=null){
+		String oldFileName=oldupvo.getfFilename();
+		vo.setfNo(upvo.getfNo());
+		logger.info("old파일 네임 = {}",oldFileName);
+		//=> [2] 기존 파일이 있다면 삭제
+		if(oldFileName!=null && !oldFileName.isEmpty()){
+			String upPath = upFileservice.getUploadPath(request,"File");
+			File oldFile = new File(upPath, oldFileName);
+			if(oldFile.exists()){
+				boolean bool =oldFile.delete();
+				logger.info("기존 파일 삭제 여부:{}", bool);
+				vo.setfNo(upvo.getfNo());
+				cnt = operAtorservice.insertOperAtor(vo);
+				upFileservice.deleteByFno(oldupvo.getfNo());
+			}
+		}
+			
+	}else{
+		vo.setfNo(oldupvo.getfNo());
+		cnt = operAtorservice.insertOperAtor(vo);
+	}*/
+	
+	
+	@RequestMapping("/excelup.do")
+	public String excelup(HttpServletRequest request,Model model){
+		logger.info("엑셀파일 읽어오기");
+		UpfileVO upfilevo= upFileservice.fileUpload(request, UpfileService.UP_EXCEL);
+		logger.info("업로드된 excel파일 네임 = {}",upfilevo.getfFilename());
+		String upPath = upFileservice.getUploadPath(request,UpfileService.UP_EXCEL);
+		File file = new File(upPath,upfilevo.getfOriginalfilename());
+		List<MemberVO> mlist = null;
+		mlist = upFileservice.readExcel(file);
+		
+		String msg="", url ="/admin/operatorMember.do";
+		int cnt =0;
+		for(int i =0; i<mlist.size(); i++){
+			MemberVO vo = mlist.get(i);
+			vo.setMgNo2(2);
+			logger.info(vo.toString());
+			cnt +=  memberService.memberInsert(vo);
+		}
+		
+		if(cnt>0){
+			msg="회원 저장 완료 건수 ="+cnt;
+		}else{
+			msg="회원 저장 실패";
+			}
+		
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		return	"common/message";
 	}
 	
 	

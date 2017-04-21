@@ -152,6 +152,27 @@ $(document).ready(function() {
 			$(".clearfix").hide();
 		}
 	});
+	
+	$("#upExcel").submit(function() {
+		var file = $("#exfile").val();
+		var filesub =file.substring(file.lastIndexOf('.')+1);
+		if(file == null || file == ""){
+			alert('업로드된 파일이 없습니다.');
+			event.preventDefault();
+		}else{
+			if(filesub=="xls" || filesub=="xlsx"){
+				$(this).submit();
+			}else{
+				alert('지원하지 않는 파일 형식입니다.');
+				event.preventDefault();
+			}
+			
+		}
+		
+		
+	});
+	
+	
 });
 
 
@@ -193,7 +214,9 @@ a{
 	margin : 0 auto;
 }
 
-
+#filelabel{
+	font-size: 10px;
+}
 
 </style>
 
@@ -223,8 +246,13 @@ a{
 
 
 <label> 현재 회원 정보 엑셀 저장 </label>
-<a id='downA' href="<c:url value="/admin/excel.do?searchKeyword=${param.searchKeyword }&searchCondition=${param.searchCondition }&searchStartDate=${param.searchStartDate }&searchEndDate=${param.searchEndDate }"/>">다운로드</a> <br><br>
-
+<a id='downA' href="<c:url value="/admin/excel.do?searchKeyword=${param.searchKeyword }&searchCondition=${param.searchCondition }&searchStartDate=${param.searchStartDate }&searchEndDate=${param.searchEndDate }"/>">다운로드</a> 
+<form id="upExcel" method="post" action='<c:url value="/admin/excelup.do"/>' enctype="multipart/form-data">
+<label style="float:right"><input type="reset" value="취소"></label>
+<label style="float:right"><input type="submit" value="등록"></label>
+<label style="float:right" ><input type="file" id="exfile" name="exfile">(xls,xlsx 확장자만 가능합니다!)</label>
+<label style="float:right">회원정보 엑셀파일로 등록하기 - &nbsp;&nbsp;&nbsp;</label>
+</form>
 	<table class="table table-hover">
   		<tr>
   			<th>NO</th>
@@ -251,7 +279,7 @@ a{
 			<c:if test="${empty alist }">
 				<span class="center">검색에 대한 정보가 존재하지 않습니다.</span>
 			</c:if>
-		
+	
 	<hr>
 	
 	
@@ -320,7 +348,7 @@ a{
 	
 	
 	<div class ="divlist">
-	<form  id="frm1" name ="frm1" method="post" action="" >
+	<form  id="frm1" name ="frm1" method="post">
 		<select id="searchCondition" name="searchCondition" style="height: 26px">
 			<option value="M_USERID" <c:if test="${param.searchCondition eq 'M_USERID' }" >selected="selected"</c:if>>
 			ID 검색
