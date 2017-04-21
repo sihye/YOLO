@@ -2,6 +2,10 @@ package com.one.yolo.member.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +62,7 @@ public class MemberController {
 
 		//4. 카테고리 그룹이랑 카테고리 비교해서 그룹 삭제할거 삭제하기 . (list.remove(i))
 		
-		for(int i=0; i<cgList.size(); i++){    
+		/*for(int i=0; i<cgList.size(); i++){    
 	         CategoryGroupVO cgvo = cgList.get(i);      //2   //카테고리 그룹  1  
 	         for(int j=0;j<cList.size();j++){                 // 1  // 카테고리 1 1 1              0 1 2
 	        	 	CategoryVO cvo = cList.get(i);
@@ -70,7 +74,7 @@ public class MemberController {
 	               
 	         }
 
-	      }
+	      }*/
 		
 		//4. 모델통해서 넘겨주기
 		model.addAttribute("cList",cList);
@@ -96,18 +100,6 @@ public class MemberController {
 	public String register(@ModelAttribute MemberVO vo, @RequestParam int[] kNo){
 		logger.info("회원가입 화면 보여주기");
 
-		if(kNo !=null){
-			if(kNo[0]>0){ 
-				vo.setkNo1(kNo[0]);
-			}
-			if(kNo[1]>0){
-				vo.setkNo2(kNo[1]);
-			}
-			if(kNo[2]>0){
-				vo.setkNo3(kNo[2]);
-			}
-			
-		}
 		
 		int cnt = memberService.memberInsert(vo);
 		String msg ="", url ="/index.do";
@@ -121,11 +113,43 @@ public class MemberController {
 	
 	@RequestMapping("/join.do")
 	public String join(@ModelAttribute MemberVO memberVo,
-			@RequestParam(value="email3" ,required=false) String email3,Model model){
+			@RequestParam(value="email3" ,required=false) String email3,
+			@RequestParam int[] kno,Model model){
+		
+		for(int i:kno){
+			logger.info("kno="+i);
+		}
+		
+		logger.info("kno[0]="+kno[0]);
+		logger.info("kno[1]="+kno[1]);
+		
+		//체크박스 처리
+		switch(kno.length){
+		case 1:
+			memberVo.setkNo1(kno[0]);
+			break;
+		case 2:
+			memberVo.setkNo1(kno[0]);
+			memberVo.setkNo2(kno[1]);
+			break;
+		case 3:
+			memberVo.setkNo1(kno[0]);
+			memberVo.setkNo2(kno[1]);
+			memberVo.setkNo3(kno[2]);
+			break;
+		}
+
+		logger.info("kNo1"+memberVo.getkNo1());
+		logger.info("kNo2"+memberVo.getkNo2());
+		
 		//1
 		logger.info("회원가입 처리, 파라미터 vo={}", memberVo);
 		
 		//2
+				
+				
+				
+		
 				//휴대폰 입력하지 않은 경우 처리
 				String hp2=memberVo.getmTel2();
 				String hp3=memberVo.getmTel3();
@@ -195,5 +219,45 @@ public class MemberController {
 		logger.info("회원탈퇴화면 보여주기");
 		
 		return "member/memberOut";
+	}
+	
+	@RequestMapping(value="/memberOut.do", method=RequestMethod.POST)
+	public String edit_post(@RequestParam String pwd,
+			HttpSession session, HttpServletResponse response, 
+			Model model){
+		String userid=(String) session.getAttribute("userid");
+		logger.info("회원탈퇴 처리, 파라미터 userid={},pwd={}", userid,pwd);
+
+		int result 
+		= memberService.loginCheck(userid, pwd);
+		String msg="", url="/member/memberOut.do";
+
+		if(result==MemberService.LOGIN_OK){
+			int cnt = memberService.memberOut(userid);
+			logger.info("회원탈퇴 결과, cnt={}", cnt);
+			if(cnt>0){
+				session.invalidate();
+				
+				//쿠키 삭제
+				Cookie ck = new Cookie("ck_userid", userid);
+				ck.setPath("/");
+				ck.setMaxAge(0); 
+				response.addCookie(ck);
+				
+				msg="회원 탈퇴처리되었습니다.";
+				url="/index.do";
+			}else{
+				msg="회원탈퇴 실패";
+			}
+		}else if(result==MemberService.PWD_DISAGREE){
+			msg="비밀번호가 일치하지 않습니다.";
+		}else{
+			msg="비밀번호 체크 에러";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
 	}
 }
