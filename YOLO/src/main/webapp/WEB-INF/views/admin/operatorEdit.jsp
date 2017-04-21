@@ -45,7 +45,7 @@ $(document).ready(function(){
 </script>
 </c:if>
 <div class="container" id="cont1">
-	<h2>메인 배너 관리</h2>
+	<h2>메인 배너 수정</h2>
 	<br><br>
 	
 		

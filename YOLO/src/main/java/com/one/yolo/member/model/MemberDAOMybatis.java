@@ -6,6 +6,8 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.one.yolo.common.SearchVO;
+
 @Repository
 public class MemberDAOMybatis extends SqlSessionDaoSupport implements MemberDAO{
 	
@@ -38,8 +40,8 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport implements MemberDAO{
 	}
 
 	@Override
-	public List<Map<String, Object>> ExcelMemberView() {
-		return getSqlSession().selectList(namespace+".ExcelMemberView");
+	public List<Map<String, Object>> ExcelMemberView(SearchVO vo) {
+		return getSqlSession().selectList(namespace+".ExcelMemberView",vo);
 	}
 
 	@Override
@@ -48,9 +50,24 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport implements MemberDAO{
 	}
 
 	@Override
+
 	public int memberOut(String userid) {
 		return getSqlSession().update(namespace+".memberOut", userid);
 	}
+
+	public List<Map<String, Object>> MemberSelectPG(SearchVO vo) {
+		
+		return getSqlSession().selectList(namespace+".MemberSelectPG",vo);
+	}
+
+	@Override
+	public int MemberSeletCount(SearchVO vo) {
+	
+		return getSqlSession().selectOne(namespace+".MemberSeletCount",vo);
+	}
+	
+	
+
 	
 	
 	

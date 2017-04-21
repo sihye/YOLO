@@ -49,7 +49,7 @@ $(document).ready(function(){
 </script>
 </c:if>
 <div class="container" id="cont1">
-	<h2>메인 배너 수정</h2>
+	<h2>메인 배너 등록</h2>
 	<br><br>
 		
 	<form class="form-inline" role="form" name="frm1" id="frm1" method="post" action='<c:url value="/admin/operatorInsert.do"/>' enctype="multipart/form-data">

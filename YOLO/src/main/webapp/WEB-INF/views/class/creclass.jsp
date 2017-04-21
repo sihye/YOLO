@@ -6,21 +6,33 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Continuous Scroll - fullPage.js</title>
+<title>::YOLO - 클래스 등록하기::</title>
 <meta name="author" content="Matthew Howell" />
 <meta name="description" content="fullPage continuous scrolling demo." />
 <meta name="keywords"
 	content="fullpage,jquery,demo,scroll,loop,continuous" />
 <meta name="Resource-type" content="Document" />
 
-
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/jquery.fullpage.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/examples.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/creCla.css" />
 
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
 <!--[if IE]>
 		<script type="text/javascript">
@@ -40,15 +52,16 @@
 	src="${pageContext.request.contextPath}/js/jquery.fullpage.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/examples.js"></script>
-<script type="text/javascript"
+<%-- <script type="text/javascript"
 	src="${pageContext.request.contextPath}/css/bootstrap.min.css"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>  --%>
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 
 <script type="text/javascript">
 
@@ -65,36 +78,43 @@
 						});
 			});
 </script>
+
 <style>
-  #image_preview {
-    display:none;
-}
- #image_preview1 {
-    display:none;
-}
- #image_preview2 {
-    display:none;
-}
- #image_preview3 {
-    display:none;
+#image_preview {
+	display: none;
 }
 
-#preview{
+#image_preview1 {
+	display: none;
+}
+
+#image_preview2 {
+	display: none;
+}
+
+#image_preview3 {
+	display: none;
+}
+
+#preview {
 	width: 300px;
 }
-#preview1{
+
+#preview1 {
 	width: 300px;
 }
-#preview2{
+
+#preview2 {
 	width: 300px;
 }
-#preview3{
+
+#preview3 {
 	width: 300px;
 }
-#map{
+
+#map {
 	margin: 0 auto;
 }
-
 </style>
 </head>
 <body>
@@ -109,8 +129,8 @@
 		<li data-menuanchor="5thpage"><a href="#5thpage">클래스 추가정보 3</a></li>
 		<li data-menuanchor="6thpage"><a href="#6thpage">스케줄 등록</a></li>
 	</ul>
-	<form action="<c:url value="/class/clacre.do"/>" class="form-inline" enctype="multipart/form-data"
-		method="post" id="claCre" name="claCre">
+	<form action="<c:url value="/class/clacre.do"/>" class="form-inline"
+		enctype="multipart/form-data" method="post" id="claCre" name="claCre">
 		<div id="fullpage" class="container">
 			<div class="section " id="section0">
 				<h1>클래스 기본정보</h1>
@@ -149,7 +169,7 @@
 				</div>
 				<div class="radio">
 					<label> <input type="radio" name="cPaymentway"
-						id="optionsRadios2"  value="현장"> 현장 결제
+						id="optionsRadios2" value="현장"> 현장 결제
 					</label>
 				</div>
 			</div>
@@ -175,7 +195,9 @@
 					<input type="text" class="form-control" id="" name="cTarget"
 						placeholder="">
 					<p>상세 설명을 입력해 주세요.</p>
-					<textarea id="introContents"style="width: 70%;" class="form-control" name="cDetailinfo" rows="10" placeholder="
+					<textarea id="introContents" style="width: 70%;"
+						class="form-control" name="cDetailinfo" rows="10"
+						placeholder="
 						• 강사님을 소개해주세요.(이력, 자기소개 등).
 						• 커리큘럼, 경력, 장점을 표현해주세요.
 						• 회원님의 모꼬지의 대해 설명해주세요.
@@ -208,14 +230,15 @@
 				<div class="intro">
 					<h1>Scroll Down</h1>
 					<p>And it will animate down to the first section</p>
-					<input type="hidden" id="sample5_address" placeholder="주소"> 
+					<input type="hidden" id="sample5_address" placeholder="주소">
 					<input type="button" onclick="sample5_execDaumPostcode()"
 						value="주소 검색"><br>
 					<div id="map"
 						style="width: 80%; height: 500px; margin-top: 10px; display: none"></div>
 
 					<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-					<script src="//apis.daum.net/maps/maps3.js?apikey=ae9a8f33df751fe70e8df23049bf7573&libraries=services"></script>
+					<script
+						src="//apis.daum.net/maps/maps3.js?apikey=ae9a8f33df751fe70e8df23049bf7573&libraries=services"></script>
 					<script>
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 						mapOption = {
@@ -302,9 +325,9 @@
 									}).open();
 						}
 					</script>
-					주소: <input type="text" id="add" name=cplace1> 
-					상세주소: <input type="text" id="addDetail" name="cplace2">
-					좌표: <input type="text" id="location" name="cLocation">
+					주소: <input type="text" id="add" name=cplace1> 상세주소: <input
+						type="text" id="addDetail" name="cplace2"> 좌표: <input
+						type="text" id="location" name="cLocation">
 				</div>
 			</div>
 			<div class="section" id="section4">
@@ -312,50 +335,42 @@
 					<h1>갤러리</h1>
 					<p>어떤 클래스인지 미리 볼 수 있도록 사진을 보여주세요.</p>
 					<p>
-						<label for="image">커버사진:</label> <input type="file" name="fileMap[0]"
-							id="image" />
+						<label for="image">커버사진:</label> <input type="file"
+							name="fileMap[0]" id="image" />
 					</p>
 					<p>
-						<label for="image">갤러리1:</label> <input type="file" name="fileMap[1]"
-							id="image1" />
+						<label for="image">갤러리1:</label> <input type="file"
+							name="fileMap[1]" id="image1" />
 					</p>
 					<p>
-						<label for="image">갤러리2:</label> <input type="file" name="fileMap[2]"
-							id="image2" />
+						<label for="image">갤러리2:</label> <input type="file"
+							name="fileMap[2]" id="image2" />
 					</p>
 					<p>
-						<label for="image">갤러리3:</label> <input type="file" name="fileMap[3]"
-							id="image3" />
+						<label for="image">갤러리3:</label> <input type="file"
+							name="fileMap[3]" id="image3" />
 					</p>
 
 				</div>
 				<div id="image_preview">
-    	<b>커버사진 미리보기</b><br>
-        <img src="#" id="preview" />
-        <br />
-        <a href="#">Remove</a>
-    </div>
-    <div id="image_preview1">
-        <b>갤러리 1 미리보기</b>
-        <img src="#" id="preview1" />
-        <br />
-        <a href="#">Remove</a>
-    </div>
-    <div id="image_preview2">
-    	<b>갤러리 2 미리보기</b>
-        <img src="#" id="preview2" />
-        <br />
-        <a href="#">Remove</a>
-    </div>
-    <div id="image_preview3">
-    	<b>갤러리 3 미리보기</b>
-        <img src="#" id="preview3" />
-        <br />
-        <a href="#">Remove</a>
-    </div>
+					<b>커버사진 미리보기</b><br> <img src="#" id="preview" /> <br /> <a
+						href="#">Remove</a>
+				</div>
+				<div id="image_preview1">
+					<b>갤러리 1 미리보기</b> <img src="#" id="preview1" /> <br /> <a
+						href="#">Remove</a>
+				</div>
+				<div id="image_preview2">
+					<b>갤러리 2 미리보기</b> <img src="#" id="preview2" /> <br /> <a
+						href="#">Remove</a>
+				</div>
+				<div id="image_preview3">
+					<b>갤러리 3 미리보기</b> <img src="#" id="preview3" /> <br /> <a
+						href="#">Remove</a>
+				</div>
 
 
-    <script type="text/javascript">
+				<script type="text/javascript">
 
     $('#image').on('change', function() {
         
@@ -454,7 +469,7 @@
     * 
     * @param e jQuery object
     */
-    function resetFormElement(e) {
+	function resetFormElement(e) {
         e.wrap('<form>').closest('form').get(0).reset(); 
         //리셋하려는 폼양식 요소를 폼(<form>) 으로 감싸고 (wrap()) , 
         //요소를 감싸고 있는 가장 가까운 폼( closest('form')) 에서 Dom요소를 반환받고 ( get(0) ),
@@ -464,14 +479,61 @@
     </script>
 			</div>
 			<div class="section " id="section5">
-			스케줄줄
-			<input type="submit" value="제출">
+				<h1>스케줄 등록하기</h1>
+				<hr>
+				<br> <label for="radio-1">하루씩 등록하기</label> <input type="radio"
+					name="radio-1" id="radio-1"> <label for="radio-2">한번에
+					등록하기</label> <input type="radio" name="radio-1" id="radio-2">
+				<script>
+					$(function() {
+						$("#exampleInputName2").datepicker();
+					});
+					
+					var time=["1","2","3","4","5","6","7","8","9","10","11","12",];
+					
+				</script>
+				<div>
+					<p>하루씩 등록하기</p>
+					<div id="selDate">
+					<label for="exampleInputName2">날짜</label> 
+					<input type="text"
+						class="form-control" id="exampleInputName2"
+						placeholder="날짜를 입력하세요"> 
+					
+					<label for="time">시간</label> 
+					<select class="form-control" id="time">
+						<option>1</option>
+						<option>2</option>
+					</select>~
+					<select class="form-control">
+						<option>1</option>
+						<option>2</option>
+					</select>
+					</div>
+					<div id="field"></div>
+					<input type="button" value="추가" onclick="add_div()" id="timeReBt">
+					<input type="button" value="삭제" onclick="remove_div(this)" id="timeAddBt">
+					
+					<input type="button" value="등록" id="timeAddBt">
+					<script type="text/javascript">
+						function add_div(){
+							var div=document.createElement('div');							
+							div.innerHTML=document.getElementById('selDate').innerHTML;
+							document.getElementById('field').appendChild(div);
+						}
+						
+						function remove_div(obj){
+							document.getElementById('field').removeChild(obj.parentNode);
+						}		
+					</script>
+				</div>
+
+				<input type="submit" value="제출">
 			</div>
 		</div>
-		
 	</form>
-	
-	
+
+
 </body>
 </html>
 

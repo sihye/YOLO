@@ -33,7 +33,7 @@ values(QUESTION_seq.nextval,'테스트질문3');
 --membergroup
 select*from membergroup;
 
-insert into membergroup
+ insert into membergroup
 values(1,1,'admin');
 insert into membergroup
 values(2,2,'member');
@@ -120,15 +120,7 @@ insert into CLASSBOARD
 values(CLASSBOARD_seq.nextval,4,'chang','후기','2014-03-15',0,'fdsfsdsf',4,'fdsds');
 insert into CLASSBOARD
 values(CLASSBOARD_seq.nextval,5,'chang','후기','2014-01-13',0,'fdsfsdsf',4,'fdsds');
---message
-select*from message;
 
-insert into message
-values(MESSAGE_seq.nextval,'hong','abc','sdfdsfs',sysdate);
-insert into message
-values(MESSAGE_seq.nextval,'kim','abc','sdfdsfs',sysdate);
-insert into message
-values(MESSAGE_seq.nextval,'chang','abc','sdfdsfs',sysdate);
 
 --boardgroup
 select*from boardgroup;
@@ -239,21 +231,29 @@ values(2,1,2,'');
 insert into operator
 (OP_NO,F_NO,K_NO,OP_SHOWFLAG)
 values(3,1,3,'');
+--message
+select*from message;
 
+insert into message
+values(MESSAGE_seq.nextval,'hong','abc','sdfdsfs',sysdate);
+insert into message
+values(MESSAGE_seq.nextval,'kim','abc','sdfdsfs',sysdate);
+insert into message
+values(MESSAGE_seq.nextval,'chang','abc','sdfdsfs',sysdate);
 
 -- 쪽지관리
 select*from messagemaga;
 
 insert into messagemaga
-(MS_NO,M_USERID,COL2)
-values(1,'hong','y');
+(MS_NO,M_USERID,MS_CHECK)
+values(4,'hong','y');
 
 insert into messagemaga
-(MS_NO,M_USERID,COL2)
+(MS_NO,M_USERID,MS_CHECK)
 values(2,'kim','y');
 
 insert into messagemaga
-(MS_NO,M_USERID,COL2)
+(MS_NO,M_USERID,MS_CHECK)
 values(3,'chang','y');
 
 

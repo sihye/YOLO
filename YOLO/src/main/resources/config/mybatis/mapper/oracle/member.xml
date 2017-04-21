@@ -3,6 +3,31 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.member">
+<sql id="searchWhere">
+		<choose>
+			<when test="searchKeyword !=null and searchKeyword !=''" >
+				where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+			</when>
+			<when test="searchStartDate !=null and searchStartDate !=''
+			 and searchEndDate !=null and searchEndDate !=''" >
+				where M_JOINDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
+				and to_date(#{searchEndDate},'YYYY-MM-DD')+1
+			</when>
+			<when test="searchKeyword !=null and searchKeyword !=''
+			 and searchStartDate !=null and searchStartDate !=''
+		 	and searchEndDate !=null and searchEndDate !=''" >
+				where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+			and
+			 M_JOINDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
+			and to_date(#{searchEndDate},'YYYY-MM-DD')+1
+			</when>
+			<otherwise>
+			
+			</otherwise>
+
+		</choose>
+
+	</sql>
 
 	<insert id="memberInsert" parameterType="MemberVO">
 		<selectKey keyProperty="mNo" resultType="int" order="BEFORE">
@@ -42,9 +67,34 @@
 		select *from member order by m_no
 	</select>
 	
+	<select id="MemberSelectPG" parameterType="SearchVO" resultType="hashmap">
+		select m_USERID,M_NO,M_NAME,M_JOINDATE,K_1,K_2,K_3
+		from
+		(
+		    select rownum as RNUM ,LIST.*
+		    from
+		    (
+		        select * from OPERATORMEMBERVIEW 
+		        <include refid="searchWhere"></include>
+		        order by m_no desc
+		    )LIST
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
 	
-	<select id="ExcelMemberView" resultType="hashmap">
-		select *from EXCELMEMBERVIEW order by m_no
+	<select id="MemberSeletCount" parameterType="SearchVO" resultType="int">
+		select count(*) from OPERATORMEMBERVIEW 
+		<include refid="searchWhere"></include>
+	</select>
+	
+	
+	<select id="ExcelMemberView" parameterType="SearchVO" resultType="hashmap">
+		select *from EXCELMEMBERVIEW 
+		<include refid="searchWhere"></include>
+		order by m_no
 	</select>
 	
 	<select id="OperatorMemberView" resultType="hashmap">
