@@ -97,7 +97,7 @@
 //-->
 </scRIPT>
 <script>
-	document.write(maxChecked);
+	/* document.write(maxChecked); */
 </script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -120,7 +120,7 @@
 			<div>
 				<label for="userid">회원ID</label> 
 				<input type="text" name="mUserid" id="userid" style="ime-mode: inactive">&nbsp; 
-				<input type="button" value="중복확인" id="btnChkId" title="새창열림">
+				<button type="button" class="btn btn-primary" id="btnChkId" title="새창열림">중복확인</button>
 			</div>
 			<div>
 				<label for="pwd">비밀번호</label> 
@@ -133,7 +133,7 @@
 			<div>
 				<label for="zipcode">주소</label> 
 				<input type="text" name="zipcode" id="zipcode" ReadOnly title="우편번호" class="width_80 postcodify_postcode"> 
-				<input type="Button" value="우편번호 찾기" id="postcodify_search_button" title="새창열림"><br />
+				<button type="button" class="btn btn-primary" id="postcodify_search_button" title="새창열림">우편번호 찾기</button><br />
 				<span class="sp1">&nbsp;</span> 
 				<input type="text" name="mAddress" ReadOnly title="주소" class="width_350 postcodify_address"><br /> 
 				<span class="sp1">&nbsp;</span> 
@@ -230,7 +230,8 @@
 			</div>
 
 			<div class="center">
-				<input type="submit" id="wr_submit" value="회원가입">
+				<button type="submit" class="btn btn-primary" id="wr_submit">회원 가입</button>
+				  <button type="button" class="btn btn-primary">취소</button>			
 			</div>
 		</fieldset>
 

@@ -58,8 +58,8 @@
 						<li><a href="#">Contact</a></li>
 					</ul>
 					<!-- 로그인 전 -->
-					<a href="#" class="login_btn">Login</a>
-					<a href="#" class="login_btn">Join</a>
+					<a href="${pageContext.request.contextPath}/login/login.do" class="login_btn">Login</a>
+					<a href="${pageContext.request.contextPath}/member/register.do" class="login_btn">Join</a>
 					<!-- 로그인 후 -->
 					
 				</nav>

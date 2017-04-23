@@ -52,7 +52,7 @@ public class LoginController {
 		if(result==MemberService.LOGIN_OK){
 			MemberVO vo = memberService.selectByUserid(userid);
 			msg=vo.getmName()+ "님, 로그인되었습니다.";
-			url="/index.do";
+			url="/index2.do";
 			
 			//세션에 저장
 			HttpSession session = request.getSession();

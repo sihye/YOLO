@@ -16,6 +16,8 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/mystyle.css" />
 
+
+
 <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>      
     <![endif]-->
@@ -56,7 +58,7 @@
 				<input type="password" name="pwd" id="pwd">
 			</div>
 			<div class="align_center">
-				<input type="submit" value="로그인">
+				<button type="submit" class="btn btn-primary">로그인</button>
 				<input type="checkbox" name="chkSaveId" id="chkId" 
 					<c:if test="${!empty cookie.ck_userid }">
 						checked="checked"
