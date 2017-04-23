@@ -126,8 +126,11 @@ header{
 }
 
 header .logo{
-    margin-top: 40px;
+    margin-top: 35px;
     float: left;
+    FONT-SIZE: 1.5EM;
+    FONT-WEIGHT: 600;
+    COLOR: WHITE;
 }
 
 header a.hamburger{
@@ -205,13 +208,14 @@ header nav .login_btn:hover{
 
 .hero{
     width: 100%;
-    height: 900px;
     position: relative;
-    background: url('../img/hero.jpg') no-repeat bottom center;
+   /*  background: url('../img/hero.jpg') no-repeat bottom center; */
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
+    height: 400PX;
+    
 }
 
 .hero .caption{
@@ -221,6 +225,7 @@ header nav .login_btn:hover{
     top: 50%;
     margin-top: -105px;
     z-index: 10;
+    background: #bfd9f2;
 }
 
 .hero .caption h2{
@@ -256,6 +261,7 @@ header nav .login_btn:hover{
     height: 100px;
     background: #bfd9f2;
     position: relative;
+    MARGIN-TOP: 153PX;
 }
 
 .search #search{
@@ -456,7 +462,7 @@ header nav .login_btn:hover{
 
 /*  listings section  */
 .listings{
-    padding: 100px 0;
+    padding: 50px 0;
 }
 
 .listings ul.properties_list{
@@ -504,7 +510,7 @@ header nav .login_btn:hover{
 }
 
 .listings ul li .property_details{
-    width: 87.64705882352941%;
+    /* width: 87.64705882352941%; */
     padding: 2.941176470588235% 5.882352941176471% 4.117647058823529% 5.882352941176471%;
     border-bottom: 1px solid #f2f1f1;
     border-left: 1px solid #f2f1f1;
@@ -592,7 +598,7 @@ header nav .login_btn:hover{
 
 /*  footer  */
 footer{
-    padding-top: 100px;
+    /* padding-top: 100px; */
     background: #95badf;
 }
 
@@ -693,7 +699,7 @@ footer .copyrights{
     display: block;
     text-align: center;
     padding: 40px 0;
-    margin-top: 60px;
+    /* margin-top: 60px; */
     color: #fff;
     font-family: "lato-regular", Helvetica, Arial, sans-serif;
     font-size: 14px;

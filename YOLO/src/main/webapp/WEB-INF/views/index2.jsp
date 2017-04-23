@@ -1,46 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta charset="utf-8">
-		
-	<link rel="stylesheet" type="text/css" href="css/sihye/reset.css">
-	<link rel="stylesheet" type="text/css" href="css/sihye/responsive.css">
-
-	<script type="text/javascript" src="js/sihye/jquery.js"></script>
-	<script type="text/javascript" src="js/sihye/main.js"></script>
-<title>Insert title here</title>
-</head>
-<body>
-<section class="hero">
-		<header>
-			<div class="wrapper">
-				<a href="#"><img src="img/logo.png" class="logo" alt="" titl=""/></a>
-				<a href="#" class="hamburger"></a>
-				<nav>
-					<ul>
-						<li><a href="#">Buy</a></li>
-						<li><a href="#">Rent</a></li>
-						<li><a href="#">Sell</a></li>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Contact</a></li>
-					</ul>
-					<a href="#" class="login_btn">Login</a>
-				</nav>
-			</div>
-		</header><!--  end header section  -->
-
+	pageEncoding="UTF-8"%>
+<%@ include file="inc/top.jsp" %>
 			<section class="caption">
-				<h2 class="caption">Find You Dream Home</h2>
-				<h3 class="properties">Appartements - Houses - Mansions</h3>
+			<div class="flexslider">
+		<ul class="slides">
+			<li><img style="height: 400PX;"
+				src="${pageContext.request.contextPath}/img/index2 (1).jpg" /></li>
+			<li><img style="height: 400PX;" src="${pageContext.request.contextPath}/img/index1.jpg" /></li>
+			<li><img style="height: 400PX;"
+				src="${pageContext.request.contextPath}/img/0M0B0169.jpg" /></li>
+		</ul>
+	</div>
+				<!-- <h2 class="caption">Find You Dream Home</h2>
+				<h3 class="properties">Appartements - Houses - Mansions</h3> -->
 			</section>
 	</section><!--  end hero section  -->
 
 
 	<section class="search">
-		<div class="wrapper">
+		<div class="wrapper" ID="SEARCHDIV">
 			<form action="#" method="post">
 				<input type="text" id="search" name="search" placeholder="What are you looking for?"  autocomplete="off"/>
 				<input type="submit" id="submit_search" name="submit_search"/>
@@ -73,7 +51,60 @@
 		</div><!--  end advanced search section  -->
 	</section><!--  end search section  -->
 
-
+	<!-- 분류카테고리 --> 
+	<div class="container"> 
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-1 dropdown"></div>
+			<div class="col-md-1 dropdown"></div>
+			<div class="col-md-1 dropdown"></div>
+			<div class="col-md-1 dropdown"></div>
+			<div class="col-md-1 dropdown"></div>
+			<div class="col-md-1 dropdown"></div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="col-md-2"></div>
+		<div class="dropdown">
+			<ul class="nav nav-pills">
+				<li class="dropdown col-md-2"><a data-toggle="dropdown"
+					href="#">라이프스타일<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a role="menuitem" href="#">독서/글쓰기</a></li>
+						<li><a role="menuitem" href="#">사진/영상</a></li>
+						<li><a role="menuitem" href="#">요리/베이킹</a></li>
+						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
+					</ul></li>
+				<li class="dropdown col-md-2"><a data-toggle="dropdown"
+					href="#">어학<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a role="menuitem" href="#">메뉴 1</a></li>
+						<li><a role="menuitem" href="#">메뉴 2</a></li>
+						<li><a role="menuitem" href="#">메뉴 3</a></li>
+						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
+					</ul></li>
+				<li class="dropdown col-md-2"><a data-toggle="dropdown"
+					href="#">뷰티<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a role="menuitem" href="#">메뉴 1</a></li>
+						<li><a role="menuitem" href="#">메뉴 2</a></li>
+						<li><a role="menuitem" href="#">메뉴 3</a></li>
+						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
+					</ul></li>
+				<li class="dropdown col-md-2"><a data-toggle="dropdown"
+					href="#">여기클릭 <span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a role="menuitem" href="#">메뉴 1</a></li>
+						<li><a role="menuitem" href="#">메뉴 2</a></li>
+						<li><a role="menuitem" href="#">메뉴 3</a></li>
+						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
+					</ul></li>
+			</ul>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
 	<section class="listings">
 		<div class="wrapper">
 			<ul class="properties_list">
@@ -191,56 +222,5 @@
 			</div>
 		</div>
 	</section>	<!--  end listing section  -->
-
-	<footer>
-		<div class="wrapper footer">
-			<ul>
-				<li class="links">
-					<ul>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Support</a></li>
-						<li><a href="#">Terms</a></li>
-						<li><a href="#">Policy</a></li>
-						<li><a href="#">Contact</a></li>
-					</ul>
-				</li>
-
-				<li class="links">
-					<ul>
-						<li><a href="#">Appartements</a></li>
-						<li><a href="#">Houses</a></li>
-						<li><a href="#">Villas</a></li>
-						<li><a href="#">Mansions</a></li>
-						<li><a href="#">...</a></li>
-					</ul>
-				</li>
-
-				<li class="links">
-					<ul>
-						<li><a href="#">New York</a></li>
-						<li><a href="#">Los Anglos</a></li>
-						<li><a href="#">Miami</a></li>
-						<li><a href="#">Washington</a></li>
-						<li><a href="#">...</a></li>
-					</ul>
-				</li>
-
-				<li class="about">
-					<p>La Casa is real estate minimal html5 website template, designed and coded by pixelhint, tellus varius, dictum erat vel, maximus tellus. Sed vitae auctor ipsum</p>
-					<ul>
-						<li><a href="http://facebook.com/pixelhint" class="facebook" target="_blank"></a></li>
-						<li><a href="http://twitter.com/pixelhint" class="twitter" target="_blank"></a></li>
-						<li><a href="http://plus.google.com/+Pixelhint" class="google" target="_blank"></a></li>
-						<li><a href="#" class="skype"></a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-
-		<div class="copyrights wrapper">
-			Copyright © 2015 <a href="http://pixelhint.com" target="_blank" class="ph_link" title="Download more free Templates">Pixelhint.com</a>. All Rights Reserved.
-		</div>
-	</footer><!--  end footer  -->
-</body>
-</html>
+<%@ include file="inc/bottom.jsp" %>
 

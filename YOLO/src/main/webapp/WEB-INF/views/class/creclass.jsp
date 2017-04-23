@@ -489,7 +489,7 @@
 						$("#exampleInputName2").datepicker();
 					});
 					
-					var time=["1","2","3","4","5","6","7","8","9","10","11","12",];
+					var time=["1","2","3","4","5","6","7","8","9","10","11","12"];
 					
 				</script>
 				<div>
@@ -502,8 +502,9 @@
 					
 					<label for="time">시간</label> 
 					<select class="form-control" id="time">
-						<option>1</option>
-						<option>2</option>
+						<c:forEach var="i" begin="1"end="12">
+						<option>${i}</option>
+						</c:forEach>
 					</select>~
 					<select class="form-control">
 						<option>1</option>
