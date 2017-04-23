@@ -14,10 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.one.yolo.common.PaginationInfo;
 import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
+import com.one.yolo.member.model.MemberService;
 import com.one.yolo.message.model.MessageMagaVO;
 import com.one.yolo.message.model.MessageListVO;
 import com.one.yolo.message.model.MessageMagaListVO;
@@ -32,6 +35,8 @@ public class MessageController {
 	=LoggerFactory.getLogger(MessageController.class);
 	@Autowired
 	private MessageService messageService;
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping("/messageSend.do")
 	public String messageSend(){
@@ -189,5 +194,21 @@ public class MessageController {
 		logger.info("idSelect 화면 보여주기");
 		
 		return "mypage/message/idSelect";
+	}
+	@RequestMapping("/ajaxCheckId.do")
+	@ResponseBody
+	public Boolean ajaxCheckId(@RequestParam String msgUserid){
+		logger.info("ajax-아이디 중복확인,파라미터 msgUserid={}",msgUserid);
+		
+		int result = memberService.duplicateUserid(msgUserid);
+		logger.info("아이디 중복확인, result={}",result);
+		
+		Boolean bool=false;
+		if(result==memberService.EXIST_ID){
+			//아이디가 이미 존재하는 경우
+			bool=true;
+		}
+		return bool;
+		
 	}
 }

@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="mypagemessagetop.jsp"%>
-
+<style>
+#error{
+		color:red;
+		font-weight: bold;
+	    display: none; 
+	}
+</style>
 <script>
 	var editor;
 	CKEDITOR
@@ -47,6 +53,41 @@ $(document).ready(function() {
 			alert('제목을 입력하세요');
 			$("#msTitle").focus();
 			return false;
+		}else if($("#chkId").val()!='Y'){
+			alert('존재하지 않는 아이디입니다.');
+			$('#btnChkId').focus();
+			return false;
+		}
+	});
+	
+	$("#msgUserid").keyup(function() {	
+		if($("#msgUserid").val()==''){		
+			$('#chkId').val("");
+			$("#error").hide();
+		}else{
+			$.ajax({
+				url:'<c:url value="/mypage/message/ajaxCheckId.do" />',
+				type:'post',
+				data:'msgUserid='+$("#msgUserid").val(),
+				success:function(res){
+					var msg="";
+					var chkId="";
+					if(res){
+						//아이디가 이미 존재
+						msg="보내기 가능한 아이디 입니다";
+						chkId="Y";
+					}else{
+						msg="존재하지 않는 아이디 입니다";
+											
+					}
+					$("#error").html(msg);
+					$("#chkId").val(chkId);
+					$("#error").show();
+				},
+				error:function(xhr,status,error){
+					alert("error"+error);
+				}
+			});
 		}
 	});
 });
@@ -70,8 +111,9 @@ $(document).ready(function() {
 				</div>
 				<div class="col-md-8">
 					<input type="text" class="form-control" name="msgUserid" id="msgUserid"
-						placeholder="받는 사람을 선택하거나 직접 입력해주세요.">
+						placeholder="받는 사람을 선택하거나 직접 입력해주세요.">				 
 				</div>
+				
 				<div class="col-md-1">
 					<a data-toggle="modal"
 						href='<c:url value="/mypage/message/idSelect.do"/>'
@@ -85,11 +127,10 @@ $(document).ready(function() {
 							<div class="modal-content"></div>
 						</div>
 					</div>
-
 				</div>
-			</div>
-		</div>
-
+			</div>		
+    </div>
+		<span id="error" style="margin-left: 13%"></span>
 		<br>
 		<div class="container">
 			<div class="row">
@@ -108,6 +149,7 @@ $(document).ready(function() {
 		<div style="text-align: center;">
 			<button type="submit" class="btn btn-default">보내기</button>
 		</div>
+		<input type ="hidden" name="chkId" id="chkId">
 	</form>
 	<br> <br>
 

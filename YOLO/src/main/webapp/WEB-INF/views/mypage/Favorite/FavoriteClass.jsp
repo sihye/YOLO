@@ -60,7 +60,7 @@ function pageFunc(curPage){
 				<c:forEach var="map" items="${alist }">
 				<tr>
 					<td>${map["C_NAME"] }</td>
-					<td>${map["C_PALCE"] }</td>
+					<td>${map["C_PLACE"] }</td>
 					<td>${map["C_PRICE"] }</td>
 					<td>${map["C_PAYMENTWAY"] }</td>
 					<td>${map["SC_REGDATE"] }</td>
