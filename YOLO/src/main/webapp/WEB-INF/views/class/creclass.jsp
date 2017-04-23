@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -7,10 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>::YOLO - 클래스 등록하기::</title>
-<meta name="author" content="Matthew Howell" />
-<meta name="description" content="fullPage continuous scrolling demo." />
-<meta name="keywords"
-	content="fullpage,jquery,demo,scroll,loop,continuous" />
 <meta name="Resource-type" content="Document" />
 
 <link rel="stylesheet" type="text/css"
@@ -145,16 +141,19 @@
 				</div>
 				<p>클래스를 대표할 카테고리를 선택하세요.</p>
 				<!-- 카테고리 셀렉트 -->
-				<c:forEach var="cateG" items="${gCateList }">
+				
 					<select class="form-control" name="kNo">
-						<option value="0">:: ${cateG.kgName} ::</option>
+						<option value="0">카테고리를 선택하세요.</option>
+					<c:forEach var="cateG" items="${gCateList }">
+					<optgroup label="${cateG.kgName}">::${cateG.kgName}::</optgroup>
 						<c:forEach var="cageVO" items="${cateList }">
 							<c:if test="${cateG.kgNo==cageVO.kgNo }">
 								<option value="${cageVO.kNo}">${cageVO.kName}</option>
 							</c:if>
 						</c:forEach>
+						</c:forEach>
 					</select>
-				</c:forEach>
+				
 				<%-- <span><input type="checkbox" name="cbox" value="1" offsrc="<c:url value='/img/off.png'/>" onsrc="<c:url value='/img/on.png'/>" /> 1번 박스</span>
 				<span><input type="checkbox" name="cbox" value="2" offsrc="<c:url value='/img/off.png'/>" onsrc="<c:url value='/img/on.png'/>" /> 2번 박스</span>
 				<script>imgCbox("cbox");</script>
@@ -501,7 +500,7 @@
 						placeholder="날짜를 입력하세요"> 
 					
 					<label for="time">시간</label> 
-					<select class="form-control" id="time">
+					<%-- <select class="form-control" id="time">
 						<c:forEach var="i" begin="1"end="12">
 						<option>${i}</option>
 						</c:forEach>
@@ -509,7 +508,7 @@
 					<select class="form-control">
 						<option>1</option>
 						<option>2</option>
-					</select>
+					</select> --%>
 					</div>
 					<div id="field"></div>
 					<input type="button" value="추가" onclick="add_div()" id="timeReBt">

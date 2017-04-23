@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="inc/top.jsp" %>
-			<section class="caption">
-			<div class="flexslider">
+<section class="caption">
+	<div class="flexslider">
 		<ul class="slides">
 			<li><img style="height: 400PX;"
 				src="${pageContext.request.contextPath}/img/index2 (1).jpg" /></li>
-			<li><img style="height: 400PX;" src="${pageContext.request.contextPath}/img/index1.jpg" /></li>
+			<li><img style="height: 400PX;"
+				src="${pageContext.request.contextPath}/img/index1.jpg" /></li>
 			<li><img style="height: 400PX;"
 				src="${pageContext.request.contextPath}/img/0M0B0169.jpg" /></li>
 		</ul>
 	</div>
-				<!-- <h2 class="caption">Find You Dream Home</h2>
+	<!-- <h2 class="caption">Find You Dream Home</h2>
 				<h3 class="properties">Appartements - Houses - Mansions</h3> -->
-			</section>
-	</section><!--  end hero section  -->
+</section>
+</section><!--  end hero section  -->
 
 
 	<section class="search">
@@ -50,57 +51,21 @@
 			</div>
 		</div><!--  end advanced search section  -->
 	</section><!--  end search section  -->
-
-	<!-- 분류카테고리 --> 
-	<div class="container"> 
-		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-1 dropdown"></div>
-			<div class="col-md-1 dropdown"></div>
-			<div class="col-md-1 dropdown"></div>
-			<div class="col-md-1 dropdown"></div>
-			<div class="col-md-1 dropdown"></div>
-			<div class="col-md-1 dropdown"></div>
-			<div class="col-md-3"></div>
-		</div>
-	</div>
 	<div class="container">
 		<div class="col-md-2"></div>
 		<div class="dropdown">
 			<ul class="nav nav-pills">
+				<c:forEach var="gvo" items="${gList}">
 				<li class="dropdown col-md-2"><a data-toggle="dropdown"
-					href="#">라이프스타일<span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a role="menuitem" href="#">독서/글쓰기</a></li>
-						<li><a role="menuitem" href="#">사진/영상</a></li>
-						<li><a role="menuitem" href="#">요리/베이킹</a></li>
-						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
-					</ul></li>
-				<li class="dropdown col-md-2"><a data-toggle="dropdown"
-					href="#">어학<span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a role="menuitem" href="#">메뉴 1</a></li>
-						<li><a role="menuitem" href="#">메뉴 2</a></li>
-						<li><a role="menuitem" href="#">메뉴 3</a></li>
-						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
-					</ul></li>
-				<li class="dropdown col-md-2"><a data-toggle="dropdown"
-					href="#">뷰티<span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a role="menuitem" href="#">메뉴 1</a></li>
-						<li><a role="menuitem" href="#">메뉴 2</a></li>
-						<li><a role="menuitem" href="#">메뉴 3</a></li>
-						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
-					</ul></li>
-				<li class="dropdown col-md-2"><a data-toggle="dropdown"
-					href="#">여기클릭 <span class="caret"></span>
-				</a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a role="menuitem" href="#">메뉴 1</a></li>
-						<li><a role="menuitem" href="#">메뉴 2</a></li>
-						<li><a role="menuitem" href="#">메뉴 3</a></li>
-						<li><a role="menuitem" href="#">분리된 메뉴 </a></li>
-					</ul></li>
+					href="#">${gvo.kgName}<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">						
+						<c:forEach var="cvo" items="${cList}">
+							<c:if test="${gvo.kgNo== cvo.kgNo}">
+							<li><a role="menuitem" href="#">${cvo.kName }</a></li></c:if>
+						</c:forEach>
+					</ul>
+				</li>
+				</c:forEach>
 			</ul>
 		</div>
 		<div class="col-md-2"></div>
