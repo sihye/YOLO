@@ -235,27 +235,23 @@ values(3,1,3,'');
 select*from message;
 
 insert into message
-values(MESSAGE_seq.nextval,'hong','abc','sdfdsfs',sysdate);
+values(MESSAGE_seq.nextval,'hong','kim','abc','sdfdsfs',sysdate);
 insert into message
-values(MESSAGE_seq.nextval,'kim','abc','sdfdsfs',sysdate);
+values(MESSAGE_seq.nextval,'kim','chang','abc','sdfdsfs',sysdate);
 insert into message
-values(MESSAGE_seq.nextval,'chang','abc','sdfdsfs',sysdate);
+values(MESSAGE_seq.nextval,'chang','hong','abc','sdfdsfs',sysdate);
 
 -- 쪽지관리
 select*from messagemaga;
-
 insert into messagemaga
-(MS_NO,M_USERID,MS_CHECK)
-values(1,'hong','y');
-
+(MS_NO,MSMG_USERID,MS_CHECK)
+values(MESSAGEMAGA_seq.nextval,'kim','y');
 insert into messagemaga
-(MS_NO,M_USERID,MS_CHECK)
-values(2,'kim','y');
-
+(MS_NO,MSMG_USERID,MS_CHECK)
+values(MESSAGEMAGA_seq.nextval,'chang','y');
 insert into messagemaga
-(MS_NO,M_USERID,MS_CHECK)
-values(3,'chang','y');
-
+(MS_NO,MSMG_USERID,MS_CHECK)
+values(MESSAGEMAGA_seq.nextval,'hong','y');
 
 -- 신고
 select*from notify;

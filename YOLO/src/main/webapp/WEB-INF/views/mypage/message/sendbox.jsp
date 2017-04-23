@@ -207,6 +207,23 @@ ol, ul {
 <script>                
 
         $(document).ready(function() {
+        	$("input[name='chkAll']").click(function(){
+    			$("tbody input[type=checkbox]").prop("checked", this.checked);
+    		});
+    		
+    		$("#btDeleteMulti").click(function(){
+    			//선택한 쪽지 삭제
+    			
+    			if($("tbody input[type=checkbox]:checked").length==0){
+    				alert("삭제할 쪽지를 선택하셔야 합니다");
+    				return;
+    			}
+    			
+    			$("#frmList").prop("action", 
+    				"<c:url value='/mypage/message/deleteMultiSend.do'/>");
+    			$("#frmList").submit();
+    		});
+        	
 
             //datepicker 한국어로 사용하기 위한 언어설정
             $.datepicker.setDefaults($.datepicker.regional['ko']);     
@@ -317,7 +334,7 @@ ol, ul {
 
 <!-- 페이징 처리를 위한 form 태그 -->
 <form name="frmPage" method="post"
-	action='<c:url value="/mypage/Mybbs/qnaboard.do" />'>
+	action='<c:url value="/mypage/message/sendbox.do" />'>
 	<input type="hidden" name="currentPage"> <input type="hidden"
 		name="searchCondition" value="${param.searchCondition }"> <input
 		type="hidden" name="searchKeyword" value="${param.searchKeyword}">
@@ -404,31 +421,49 @@ ol, ul {
 	</form>
 	<br>
 	<!-- //기간별조회 -->
-	<table class="table table-hover">
-		<thead>
-			<tr style="background: skyblue">
-				<th></th>
-				<th>번호</th>
-				<th>받은사람</th>
-				<th>제목</th>
-				<th>내용</th>
-				<th>보낸시간</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="map" items="${alist }">
-				<tr>
-					<td>${map["CQ_NO"] }</td>
-					<td>${map["C_NAME"] }</td>
-					<td>${map["CQ_CONTENT"] }</td>
-					<td>${map["C_REGDATE"] }</td>
-					<td>처리중</td>
+	<form name="frmList" id="frmList" method="post">
+		<table class="table table-hover">
+			<thead>
+				<tr style="background: skyblue">
+					<th><input type="checkbox" value="None" id="chkAll"
+						name="chkAll" /> </label>
+						</div></th>
+					<th>번호</th>
+					<th>받은사람</th>
+					<th>제목</th>
+					<th>내용</th>
+					<th>보낸시간</th>
+					<th>상태</th>
+					
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<c:set var="i" value="0" />
+				<c:forEach var="map" items="${alist }">
+					<tr>
+						<td><input type="checkbox" id="chk_${i}"
+							name="msmgItems[${i}].msNo" value="${map['MS_NO'] }"></td>
+						<td>${map["MS_NO"] }</td>
+						<td>${map["MSMG_USERID"] }</td>
+						<td>${map["MS_TITLE"] }</td>
+						<td>${map["MS_CONTENT"] }</td>
+						<td>${map["MS_REGDATE"] }</td>
+						<td>미확인</td>
+					</tr>
+					<c:set var="i" value="${i+1}" />
+				</c:forEach>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="6" style="text-align: center">
+						<button id="btDeleteMulti" class="btn btn-primary" type="button">선택한
+							쪽지 삭제</button>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
 </div>
-
+</form>
 <div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->
 	<!-- 이전 블럭으로 이동 ◀-->

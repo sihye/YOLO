@@ -39,9 +39,9 @@ $(document).ready(function() {
 	$("#mUserid").focus();
 	
 	$("#sendfrm").submit(function() {
-		if($("#mUserid").val()==''){
+		if($("#msgUserid").val()==''){
 			alert('받는사람을 입력하세요');
-			$("#mUserid").focus();
+			$("#msgUserid").focus();
 			return false;
 		}else if($("#msTitle").val().length<1){
 			alert('제목을 입력하세요');
@@ -69,7 +69,7 @@ $(document).ready(function() {
 					<label for="mUserid">받는사람</label>
 				</div>
 				<div class="col-md-8">
-					<input type="text" class="form-control" name="mUserid" id="mUserid"
+					<input type="text" class="form-control" name="msgUserid" id="msgUserid"
 						placeholder="받는 사람을 선택하거나 직접 입력해주세요.">
 				</div>
 				<div class="col-md-1">

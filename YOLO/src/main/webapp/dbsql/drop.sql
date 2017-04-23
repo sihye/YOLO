@@ -37,6 +37,8 @@ DROP TABLE classboard;
 
 -- 게시판분류
 DROP TABLE boardgroup;
+-- 쪽지관리
+DROP TABLE messagemaga;
 
 -- 쪽지
 DROP TABLE message;
@@ -60,8 +62,7 @@ DROP TABLE paymentcancel;
 -- 관리자메인관리
 DROP TABLE operator;
 
--- 쪽지관리
-DROP TABLE messagemaga;
+
 
 --신고NOTIFY 
 DROP TABLE NOTIFY;
@@ -79,6 +80,7 @@ DROP SEQUENCE CLASSSCHEDULE_seq;
 DROP SEQUENCE MEMBER_seq;
 DROP SEQUENCE MEMBERGROUP_seq;
 DROP SEQUENCE MESSAGE_seq;
+DROP SEQUENCE MESSAGEMAGA_seq;
 DROP SEQUENCE NOTICEBOARD_seq;
 DROP SEQUENCE OPERATOR_seq;
 DROP SEQUENCE PAYMENT_seq;

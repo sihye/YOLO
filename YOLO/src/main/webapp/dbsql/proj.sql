@@ -350,7 +350,8 @@ ALTER TABLE classboard
 -- 쪽지
 CREATE TABLE message (
 	MS_NO      NUMBER        NOT NULL, -- 쪽지번호
-	M_USERID   VARCHAR2(500) NOT NULL, -- 보낸사람
+	MS_USERID   VARCHAR2(500) NOT NULL, -- 보낸사람
+	MSG_USERID VARCHAR2(500) NOT NULL, -- 받는사람
 	MS_TITLE   VARCHAR2(500) NULL,     -- 제목
 	MS_CONTENT CLOB          NULL,     -- 내용
 	MS_REGDATE DATE         DEFAULT sysdate NULL      -- 등록일
@@ -570,7 +571,7 @@ ALTER TABLE operator
 -- 쪽지관리
 CREATE TABLE messagemaga (
 	MS_NO    NUMBER             NULL, -- 쪽지번호
-	M_USERID VARCHAR2(500)      NULL, -- 받는사람
+	MSMG_USERID VARCHAR2(500)      NULL, -- 받는사람
 	MS_CHECK VARCHAR2(5) DEFAULT 'N'  -- 확인여부
 );
 
@@ -777,7 +778,7 @@ ALTER TABLE message
 	ADD
 		CONSTRAINT FK_Member_TO_message -- 회원 -> 쪽지
 		FOREIGN KEY (
-			M_USERID -- 보낸사람
+			MS_USERID -- 보낸사람
 		)
 		REFERENCES Member ( -- 회원
 			M_USERID -- 아이디
@@ -904,23 +905,13 @@ ALTER TABLE operator
 		REFERENCES category ( -- 카테고리
 			K_NO -- 카테고리번호
 		);
--- 쪽지관리
-ALTER TABLE messagemaga
-	ADD
-		CONSTRAINT FK_message_TO_messagemaga -- 쪽지 -> 쪽지관리
-		FOREIGN KEY (
-			MS_NO -- 쪽지번호
-		)
-		REFERENCES message ( -- 쪽지
-			MS_NO -- 쪽지번호
-		);
 
 -- 쪽지관리
 ALTER TABLE messagemaga
 	ADD
 		CONSTRAINT FK_Member_TO_messagemaga -- 회원 -> 쪽지관리
 		FOREIGN KEY (
-			M_USERID -- 받는사람
+			MSMG_USERID -- 받는사람
 		)
 		REFERENCES Member ( -- 회원
 			M_USERID -- 아이디
@@ -1028,6 +1019,12 @@ nocache;
 
 
 create sequence MESSAGE_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+create sequence MESSAGEMAGA_seq
 increment by 1
 start with 1
 nomaxvalue

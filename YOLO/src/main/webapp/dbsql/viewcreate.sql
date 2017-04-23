@@ -59,3 +59,8 @@ WHERE p.C_NO=c.C_NO;
 
 select*from mypayment;
 
+CREATE OR REPLACE VIEW messagsend
+AS SELECT m.MS_USERID,m.MS_CONTENT,m.MS_REGDATE,m.MS_TITLE,m2.MS_NO,m2.MSMG_USERID,m2.MS_CHECK
+FROM message m,messagemaga m2
+WHERE m.MS_NO=m2.MS_NO;
+select*from messagsend;
