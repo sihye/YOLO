@@ -262,6 +262,7 @@ header nav .login_btn:hover{
     background: #bfd9f2;
     position: relative;
     MARGIN-TOP: 153PX;
+    margin-bottom: 20px;
 }
 
 .search #search{

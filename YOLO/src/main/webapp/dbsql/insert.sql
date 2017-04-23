@@ -4,21 +4,63 @@
 select * from categorygroup;
 
 insert into categorygroup
-values(CATEGORYGROUP_seq.nextval,1,'카테고리분류1');
+values(CATEGORYGROUP_seq.nextval,1,'라이프스타일');
 insert into categorygroup
-values(CATEGORYGROUP_seq.nextval,1,'카테고리분류2');
+values(CATEGORYGROUP_seq.nextval,2,'외국어');
 insert into categorygroup
-values(CATEGORYGROUP_seq.nextval,1,'카테고리분류3');	
+values(CATEGORYGROUP_seq.nextval,3,'뷰티/미용');	
+insert into categorygroup
+values(CATEGORYGROUP_seq.nextval,4,'스포츠');	
 
 --category
 select * from category;
 
 insert into category
-values(CATEGORY_seq.nextval,1,1,'카테고리1');
+values(CATEGORY_seq.nextval,1,1,'독서/글쓰기');
 insert into category
-values(CATEGORY_seq.nextval,1,1,'카테고리2');
+values(CATEGORY_seq.nextval,1,2,'봉사활동');
 insert into category
-values(CATEGORY_seq.nextval,1,1,'카테고리3');
+values(CATEGORY_seq.nextval,1,3,'요리/베이킹');
+insert into category
+values(CATEGORY_seq.nextval,1,4,'반려동물');
+insert into category
+values(CATEGORY_seq.nextval,1,5,'라이프스타일 기타');
+
+insert into category
+values(CATEGORY_seq.nextval,2,1,'영어');
+insert into category
+values(CATEGORY_seq.nextval,2,2,'중국어');
+insert into category
+values(CATEGORY_seq.nextval,2,3,'일본어');
+insert into category
+values(CATEGORY_seq.nextval,2,4,'외국어 기타');
+
+insert into category
+values(CATEGORY_seq.nextval,3,1,'헤어');
+insert into category
+values(CATEGORY_seq.nextval,3,2,'네일');
+insert into category
+values(CATEGORY_seq.nextval,3,3,'메이크업');
+insert into category
+values(CATEGORY_seq.nextval,3,4,'뷰티/미용 기타');
+
+insert into category
+values(CATEGORY_seq.nextval,4,1,'축구');
+insert into category
+values(CATEGORY_seq.nextval,4,2,'야구');
+insert into category
+values(CATEGORY_seq.nextval,4,3,'요가');
+insert into category
+values(CATEGORY_seq.nextval,4,4,'스포츠 기타');
+
+
+
+
+
+
+
+
+
 --question
 
 select * from question;
