@@ -44,9 +44,10 @@ where o.K_NO = cg.K_NO and o.F_NO = up.F_NO
 
 create view operatorMemberView
 as
-select m_userid,m_no,m_name,m_joindate,(select c.k_name from category c where c.K_NO = m.k_no1)as k_1 ,
+select m_userid,m_no,mg_no2,m_name,m_joindate,(select c.k_name from category c where c.K_NO = m.k_no1)as k_1 ,
 (select c.k_name from category c where c.K_NO = m.k_no2) as k_2 ,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
-from member m;
+from member m  
+where mg_no2=2;
 
 
 

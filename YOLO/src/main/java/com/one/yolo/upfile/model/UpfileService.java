@@ -11,6 +11,9 @@ public interface UpfileService {
 	
 	public static final String UP_FILE ="File";
 	public static final String UP_EXCEL = "Excel";
+	public static final String UP_EXCELSAVEFORM="Saveform";
+	
+	
 	
 	public UpfileVO selectByOname(String fileName);
 	public int insertUpfile(UpfileVO vo);

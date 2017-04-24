@@ -205,6 +205,9 @@ a{
 #downA{
 	color: blue;
 }
+#membersave{
+	color: blue;
+}
 
 #frm1{
 	width: 400px; 
@@ -246,7 +249,11 @@ a{
 
 
 <label> 현재 회원 정보 엑셀 저장 </label>
-<a id='downA' href="<c:url value="/admin/excel.do?searchKeyword=${param.searchKeyword }&searchCondition=${param.searchCondition }&searchStartDate=${param.searchStartDate }&searchEndDate=${param.searchEndDate }"/>">다운로드</a> 
+<a id='downA' href="<c:url value="/admin/excel.do?searchKeyword=${param.searchKeyword }&searchCondition=${param.searchCondition }&searchStartDate=${param.searchStartDate }&searchEndDate=${param.searchEndDate }"/>">다운로드</a>
+<br>
+<label> 회원정보 입력 엑셀서식 받기 </label>
+<a id='membersave' href="<c:url value="/admin/memberSaveForm.do"/>">다운로드</a>
+
 <form id="upExcel" method="post" action='<c:url value="/admin/excelup.do"/>' enctype="multipart/form-data">
 <label style="float:right"><input type="reset" value="취소"></label>
 <label style="float:right"><input type="submit" value="등록"></label>

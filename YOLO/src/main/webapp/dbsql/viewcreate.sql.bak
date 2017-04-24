@@ -1,27 +1,29 @@
 --[viewcreate.sql]
 
-select*from qnaboard;
+
 
 CREATE OR REPLACE VIEW qnaboard
 AS SELECT q.*,c.C_NAME
 FROM classqnaboard q,class c
 WHERE q.C_NO=c.C_NO;
+select*from qnaboard;
 
-select*from reviewboard;
 
 CREATE OR REPLACE VIEW reviewboard
 AS SELECT a.*,c.C_NAME
 FROM CLASSBOARD  a,class c
 WHERE a.C_NO=c.C_NO;
+select*from reviewboard;
 
-select*from favoriteclass;
+--DROP VIEW favoriteclass;
+
 CREATE OR REPLACE VIEW favoriteclass
-AS select sb.*,c.C_NAME,c.C_PALCE,c.C_PRICE,c.C_PAYMENTWAY
+AS select sb.*,c.C_NAME,c.C_PLACE,c.C_PRICE,c.C_PAYMENTWAY
 from MEMBER m,CLASS c,SHOPPINGBASKET sb
 where m.M_USERID = sb.SB_USERID
 and c.C_NO = sb.C_NO;
-
-
+select*from favoriteclass;
+--commit
 
 create view ExcelMemberView
 as
@@ -42,19 +44,24 @@ where o.K_NO = cg.K_NO and o.F_NO = up.F_NO
 
 create view operatorMemberView
 as
-select m_userid,m_no,m_name,m_joindate,(select c.k_name from category c where c.K_NO = m.k_no1)as k_1 ,
+select m_userid,m_no,mg_no2,m_name,m_joindate,(select c.k_name from category c where c.K_NO = m.k_no1)as k_1 ,
 (select c.k_name from category c where c.K_NO = m.k_no2) as k_2 ,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
-from member m;
+from member m  
+where mg_no2=2;
 
-<<<<<<< HEAD
-=======
 
-select*from mypayment;
+
+
 
 CREATE OR REPLACE VIEW mypayment
 AS SELECT p.*,c.C_NAME,C_PRICE
 FROM payment p,class c
 WHERE p.C_NO=c.C_NO;
 
->>>>>>> branch 'master' of https://github.com/sihye/YOLO.git
+select*from mypayment;
 
+CREATE OR REPLACE VIEW messagsend
+AS SELECT m.MS_USERID,m.MS_CONTENT,m.MS_REGDATE,m.MS_TITLE,m2.MS_NO,m2.MSMG_USERID,m2.MS_CHECK
+FROM message m,messagemaga m2
+WHERE m.MS_NO=m2.MS_NO;
+select*from messagsend;

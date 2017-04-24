@@ -108,7 +108,7 @@
 	</select>
 	
 	<select id="MemberSeletCount" parameterType="SearchVO" resultType="int">
-		select count(*) from OPERATORMEMBERVIEW 
+		select count(*) from OPERATORMEMBERVIEW where 
 		<include refid="searchWhere"></include>
 	</select>
 	
