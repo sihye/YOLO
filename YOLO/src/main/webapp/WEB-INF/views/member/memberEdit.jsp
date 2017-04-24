@@ -107,6 +107,7 @@
 
 <article>
 <div class="divForm">
+
 	<form id="frm1" name="frm1" method="post"
 		action='<c:url value="/member/memberEdit.do" />'>
 		<fieldset>
