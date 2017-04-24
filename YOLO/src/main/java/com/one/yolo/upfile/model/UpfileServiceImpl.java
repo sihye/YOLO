@@ -183,12 +183,12 @@ public class UpfileServiceImpl implements UpfileService{
 			HSSFSheet sheet=workbook.getSheetAt(0);
 			//행의 수
 			int rows=sheet.getPhysicalNumberOfRows();
-			for(rowindex=1;rowindex<=rows+1;rowindex++){
+			for(rowindex=1;rowindex<=rows;rowindex++){
 			    //행을 읽는다
 			    HSSFRow row=sheet.getRow(rowindex);
 			    if(row !=null){
 			        //셀의 수
-			        int cells=row.getPhysicalNumberOfCells();
+			        int cells=row.getPhysicalNumberOfCells()+1;
 			        MemberVO  vo = new MemberVO();
 			        for(columnindex=0;columnindex<=cells;columnindex++){
 			            //셀값을 읽는다
@@ -368,9 +368,9 @@ public class UpfileServiceImpl implements UpfileService{
 			    HSSFRow row=sheet.getRow(rowindex);
 			    if(row !=null){
 			        //셀의 수
-			        int cells=row.getPhysicalNumberOfCells();
+			        int cells=row.getPhysicalNumberOfCells()+1;
 			        MemberVO  vo = new MemberVO();
-			        for(columnindex=0;columnindex<cells;columnindex++){
+			        for(columnindex=0;columnindex<=cells;columnindex++){
 			            //셀값을 읽는다
 			            HSSFCell cell=row.getCell(columnindex);
 			            String value="";
@@ -396,18 +396,20 @@ public class UpfileServiceImpl implements UpfileService{
 			                	 vo.setmName(value);
 			                	 continue;
 			                case 3://핸드폰
-			                
-			                		value=cell.getStringCellValue()+"";
-			                		String tel []={"","",""};
+			                		if(cell!=null){
+			                		value=cell.getStringCellValue();
+			                		String tel []= new String[3];
 			                		if(value!=null){
-			                		tel= value.split("-");
+				                		tel = value.split("-");
+				                		System.out.println("size = "+tel.length +", tel value="+cell.getStringCellValue());
 			                		}
 			                		vo.setmTel1(tel[0]);
 			                		vo.setmTel2(tel[1]);
-			                		vo.setmTel3(tel[2]);
+			                		vo.setmTel3(tel[2]);	
+			                		}
 			                		continue;
 			                case 4://이메일
-			                	
+			                	if(cell!=null){
 			                		value=cell.getStringCellValue()+"";
 			                		String email[]={"",""};
 			                		if(value!=null && !value.isEmpty()){
@@ -415,22 +417,26 @@ public class UpfileServiceImpl implements UpfileService{
 			                		}
 			                		vo.setmEmail1(email[0]);
 			                		vo.setmEmail2(email[1]);
-			                	
+			                	}
 			                		continue;
 			                case 5://주소
-			                
+			                	if(cell!=null){
 			                		value=cell.getStringCellValue()+"";
-			                		String addr[] ={"",""};
+			                		System.out.println(value+"= addr");
+			                		String addr[] =new String[2];
 			                		if(value!=null && !value.isEmpty()){
 			                			addr = value.split("/");
+			                			System.out.println("size = "+addr.length +", addr value="+value);
 			                		}
 			                		vo.setmAddress(addr[0]);
 			                		vo.setmAddressdetail(addr[1]);
-				               	
+			                	}
 			                		continue;
 			                case 6://관심1
-			
+			                		if(cell !=null){
 			                		value=cell.getStringCellValue()+"";
+			                		
+			                		if(value!=null && !value.isEmpty()){
 			                		int kno;
 			                		for(int i=0; i<categoryList.size();i++){
 			                			CategoryVO cvo = categoryList.get(i);
@@ -439,12 +445,16 @@ public class UpfileServiceImpl implements UpfileService{
 			                				System.out.println("Kno="+kno);
 			                				vo.setkNo1(kno);
 			                			}
+			                			}
+			                		}
 			                		}
 			                	
 			                		continue;
 			                case 7://관심2
-			                	
-			                		value=cell.getStringCellValue()+"";
+			                		if(cell !=null){
+			                			value=cell.getStringCellValue()+"";
+			                		
+			                		if(value!=null && !value.isEmpty()){
 			                		int kno1;
 			                		for(int i=0; i<categoryList.size();i++){
 			                			CategoryVO cvo = categoryList.get(i);
@@ -454,12 +464,17 @@ public class UpfileServiceImpl implements UpfileService{
 			                				vo.setkNo2(kno1);
 			                			}
 			                		}
+			                		}
+			                		}
+			                
+			                
+			                		
 			                	
 			                		continue;
 			                case 8://관심3
-			                		if(cell!=null){
-			                			value=cell.getStringCellValue()+"";
-			                		}
+			                	if(cell !=null){
+			                		value=cell.getStringCellValue()+"";
+			                		if(value!=null && !value.isEmpty()){
 			                		int kno11;
 			                		for(int i=0; i<categoryList.size();i++){
 			                			CategoryVO cvo = categoryList.get(i);
@@ -469,16 +484,17 @@ public class UpfileServiceImpl implements UpfileService{
 			                				vo.setkNo3(kno11);
 			                			}
 			                		}
+			                	}
+			                	}
 			                	
 			                		continue;
 			                case 9://질문
-			             
 			                		value=cell.getStringCellValue()+"";
 			                		for(int i=0; i<qlist.size();i++){
 			                			QuestionVO qvo = qlist.get(i);
 			                			if(qvo.getqQuestionname().equals(value)){
 			                				vo.setqQuestionno(qvo.getqQuestionno());
-			                				System.out.println("qno="+qvo.getqQuestionname());
+			                				System.out.println("qno="+vo.getqQuestionno());
 			                			}
 			                		}
 			                
@@ -486,15 +502,17 @@ public class UpfileServiceImpl implements UpfileService{
 			                case 10://답
 			                		value=cell.getStringCellValue()+"";	
 			                	  	vo.setmQuestionanswer(value);
+			                	  	System.out.println("qan ="+vo.getmQuestionanswer());
 			                	  	continue;
 			                case 11:
-			                    	value=cell.getStringCellValue()+"";
-			                    	vo.setmBankname(value);
-			                	continue;
+		                    	value=cell.getStringCellValue()+"";
+		                    	vo.setmBankname(value);
+		                	continue;
+		                	
 			                case 12:
-		                    	value=cell.getNumericCellValue()+"";
-		                    	vo.setmAccount(value);
-		                    	continue;
+	                    	value=(int)(cell.getNumericCellValue())+"";
+	                    	vo.setmAccount(value);
+	                    	continue;	  	
 			                }
 				            System.out.println("각 셀 내용 :"+value);
 			            }
@@ -511,7 +529,7 @@ public class UpfileServiceImpl implements UpfileService{
 		
 		return list;
 
-	
+			        
 		
 	}
 	
