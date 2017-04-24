@@ -11,6 +11,8 @@ insert into categorygroup
 values(CATEGORYGROUP_seq.nextval,3,'뷰티/미용');	
 insert into categorygroup
 values(CATEGORYGROUP_seq.nextval,4,'스포츠');	
+insert into categorygroup
+values(0,0,'임시');	
 
 --category
 select * from category;
@@ -25,6 +27,8 @@ insert into category
 values(CATEGORY_seq.nextval,1,4,'반려동물');
 insert into category
 values(CATEGORY_seq.nextval,1,5,'라이프스타일 기타');
+insert into category
+values(0,0,0,'임시');
 
 insert into category
 values(CATEGORY_seq.nextval,2,1,'영어');

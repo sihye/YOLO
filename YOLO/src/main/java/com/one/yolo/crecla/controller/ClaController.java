@@ -39,6 +39,8 @@ public class ClaController {
 	private UpfileService uService;
 	@Autowired
 	private FileUploadWebUtil fileUploadWebUtil;
+
+
 	
 	//클래스 생성 페이지 보여주기
 	@RequestMapping(value="/clacre.do", method=RequestMethod.GET)
@@ -111,20 +113,16 @@ public class ClaController {
 		return "common/message";
 	}
 	
-<<<<<<< HEAD
-	@RequestMapping("claDetail.do")
-	public String claDetail(int cNo, Model model,HttpServletResponse response){
-=======
-	//클래스 디테일 페이지
+
+
 	@RequestMapping("/claDetail.do")
-	public String claDetail(int cNo, Model model){
->>>>>>> branch 'master' of https://github.com/sihye/YOLO.git
+	public String claDetail(int cNo, Model model, HttpServletResponse response){
 		logger.info("클래스 디테일 파람no={}",cNo);
 		String claNo = Integer.toString(cNo);
 		Cookie cookie =new Cookie("classNo"+claNo,claNo);
 		cookie.setPath("/");
-		cookie.setMaxAge(60*60*24) ;
-		 response.addCookie(cookie) ;
+		cookie.setMaxAge(60*60*24);
+		response.addCookie(cookie);
 		
 		ClassVO vo=claService.selClass(cNo);	
 		String kName=cService.selCateNameByNo(vo.getkNo());

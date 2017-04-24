@@ -52,6 +52,14 @@ where mg_no2=2;
 
 
 
+create view operatorHostView
+as
+select m_userid,m_no,m_name,m_joindate,m_bankname,m_accoutn,(select c.k_name from category c where c.K_NO = m.k_no1)as k_1 ,
+(select c.k_name from category c where c.K_NO = m.k_no2) as k_2 ,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
+from member m  
+where mg_no2=3;
+
+
 
 CREATE OR REPLACE VIEW mypayment
 AS SELECT p.*,c.C_NAME,C_PRICE

@@ -307,17 +307,18 @@ public class AdminController {
 		logger.info("엑셀파일 읽어오기");
 		UpfileVO upfilevo= upFileservice.fileUpload(request, UpfileService.UP_EXCEL);
 		logger.info("업로드된 excel파일 네임 = {}",upfilevo.getfFilename());
+		logger.info("vo정보 = {}",upfilevo.toString());
 		String upPath = upFileservice.getUploadPath(request,UpfileService.UP_EXCEL);
 		File file = new File(upPath,upfilevo.getfOriginalfilename());
 		List<MemberVO> mlist = null;
 		mlist = upFileservice.readExcel(file);
+		System.out.println(mlist.size() +"-"+ mlist.get(0).getkNo1() +"-"+mlist.get(0).getkNo2()+"-"+mlist.get(0).getkNo3() );
 		
 		String msg="", url ="/admin/operatorMember.do";
 		int cnt =0;
 		for(int i =0; i<mlist.size(); i++){
 			MemberVO vo = mlist.get(i);
 			vo.setMgNo2(2);
-			logger.info(vo.toString());
 			cnt +=  memberService.memberInsert(vo);
 		}
 		
