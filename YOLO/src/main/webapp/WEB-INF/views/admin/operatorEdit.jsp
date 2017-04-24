@@ -10,8 +10,7 @@
 <link href="<c:url value='/css/bootstrap-select.min.css'/>" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="<c:url value='/jquery/jquery-3.1.1.min.js'/>"></script>
 <script src="<c:url value='/js/bootstrap-select.min.js'/>" ></script>
-<script
-			src="<c:url value='../startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.min.js'/>"></script>
+<script src="<c:url value='../startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.min.js'/>"></script>
 
 
 <script type="text/javascript">
