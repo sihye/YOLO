@@ -142,6 +142,7 @@
     		document.frmPage.currentPage.value=curPage;
     		frmPage.submit();
     	}
+
             
         </script>
 
@@ -166,7 +167,7 @@
 	<h2>보낸쪽지함</h2>
 	<br>
 	<form>
-
+	
 		<!-- search -->
 		<table class="searchBox">
 			<caption>조회</caption>
@@ -247,22 +248,49 @@
 					<th>내용</th>
 					<th>보낸시간</th>
 					<th>상태</th>
-					
+
 				</tr>
 			</thead>
 			<tbody>
 				<c:set var="i" value="0" />
 				<c:forEach var="map" items="${alist }">
-					<tr>
+					<tr id="tr1${i }" onclick="onFunc(${i})">
 						<td><input type="checkbox" id="chk_${i}"
 							name="msmgItems[${i}].msNo" value="${map['MS_NO'] }"></td>
 						<td>${map["MS_NO"] }</td>
 						<td>${map["MSMG_USERID"] }</td>
 						<td>${map["MS_TITLE"] }</td>
 						<td>${map["MS_CONTENT"] }</td>
-						<td>${map["MS_REGDATE"] }</td>
+						<td><fmt:formatDate value="${map['MS_REGDATE'] }" pattern="yyyyMMddHHmmss"/></td>
 						<td>미확인</td>
+					</tr>				
+					<tr id="tr2${i }" style="display: none;">			
+					<td colspan="7">
+						<table class="table table-bordered" summary="보낸쪽지 내용" >
+							<caption>보낸메세지</caption>
+							<colgroup>
+								<col width="18%;" />
+								<col width="33%;" />
+								<col width="18%;" />
+								<col width="*;" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="row">보낸사람</th>
+									<td>${map["MS_NO"] }</td>
+									<th scope="row">받은사람</th>
+									<td>${map["MS_TITLE"] }</td>
+								</tr>
+								<tr>
+									<th scope="row">제목</th>
+									<td colspan="3" class="goods">${map["MS_TITLE"] }</td>
+								</tr>
+							</tbody>
+						</table>
+						<p style="margin-top: 10px;">${map["MS_CONTENT"] }</p>
+					</td>
 					</tr>
+					
 					<c:set var="i" value="${i+1}" />
 				</c:forEach>
 			</tbody>
