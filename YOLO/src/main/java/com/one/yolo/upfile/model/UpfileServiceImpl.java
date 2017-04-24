@@ -125,6 +125,8 @@ public class UpfileServiceImpl implements UpfileService{
 				upPath=fileProperties.getProperty("file.upload.path.test");
 			}else if(uptype.equals("Excel")){
 				upPath=fileProperties.getProperty("excel.upload.path.test");
+			}else if(uptype.equals("Saveform")){
+				upPath=fileProperties.getProperty("saveform.upload.path.test");
 			}
 		}else{
 			String dir = fileProperties.getProperty("file.upload.path");

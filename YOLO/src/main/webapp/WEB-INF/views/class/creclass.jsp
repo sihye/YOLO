@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" 
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -60,7 +60,6 @@
 
 
 <script type="text/javascript">
-
 	$(document).ready(
 			function() {
 				$('#fullpage').fullpage(
@@ -92,20 +91,11 @@
 	display: none;
 }
 
-#preview {
+#preview div{
+	float: left;
 	width: 300px;
-}
-
-#preview1 {
-	width: 300px;
-}
-
-#preview2 {
-	width: 300px;
-}
-
-#preview3 {
-	width: 300px;
+	height: 500px;
+	margin: 10px;
 }
 
 #map {
@@ -117,86 +107,98 @@
 
 	<ul id="menu">
 		<li data-menuanchor="firstPage" class="active"><a
-			href="#firstPage">클래스 기본정보 1</a></li>
-		<li data-menuanchor="secondPage"><a href="#secondPage">클래스
-				기본정보 2</a></li>
-		<li data-menuanchor="3rdPage"><a href="#3rdPage">클래스 추가정보 1</a></li>
-		<li data-menuanchor="4thpage"><a href="#4thPage">클래스 추가정보 2</a></li>
+			href="#firstPage">클래스 기본정보 등록</a></li>
+		<li data-menuanchor="secondPage"><a href="#secondPage">주소 등록</a></li>
+		<li data-menuanchor="3rdPage"><a href="#3rdPage">클래스 갤러리 등록</a></li>
+		<li data-menuanchor="4thpage"><a href="#4thPage">클래스 스케줄 등록</a></li>
 		<li data-menuanchor="5thpage"><a href="#5thpage">클래스 추가정보 3</a></li>
 		<li data-menuanchor="6thpage"><a href="#6thpage">스케줄 등록</a></li>
 	</ul>
-	<form action="<c:url value="/class/clacre.do"/>" class="form-inline"
-		enctype="multipart/form-data" method="post" id="claCre" name="claCre">
-		<div id="fullpage" class="container">
+	<form action="<c:url value="/class/clacre.do"/>"
+		class="form-horizontal container" enctype="multipart/form-data"
+		method="post" id="claCre" name="claCre">
+
+		<div id="fullpage">
 			<div class="section " id="section0">
 				<h1>클래스 기본정보</h1>
-				<hr>
 				<br>
-				<p>클래스 이름을 입력해 주세요.</p>
 				<div class="form-group">
-					<div class="col-xs-4">
-						<input type="text" class="form-control" id="" name="cName"
-							placeholder="이름등록">
+					<label for="inputEmail3" class="col-sm-2 control-label">클래스
+						이름 </label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputEmail3"
+							name="cName" placeholder="Class Name">
 					</div>
 				</div>
-				<p>클래스를 대표할 카테고리를 선택하세요.</p>
-				<!-- 카테고리 셀렉트 -->
-				
-					<select class="form-control" name="kNo">
-						<option value="0">카테고리를 선택하세요.</option>
-					<c:forEach var="cateG" items="${gCateList }">
-					<optgroup label="${cateG.kgName}">::${cateG.kgName}::</optgroup>
-						<c:forEach var="cageVO" items="${cateList }">
-							<c:if test="${cateG.kgNo==cageVO.kgNo }">
-								<option value="${cageVO.kNo}">${cageVO.kName}</option>
-							</c:if>
-						</c:forEach>
-						</c:forEach>
-					</select>
-				
-				<%-- <span><input type="checkbox" name="cbox" value="1" offsrc="<c:url value='/img/off.png'/>" onsrc="<c:url value='/img/on.png'/>" /> 1번 박스</span>
-				<span><input type="checkbox" name="cbox" value="2" offsrc="<c:url value='/img/off.png'/>" onsrc="<c:url value='/img/on.png'/>" /> 2번 박스</span>
-				<script>imgCbox("cbox");</script>
-				<input id="LTC09_00" type="checkbox" name="category" value="LTC09_00" />
-                <label class="midCategoryBox" for="LTC09_00"># 육아</label> --%>
-				<!-- 카테고리 셀렉트 끝 -->
-				<p>결제방법을 선택하세요.</p>
-				<div class="radio">
-					<label> <input type="radio" name="cPaymentway"
-						id="optionsRadios1" value="온라인" checked> 온라인 결제
-					</label>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">클래스
+						카테고리 </label>
+					<div class="col-sm-10">
+						<!-- 카테고리 셀렉트 -->
+						<select class="form-control" name="kNo">
+							<option value="0">카테고리를 선택하세요.</option>
+							<c:forEach var="cateG" items="${gCateList }">
+								<optgroup label="${cateG.kgName}">::${cateG.kgName}::</optgroup>
+								<c:forEach var="cageVO" items="${cateList }">
+									<c:if test="${cateG.kgNo==cageVO.kgNo }">
+										<option value="${cageVO.kNo}">${cageVO.kName}</option>
+									</c:if>
+								</c:forEach>
+							</c:forEach>
+						</select>
+						<!-- 카테고리 셀렉트 끝 -->
+					</div>
 				</div>
-				<div class="radio">
-					<label> <input type="radio" name="cPaymentway"
-						id="optionsRadios2" value="현장"> 현장 결제
-					</label>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">결제
+						방법</label>
+					<div class="col-sm-10">
+						<select class="form-control" name="cPaymentway">
+							<option value="0">결제 방법을 선택하세요.</option>
+							<option value="현장">현장 결제</option>
+							<option value="온라인">온라인 결제</option>
+						</select>
+					</div>
 				</div>
-			</div>
-			<div class="section" id="section1">
-				<div class="intro">
-					<p>비용을 입력해 주세요.(0원 입력시 협의)</p>
-					<input type="text" class="form-control" id="" name="cPrice"
-						placeholder="">
-					<p>특기사항을 입력해 주세요.</p>
-					<input type="text" class="form-control" id="" name="cSpevialty"
-						placeholder="">
-					<p>최대 인원을 입력해 주세요.</p>
-					<input type="text" class="form-control" id="" name="cMaxperson"
-						placeholder="">
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">비용 </label>
+						<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputEmail3"
+							name="cPrice" placeholder="0원 입력시 협의">
+					</div>
 				</div>
-			</div>
-			<div class="section" id="section2">
-				<div class="intro">
-					<p>목표을 입력해 주세요.</p>
-					<input type="text" class="form-control" id="" name="cGoal"
-						placeholder="">
-					<p>대상을 선택해 주세요.</p>
-					<input type="text" class="form-control" id="" name="cTarget"
-						placeholder="">
-					<p>상세 설명을 입력해 주세요.</p>
-					<textarea id="introContents" style="width: 70%;"
-						class="form-control" name="cDetailinfo" rows="10"
-						placeholder="
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">대상 </label>
+						<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputEmail3"
+							name="cTarget" placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">특기사항 </label>
+						<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputEmail3"
+							name="cSpevialty" placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">최대 인원 </label>
+						<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputEmail3"
+							name="cMaxperson" placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">목표 </label>
+						<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputEmail3"
+							name="cGoal" placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">상세설명 </label>
+						<div class="col-sm-10">
+						<textarea id="introContents" class="form-control" name="cDetailinfo" rows="10" placeholder="
 						• 강사님을 소개해주세요.(이력, 자기소개 등).
 						• 커리큘럼, 경력, 장점을 표현해주세요.
 						• 회원님의 모꼬지의 대해 설명해주세요.
@@ -222,22 +224,19 @@
 	Q. 강사님을 소개해주세요.(이력, 자기소개 등)
 	A. 
 					</textarea>
-
-				</div>
+					</div>
+				</div>	
 			</div>
-			<div class="section" id="section3">
+			<div class="section" id="section1">
 				<div class="intro">
-					<h1>Scroll Down</h1>
-					<p>And it will animate down to the first section</p>
-					<input type="hidden" id="sample5_address" placeholder="주소">
-					<input type="button" onclick="sample5_execDaumPostcode()"
-						value="주소 검색"><br>
-					<div id="map"
-						style="width: 80%; height: 500px; margin-top: 10px; display: none"></div>
+					<h1>클래스 주소 등록</h1><br>
+				<div class="form-group">
+					<input type="text" id="sample5_address" placeholder="주소">
+					<input type="button" class="btn btn-default btn-lg btn-block" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+					<div id="map" style="width: 80%; height: 500px; margin-top: 10px; display: none"></div>
 
 					<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-					<script
-						src="//apis.daum.net/maps/maps3.js?apikey=ae9a8f33df751fe70e8df23049bf7573&libraries=services"></script>
+					<script src="//apis.daum.net/maps/maps3.js?apikey=ae9a8f33df751fe70e8df23049bf7573&libraries=services"></script>
 					<script>
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 						mapOption = {
@@ -253,14 +252,12 @@
 
 						// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
 						// daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-						map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+						map.addControl(mapTypeControl,daum.maps.ControlPosition.TOPRIGHT);
 
 						// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 						var zoomControl = new daum.maps.ZoomControl();
-						map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-						
-						
-						
+						map.addControl(zoomControl,daum.maps.ControlPosition.RIGHT);
+
 						//주소-좌표 변환 객체를 생성
 						var geocoder = new daum.maps.services.Geocoder();
 						//마커를 미리 생성
@@ -271,7 +268,8 @@
 
 						function sample5_execDaumPostcode() {
 							new daum.Postcode(
-									{oncomplete : function(data) {
+									{
+										oncomplete : function(data) {
 											// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 											// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 											var fullAddr = data.address; // 최종 주소 변수
@@ -293,14 +291,14 @@
 												fullAddr += (extraAddr !== '' ? ' ('
 														+ extraAddr + ')'
 														: '');
-												
+
 											}
 											console.log(fullAddr)
 											// 주소 정보를 해당 필드에 넣는다.
 											document.getElementById("sample5_address").value = fullAddr;
 											document.getElementById("add").value = fullAddr;
 											// 주소로 좌표를 검색
-											geocoder.addr2coord(data.address,function(status,result) {
+											geocoder.addr2coord(data.address, function(status,result) {
 																// 정상적으로 검색이 완료됐으면
 																if (status === daum.maps.services.Status.OK) {
 																	// 해당 주소에 대한 좌표를 받아서
@@ -324,15 +322,26 @@
 									}).open();
 						}
 					</script>
-					주소: <input type="text" id="add" name=cPlace> 상세주소: <input
-						type="text" id="addDetail" name="cplacedetail"> 좌표: <input
-						type="text" id="location" name="cLocation">
+					<label for="inputEmail3" class="col-sm-2 control-label">주소</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="add"
+							name="cPlace">
+					</div>
+					<label for="inputEmail3" class="col-sm-2 control-label">상세주소</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputEmail3"
+							name="cplacedetail" >
+					</div>
+					좌표: <input type="text" id="location" name="location">
+				</div>
+				
 				</div>
 			</div>
-			<div class="section" id="section4">
+			
+			
+			<div class="section" id="section2">
 				<div class="intro">
-					<h1>갤러리</h1>
-					<p>어떤 클래스인지 미리 볼 수 있도록 사진을 보여주세요.</p>
+					<h1>갤러리 등록하기</h1>
 					<p>
 						<label for="image">커버사진:</label> <input type="file"
 							name="fileMap[0]" id="image" />
@@ -351,21 +360,23 @@
 					</p>
 
 				</div>
-				<div id="image_preview">
-					<b>커버사진 미리보기</b><br> <img src="#" id="preview" /> <br /> <a
-						href="#">Remove</a>
-				</div>
-				<div id="image_preview1">
-					<b>갤러리 1 미리보기</b> <img src="#" id="preview1" /> <br /> <a
-						href="#">Remove</a>
-				</div>
-				<div id="image_preview2">
-					<b>갤러리 2 미리보기</b> <img src="#" id="preview2" /> <br /> <a
-						href="#">Remove</a>
-				</div>
-				<div id="image_preview3">
-					<b>갤러리 3 미리보기</b> <img src="#" id="preview3" /> <br /> <a
-						href="#">Remove</a>
+				<div id="preview">
+					<div id="image_preview" class="container-fluid">
+						<b>커버사진 미리보기</b><br> <img src="#" id="preview" /> <br /> <a
+							href="#">Remove</a>
+					</div>
+					<div id="image_preview1">
+						<b>갤러리 1 미리보기</b> <img src="#" id="preview1" /> <br /> <a
+							href="#">Remove</a>
+					</div>
+					<div id="image_preview2">
+						<b>갤러리 2 미리보기</b> <img src="#" id="preview2" /> <br /> <a
+							href="#">Remove</a>
+					</div>
+					<div id="image_preview3">
+						<b>갤러리 3 미리보기</b> <img src="#" id="preview3" /> <br /> <a
+							href="#">Remove</a>
+					</div>
 				</div>
 
 
@@ -476,31 +487,30 @@
         e.unwrap(); //감싼 <form> 태그를 제거
     }
     </script>
-			</div>
-			<div class="section " id="section5">
-				<h1>스케줄 등록하기</h1>
-				<hr>
-				<br> <label for="radio-1">하루씩 등록하기</label> <input type="radio"
-					name="radio-1" id="radio-1"> <label for="radio-2">한번에
-					등록하기</label> <input type="radio" name="radio-1" id="radio-2">
+				</div>
+
+			<div class="section" id="section3">
+				<div class="intro">
+					<h1>스케줄 등록하기</h1><br> 
+					<label for="radio-1">하루씩 등록하기</label> 
+					<input type="radio" name="radio-1" id="radio-1"> 
+					<label for="radio-2">한번에 등록하기</label> 
+					<input type="radio" name="radio-1" id="radio-2">
 				<script>
 					$(function() {
 						$("#exampleInputName2").datepicker();
 					});
-					
-					var time=["1","2","3","4","5","6","7","8","9","10","11","12"];
-					
+
+					var time = [ "1", "2", "3", "4", "5", "6", "7", "8", "9",
+							"10", "11", "12" ];
 				</script>
 				<div>
 					<p>하루씩 등록하기</p>
 					<div id="selDate">
-					<label for="exampleInputName2">날짜</label> 
-					<input type="text"
-						class="form-control" id="exampleInputName2"
-						placeholder="날짜를 입력하세요"> 
-					
-					<label for="time">시간</label> 
-					<%-- <select class="form-control" id="time">
+						<label for="exampleInputName2">날짜</label> <input type="text"
+							class="form-control" id="exampleInputName2"
+							placeholder="날짜를 입력하세요"> <label for="time">시간</label>
+						<%-- <select class="form-control" id="time">
 						<c:forEach var="i" begin="1"end="12">
 						<option>${i}</option>
 						</c:forEach>
@@ -512,25 +522,27 @@
 					</div>
 					<div id="field"></div>
 					<input type="button" value="추가" onclick="add_div()" id="timeReBt">
-					<input type="button" value="삭제" onclick="remove_div(this)" id="timeAddBt">
-					
-					<input type="button" value="등록" id="timeAddBt">
+					<input type="button" value="삭제" onclick="remove_div(this)"
+						id="timeAddBt"> <input type="button" value="등록"
+						id="timeAddBt">
 					<script type="text/javascript">
-						function add_div(){
-							var div=document.createElement('div');							
-							div.innerHTML=document.getElementById('selDate').innerHTML;
+						function add_div() {
+							var div = document.createElement('div');
+							div.innerHTML = document.getElementById('selDate').innerHTML;
 							document.getElementById('field').append(div);
 						}
-						
-						function remove_div(obj){
-							document.getElementById('field').removeChild(obj.parentNode);
-						}		
+
+						function remove_div(obj) {
+							document.getElementById('field').removeChild(
+									obj.parentNode);
+						}
 					</script>
 				</div>
 
 				<input type="submit" value="제출">
+				</div>
 			</div>
-		</div>
+			
 	</form>
 
 

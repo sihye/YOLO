@@ -91,6 +91,11 @@ public class MemberServiceImpl implements MemberService{
 	
 		return memberDao.MemberSeletCount(vo);
 	}
+
+	@Override
+	public int updateMember(MemberVO vo) {
+		return memberDao.updateMember(vo);
+	}
 	
 	
 	

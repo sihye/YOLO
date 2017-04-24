@@ -27,6 +27,7 @@ public interface MemberService {
 
 	public List<Map<String, Object>> MemberSelectPG(SearchVO vo);
 	public int MemberSeletCount(SearchVO vo);
+	public int updateMember(MemberVO vo);
 
 	
 }
