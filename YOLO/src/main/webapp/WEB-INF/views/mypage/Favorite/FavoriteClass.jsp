@@ -59,7 +59,7 @@ function pageFunc(curPage){
 			<tbody>
 				<c:forEach var="map" items="${alist }">
 				<tr>
-					<td>${map["C_NAME"] }</td>
+					<td><a href='<c:url value="/class/claDetail.do?cNo=${map['C_NO'] }"/>'>${map["C_NAME"] }</a></td>
 					<td>${map["C_PLACE"] }</td>
 					<td>${map["C_PRICE"] }</td>
 					<td>${map["C_PAYMENTWAY"] }</td>

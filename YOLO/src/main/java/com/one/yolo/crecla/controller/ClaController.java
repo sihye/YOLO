@@ -3,7 +3,9 @@ package com.one.yolo.crecla.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,9 +109,15 @@ public class ClaController {
 	}
 	
 	@RequestMapping("claDetail.do")
-	public String claDetail(int cNo, Model model){
+	public String claDetail(int cNo, Model model,HttpServletResponse response){
 		logger.info("클래스 디테일 파람no={}",cNo);
-		ClassVO vo=claService.selClass(cNo);
+		String claNo = Integer.toString(cNo);
+		Cookie cookie =new Cookie("classNo"+claNo,claNo);
+		cookie.setPath("/");
+		cookie.setMaxAge(60*60*24) ;
+		 response.addCookie(cookie) ;
+		
+		ClassVO vo=claService.selClass(cNo);	
 		String kName=cService.selCateNameByNo(vo.getkNo());
 		model.addAttribute("claVo", vo);
 		model.addAttribute("kName", kName);
