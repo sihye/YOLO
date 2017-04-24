@@ -56,6 +56,15 @@ public class NoticeboardDAOMybatis extends SqlSessionDaoSupport
 	}
 
 
+	public List<Map<String, Object>> operatorNotice(SearchVO vo) {
+		
+		return getSqlSession().selectList(namespace+".operatorNotice",vo);
+	}
+
+	
+	
+
+	
 
 	
 

@@ -15,5 +15,6 @@ public interface NoticeboardService {
 	public int updateReadCount(int no);
 	public int updateNotice(NoticeboardVO vo);
 	public int deleteNoticeoard(int no);
+	public List<Map<String, Object>> operatorNotice(SearchVO vo);
 	
 }

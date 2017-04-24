@@ -71,6 +71,28 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport implements MemberDAO{
 		
 		return getSqlSession().selectOne(namespace+".updateMember",vo);
 	}
+
+	@Override
+	public List<Map<String, Object>> HostSelectPG(SearchVO vo) {
+		return getSqlSession().selectList(namespace+".HostSelectPG",vo);
+	}
+
+	@Override
+	public int HostSeletCount(SearchVO vo) {
+		return getSqlSession().selectOne(namespace+".HostSeletCount",vo);
+	}
+
+	public List<Map<String, Object>> HostExcelView(SearchVO vo) {
+		return getSqlSession().selectList(namespace+".HostExcelView",vo);
+	}
+
+	@Override
+	public int hostInsert(MemberVO vo) {
+		return getSqlSession().insert(namespace+".hostInsert",vo);
+	}
+	
+	
+	
 	
 	
 

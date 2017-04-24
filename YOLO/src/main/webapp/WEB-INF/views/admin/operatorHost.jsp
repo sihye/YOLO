@@ -243,28 +243,30 @@ a{
 </form>
 
 
-	<h2>회원 관리</h2>
+	<h2>호스트 관리</h2>
 
     <br><br>
 
 
-<label> 현재 회원 정보 엑셀 저장 </label>
-<a id='downA' href="<c:url value="/admin/excel.do?searchKeyword=${param.searchKeyword }&searchCondition=${param.searchCondition }&searchStartDate=${param.searchStartDate }&searchEndDate=${param.searchEndDate }&type=member "/>">다운로드</a>
+<label> 현재 호스트 정보 엑셀 저장 </label>
+<a id='downA' href="<c:url value="/admin/excel.do?searchKeyword=${param.searchKeyword }&searchCondition=${param.searchCondition }&searchStartDate=${param.searchStartDate }&searchEndDate=${param.searchEndDate }&type=host "/>">다운로드</a>
 <br>
-<label> 회원 입력 엑셀서식 받기 </label>
-<a id='membersave' href="<c:url value="/admin/memberSaveForm.do"/>">다운로드</a>
+<label> 호스트 엑셀서식 받기 </label>
+<a id='membersave' href="<c:url value="/admin/hostForm.do"/>">다운로드</a>
 
-<form id="upExcel" method="post" action='<c:url value="/admin/excelup.do"/>' enctype="multipart/form-data">
+<form id="upExcel" method="post" action='<c:url value="/admin/excelupHost.do"/>' enctype="multipart/form-data">
 <label style="float:right"><input type="reset" value="취소"></label>
 <label style="float:right"><input type="submit" value="등록"></label>
 <label style="float:right" ><input type="file" id="exfile" name="exfile">(xls,xlsx 확장자만 가능합니다!)</label>
-<label style="float:right">회원 정보 엑셀파일로 등록하기 - &nbsp;&nbsp;&nbsp;</label>
+<label style="float:right">호스트정보 엑셀파일로 등록하기 - &nbsp;&nbsp;&nbsp;</label>
 </form>
 	<table class="table table-hover">
   		<tr>
   			<th>NO</th>
   			<th>이름</th>
   			<th>아이디</th>
+  			<th>은행명</th>
+  			<th>계좌번호</th>
   			<th>가입일자</th>
   			<th>관심목록1</th>
   			<th>관심목록2</th>
@@ -276,6 +278,8 @@ a{
   			<td>${map["M_NO"]}</td>
   			<td>${map["M_NAME"]}</td>
   			<td>${map["M_USERID"]}</td>
+  			<td>${map["M_BANKNAME"]}</td>
+  			<td>${map["M_ACCOUNT"]}</td>
   			<td><fmt:formatDate value="${map['M_JOINDATE'] }" pattern="yyyy-MM-dd"/></td>
  			<td>${map["K_1"] }</td>
  			<td>${map["K_2"] }</td>

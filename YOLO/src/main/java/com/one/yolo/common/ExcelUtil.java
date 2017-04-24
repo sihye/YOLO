@@ -33,15 +33,26 @@ public class ExcelUtil {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	private static final Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
 	@SuppressWarnings("deprecation")
-	public String excelWrith(SearchVO vo){
+	public String excelWrith(SearchVO vo,String type){
 		//Excel Write
 		HSSFWorkbook workbook = new HSSFWorkbook();
+		String realName ="";
 		System.out.println("++++++++++++++++++++++++++++맵실행 전");
-		List<Map<String,Object>> mMap = memberService.ExcelMemberView(vo);
+		List<Map<String,Object>> mMap = null;
+		if(type.equals("member")){
+			mMap = memberService.ExcelMemberView(vo);
+		}else if(type.equals("host")){
+			mMap = memberService.HostExcelView(vo);
+			System.out.println("host size = "+mMap.size());
+		}
 		System.out.println("++++++++++++++++++++++++++++맵실행 후");
-		
-		HSSFSheet sheet = workbook.createSheet("회원");
-
+		HSSFSheet sheet =null;
+		if(type.equals("member")){
+			sheet = workbook.createSheet("회원");
+		}else if(type.equals("host")){
+			sheet = workbook.createSheet("호스트");
+			
+		}
 		sheet.setColumnWidth((short)0, (short)4000); // 1000이 열 너비 3.14
 		sheet.setColumnWidth((short)1, (short)4000); // 1000이 열 너비 3.14
 		sheet.setColumnWidth((short)2, (short)4000); // 1000이 열 너비 3.14
@@ -52,7 +63,11 @@ public class ExcelUtil {
 		sheet.setColumnWidth((short)7, (short)7000); // 1000이 열 너비 3.14
 		sheet.setColumnWidth((short)8, (short)7000); // 1000이 열 너비 3.14
 		sheet.setColumnWidth((short)9, (short)7000); // 1000이 열 너비 3.14
-
+		if(type.equals("host")){
+			sheet.setColumnWidth((short)10, (short)7000); // 1000이 열 너비 3.14
+			sheet.setColumnWidth((short)11, (short)7000); // 1000이 열 너비 3.14
+			System.out.println("host 셀 생성 들어왔음");
+		}
 		//Font 설정.
 		HSSFFont font = workbook.createFont();
 		font.setFontName(HSSFFont.FONT_ARIAL);
@@ -108,6 +123,18 @@ public class ExcelUtil {
 		cell10.setCellValue("관심카테고리3");
 		cell10.setCellStyle(titlestyle);
 		
+		HSSFCell cell11=null;
+		HSSFCell cell12=null;
+		
+		if(type.equals("host")){
+			cell11 = row.createCell((short)10);
+			cell11.setCellValue("은행명");
+			cell11.setCellStyle(titlestyle);
+			
+			cell12 = row.createCell((short)11);
+			cell12.setCellValue("계좌번호");
+			cell12.setCellStyle(titlestyle);
+		}
 
 		//내용 스타일 지정
 		HSSFCellStyle style = workbook.createCellStyle();
@@ -199,13 +226,35 @@ public class ExcelUtil {
 		    	cell10.setCellValue("");
 		    }
 		    cell10.setCellStyle(styleCenter);
+		    
+		    if(type.equals("host")){
+		    	cell11 =row.createCell((short)10);
+		    	 if(map.get("M_BANKNAME")!=null){
+				    	cell11.setCellValue(map.get("M_BANKNAME")+"");
+				    }else{
+				    	cell11.setCellValue("");
+				    }
+				    cell11.setCellStyle(styleCenter);
+				    
+				 cell12 =row.createCell((short)11);
+				    if(map.get("M_ACCOUNT")!=null){
+				    	cell12.setCellValue(map.get("M_ACCOUNT")+"");
+				    }else{
+				    	cell12.setCellValue("");
+				    }
+				    cell12.setCellStyle(styleCenter);
+				    
+		    }
 		   
 		    
 		}
 
 		// 실제 저장될 파일 이름
-		String realName = "member.xls";
-		
+		if(type.equals("member")){
+			realName = "member.xls";
+		}else if(type.equals("host")){
+			realName="host.xls";
+		}
 		
 		// 실제로 저장될 파일 풀 경로
 		
@@ -224,7 +273,12 @@ public class ExcelUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		logger.info("Excel File 생성 OK");
+		if(type.equals("member")){
+		logger.info("member Excel File 생성 OK");
+		}else if(type.equals("host")){
+			logger.info("host Excel File 생성 OK");
+		}
+		
 
 		return realName;
 		

@@ -10,9 +10,9 @@
 	</sql> -->
 	<sql id="searchWhere">
 		<if test="searchKeyword !=null and searchKeyword !=''">
-			where lower(M_USERID) like '%'|| lower(#{searchKeyword}) ||'%'
-			or lower(nb_content) like '%'|| lower(#{searchKeyword}) ||'%'
-			or lower(NB_TITLE) like '%'|| lower(#{searchKeyword}) ||'%'
+			where lower(M_USERID) like '%'|| lower(#{searchKeyword}) ||'%' and nb_delflag='N'
+			or lower(nb_content) like '%'|| lower(#{searchKeyword}) ||'%' and nb_delflag='N'
+			or lower(NB_TITLE) like '%'|| lower(#{searchKeyword}) ||'%' and nb_delflag='N'
 		</if>
 	</sql>
 	
@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="selectTotalRecord" parameterType="SearchVO" resultType="int">
-		select count(*) from noticeboard
+		select count(*) from noticeboard 
 		<include refid="searchWhere"></include>
 	</select> 	
 	
@@ -72,6 +72,25 @@
 	<delete id="deleteNoticeoard" parameterType="int">
 		delete from noticeboard where nb_no=#{nbNo}
 	</delete>
+	
+	
+	<select id="operatorNotice" parameterType="SearchVO" resultType="hashmap">
+		select *
+		from
+		(
+		    select rownum as RNUM ,LIST.*
+		    from
+		    (
+		        select * from noticeboardview
+		        <include refid="searchWhere"></include>
+		        order by nb_no desc
+		    )LIST
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
 	
 </mapper>
 

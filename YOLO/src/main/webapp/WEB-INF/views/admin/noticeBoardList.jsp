@@ -127,7 +127,7 @@ function setSearchDate(start){
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	if($("#searchCondition").val()=='M_JOINDATE'){
+	if($("#searchCondition").val()=='NB_REGDATE'){
 		$("#searchKeyword").hide();
 		$(".clearfix").show();
 	}else{
@@ -142,7 +142,7 @@ $(document).ready(function() {
 	
 	$("#searchCondition").change(function() {
 		var selCondition = $(this).val();
-		if(selCondition == 'M_JOINDATE'){
+		if(selCondition == 'NB_REGDATE'){
 			$("#searchKeyword").hide();
 			$(".clearfix").show();
 		}else{
@@ -153,25 +153,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("#upExcel").submit(function() {
-		var file = $("#exfile").val();
-		var filesub =file.substring(file.lastIndexOf('.')+1);
-		if(file == null || file == ""){
-			alert('업로드된 파일이 없습니다.');
-			event.preventDefault();
-		}else{
-			if(filesub=="xls" || filesub=="xlsx"){
-				$(this).submit();
-			}else{
-				alert('지원하지 않는 파일 형식입니다.');
-				event.preventDefault();
-			}
-			
-		}
-		
-		
-	});
-	
+
 	
 });
 
@@ -243,43 +225,30 @@ a{
 </form>
 
 
-	<h2>회원 관리</h2>
+	<h2>공지사항 관리</h2>
 
     <br><br>
 
-
-<label> 현재 회원 정보 엑셀 저장 </label>
-<a id='downA' href="<c:url value="/admin/excel.do?searchKeyword=${param.searchKeyword }&searchCondition=${param.searchCondition }&searchStartDate=${param.searchStartDate }&searchEndDate=${param.searchEndDate }&type=member "/>">다운로드</a>
-<br>
-<label> 회원 입력 엑셀서식 받기 </label>
-<a id='membersave' href="<c:url value="/admin/memberSaveForm.do"/>">다운로드</a>
-
-<form id="upExcel" method="post" action='<c:url value="/admin/excelup.do"/>' enctype="multipart/form-data">
-<label style="float:right"><input type="reset" value="취소"></label>
-<label style="float:right"><input type="submit" value="등록"></label>
-<label style="float:right" ><input type="file" id="exfile" name="exfile">(xls,xlsx 확장자만 가능합니다!)</label>
-<label style="float:right">회원 정보 엑셀파일로 등록하기 - &nbsp;&nbsp;&nbsp;</label>
-</form>
 	<table class="table table-hover">
   		<tr>
   			<th>NO</th>
-  			<th>이름</th>
-  			<th>아이디</th>
-  			<th>가입일자</th>
-  			<th>관심목록1</th>
-  			<th>관심목록2</th>
-  			<th>관심목록3</th>
+  			<th>제목</th>
+  			<th>작성일</th>
+  			<th>조회수</th>
+  			<th>업로드파일1</th>
+  			<th>업로드파일2</th>
+  			<th>업로드파일3</th>
   		</tr>
   		<c:if test="${!empty alist }">
-  		<c:forEach var="map" items="${alist }">
+  		<c:forEach var="MAP" items="${alist }">
   		<tr>
-  			<td>${map["M_NO"]}</td>
-  			<td>${map["M_NAME"]}</td>
-  			<td>${map["M_USERID"]}</td>
-  			<td><fmt:formatDate value="${map['M_JOINDATE'] }" pattern="yyyy-MM-dd"/></td>
- 			<td>${map["K_1"] }</td>
- 			<td>${map["K_2"] }</td>
- 			<td>${map["K_3"] }</td>
+  			<td>${MAP["NB_NO"] }</td>
+  			<td>${MAP["NB_TITLE"] }</td>
+  			<td><fmt:formatDate value='${MAP["NB_REGDATE"] }' pattern="yyyy-MM-dd"/></td>
+ 			<td>${MAP["NB_READCOUNT"]}</td>
+ 			<td>${MAP["F_1"]}</td>
+ 			<td>${MAP["F_2"]}</td>
+ 			<td>${MAP["F_3"]}</td>
 		</c:forEach>  		
 		</c:if>
 	</table>	
@@ -357,14 +326,11 @@ a{
 	<div class ="divlist">
 	<form  id="frm1" name ="frm1" method="post">
 		<select id="searchCondition" name="searchCondition" style="height: 26px">
-			<option value="M_USERID" <c:if test="${param.searchCondition eq 'M_USERID' }" >selected="selected"</c:if>>
-			ID 검색
+			<option value="NB_TITEL" <c:if test="${param.searchCondition eq 'NB_TITEL' }" >selected="selected"</c:if>>
+			제목 검색
 			</option>
-			<option value="M_NAME" <c:if test="${param.searchCondition eq 'M_NAME' }" >selected="selected"</c:if>>
-			이름 검색
-			</option>
-			<option value="M_JOINDATE" <c:if test="${param.searchCondition eq 'M_JOINDATE' }" >selected="selected"</c:if>>
-			가입일 검색
+			<option value="NB_REGDATE" <c:if test="${param.searchCondition eq 'NB_REGDATE' }" >selected="selected"</c:if>>
+			작성일자 검색
 			</option> 
 		</select>
 		<input type="text"  id = "searchKeyword" name="searchKeyword" style="height: 25px" value="${param.searchKeyword}">
