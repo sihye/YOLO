@@ -66,11 +66,15 @@ values(CATEGORY_seq.nextval,4,4,'스포츠 기타');
 select * from question;
 
 insert into question
-values(QUESTION_seq.nextval,'테스트질문1');
+values(QUESTION_seq.nextval,'나의 출신 고향은?');
 insert into question
-values(QUESTION_seq.nextval,'테스트질문2');
+values(QUESTION_seq.nextval,'어머니의 이름은?');
 insert into question
-values(QUESTION_seq.nextval,'테스트질문3');
+values(QUESTION_seq.nextval,'가장 좋아하는 색은?');
+insert into question
+values(QUESTION_seq.nextval,'반려 동물의 이름은?');
+insert into question
+values(QUESTION_seq.nextval,'내가 존경하는 인물은?');
 
 --membergroup
 select*from membergroup;
