@@ -247,7 +247,7 @@ public class AdminController {
 		
 		logger.info("excel 다운로드 vo={}",vo);
 		String fileName = excelUtil.excelWrith(vo);
-		String upPath = upFileservice.getUploadPath(request, "Excel");
+		String upPath = upFileservice.getUploadPath(request, UpfileService.UP_EXCEL);
 		File file = new File(upPath,fileName);
 		Map<String,Object> fileMap = new HashMap<String, Object>();
 		fileMap.put("downFile", file);
@@ -255,6 +255,22 @@ public class AdminController {
 		
 		ModelAndView mav = new ModelAndView("excelDownView",fileMap);
 		return mav;
+	}
+	
+	@RequestMapping("/memberSaveForm.do")
+	public ModelAndView saveForm(HttpServletRequest request){		
+		logger.info("Excel 폼 다운로드");
+		String fileName="member저장서식(기본).xls"; 
+		String upPath = upFileservice.getUploadPath(request, UpfileService.UP_EXCELSAVEFORM);
+		File file = new File(upPath,fileName);
+		System.out.println("file name =" + file.getName()+"**************************");
+		Map<String,Object> fileMap = new HashMap<String, Object>();
+		fileMap.put("downFile",file);
+		
+		ModelAndView mav = new ModelAndView("excelDownView",fileMap);
+		return mav;
+
+		
 	}
 		
 	
