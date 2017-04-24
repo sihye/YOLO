@@ -53,7 +53,11 @@
 				alert('휴대폰은 숫자를 입력하셔야 합니다');
 				$("#hp2").focus();
 				return false;
-			}	
+			}else if(!$("input:checkbox[id='hobby']").is(":checked") == true){
+				alert("관심사는 하나 이상 체크하셔야 합니다");	
+				return false;
+			}
+			
 		});
 		
 		$("#btnChkId").click(function(){
@@ -207,7 +211,7 @@
 					<label for="hobby">${cg.kgName}</label>	
 					<c:forEach var="c" items="${cList }">
 						<c:if test ="${cg.kgNo == c.kgNo}">
-							<input value='${c.kNo}' onclick=CountChecked(this) 
+							<input value='${c.kNo}' onclick=CountChecked(this) id="hobby"
 							type=checkbox name="kno">${c.kName}
 						</c:if>
 					</c:forEach><br>

@@ -121,7 +121,7 @@ public class MemberController {
 		}
 		
 		logger.info("kno[0]="+kno[0]);
-		logger.info("kno[1]="+kno[1]);
+		//logger.info("kno[1]="+kno[1]);
 		
 		//체크박스 처리
 		switch(kno.length){
@@ -180,7 +180,7 @@ public class MemberController {
 				String msg="", url="";
 				if(cnt>0){
 					msg="회원가입되었습니다";
-					url="/index.do";
+					url="/index2.do";
 				}else{
 					msg="회원가입 실패";
 					url="/member/register.do";
@@ -245,7 +245,7 @@ public class MemberController {
 				response.addCookie(ck);
 				
 				msg="회원 탈퇴처리되었습니다.";
-				url="/index.do";
+				url="/index2.do";
 			}else{
 				msg="회원탈퇴 실패";
 			}

@@ -15,6 +15,11 @@
 	href="${pageContext.request.contextPath}/css/layout.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/mystyle.css" />
+	
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/bootstrap-select.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 
 
 
@@ -47,24 +52,29 @@
 	<form name="frmLogin"  id="frmLogin" method="post" 
 		action="<c:url value='/login/login.do'/>">
 		<fieldset>
-			<legend>로그인</legend>
+			<legend><img src="${pageContext.request.contextPath}/img/tit_login2.gif" 
+		alt="메인 herb이미지"></legend>
 			<div>
-				<label for="userid" class="label">아이디</label>
+				<label for="userid" style="margin-right: 14px;margin-left: 30px">&nbsp;&nbsp;&nbsp;아이디</label>
 				<input type="text" name="userid" id="userid" 
 				value="${cookie.ck_userid.value}">
 			</div>
 			<div>
-				<label for="pwd" class="label">비밀번호</label>
+				<label for="pwd" style="margin-left: 30px;">&nbsp;&nbsp;&nbsp;비밀번호</label>
 				<input type="password" name="pwd" id="pwd">
 			</div>
-			<div class="align_center">
-				<button type="submit" class="btn btn-primary">로그인</button>
+			<div class="align_right">
 				<input type="checkbox" name="chkSaveId" id="chkId" 
 					<c:if test="${!empty cookie.ck_userid }">
 						checked="checked"
 					</c:if>
 				>
-				<label for="chkId">아이디 저장하기</label>
+				<label for="chkId">아이디 저장하기</label><br>
+			</div>	
+			<div class="align_center">
+				<button type="submit" class="btn btn-primary">로그인</button>
+				<button type="button" class="btn btn-primary">취소</button>
+				
 			</div>
 			
 		</fieldset>
