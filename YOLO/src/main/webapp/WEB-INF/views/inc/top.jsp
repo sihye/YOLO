@@ -57,11 +57,15 @@
 						<li><a href="#">Guide</a></li>					
 						<li><a href="#">Contact</a></li>
 					</ul>
-					<!-- 로그인 전 -->
-					<a href="${pageContext.request.contextPath}/login/login.do" class="login_btn">Login</a>
-					<a href="${pageContext.request.contextPath}/member/register.do" class="login_btn">Join</a>
-					<!-- 로그인 후 -->
-					
+					<c:if test="${empty sessionScope.userid }">
+						<a href="${pageContext.request.contextPath}/login/login.do" class="login_btn">Login</a>
+						<a href="${pageContext.request.contextPath}/member/register.do" class="login_btn">Join</a>
+					</c:if>
+					<c:if test="${!empty sessionScope.userid }">
+					<a href="${pageContext.request.contextPath}/login/logout.do" class="login_btn">LoginOut</a>
+					<a href="${pageContext.request.contextPath}/member/memberEdit.do" class="login_btn">
+						Edit Members</a>
+					</c:if>
 				</nav>
 			</div>
 		</header><!--  end header section  -->
