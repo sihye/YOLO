@@ -9,9 +9,6 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
-
-
-
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- datepicker 한국어로 -->
@@ -127,7 +124,7 @@ function setSearchDate(start){
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	if($("#searchCondition").val()=='NB_REGDATE'){
+	if($("#searchCondition").val()=='N_REGDATE'){
 		$("#searchKeyword").hide();
 		$(".clearfix").show();
 	}else{
@@ -142,7 +139,7 @@ $(document).ready(function() {
 	
 	$("#searchCondition").change(function() {
 		var selCondition = $(this).val();
-		if(selCondition == 'NB_REGDATE'){
+		if(selCondition == 'N_REGDATE'){
 			$("#searchKeyword").hide();
 			$(".clearfix").show();
 		}else{
@@ -154,18 +151,29 @@ $(document).ready(function() {
 	});
 	
 	
-	$("#")
+	
+		
+	
 
 	
 });
-
-
 
 
 function pageFunc(curPage){
 	document.frmPage.currentPage.value=curPage;
 	frmPage.submit();
 }
+
+function detail(no) {
+	 window.open(
+			"<c:url value='/admin/badClassDetail.do?cno="+no+ "'/>", '신고내용',
+						'width=400,height=200,left=10,top=10,location=yes,resizable=yes'); 
+}
+
+
+ 
+	
+
 </script>
 <style>
 
@@ -217,7 +225,7 @@ a{
 
 <!-- 페이징 처리를 위한 form 태그 -->
 <form name="frmPage" method="post"
-	action='<c:url value="/admin/operatorMember.do" />'>
+	action='<c:url value="/admin/operatorBadClass.do" />'>
 	<input type="hidden" name="currentPage"> <input type="hidden"
 		name="searchCondition" value="${param.searchCondition }"> <input
 		type="hidden" name="searchKeyword" value="${param.searchKeyword}">
@@ -227,30 +235,39 @@ a{
 </form>
 
 
-	<h2>공지사항 관리</h2>
-
-    <br><br>
+	<h2>신고 클래스 관리</h2>
+<br>
 
 	<table class="table table-hover">
   		<tr>
   			<th>NO</th>
-  			<th>제목</th>
-  			<th>작성일</th>
-  			<th>조회수</th>
-  			<th>업로드파일1</th>
-  			<th>업로드파일2</th>
-  			<th>업로드파일3</th>
+  			<th>카테고리</th>
+  			<th>신고 클래스</th>
+  			<th>클래스 호스트</th>
+  			<th>신고 유형</th>
+  			<th>신고접수일</th>
+  			<th>클래스처리여부</th>
+  			<th>처리</th>
   		</tr>
   		<c:if test="${!empty alist }">
-  		<c:forEach var="MAP" items="${alist }">
+  		<c:forEach var="map" items="${alist }">
   		<tr>
-  			<td>${MAP["NB_NO"] }</td>
-  			<td><a href="#">${MAP["NB_TITLE"] }</a></td>
-  			<td><fmt:formatDate value='${MAP["NB_REGDATE"] }' pattern="yyyy-MM-dd"/></td>
- 			<td>${MAP["NB_READCOUNT"]}</td>
- 			<td>${MAP["F_1"]}</td>
- 			<td>${MAP["F_2"]}</td>
- 			<td>${MAP["F_3"]}</td>
+  			<td>${map["C_NO"]}</td>
+  			<td>${map["K_NAME"]}</td>
+  			<td>${map["C_NAME"]}</td>
+  			<td>${map["M_USERID"] }</td>
+  			<td><a href="#" onclick="detail(${map['C_NO']} )">${map["N_CODE"] }</a></td>
+  			<td><fmt:formatDate value="${map['N_REGDATE'] }" pattern="yyyy-MM-dd"/></td> 
+  			<td>${map["C_DEL"] }</td>
+  			<td>
+  			<c:if test="${map['C_DEL'] eq 'N' }">
+  				<a href="<c:url value='/admin/editBadclass.do?type=del&cNo=${map["C_NO"] }'/>" onclick="return confirm(&quot;정말 ${map['C_NAME']} 클래스를 삭제하시겠습니까 ?&quot;)" >삭제</a>
+  			</c:if>
+  			<c:if test="${map['C_DEL'] eq 'Y' }">
+  				<a href="<c:url value='/admin/editBadclass.do?type=reset&cNo=${map["C_NO"] }'/>" onclick="return confirm(&quot;정말  ${map['C_NAME']} 클래스에 대한 삭제취소를 하시겠습니까 ?&quot;)" >삭제취소</a>
+  			</c:if>
+  			</td>
+ 			
 		</c:forEach>  		
 		</c:if>
 	</table>	
@@ -262,29 +279,6 @@ a{
 	
 	
   
-	<%-- <form class="form-inline" role="form" name="frm1" id="frm1" method="post" action='<c:url value="/admin/operatorInsert.do"/>' enctype="multipart/form-data">
-	  <div class="form-group">
-	  </div>
-	  <div class="form-group">
-	   <select id="Select1" name="kNo" class="selectpicker" style="height:30px">
-	   <option value="">
-	   	검색 목록
-	   </option>
-	   <option value="M_USERID">
-	   ID 검색
-	   </option>
-	   <option value="M_NAME">
-	   이름 검색
-	   </option>
-		</select>
-		</div>
-	   <div class="form-group">
-	   <input type="text"> 
-		
-		<input type="submit" id="btSubmit" value="검색">
-		
-	  </div>
-	</form> --%>
 	<div class="divList">
 	<div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->
@@ -328,11 +322,14 @@ a{
 	<div class ="divlist">
 	<form  id="frm1" name ="frm1" method="post">
 		<select id="searchCondition" name="searchCondition" style="height: 26px">
-			<option value="NB_TITEL" <c:if test="${param.searchCondition eq 'NB_TITEL' }" >selected="selected"</c:if>>
-			제목 검색
+			<option value="C_NAME" <c:if test="${param.searchCondition eq 'C_NAME' }" >selected="selected"</c:if>>
+			클래스명 검색
 			</option>
-			<option value="NB_REGDATE" <c:if test="${param.searchCondition eq 'NB_REGDATE' }" >selected="selected"</c:if>>
-			작성일자 검색
+			<option value="M_USERID" <c:if test="${param.searchCondition eq 'M_USERID' }" >selected="selected"</c:if>>
+			호스트명 검색
+			</option>
+			<option value="N_REGDATE" <c:if test="${param.searchCondition eq 'N_REGDATE' }" >selected="selected"</c:if>>
+			신고일 검색
 			</option> 
 		</select>
 		<input type="text"  id = "searchKeyword" name="searchKeyword" style="height: 25px" value="${param.searchKeyword}">
