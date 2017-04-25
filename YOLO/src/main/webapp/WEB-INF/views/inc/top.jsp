@@ -45,23 +45,53 @@
 </head>
 <body>
 <section class="hero">
-		<header>
-			<div class="wrapper">
-				<a href="${pageContext.request.contextPath}/index2.do" class="logo">YOLO</a>
-				<a href="#" class="hamburger"></a>
-				<nav>
-					<ul>
-					<!-- 상단 네비 -->
-						<li><a href="#">About</a></li>
-						<li><a href="#">Notice</a></li>
-						<li><a href="#">Guide</a></li>					
-						<li><a href="#">Contact</a></li>
+ <header>
+	<div class="wrapper">
+		<a href="${pageContext.request.contextPath}/index2.do" class="logo" style="font-size: 30px;">YOLO</a>
+		
+		<a href="#" class="hamburger"></a>	
+		
+			
+		<nav>
+		
+		<ul>
+			<!-- 상단 네비 -->
+			
+			<li><a href="#">About</a></li>
+			<li><a href="#">Notice</a></li>
+			<li><a href="#">Guide</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
+		
+		<!-- 로그인 전 --> 
+		<c:if test="${empty sessionScope.userid }">
+			<a href="${pageContext.request.contextPath}/login/login.do"
+				class="login_btn">Login</a>
+			<a href="${pageContext.request.contextPath}/member/register.do"
+				class="login_btn">Join</a>	
+			
+		</c:if> 
+		<!-- 로그인 후 -->
+		<c:if test="${!empty sessionScope.userid }">
+			
+			<a href="${pageContext.request.contextPath}/member/memberEdit.do"
+				class="login_btn">회원탈퇴</a>
+			<a class="dropdown">
+			<a data-toggle="dropdown" href="#" style="color: white;" class="login_btn"> ${sessionScope.userName} 님</a>
+					<ul class="dropdown-menu" role="menu">
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="${pageContext.request.contextPath}/mypage/Favorite/FavoriteClass.do">마이페이지</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="#">쪽지함</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" 
+						href="${pageContext.request.contextPath}/login/logout.do">로그아웃</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" 
+						href="${pageContext.request.contextPath}/member/memberOut.do">회원탈퇴</a></li>
 					</ul>
-					<!-- 로그인 전 -->
-					<a href="${pageContext.request.contextPath}/login/login.do" class="login_btn">Login</a>
-					<a href="${pageContext.request.contextPath}/member/register.do" class="login_btn">Join</a>
-					<!-- 로그인 후 -->
-					
-				</nav>
-			</div>
-		</header><!--  end header section  -->
+				</a>
+		</c:if> 
+		 </nav>
+	</div>
+
+</header><!--  end header section  -->
