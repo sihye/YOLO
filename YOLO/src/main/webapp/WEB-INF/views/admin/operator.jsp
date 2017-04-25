@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="../inc/admin/top.jsp" %>
-<link href="<c:url value='/css/bootstrap-select.min.css'/>" rel="stylesheet" type="text/css"/>
-<script src="<c:url value='/js/bootstrap-select.min.js'/>" ></script>
-
 
 <script type="text/javascript">
 

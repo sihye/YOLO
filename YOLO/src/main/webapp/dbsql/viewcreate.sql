@@ -52,6 +52,14 @@ where mg_no2=2;
 
 
 
+create view operatorHostView
+as
+select m_userid,m_no,m_name,m_joindate,m_bankname,m_accoutn,(select c.k_name from category c where c.K_NO = m.k_no1)as k_1 ,
+(select c.k_name from category c where c.K_NO = m.k_no2) as k_2 ,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
+from member m  
+where mg_no2=3;
+
+
 
 CREATE OR REPLACE VIEW mypayment
 AS SELECT p.*,c.C_NAME,C_PRICE
@@ -65,3 +73,23 @@ AS SELECT m.MS_USERID,m.MS_CONTENT,m.MS_REGDATE,m.MS_TITLE,m2.MS_NO,m2.MSMG_USER
 FROM message m,messagemaga m2
 WHERE m.MS_NO=m2.MS_NO;
 select*from messagsend;
+
+
+
+
+
+
+
+create view noticeboardview   --包府磊 notice view
+as
+select nb_no,nb_title,nb_regdate,nb_readcount,(select f_filename from upfile u where n.f_no1=u.f_no) as f_1,(select f_filename from upfile u where n.f_no2=u.f_no) as f_2,(select f_filename from upfile u where n.f_no3=u.f_no) as f_3
+from noticeboard n
+where nb_delflag='N'
+
+
+
+create view ExcelHostView   --包府磊 host 竣伎
+as
+select m.M_NO,M_USERID, m.M_NAME,m.M_BANKNAME,m.M_ACCOUNT ,m.M_TEL1, m.M_TEL2, m.M_TEL3, m.M_EMAIL1, m.M_EMAIL2, m.M_ADDRESS, m.M_ADDRESSDETAIL, m.M_JOINDATE,
+(select c.k_name from category c where c.K_NO = m.k_no1) as k_1,(select c.k_name from category c where c.K_NO = m.k_no2) as k_2,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
+from member m where m.mg_no2 = 3

@@ -2,7 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="mypageFavoritetop.jsp"%>
 <script type="text/javascript">
-
+function delNoFunc(delNo) { 
+	location.href='<c:url value="/mypage/Favorite/seeClassdeleteNo.do?cNo='+delNo+'" />';
+}
+function delFunc() { 
+	location.href='<c:url value="/mypage/Favorite/seeClassdelete.do" />';
+} 
 function pageFunc(curPage){
 	document.frmPage.currentPage.value=curPage;
 	frmPage.submit();
@@ -40,20 +45,20 @@ function pageFunc(curPage){
 					<th width="20%">장소</th>
 					<th width="20%">가격</th>
 					<th width="20%">결제방법</th>
-					<th width="20%">등록일</th>
+					<th width="20%">호스트</th>
 
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="map" items="${alist }">
+				<c:forEach var="vo" items="${alist }">
 					<tr>
-						<td>${map["C_NAME"] }</td>
-						<td>${map["C_PALCE"] }</td>
-						<td>${map["C_PRICE"] }</td>
-						<td>${map["C_PAYMENTWAY"] }</td>
-						<td>${map["SC_REGDATE"] }</td>
+						<td>${vo.cName }</td>
+						<td>${vo.cPlace }</td>
+						<td>${vo.cPrice }</td>
+						<td>${vo.cPaymentway }</td>
+						<td>${vo.mUserid }</td>
 						<td><button id="del" class="btn btn-primary" type="button"
-								onclick="delNoFunc(${map['SB_NO']})">삭제</button></td>
+								onclick="delNoFunc(${vo.cNo})">삭제</button></td>
 					</tr>
 				</c:forEach>
 
@@ -62,7 +67,7 @@ function pageFunc(curPage){
 				<tr>
 					<td colspan="6" style="text-align: center">
 						<button id="alldel" class="btn btn-primary" type="button"
-							onclick="delIdFunc()">삭제</button>
+							onclick="delFunc()">최근 본 상품 비우기</button>
 					</td>
 				</tr>
 			</tfoot>

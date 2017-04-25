@@ -18,6 +18,10 @@ public interface MemberDAO {
 
 	public List<Map<String, Object>> MemberSelectPG(SearchVO vo);
 	public int MemberSeletCount(SearchVO vo);
-
+	public int updateMember(MemberVO vo);
+	public List<Map<String , Object>> HostSelectPG(SearchVO vo);
+	public int HostSeletCount(SearchVO vo);
+	public List<Map<String, Object>> HostExcelView(SearchVO vo);
+	public int hostInsert(MemberVO vo);
 
 }

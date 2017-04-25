@@ -188,9 +188,9 @@ public class UpfileServiceImpl implements UpfileService{
 			    HSSFRow row=sheet.getRow(rowindex);
 			    if(row !=null){
 			        //셀의 수
-			        int cells=row.getPhysicalNumberOfCells();
+			        int cells=row.getPhysicalNumberOfCells()+1;
 			        MemberVO  vo = new MemberVO();
-			        for(columnindex=0;columnindex<cells;columnindex++){
+			        for(columnindex=0;columnindex<=cells;columnindex++){
 			            //셀값을 읽는다
 			            HSSFCell cell=row.getCell(columnindex);
 			            String value="";
@@ -216,19 +216,20 @@ public class UpfileServiceImpl implements UpfileService{
 			                	 vo.setmName(value);
 			                	 continue;
 			                case 3://핸드폰
-			                
-			                		value=cell.getStringCellValue()+"";
-			                		String tel []={"","",""};
+			                		if(cell!=null){
+			                		value=cell.getStringCellValue();
+			                		String tel []= new String[3];
 			                		if(value!=null){
-			                		tel= value.split("-");
+			                		tel = value.split("-");
+			                		System.out.println("size = "+tel.length +", tel value="+cell.getStringCellValue());
 			                		}
 			                		vo.setmTel1(tel[0]);
 			                		vo.setmTel2(tel[1]);
-			                		vo.setmTel3(tel[2]);
-			                	
+			                		vo.setmTel3(tel[2]);	
+			                		}
 			                		continue;
 			                case 4://이메일
-			                	
+			                	if(cell!=null){
 			                		value=cell.getStringCellValue()+"";
 			                		String email[]={"",""};
 			                		if(value!=null && !value.isEmpty()){
@@ -236,22 +237,26 @@ public class UpfileServiceImpl implements UpfileService{
 			                		}
 			                		vo.setmEmail1(email[0]);
 			                		vo.setmEmail2(email[1]);
-			                	
+			                	}
 			                		continue;
 			                case 5://주소
-			                
+			                	if(cell!=null){
 			                		value=cell.getStringCellValue()+"";
-			                		String addr[] ={"",""};
+			                		System.out.println(value+"= addr");
+			                		String addr[] =new String[2];
 			                		if(value!=null && !value.isEmpty()){
-			                			addr = value.split("-");
+			                			addr = value.split("/");
+			                			System.out.println("size = "+addr.length +", addr value="+value);
 			                		}
 			                		vo.setmAddress(addr[0]);
 			                		vo.setmAddressdetail(addr[1]);
-				               	
+			                	}
 			                		continue;
 			                case 6://관심1
-			
+			                		if(cell !=null){
 			                		value=cell.getStringCellValue()+"";
+			                		
+			                		if(value!=null && !value.isEmpty()){
 			                		int kno;
 			                		for(int i=0; i<categoryList.size();i++){
 			                			CategoryVO cvo = categoryList.get(i);
@@ -260,12 +265,16 @@ public class UpfileServiceImpl implements UpfileService{
 			                				System.out.println("Kno="+kno);
 			                				vo.setkNo1(kno);
 			                			}
+			                			}
+			                		}
 			                		}
 			                	
 			                		continue;
 			                case 7://관심2
-			                	
-			                		value=cell.getStringCellValue()+"";
+			                		if(cell !=null){
+			                			value=cell.getStringCellValue()+"";
+			                		
+			                		if(value!=null && !value.isEmpty()){
 			                		int kno1;
 			                		for(int i=0; i<categoryList.size();i++){
 			                			CategoryVO cvo = categoryList.get(i);
@@ -275,11 +284,17 @@ public class UpfileServiceImpl implements UpfileService{
 			                				vo.setkNo2(kno1);
 			                			}
 			                		}
+			                		}
+			                		}
+			                
+			                
+			                		
 			                	
 			                		continue;
 			                case 8://관심3
-			                
+			                	if(cell !=null){
 			                		value=cell.getStringCellValue()+"";
+			                		if(value!=null && !value.isEmpty()){
 			                		int kno11;
 			                		for(int i=0; i<categoryList.size();i++){
 			                			CategoryVO cvo = categoryList.get(i);
@@ -289,16 +304,17 @@ public class UpfileServiceImpl implements UpfileService{
 			                				vo.setkNo3(kno11);
 			                			}
 			                		}
+			                	}
+			                	}
 			                	
 			                		continue;
 			                case 9://질문
-			             
 			                		value=cell.getStringCellValue()+"";
 			                		for(int i=0; i<qlist.size();i++){
 			                			QuestionVO qvo = qlist.get(i);
 			                			if(qvo.getqQuestionname().equals(value)){
 			                				vo.setqQuestionno(qvo.getqQuestionno());
-			                				System.out.println("qno="+qvo.getqQuestionname());
+			                				System.out.println("qno="+vo.getqQuestionno());
 			                			}
 			                		}
 			                
@@ -306,6 +322,7 @@ public class UpfileServiceImpl implements UpfileService{
 			                case 10://답
 			                		value=cell.getStringCellValue()+"";	
 			                	  	vo.setmQuestionanswer(value);
+			                	  	System.out.println("qan ="+vo.getmQuestionanswer());
 			                	  	continue;
 			                }
 				            System.out.println("각 셀 내용 :"+value);
@@ -324,6 +341,200 @@ public class UpfileServiceImpl implements UpfileService{
 		return list;
 
 	}
+
+	@Override
+	public List<MemberVO> readExcelHost(File file) {
+		List<MemberVO> list = new ArrayList<MemberVO>();
+		List<CategoryVO> categoryList = categoryService.selectAll();
+		System.out.println("cLIst ="+categoryList.size());
+		List<QuestionVO> qlist = qService.selectAll();
+		System.out.println("qlist ="+qlist.size());
+		//파일을 읽기위해 엑셀파일을 가져온다
+		
+		FileInputStream fis;
+		try {
+			fis = new FileInputStream(file);
+			HSSFWorkbook workbook=new HSSFWorkbook(fis);
+			
+			int rowindex=0;
+			int columnindex=0;
+			//시트 수 (첫번째에만 존재하므로 0을 준다)
+			//만약 각 시트를 읽기위해서는 FOR문을 한번더 돌려준다
+			HSSFSheet sheet=workbook.getSheetAt(0);
+			//행의 수
+			int rows=sheet.getPhysicalNumberOfRows();
+			for(rowindex=1;rowindex<=rows;rowindex++){
+			    //행을 읽는다
+			    HSSFRow row=sheet.getRow(rowindex);
+			    if(row !=null){
+			        //셀의 수
+			        int cells=row.getPhysicalNumberOfCells()+1;
+			        MemberVO  vo = new MemberVO();
+			        for(columnindex=0;columnindex<=cells;columnindex++){
+			            //셀값을 읽는다
+			            HSSFCell cell=row.getCell(columnindex);
+			            String value="";
+			                //타입별로 내용 읽기
+			          
+			                switch(columnindex){
+			                case 0://아이디
+			                	if(cell!=null){
+			                		value=cell.getStringCellValue()+"";
+			                	}
+			                    vo.setmUserid(value);
+			                    continue;
+			                case 1://비밀번호
+			                	if(cell!=null){
+			                		value=cell.getStringCellValue()+"";
+			                	}
+			                    vo.setmPwd(value);
+			                    continue;   
+			                case 2://이름
+			                	if(cell!=null){
+			                		value=cell.getStringCellValue()+"";
+			                	}
+			                	 vo.setmName(value);
+			                	 continue;
+			                case 3://핸드폰
+			                		if(cell!=null){
+			                		value=cell.getStringCellValue();
+			                		String tel []= new String[3];
+			                		if(value!=null){
+				                		tel = value.split("-");
+				                		System.out.println("size = "+tel.length +", tel value="+cell.getStringCellValue());
+			                		}
+			                		vo.setmTel1(tel[0]);
+			                		vo.setmTel2(tel[1]);
+			                		vo.setmTel3(tel[2]);	
+			                		}
+			                		continue;
+			                case 4://이메일
+			                	if(cell!=null){
+			                		value=cell.getStringCellValue()+"";
+			                		String email[]={"",""};
+			                		if(value!=null && !value.isEmpty()){
+				                		email = value.split("@");
+			                		}
+			                		vo.setmEmail1(email[0]);
+			                		vo.setmEmail2(email[1]);
+			                	}
+			                		continue;
+			                case 5://주소
+			                	if(cell!=null){
+			                		value=cell.getStringCellValue()+"";
+			                		System.out.println(value+"= addr");
+			                		String addr[] =new String[2];
+			                		if(value!=null && !value.isEmpty()){
+			                			addr = value.split("/");
+			                			System.out.println("size = "+addr.length +", addr value="+value);
+			                		}
+			                		vo.setmAddress(addr[0]);
+			                		vo.setmAddressdetail(addr[1]);
+			                	}
+			                		continue;
+			                case 6://관심1
+			                		if(cell !=null){
+			                		value=cell.getStringCellValue()+"";
+			                		
+			                		if(value!=null && !value.isEmpty()){
+			                		int kno;
+			                		for(int i=0; i<categoryList.size();i++){
+			                			CategoryVO cvo = categoryList.get(i);
+			                			if(cvo.getkName().equals(value)){
+			                				kno=cvo.getkNo();
+			                				System.out.println("Kno="+kno);
+			                				vo.setkNo1(kno);
+			                			}
+			                			}
+			                		}
+			                		}
+			                	
+			                		continue;
+			                case 7://관심2
+			                		if(cell !=null){
+			                			value=cell.getStringCellValue()+"";
+			                		
+			                		if(value!=null && !value.isEmpty()){
+			                		int kno1;
+			                		for(int i=0; i<categoryList.size();i++){
+			                			CategoryVO cvo = categoryList.get(i);
+			                			if(cvo.getkName().equals(value)){
+			                				kno1=cvo.getkNo();
+			                				System.out.println("Kno="+kno1);
+			                				vo.setkNo2(kno1);
+			                			}
+			                		}
+			                		}
+			                		}
+			                
+			                
+			                		
+			                	
+			                		continue;
+			                case 8://관심3
+			                	if(cell !=null){
+			                		value=cell.getStringCellValue()+"";
+			                		if(value!=null && !value.isEmpty()){
+			                		int kno11;
+			                		for(int i=0; i<categoryList.size();i++){
+			                			CategoryVO cvo = categoryList.get(i);
+			                			if(cvo.getkName().equals(value)){
+			                				kno11=cvo.getkNo();
+			                				System.out.println("Kno="+kno11);
+			                				vo.setkNo3(kno11);
+			                			}
+			                		}
+			                	}
+			                	}
+			                	
+			                		continue;
+			                case 9://질문
+			                		value=cell.getStringCellValue()+"";
+			                		for(int i=0; i<qlist.size();i++){
+			                			QuestionVO qvo = qlist.get(i);
+			                			if(qvo.getqQuestionname().equals(value)){
+			                				vo.setqQuestionno(qvo.getqQuestionno());
+			                				System.out.println("qno="+vo.getqQuestionno());
+			                			}
+			                		}
+			                
+			                		continue;
+			                case 10://답
+			                		value=cell.getStringCellValue()+"";	
+			                	  	vo.setmQuestionanswer(value);
+			                	  	System.out.println("qan ="+vo.getmQuestionanswer());
+			                	  	continue;
+			                case 11:
+		                    	value=cell.getStringCellValue()+"";
+		                    	vo.setmBankname(value);
+		                	continue;
+		                	
+			                case 12:
+	                    	value=(int)(cell.getNumericCellValue())+"";
+	                    	vo.setmAccount(value);
+	                    	continue;	  	
+			                }
+				            System.out.println("각 셀 내용 :"+value);
+			            }
+			        list.add(vo);
+			        }
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
+
+			        
+		
+	}
+	
+	
+	
 
 
 }

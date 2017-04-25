@@ -20,7 +20,7 @@
 
 	<section class="search">
 		<div class="wrapper" ID="SEARCHDIV">
-			<form action="#" method="post">
+			<form action="<c:url value='/class/searchClass.do'/>" method="post" name="searchClass" id="searchClass">
 				<input type="text" id="search" name="search" placeholder="What are you looking for?"  autocomplete="off"/>
 				<input type="submit" id="submit_search" name="submit_search"/>
 			</form>

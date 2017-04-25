@@ -11,7 +11,32 @@ public class NoticeboardVO {
 	private int nbReadcount;
 	private String nbContent;
 	private String nbDelflag;
+	private int fNo1;
+	private int fNo2;
+	private int fNo3;
 	
+	
+	
+	
+	
+	public int getfNo1() {
+		return fNo1;
+	}
+	public void setfNo1(int fNo1) {
+		this.fNo1 = fNo1;
+	}
+	public int getfNo2() {
+		return fNo2;
+	}
+	public void setfNo2(int fNo2) {
+		this.fNo2 = fNo2;
+	}
+	public int getfNo3() {
+		return fNo3;
+	}
+	public void setfNo3(int fNo3) {
+		this.fNo3 = fNo3;
+	}
 	public int getNbNo() {
 		return nbNo;
 	}

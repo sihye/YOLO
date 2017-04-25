@@ -4,36 +4,86 @@
 select * from categorygroup;
 
 insert into categorygroup
-values(CATEGORYGROUP_seq.nextval,1,'카테고리분류1');
+values(CATEGORYGROUP_seq.nextval,1,'라이프스타일');
 insert into categorygroup
-values(CATEGORYGROUP_seq.nextval,1,'카테고리분류2');
+values(CATEGORYGROUP_seq.nextval,2,'외국어');
 insert into categorygroup
-values(CATEGORYGROUP_seq.nextval,1,'카테고리분류3');	
+values(CATEGORYGROUP_seq.nextval,3,'뷰티/미용');	
+insert into categorygroup
+values(CATEGORYGROUP_seq.nextval,4,'스포츠');	
+insert into categorygroup
+values(0,0,'임시');	
 
 --category
 select * from category;
 
 insert into category
-values(CATEGORY_seq.nextval,1,1,'카테고리1');
+values(CATEGORY_seq.nextval,1,1,'독서/글쓰기');
 insert into category
-values(CATEGORY_seq.nextval,1,1,'카테고리2');
+values(CATEGORY_seq.nextval,1,2,'봉사활동');
 insert into category
-values(CATEGORY_seq.nextval,1,1,'카테고리3');
+values(CATEGORY_seq.nextval,1,3,'요리/베이킹');
+insert into category
+values(CATEGORY_seq.nextval,1,4,'반려동물');
+insert into category
+values(CATEGORY_seq.nextval,1,5,'라이프스타일 기타');
+insert into category
+values(0,0,0,'임시');
+
+insert into category
+values(CATEGORY_seq.nextval,2,1,'영어');
+insert into category
+values(CATEGORY_seq.nextval,2,2,'중국어');
+insert into category
+values(CATEGORY_seq.nextval,2,3,'일본어');
+insert into category
+values(CATEGORY_seq.nextval,2,4,'외국어 기타');
+
+insert into category
+values(CATEGORY_seq.nextval,3,1,'헤어');
+insert into category
+values(CATEGORY_seq.nextval,3,2,'네일');
+insert into category
+values(CATEGORY_seq.nextval,3,3,'메이크업');
+insert into category
+values(CATEGORY_seq.nextval,3,4,'뷰티/미용 기타');
+
+insert into category
+values(CATEGORY_seq.nextval,4,1,'축구');
+insert into category
+values(CATEGORY_seq.nextval,4,2,'야구');
+insert into category
+values(CATEGORY_seq.nextval,4,3,'요가');
+insert into category
+values(CATEGORY_seq.nextval,4,4,'스포츠 기타');
+
+
+
+
+
+
+
+
+
 --question
 
 select * from question;
 
 insert into question
-values(QUESTION_seq.nextval,'테스트질문1');
+values(QUESTION_seq.nextval,'나의 출신 고향은?');
 insert into question
-values(QUESTION_seq.nextval,'테스트질문2');
+values(QUESTION_seq.nextval,'어머니의 이름은?');
 insert into question
-values(QUESTION_seq.nextval,'테스트질문3');
+values(QUESTION_seq.nextval,'가장 좋아하는 색은?');
+insert into question
+values(QUESTION_seq.nextval,'반려 동물의 이름은?');
+insert into question
+values(QUESTION_seq.nextval,'내가 존경하는 인물은?');
 
 --membergroup
 select*from membergroup;
 
-insert into membergroup
+ insert into membergroup
 values(1,1,'admin');
 insert into membergroup
 values(2,2,'member');
@@ -44,13 +94,12 @@ values(3,3,'host');
 --Member
 select * from member ;
 
-insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO3,Q_QUESTIONNO,M_QUESTIONANSWER)
+insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER)
 values('hong','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답');
-insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO3,Q_QUESTIONNO,M_QUESTIONANSWER)
+insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER)
 values('kim','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답');
-insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO3,Q_QUESTIONNO,M_QUESTIONANSWER)
+insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER)
 values('chang','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답');
-
 
 
 --class
@@ -121,15 +170,7 @@ insert into CLASSBOARD
 values(CLASSBOARD_seq.nextval,4,'chang','후기','2014-03-15',0,'fdsfsdsf',4,'fdsds');
 insert into CLASSBOARD
 values(CLASSBOARD_seq.nextval,5,'chang','후기','2014-01-13',0,'fdsfsdsf',4,'fdsds');
---message
-select*from message;
 
-insert into message
-values(MESSAGE_seq.nextval,'hong','abc','sdfdsfs',sysdate);
-insert into message
-values(MESSAGE_seq.nextval,'kim','abc','sdfdsfs',sysdate);
-insert into message
-values(MESSAGE_seq.nextval,'chang','abc','sdfdsfs',sysdate);
 
 --boardgroup
 select*from boardgroup;
@@ -180,6 +221,12 @@ values(SHOPPINGBASKET_seq.nextval,'kim',1,sysdate);
 insert into shoppingbasket
 (SB_NO,SB_USERID,C_NO,SC_REGDATE)
 values(SHOPPINGBASKET_seq.nextval,'chang',1,sysdate);
+insert into shoppingbasket
+(SB_NO,SB_USERID,C_NO,SC_REGDATE)
+values(SHOPPINGBASKET_seq.nextval,'hong',2,sysdate);
+insert into shoppingbasket
+(SB_NO,SB_USERID,C_NO,SC_REGDATE)
+values(SHOPPINGBASKET_seq.nextval,'hong',3,sysdate);
 
 
 -- 결제
@@ -234,23 +281,27 @@ values(2,1,2,'');
 insert into operator
 (OP_NO,F_NO,K_NO,OP_SHOWFLAG)
 values(3,1,3,'');
+--message
+select*from message;
 
+insert into message
+values(MESSAGE_seq.nextval,'hong','kim','abc','sdfdsfs',sysdate);
+insert into message
+values(MESSAGE_seq.nextval,'kim','chang','abc','sdfdsfs',sysdate);
+insert into message
+values(MESSAGE_seq.nextval,'chang','hong','abc','sdfdsfs',sysdate);
 
 -- 쪽지관리
 select*from messagemaga;
-
 insert into messagemaga
-(MS_NO,M_USERID,COL2)
-values(1,'hong','y');
-
+(MS_NO,MSMG_USERID,MS_CHECK)
+values(MESSAGEMAGA_seq.nextval,'kim','y');
 insert into messagemaga
-(MS_NO,M_USERID,COL2)
-values(2,'kim','y');
-
+(MS_NO,MSMG_USERID,MS_CHECK)
+values(MESSAGEMAGA_seq.nextval,'chang','y');
 insert into messagemaga
-(MS_NO,M_USERID,COL2)
-values(3,'chang','y');
-
+(MS_NO,MSMG_USERID,MS_CHECK)
+values(MESSAGEMAGA_seq.nextval,'hong','y');
 
 -- 신고
 select*from notify;

@@ -91,13 +91,31 @@ public class MemberServiceImpl implements MemberService{
 	
 		return memberDao.MemberSeletCount(vo);
 	}
-	
-	
-	
-	
-	
 
-	
+	@Override
+	public int updateMember(MemberVO vo) {
+		return memberDao.updateMember(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> HostSelectPG(SearchVO vo) {
+		return memberDao.HostSelectPG(vo);
+	}
+
+	@Override
+	public int HostSeletCount(SearchVO vo) {
+		return memberDao.HostSeletCount(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> HostExcelView(SearchVO vo) {
+		return memberDao.HostExcelView(vo);
+	}
+
+	@Override
+	public int hostInsert(MemberVO vo) {
+		return memberDao.hostInsert(vo);
+	}
 	
 	
 	

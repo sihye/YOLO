@@ -22,4 +22,5 @@ public interface UpfileService {
 	public UpfileVO selectByFno(int no);
 	public int deleteByFno(int no);
 	public List<MemberVO> readExcel(File file);
+	public List<MemberVO> readExcelHost(File file);
 }

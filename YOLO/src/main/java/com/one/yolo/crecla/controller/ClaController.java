@@ -3,7 +3,9 @@ package com.one.yolo.crecla.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +39,10 @@ public class ClaController {
 	private UpfileService uService;
 	@Autowired
 	private FileUploadWebUtil fileUploadWebUtil;
+
+
 	
+	//클래스 생성 페이지 보여주기
 	@RequestMapping(value="/clacre.do", method=RequestMethod.GET)
 	public String showClaCre_get(@RequestParam(defaultValue="0", required=false)int kgNo,Model model){
 		logger.info("클래스생성페이지 보여주기");
@@ -49,6 +54,8 @@ public class ClaController {
 		model.addAttribute("cateList", cateList);
 		return "class/creclass";
 	}
+	
+	//클래스 인서트
 	@RequestMapping(value="/clacre.do", method=RequestMethod.POST)
 	public String insertCla(HttpServletRequest req, @ModelAttribute ClassVO vo, Model model){
 		logger.info("클래스 insert param vo={}",vo);
@@ -106,10 +113,18 @@ public class ClaController {
 		return "common/message";
 	}
 	
-	@RequestMapping("claDetail.do")
-	public String claDetail(int cNo, Model model){
+
+
+	@RequestMapping("/claDetail.do")
+	public String claDetail(int cNo, Model model, HttpServletResponse response){
 		logger.info("클래스 디테일 파람no={}",cNo);
-		ClassVO vo=claService.selClass(cNo);
+		String claNo = Integer.toString(cNo);
+		Cookie cookie =new Cookie("classNo"+claNo,claNo);
+		cookie.setPath("/");
+		cookie.setMaxAge(60*60*24);
+		response.addCookie(cookie);
+		
+		ClassVO vo=claService.selClass(cNo);	
 		String kName=cService.selCateNameByNo(vo.getkNo());
 		model.addAttribute("claVo", vo);
 		model.addAttribute("kName", kName);
@@ -117,10 +132,25 @@ public class ClaController {
 	}
 	
 
-	@RequestMapping("bsTest3.do")
+	@RequestMapping("classCre.do")
 	public void test(){
 		logger.info("test확인");
 
+	}
+	
+	@RequestMapping(value="/searchClass.do", method=RequestMethod.POST)
+	public String searchClass(@RequestParam String search, Model model){
+		logger.info("클래스 검색 페이지 검색어={}",search);
+		
+		List<CategoryGroupVO> gCateList=cService.selCateGroupAll();
+		List<CategoryVO> cateList =cService.selectCateAll();
+		logger.info("☆☆☆gcateList size={}",gCateList.size());
+		
+		model.addAttribute("gCateList", gCateList);
+		model.addAttribute("cateList", cateList);
+		model.addAttribute("search", search);
+		
+		return "class/searchClass";
 	}
 	
 }

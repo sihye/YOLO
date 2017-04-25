@@ -108,7 +108,7 @@
 	</select>
 	
 	<select id="MemberSeletCount" parameterType="SearchVO" resultType="int">
-		select count(*) from OPERATORMEMBERVIEW where 
+		select count(*) from OPERATORMEMBERVIEW 
 		<include refid="searchWhere"></include>
 	</select>
 	
@@ -122,6 +122,109 @@
 	<select id="OperatorMemberView" resultType="hashmap">
 		select *from operatorMemberView order by m_no
 	</select>
+	
+	<update id="memberUpdate" parameterType="MemberVO">
+		 <choose>
+			<when test="kNo2==0 and kNo3==0">
+			update member set m_email1=#{mEmail1},m_email2=#{mEmail2},m_address=#{mAddress},m_addressdetail=#{mAddressdetail},
+								k_no1=#{kNo1},m_tel1=#{mTel1},m_tel2=#{mTel2},m_tel3=#{mTel3},
+								q_questionno=#{qQuestionno},m_questionanswer=#{mQuestionanswer}
+			where m_userid=#{mUserid}
+			</when>
+			<when test="kNo2==0 and kNo3!=0">
+			update member set m_email1=#{mEmail1},m_email2=#{mEmail2},m_address=#{mAddress},m_addressdetail=#{mAddressdetail},
+								k_no1=#{kNo1},k_no3=#{kNo3},m_tel1=#{mTel1},m_tel2=#{mTel2},m_tel3=#{mTel3},
+								q_questionno=#{qQuestionno},m_questionanswer=#{mQuestionanswer}
+			where m_userid=#{mUserid}
+			</when>
+			<when test="kNo2!=0 and kNo3==0">
+			update member set m_email1=#{mEmail1},m_email2=#{mEmail2},m_address=#{mAddress},m_addressdetail=#{mAddressdetail},
+								k_no1=#{kNo1},k_no2=#{kNo2},m_tel1=#{mTel1},m_tel2=#{mTel2},m_tel3=#{mTel3},
+								q_questionno=#{qQuestionno},m_questionanswer=#{mQuestionanswer}
+			where m_userid=#{mUserid}
+			</when>
+			
+			<when test="kNo2!=0 and kNo3!=0">
+			update member set m_email1=#{mEmail1},m_email2=#{mEmail2},m_address=#{mAddress},m_addressdetail=#{mAddressdetail},
+								k_no1=#{kNo1},k_no2=#{kNo2},k_no3=#{kNo3},m_tel1=#{mTel1},m_tel2=#{mTel2},m_tel3=#{mTel3},
+								q_questionno=#{qQuestionno},m_questionanswer=#{mQuestionanswer}
+			where m_userid=#{mUserid}
+			</when>
+			<otherwise>
+			
+			</otherwise>
+		</choose>
+	</update>
+	
+	<select id="HostSelectPG" parameterType="SearchVO" resultType="hashmap">
+		select m_USERID,M_NO,M_NAME,m_bankname,m_account,M_JOINDATE,K_1,K_2,K_3
+		from
+		(
+		    select rownum as RNUM ,LIST.*
+		    from
+		    (
+		        select * from operatorHostView 
+		        <include refid="searchWhere"></include>
+		        order by m_no desc
+		    )LIST
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	
+	<select id="HostSeletCount" parameterType="SearchVO" resultType="int">
+		select count(*) from operatorHostView
+		<include refid="searchWhere"></include>
+	</select>
+	
+	<select id="HostExcelView" parameterType="SearchVO" resultType="hashmap">
+		select *from ExcelHostView
+		<include refid="searchWhere"></include>
+		order by m_no
+	</select>
+	
+	
+	<insert id="hostInsert" parameterType="MemberVO">
+		<selectKey keyProperty="mNo" resultType="int" order="BEFORE">
+			select member_seq.nextval from dual
+		</selectKey>
+			 <choose>
+			<when test="kNo2==0 and kNo3==0">
+			insert into member(m_userid,mg_no2,m_no,m_pwd,m_name,m_email1,m_email2,m_address,m_addressdetail,
+								k_no1,m_tel1,m_tel2,m_tel3,q_questionno,m_questionanswer,m_bankname,m_account)
+			values(#{mUserid},#{mgNo2},#{mNo},#{mPwd},#{mName},#{mEmail1},#{mEmail2},#{mAddress},#{mAddressdetail},
+								#{kNo1},#{mTel1},#{mTel2},#{mTel3},#{qQuestionno},#{mQuestionanswer},#{mBankname},#{mAccount})
+			</when>
+			<when test="kNo2==0 and kNo3!=0">
+			insert into member(m_userid,mg_no2,m_no,m_pwd,m_name,m_email1,m_email2,m_address,m_addressdetail,
+								k_no1,k_no3,m_tel1,m_tel2,m_tel3,q_questionno,m_questionanswer,m_bankname,m_account)
+			values(#{mUserid},#{mgNo2},#{mNo},#{mPwd},#{mName},#{mEmail1},#{mEmail2},#{mAddress},#{mAddressdetail},
+								#{kNo1},#{kNo3},#{mTel1},#{mTel2},#{mTel3},#{qQuestionno},#{mQuestionanswer},#{mBankname},#{mAccount})
+			</when>
+			<when test="kNo2!=0 and kNo3==0">
+			insert into member(m_userid,mg_no2,m_no,m_pwd,m_name,m_email1,m_email2,m_address,m_addressdetail,
+								k_no1,k_no2,m_tel1,m_tel2,m_tel3,q_questionno,m_questionanswer,m_bankname,m_account)
+			values(#{mUserid},#{mgNo2},#{mNo},#{mPwd},#{mName},#{mEmail1},#{mEmail2},#{mAddress},#{mAddressdetail},
+								#{kNo1},#{kNo2},#{mTel1},#{mTel2},#{mTel3},#{qQuestionno},#{mQuestionanswer},#{mBankname},#{mAccount})
+			</when>
+			
+			<when test="kNo2!=0 and kNo3!=0">
+			insert into member(m_userid,mg_no2,m_no,m_pwd,m_name,m_email1,m_email2,m_address,m_addressdetail,
+								k_no1,k_no2,k_no3,m_tel1,m_tel2,m_tel3,q_questionno,m_questionanswer,m_bankname,m_account)
+			values(#{mUserid},#{mgNo2},#{mNo},#{mPwd},#{mName},#{mEmail1},#{mEmail2},#{mAddress},#{mAddressdetail},
+								#{kNo1},#{kNo2},#{kNo3},#{mTel1},#{mTel2},#{mTel3},#{qQuestionno},#{mQuestionanswer},#{mBankname},#{mAccount})
+			</when>
+			<otherwise>
+			
+			</otherwise>
+
+		</choose>
+
+			
+	</insert>
 	
 	
 

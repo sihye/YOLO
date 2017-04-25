@@ -12,6 +12,7 @@
 
 
 
+
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- datepicker 한국어로 -->
@@ -249,16 +250,16 @@ a{
 
 
 <label> 현재 회원 정보 엑셀 저장 </label>
-<a id='downA' href="<c:url value="/admin/excel.do?searchKeyword=${param.searchKeyword }&searchCondition=${param.searchCondition }&searchStartDate=${param.searchStartDate }&searchEndDate=${param.searchEndDate }"/>">다운로드</a>
+<a id='downA' href="<c:url value="/admin/excel.do?searchKeyword=${param.searchKeyword }&searchCondition=${param.searchCondition }&searchStartDate=${param.searchStartDate }&searchEndDate=${param.searchEndDate }&type=member "/>">다운로드</a>
 <br>
-<label> 회원정보 입력 엑셀서식 받기 </label>
+<label> 회원 입력 엑셀서식 받기 </label>
 <a id='membersave' href="<c:url value="/admin/memberSaveForm.do"/>">다운로드</a>
 
 <form id="upExcel" method="post" action='<c:url value="/admin/excelup.do"/>' enctype="multipart/form-data">
 <label style="float:right"><input type="reset" value="취소"></label>
 <label style="float:right"><input type="submit" value="등록"></label>
 <label style="float:right" ><input type="file" id="exfile" name="exfile">(xls,xlsx 확장자만 가능합니다!)</label>
-<label style="float:right">회원정보 엑셀파일로 등록하기 - &nbsp;&nbsp;&nbsp;</label>
+<label style="float:right">회원 정보 엑셀파일로 등록하기 - &nbsp;&nbsp;&nbsp;</label>
 </form>
 	<table class="table table-hover">
   		<tr>
@@ -274,7 +275,7 @@ a{
   		<c:forEach var="map" items="${alist }">
   		<tr>
   			<td>${map["M_NO"]}</td>
-  			<td><a href="#">${map["M_NAME"]}</a></td>
+  			<td>${map["M_NAME"]}</td>
   			<td>${map["M_USERID"]}</td>
   			<td><fmt:formatDate value="${map['M_JOINDATE'] }" pattern="yyyy-MM-dd"/></td>
  			<td>${map["K_1"] }</td>

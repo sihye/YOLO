@@ -55,6 +55,13 @@ public class NoticeboardServiceImpl
 		return dao.deleteNoticeoard(no);
 	}
 
+	@Override
+	public List<Map<String, Object>> operatorNotice(SearchVO vo) {
+		
+		return dao.operatorNotice(vo);
+	}
+
+	
 	
 
 }

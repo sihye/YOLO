@@ -28,6 +28,8 @@ import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
 import com.one.yolo.member.model.MemberService;
 import com.one.yolo.member.model.MemberVO;
+import com.one.yolo.noticeboard.model.NoticeboardService;
+import com.one.yolo.noticeboard.model.NoticeboardVO;
 import com.one.yolo.upfile.model.UpfileService;
 import com.one.yolo.upfile.model.UpfileVO;
 
@@ -50,6 +52,8 @@ public class AdminController {
 	@Autowired 
 	private MemberService memberService;
 	
+	@Autowired
+	private NoticeboardService noticeService;
 	
 	@Autowired
 	ExcelUtil excelUtil;
@@ -242,11 +246,12 @@ public class AdminController {
 	
 	
 	@RequestMapping("/excel.do")
-	public ModelAndView excel(@ModelAttribute SearchVO vo, HttpServletRequest request){
+	public ModelAndView excel(@ModelAttribute SearchVO vo,@RequestParam String type, HttpServletRequest request){
 		//ExcelUtil excel = new ExcelUtil();
 		
-		logger.info("excel 다운로드 vo={}",vo);
-		String fileName = excelUtil.excelWrith(vo);
+		logger.info("excel 다운로드 vo={}, type{}",vo,type);
+		System.out.println("type ="+type);
+		String fileName = excelUtil.excelWrith(vo,type);
 		String upPath = upFileservice.getUploadPath(request, UpfileService.UP_EXCEL);
 		File file = new File(upPath,fileName);
 		Map<String,Object> fileMap = new HashMap<String, Object>();
@@ -302,17 +307,18 @@ public class AdminController {
 		logger.info("엑셀파일 읽어오기");
 		UpfileVO upfilevo= upFileservice.fileUpload(request, UpfileService.UP_EXCEL);
 		logger.info("업로드된 excel파일 네임 = {}",upfilevo.getfFilename());
+		logger.info("vo정보 = {}",upfilevo.toString());
 		String upPath = upFileservice.getUploadPath(request,UpfileService.UP_EXCEL);
 		File file = new File(upPath,upfilevo.getfOriginalfilename());
 		List<MemberVO> mlist = null;
 		mlist = upFileservice.readExcel(file);
+		System.out.println(mlist.size() +"-"+ mlist.get(0).getkNo1() +"-"+mlist.get(0).getkNo2()+"-"+mlist.get(0).getkNo3() );
 		
 		String msg="", url ="/admin/operatorMember.do";
 		int cnt =0;
 		for(int i =0; i<mlist.size(); i++){
 			MemberVO vo = mlist.get(i);
 			vo.setMgNo2(2);
-			logger.info(vo.toString());
 			cnt +=  memberService.memberInsert(vo);
 		}
 		
@@ -328,5 +334,121 @@ public class AdminController {
 		return	"common/message";
 	}
 	
+	@RequestMapping("/noticeBoard.do")
+	public String noticeBoard_get(@ModelAttribute SearchVO searchVo, Model model){
+		logger.info("notice 화면 보여주기 ,파라미터 searchVO={}",searchVo);
+		//[1] PaginationInfo 객체 생성 
+		//=> firstRecordIndex 를 계산하기 위함
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//[2] SearchVO 값 셋팅
+		searchVo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		
+		List<Map<String, Object>> alist = noticeService.operatorNotice(searchVo);
 	
+		logger.info("공지사항  alist.size()={}",alist.size());
+
+		int totalRecord =noticeService.selectTotalRecord(searchVo);
+		logger.info("공지사항-전체레코드 개수조회 결과, totalRecord={}",			
+				totalRecord);
+
+		pagingInfo.setTotalRecord(totalRecord);
+			
+		
+		model.addAttribute("alist",alist);
+		model.addAttribute("pagingInfo", pagingInfo);
+
+		return "admin/noticeBoardList";
+	}
+	
+	@RequestMapping("/operatorHost.do")
+	public String operatorHost_get(@ModelAttribute SearchVO searchVo, Model model){
+		logger.info("host 화면 보여주기 ,파라미터 searchVO={}",searchVo);
+		//[1] PaginationInfo 객체 생성 
+		//=> firstRecordIndex 를 계산하기 위함
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		//[2] SearchVO 값 셋팅
+		searchVo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+
+		
+		List<Map<String, Object>> alist = memberService.HostSelectPG(searchVo);
+		logger.info("호스트조회결과  alist.size()={}",alist.size());
+
+		int totalRecord =memberService.HostSeletCount(searchVo);
+		logger.info("호스트 목록 조회-전체레코드 개수조회 결과, totalRecord={}",			
+				totalRecord);
+
+		pagingInfo.setTotalRecord(totalRecord);
+
+		
+		model.addAttribute("alist",alist);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		
+		return "admin/operatorHost";
+	}
+	
+	@RequestMapping("/excelupHost.do")
+	public String excelupHost(HttpServletRequest request,Model model){
+		logger.info("엑셀파일 읽어오기");
+		UpfileVO upfilevo= upFileservice.fileUpload(request, UpfileService.UP_EXCEL);
+		logger.info("업로드된 excel파일 네임 = {}",upfilevo.getfFilename());
+		String upPath = upFileservice.getUploadPath(request,UpfileService.UP_EXCEL);
+		File file = new File(upPath,upfilevo.getfOriginalfilename());
+		List<MemberVO> mlist = null;
+		mlist = upFileservice.readExcelHost(file);
+		
+		String msg="", url ="/admin/operatorHost.do";
+		int cnt =0;
+		for(int i =0; i<mlist.size(); i++){
+			MemberVO vo = mlist.get(i);
+			vo.setMgNo2(3);
+			logger.info(vo.toString());
+			cnt +=  memberService.hostInsert(vo);
+		}
+		
+		if(cnt>0){
+			msg="회원 저장 완료 건수 ="+cnt;
+		}else{
+			msg="회원 저장 실패";
+			}
+		
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		return	"common/message";
+	}
+	
+	
+	@RequestMapping("/hostForm.do")
+	public ModelAndView hostform(HttpServletRequest request){		
+		logger.info("Excel host 폼 다운로드");
+		String fileName="host저장서식(기본).xls"; 
+		String upPath = upFileservice.getUploadPath(request, UpfileService.UP_EXCELSAVEFORM);
+		File file = new File(upPath,fileName);
+		System.out.println("file name =" + file.getName()+"**************************");
+		Map<String,Object> fileMap = new HashMap<String, Object>();
+		fileMap.put("downFile",file);
+		
+		ModelAndView mav = new ModelAndView("excelDownView",fileMap);
+		return mav;
+
+		
+	}
 }
+
+
+
+
+
+
