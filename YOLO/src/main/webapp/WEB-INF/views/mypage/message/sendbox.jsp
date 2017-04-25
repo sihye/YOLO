@@ -142,6 +142,16 @@
     		document.frmPage.currentPage.value=curPage;
     		frmPage.submit();
     	}
+        function onFunc(trNo) {
+			var tr2Id = document.getElementById("tr2"+trNo);
+			var style = window.getComputedStyle(tr2Id,null).getPropertyValue("display");
+			if(style=='none'){
+				tr2Id.style.display='';	
+			}else if(style=='table-row'){
+				tr2Id.style.display='none';	
+			}
+		}
+        
 
             
         </script>
@@ -254,12 +264,12 @@
 			<tbody>
 				<c:set var="i" value="0" />
 				<c:forEach var="map" items="${alist }">
-					<tr id="tr1${i }" onclick="onFunc(${i})">
+					<tr id="tr1${i }">
 						<td><input type="checkbox" id="chk_${i}"
 							name="msmgItems[${i}].msNo" value="${map['MS_NO'] }"></td>
 						<td>${map["MS_NO"] }</td>
 						<td>${map["MSMG_USERID"] }</td>
-						<td>${map["MS_TITLE"] }</td>
+						<td><a href="#"  onclick="onFunc(${i})">${map["MS_TITLE"] }</a></td>
 						<td>${map["MS_CONTENT"] }</td>
 						<td><fmt:formatDate value="${map['MS_REGDATE'] }" pattern="yyyyMMddHHmmss"/></td>
 						<td>미확인</td>
@@ -277,9 +287,9 @@
 							<tbody>
 								<tr>
 									<th scope="row">보낸사람</th>
-									<td>${map["MS_NO"] }</td>
+									<td>${map["MS_USERID"] }</td>
 									<th scope="row">받은사람</th>
-									<td>${map["MS_TITLE"] }</td>
+									<td>${map["MSMG_USERID"] }</td>
 								</tr>
 								<tr>
 									<th scope="row">제목</th>

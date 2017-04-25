@@ -1153,3 +1153,9 @@ increment by 1
 start with 1
 nomaxvalue
 nocache;
+
+create sequence FOLLOW_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
