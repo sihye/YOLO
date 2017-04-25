@@ -3,69 +3,18 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.class">
-<sql id="searchWhere">
-		<choose>
-			<when test="searchKeyword !=null and searchKeyword !=''" >
-				where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
-			</when>
-			<when test="searchStartDate !=null and searchStartDate !=''
-			 and searchEndDate !=null and searchEndDate !=''" >
-				where N_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
-				and to_date(#{searchEndDate},'YYYY-MM-DD')+1
-			</when>
-			<when test="searchKeyword !=null and searchKeyword !=''
-			 and searchStartDate !=null and searchStartDate !=''
-		 	and searchEndDate !=null and searchEndDate !=''" >
-				where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
-			and
-			 N_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
-			and to_date(#{searchEndDate},'YYYY-MM-DD')+1
-			</when>
-			<otherwise>
-			
-			</otherwise>
-
-		</choose>
-
-	</sql>
-
-
-
 	<insert id="claInsert" parameterType="ClassVO" >
 		<selectKey keyProperty="cNo" resultType="int" order="BEFORE">
 			select CLASS_seq.nextval from dual
 		</selectKey>
 		insert into class (c_no,m_userid,k_no,c_name,c_price,c_goal,c_target,c_spevialty,c_detailinfo,C_PLACE,C_PLACEDETAIL,c_mainimg,
- 		c_detailimg1,c_detailimg2,c_detailimg3,c_maxperson,C_PAYMENTWAY,C_coordinate)
+ 		c_detailimg1,c_detailimg2,c_detailimg3,c_maxperson,C_PAYMENTWAY)
 			values(#{cNo},#{mUserid},#{kNo},#{cName},#{cPrice},#{cGoal},#{cTarget},#{cSpevialty},#{cDetailinfo},#{cPlace},#{cplacedetail},
-			#{cMainimg},#{cDetailimg1},#{cDetailimg2},#{cDetailimg3},#{cMaxperson},#{cPaymentway},#{cCoordinate})
+			#{cMainimg},#{cDetailimg1},#{cDetailimg2},#{cDetailimg3},#{cMaxperson},#{cPaymentway})
 	</insert>
 	<select id="selClass" parameterType="int" resultType="ClassVO">
 		select * from class where c_no=#{c_no}
 	</select>
-	
-	<select id="badClassView" parameterType="SearchVO" resultType="hashmap" >
-		select *from badClassView
-		<include refid="searchWhere"></include>
-	</select>
-	<select id="badClassCount" parameterType="SearchVO" resultType="int">
-		select count(*)from badclassview
-		<include refid="searchWhere"></include>
-	</select>
-	
-	<update id="delClass" parameterType="int">
-		update class set c_del ='Y'
-		where c_no = #{no}
-	</update>
-	<update id="resetClass" parameterType="int">
-		update class set c_del ='N'
-		where c_no = #{no}
-	</update>
-	<select id="selectBadClassByCno" parameterType="int" resultType="hashmap">
-		select *from badclassview where c_no =#{no}
-	</select>
-	
-	
 </mapper>
 
 

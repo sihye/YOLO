@@ -23,7 +23,6 @@ public class ClassVO {
 	private Timestamp cRegdate;//등록일
 	private int cHits;//조회수
 	private String cDel;//삭제여부
-	private String cCoordinate;
 	public int getcNo() {
 		return cNo;
 	}
@@ -145,12 +144,6 @@ public class ClassVO {
 	public void setCplacedetail(String cplacedetail) {
 		this.cplacedetail = cplacedetail;
 	}
-	public String getcCoordinate() {
-		return cCoordinate;
-	}
-	public void setcCoordinate(String cCoordinate) {
-		this.cCoordinate = cCoordinate;
-	}
 	@Override
 	public String toString() {
 		return "ClassVO [cNo=" + cNo + ", mUserid=" + mUserid + ", kNo=" + kNo + ", cName=" + cName + ", cPrice="
@@ -158,7 +151,7 @@ public class ClassVO {
 				+ cDetailinfo + ", cPlace=" + cPlace + ", cplacedetail=" + cplacedetail + ", cMainimg=" + cMainimg
 				+ ", cDetailimg1=" + cDetailimg1 + ", cDetailimg2=" + cDetailimg2 + ", cDetailimg3=" + cDetailimg3
 				+ ", cPaymentway=" + cPaymentway + ", cMaxperson=" + cMaxperson + ", cRegdate=" + cRegdate + ", cHits="
-				+ cHits + ", cDel=" + cDel + ", cCoordinate=" + cCoordinate + "]";
+				+ cHits + ", cDel=" + cDel + "]";
 	}
 	
 	

@@ -19,6 +19,8 @@
 	href="${pageContext.request.contextPath}/css/bootstrap-select.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+
+
 <script type="text/javascript" src='<c:url value="/jquery/jquery-3.1.1.min.js" />'></script>
 <script type="text/javascript" src='<c:url value="/js/member.js" />'></script>
 </head>
@@ -53,13 +55,18 @@
 				alert('휴대폰은 숫자를 입력하셔야 합니다');
 				$("#hp2").focus();
 				return false;
-			}	
+			}else if(!$("input:checkbox[id='hobby']").is(":checked") == true){
+				alert("관심사는 하나 이상 체크하셔야 합니다");	
+				return false;
+			}
+			
 		});
 		
 		$("#btnChkId").click(function(){
 			window.open("<c:url value='/member/checkUserid.do?userid="+$("#userid").val()+ "'/>", 'chk',
 			'width=400,height=300,left=10,top=10,location=yes,resizable=yes');
 		});
+		
 		
 	});
 	
@@ -207,7 +214,7 @@
 					<label for="hobby">${cg.kgName}</label>	
 					<c:forEach var="c" items="${cList }">
 						<c:if test ="${cg.kgNo == c.kgNo}">
-							<input value='${c.kNo}' onclick=CountChecked(this) 
+							<input value='${c.kNo}' onclick=CountChecked(this) id="hobby"
 							type=checkbox name="kno">${c.kName}
 						</c:if>
 					</c:forEach><br>
@@ -233,10 +240,17 @@
 				<button type="submit" class="btn btn-primary" id="wr_submit">회원 가입</button>
 				  <button type="button" class="btn btn-primary">취소</button>			
 			</div>
+			
+			
+
+
+
 		</fieldset>
 
 		<input type="hidden" name="chkId" id="chkId" >
 
 	</form>
+	
 </div>
 </article>
+

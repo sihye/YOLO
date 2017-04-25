@@ -77,7 +77,12 @@ select*from messagsend;
 
 
 
-
+CREATE OR REPLACE VIEW FOLLOWCLASS
+AS SELECT f.*,c.*
+FROM FOLLOW  f,CLASS  c
+WHERE f.FL_WUSERID=c.M_USERID;
+select*from FOLLOWCLASS;
+select*from follow;
 
 
 create view noticeboardview   --°ü¸®ÀÚ notice view

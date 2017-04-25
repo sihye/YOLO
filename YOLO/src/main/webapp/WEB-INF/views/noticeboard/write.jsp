@@ -67,18 +67,12 @@
         	<textarea class="ckeditor" id="nbContent" name="nbContent" placeholder="내용" >${vo.nbContent}</textarea>
  			</div>
         </div><br>
-        <div>  
-         	<label for="upfile" class="col-sm-2 control-label" for="content">첨부파일</label>
-         	<div class="col-sm-6">         
-        	<input type="file" name="upfile" id="upfile">(최대 2M)
-        	</div>
-        </div><br>
         <div align="center">
             <input class="btn btn-default" type = "submit" value="등록"/>
             <input class="btn btn-default" type = "Button" value="글목록" 
             onclick
            ="location.href='<c:url value="/noticeboard/list.do"/>'" />        
-        </div><br>
+        </div>
     </fieldset>
 </form>
 </div>   

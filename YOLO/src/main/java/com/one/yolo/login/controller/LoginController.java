@@ -94,7 +94,7 @@ public class LoginController {
 		session.removeAttribute("userid");
 		session.removeAttribute("userName");
 		
-		return "redirect:/index.do";
+		return "redirect:/index2.do";
 	}
 	
 	

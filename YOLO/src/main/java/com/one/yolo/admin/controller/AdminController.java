@@ -26,7 +26,6 @@ import com.one.yolo.common.ExcelUtil;
 import com.one.yolo.common.PaginationInfo;
 import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
-import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.member.model.MemberService;
 import com.one.yolo.member.model.MemberVO;
 import com.one.yolo.noticeboard.model.NoticeboardService;
@@ -57,9 +56,7 @@ public class AdminController {
 	private NoticeboardService noticeService;
 	
 	@Autowired
-	private ExcelUtil excelUtil;
-	@Autowired
-	private ClassService classService;
+	ExcelUtil excelUtil;
 	
 	@RequestMapping(value="/operator.do",method=RequestMethod.GET)
 	public String upfile_get(Model model){
@@ -415,22 +412,14 @@ public class AdminController {
 		int cnt =0;
 		for(int i =0; i<mlist.size(); i++){
 			MemberVO vo = mlist.get(i);
-			if(vo.getmUserid()!=null && !vo.getmUserid().isEmpty()){
-				vo.setMgNo2(3);
-				logger.info(vo.toString());
-				cnt +=  memberService.hostInsert(vo);
-			}
+			vo.setMgNo2(3);
+			logger.info(vo.toString());
+			cnt +=  memberService.hostInsert(vo);
 		}
 		
 		if(cnt>0){
-		
-			boolean bool= file.exists();
-			logger.info("파일 존재 여부 bool ={}, {}",bool,file.getName());
-			bool = file.delete();
-			logger.info("파일 삭제 여부 bool ={},",bool);
 			msg="회원 저장 완료 건수 ="+cnt;
 		}else{
-			file.exists();
 			msg="회원 저장 실패";
 			}
 		
@@ -455,66 +444,6 @@ public class AdminController {
 		return mav;
 
 		
-	}
-	@RequestMapping("/operatorBadClass.do")
-	public String opBadClass(@ModelAttribute SearchVO searchVo, Model model){
-		
-		
-		logger.info("BadClass 화면 보여주기 ,파라미터 searchVO={}",searchVo);
-		//[1] PaginationInfo 객체 생성 
-		//=> firstRecordIndex 를 계산하기 위함
-		PaginationInfo pagingInfo = new PaginationInfo();
-		pagingInfo.setBlockSize(Utility.BLOCKSIZE);
-		pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
-		
-		//[2] SearchVO 값 셋팅
-		searchVo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-	
-		List<Map<String, Object>> alist = classService.badClassView(searchVo); 
-	
-		logger.info("신고클래스  alist.size()={}",alist.size());
-
-		int totalRecord = classService.badClassCount(searchVo);
-		logger.info("신고 클래스 갯수, totalRecord={}",			
-				totalRecord);
-
-		pagingInfo.setTotalRecord(totalRecord);
-			
-		
-		model.addAttribute("alist",alist);
-		model.addAttribute("pagingInfo", pagingInfo);
-
-		
-		
-		return "admin/operatorBadClass";
-	}
-	
-	@RequestMapping("/editBadclass.do")
-	public String delBadclass(@RequestParam int cNo , @RequestParam String type ,Model model){
-		int result = classService.editBadClass(cNo, type);
-		
-		String msg = "", url="/admin/operatorBadClass.do";
-		if(result>0){
-			msg= "선택하신 신고클래스 삭제 완료 되었습니다.";
-		}else{
-			msg="선택하신 신고클래스 삭제 실패 되었습니다.";
-		}
-		
-		model.addAttribute("msg",msg);
-		model.addAttribute("url",url);
-		
-		return "common/message";
-	}
-	
-	@RequestMapping("/badClassDetail.do")
-	public String badDetail(@RequestParam int cno,Model model){
-		logger.info("detail");
-		Map<String, Object> map = classService.selectBadClassByCno(cno);
-		
-		model.addAttribute("map",map);
-		return "admin/badClassDetail";
 	}
 }
 

@@ -316,4 +316,11 @@ insert into notify
 (C_NO,N_CODE,N_CONTENT)
 values(3,'신고3','개인취향');
 
+insert into follow
+values(FOLLOW_seq.nextval,'hong','kim',sysdate);
+insert into follow
+values(FOLLOW_seq.nextval,'hong','chang',sysdate);
+insert into follow
+values(FOLLOW_seq.nextval,'hong','hong',sysdate);
+
 commit;
