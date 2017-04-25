@@ -84,7 +84,7 @@ public class ClaController {
 				vo.setcDetailimg1(imgUrl[1]);
 				vo.setcDetailimg2("");
 				vo.setcDetailimg3("");
-			}else if(fileList.size()==2){
+			}else if(fileList.size()==3){
 				vo.setcMainimg(imgUrl[0]);
 				vo.setcDetailimg1(imgUrl[1]);
 				vo.setcDetailimg2(imgUrl[2]);

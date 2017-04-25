@@ -8,9 +8,9 @@
 			select CLASS_seq.nextval from dual
 		</selectKey>
 		insert into class (c_no,m_userid,k_no,c_name,c_price,c_goal,c_target,c_spevialty,c_detailinfo,C_PLACE,C_PLACEDETAIL,c_mainimg,
- 		c_detailimg1,c_detailimg2,c_detailimg3,c_maxperson,C_PAYMENTWAY)
+ 		c_detailimg1,c_detailimg2,c_detailimg3,c_maxperson,C_PAYMENTWAY,C_coordinate)
 			values(#{cNo},#{mUserid},#{kNo},#{cName},#{cPrice},#{cGoal},#{cTarget},#{cSpevialty},#{cDetailinfo},#{cPlace},#{cplacedetail},
-			#{cMainimg},#{cDetailimg1},#{cDetailimg2},#{cDetailimg3},#{cMaxperson},#{cPaymentway})
+			#{cMainimg},#{cDetailimg1},#{cDetailimg2},#{cDetailimg3},#{cMaxperson},#{cPaymentway},#{cCoordinate})
 	</insert>
 	<select id="selClass" parameterType="int" resultType="ClassVO">
 		select * from class where c_no=#{c_no}

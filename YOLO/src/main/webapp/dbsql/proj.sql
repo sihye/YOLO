@@ -125,6 +125,7 @@ ALTER TABLE category
 		);
 --commit;
 -- 클래스
+--SELECT * from CLASS;
 CREATE TABLE Class (
 	C_NO         NUMBER        NOT NULL, -- 클래스번호
 	M_USERID     VARCHAR2(500) NOT NULL, -- 호스트아이디
@@ -134,9 +135,10 @@ CREATE TABLE Class (
 	C_GOAL       VARCHAR2(500) NULL,     -- 목표
 	C_TARGET     VARCHAR2(500) NULL,     -- 대상
 	C_SPEVIALTY  VARCHAR2(500) NULL,     -- 특기사항
-	C_DETAILINFO VARCHAR2(500) NULL,     -- 상세정보
+	C_DETAILINFO clob NULL,     -- 상세정보
 	C_PLACE     VARCHAR2(500) NOT NULL, -- 장소
 	C_PLACEDETAIL   VARCHAR2(500) NOT NULL, -- 상세주소
+	C_coordinate VARCHAR2(500) NOT NULL, --좌표
 	C_MAINIMG    VARCHAR2(500) not null,     -- 메인이미지
 	C_DETAILIMG1 VARCHAR2(500) NULL,     -- 상세이미지1
 	C_DETAILIMG2 VARCHAR2(500) NULL,     -- 상세이미지2
@@ -555,6 +557,50 @@ CREATE TABLE paymentcancel (
 	PMC_DETAIL   VARCHAR2(500) NULL      -- 상세정보
 );
 
+-- 관심호스트
+CREATE TABLE follow (
+	FL_NO      NUMBER        NOT NULL, -- 팔로우번호
+	FL_USERID  VARCHAR2(500) NOT NULL, -- 팔로워아이디
+	FL_WUSERID VARCHAR2(500) NOT NULL, -- 팔로우아이디
+	FL_REGDATE DATE          NULL      -- 등록일
+);
+
+-- 관심호스트 기본키
+CREATE UNIQUE INDEX PK_follow
+	ON follow ( -- 관심호스트
+		FL_NO ASC -- 팔로우번호
+	);
+
+-- 관심호스트
+ALTER TABLE follow
+	ADD
+		CONSTRAINT PK_follow -- 관심호스트 기본키
+		PRIMARY KEY (
+			FL_NO -- 팔로우번호
+		);
+
+-- 관심호스트
+ALTER TABLE follow
+	ADD
+		CONSTRAINT FK_Member_TO_follow -- 회원 -> 관심호스트
+		FOREIGN KEY (
+			FL_USERID -- 팔로워아이디
+		)
+		REFERENCES Member ( -- 회원
+			M_USERID -- 아이디
+		);
+
+-- 관심호스트
+ALTER TABLE follow
+	ADD
+		CONSTRAINT FK_Member_TO_follow2 -- 회원 -> 관심호스트2
+		FOREIGN KEY (
+			FL_WUSERID -- 팔로우아이디
+		)
+		REFERENCES Member ( -- 회원
+			M_USERID -- 아이디
+		);
+
 -- 결제취소 기본키
 CREATE UNIQUE INDEX PK_paymentcancel
 	ON paymentcancel ( -- 결제취소
@@ -943,7 +989,8 @@ ALTER TABLE messagemaga
 CREATE TABLE notify (
 	C_NO      NUMBER        NOT NULL, -- 클래스번호
 	N_CODE    VARCHAR2(500) NOT NULL, -- 신고항목
-	N_CONTENT VARCHAR2(500) NOT NULL  -- 신고내용
+	N_CONTENT VARCHAR2(500) NOT NULL,  -- 신고내용
+	N_REGDATE DATE DEFAULT SYSDATE
 );
 
 -- 신고 기본키
