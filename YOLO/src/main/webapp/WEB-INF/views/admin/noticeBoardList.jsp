@@ -243,7 +243,7 @@ a{
   		<c:forEach var="MAP" items="${alist }">
   		<tr>
   			<td>${MAP["NB_NO"] }</td>
-  			<td>${MAP["NB_TITLE"] }</td>
+  			<td><a href="">${MAP["NB_TITLE"] }</a></td>
   			<td><fmt:formatDate value='${MAP["NB_REGDATE"] }' pattern="yyyy-MM-dd"/></td>
  			<td>${MAP["NB_READCOUNT"]}</td>
  			<td>${MAP["F_1"]}</td>

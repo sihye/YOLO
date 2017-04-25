@@ -56,6 +56,9 @@ public class ExcelDownView extends AbstractView {
 	      OutputStream os = response.getOutputStream();
 	      FileInputStream fis = new FileInputStream(file);
 	      FileCopyUtils.copy(fis, os);
+	      if(file.exists() == true){
+	    	  file.delete();
+	      }
 	      fis.close();
 	      os.flush();
 	     

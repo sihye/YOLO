@@ -412,14 +412,22 @@ public class AdminController {
 		int cnt =0;
 		for(int i =0; i<mlist.size(); i++){
 			MemberVO vo = mlist.get(i);
-			vo.setMgNo2(3);
-			logger.info(vo.toString());
-			cnt +=  memberService.hostInsert(vo);
+			if(vo.getmUserid()!=null && !vo.getmUserid().isEmpty()){
+				vo.setMgNo2(3);
+				logger.info(vo.toString());
+				cnt +=  memberService.hostInsert(vo);
+			}
 		}
 		
 		if(cnt>0){
+		
+			boolean bool= file.exists();
+			logger.info("파일 존재 여부 bool ={}, {}",bool,file.getName());
+			bool = file.delete();
+			logger.info("파일 삭제 여부 bool ={},",bool);
 			msg="회원 저장 완료 건수 ="+cnt;
 		}else{
+			file.exists();
 			msg="회원 저장 실패";
 			}
 		
