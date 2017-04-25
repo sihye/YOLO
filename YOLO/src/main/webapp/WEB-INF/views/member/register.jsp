@@ -19,6 +19,8 @@
 	href="${pageContext.request.contextPath}/css/bootstrap-select.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+
+
 <script type="text/javascript" src='<c:url value="/jquery/jquery-3.1.1.min.js" />'></script>
 <script type="text/javascript" src='<c:url value="/js/member.js" />'></script>
 </head>
@@ -64,6 +66,7 @@
 			window.open("<c:url value='/member/checkUserid.do?userid="+$("#userid").val()+ "'/>", 'chk',
 			'width=400,height=300,left=10,top=10,location=yes,resizable=yes');
 		});
+		
 		
 	});
 	
@@ -237,10 +240,17 @@
 				<button type="submit" class="btn btn-primary" id="wr_submit">회원 가입</button>
 				  <button type="button" class="btn btn-primary">취소</button>			
 			</div>
+			
+			
+
+
+
 		</fieldset>
 
 		<input type="hidden" name="chkId" id="chkId" >
 
 	</form>
+	
 </div>
 </article>
+

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -28,7 +27,10 @@
     <![endif]-->
 <script type="text/javascript"
 	src='<c:url value="/jquery/jquery-3.1.1.min.js" />'></script>
+
+
 </head>
+
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -52,8 +54,7 @@
 	<form name="frmLogin"  id="frmLogin" method="post" 
 		action="<c:url value='/login/login.do'/>">
 		<fieldset>
-			<legend><img src="${pageContext.request.contextPath}/img/tit_login2.gif" 
-		alt="메인 herb이미지"></legend>
+			<legend>로그인</legend>
 			<div>
 				<label for="userid" style="margin-right: 14px;margin-left: 30px">&nbsp;&nbsp;&nbsp;아이디</label>
 				<input type="text" name="userid" id="userid" 
