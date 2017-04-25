@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.follow">
+	<select id="selectFollow" parameterType="String" resultType="FollowVO">
+		select * from FOLLOW
+		where FL_USERID=#{userid}
+	</select>
+	<!-- <select id="selectFollowClass" parameterType="SearchVO" resultType="map"> 
+		select FL_NO, C_NO,FL_USERID, M_USERID, C_PLACE, C_PRICE, C_PAYMENTWAY, C_NAME 
+		from ( select rownum as RNUM ,LIST.* from ( select * from FOLLOWCLASS where 
+		FL_USERID=#{userid} )LIST ) <![CDATA[ where RNUM>#{firstRecordIndex} and 
+		RNUM <=#{firstRecordIndex} + #{recordCountPerPage} ]]> </select> -->
+
+	<select id="selectTotalRecord" parameterType="SearchVO"
+		resultType="int">
+		select count(*) from FOLLOWCLASS
+		where SB_USERID=#{userid}
+	</select>
+	<delete id="deleteFollow" parameterType="int">
+		delete from FOLLOW where FL_NO=#{no}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
