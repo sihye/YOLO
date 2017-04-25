@@ -269,7 +269,7 @@
 							name="msmgItems[${i}].msNo" value="${map['MS_NO'] }"></td>
 						<td>${map["MS_NO"] }</td>
 						<td>${map["MSMG_USERID"] }</td>
-						<td><a href="#"  onclick="onFunc(${i})">${map["MS_TITLE"] }</a></td>
+						<td><a href="#"  onclick="onFun0c(${i})">${map["MS_TITLE"] }</a></td>
 						<td>${map["MS_CONTENT"] }</td>
 						<td><fmt:formatDate value="${map['MS_REGDATE'] }" pattern="yyyyMMddHHmmss"/></td>
 						<td>미확인</td>
