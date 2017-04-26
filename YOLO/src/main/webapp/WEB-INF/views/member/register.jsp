@@ -138,8 +138,8 @@
 				<input type="Password" name="mPwd2" id="pwd2">
 			</div>
 			<div>
-				<label for="zipcode">주소</label> 
-				<input type="text" name="zipcode" id="zipcode" ReadOnly title="우편번호" class="width_80 postcodify_postcode"> 
+				<label for="zipcode" name="zipcode">주소</label> 
+				<input type="text" name="mZipcode" id="zipcode" ReadOnly title="우편번호" class="width_80 postcodify_postcode"> 
 				<button type="button" class="btn btn-primary" id="postcodify_search_button" title="새창열림">우편번호 찾기</button><br />
 				<span class="sp1">&nbsp;</span> 
 				<input type="text" name="mAddress" ReadOnly title="주소" class="width_350 postcodify_address"><br /> 
