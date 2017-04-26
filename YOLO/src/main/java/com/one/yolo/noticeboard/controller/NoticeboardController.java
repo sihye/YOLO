@@ -1,6 +1,9 @@
 package com.one.yolo.noticeboard.controller;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,11 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.one.yolo.common.FileUploadWebUtil;
 import com.one.yolo.common.PaginationInfo;
 import com.one.yolo.common.Utility;
 import com.one.yolo.common.SearchVO;
 import com.one.yolo.noticeboard.model.NoticeboardService;
 import com.one.yolo.noticeboard.model.NoticeboardVO;
+import com.one.yolo.upfile.model.UpfileService;
+import com.one.yolo.upfile.model.UpfileVO;
 
 @Controller
 @RequestMapping(value="/noticeboard")
@@ -27,6 +33,12 @@ public class NoticeboardController {
 	
 	@Autowired
 	private NoticeboardService noticeboardService;
+	
+	@Autowired
+	private FileUploadWebUtil fileUploadWebUtil;
+	
+	@Autowired
+	private UpfileService upFileservice;
 	
 	@RequestMapping("/list.do")
 	public String noticeboardlist(@ModelAttribute SearchVO searchVo, Model model){
@@ -66,8 +78,28 @@ public class NoticeboardController {
 	}
 	
 	@RequestMapping(value="write.do", method=RequestMethod.POST)
-	public String write_post(@ModelAttribute NoticeboardVO vo){
+	public String write_post(@ModelAttribute NoticeboardVO vo,
+			@ModelAttribute UpfileVO upfileVo,
+			HttpServletRequest request, Model model){
 		logger.info("공지사항 글쓰기 처리, 파라미터 NoticeboardVO={}", vo);
+		
+		//파일 업로드
+		List<Map<String, Object>> fileList 
+		=fileUploadWebUtil.fileUpload(request, FileUploadWebUtil.IMAGE_UPLOAD);
+		
+		String fileName="", originalFileName="";
+		long fileSize=0;
+		if(!fileList.isEmpty()){
+			for(Map<String, Object> map : fileList){
+				fileName = (String) map.get("fileName");
+				fileSize = (Long) map.get("fileSize");
+				originalFileName = (String) map.get("originalFileName");
+			}//for
+		}//if
+		
+		upfileVo.setfFilename(fileName);
+		upfileVo.setfFilesize(fileSize);
+		upfileVo.setfOriginalfilename(originalFileName);
 		
 		int cnt = noticeboardService.insertNoticboard(vo);
 		logger.info("공지사항 글쓰기 결과 cnt={}",cnt);
