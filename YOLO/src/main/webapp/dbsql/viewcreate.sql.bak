@@ -25,7 +25,7 @@ and c.C_NO = sb.C_NO;
 select*from favoriteclass;
 --commit
 
-create view ExcelMemberView
+create view ExcelMemberView -- excel 파일 다운로드 정보 view
 as
 select m.M_NO,M_USERID, m.M_NAME, m.M_TEL1, m.M_TEL2, m.M_TEL3, m.M_EMAIL1, m.M_EMAIL2, m.M_ADDRESS, m.M_ADDRESSDETAIL, m.M_JOINDATE,
 (select c.k_name from category c where c.K_NO = m.k_no1) as k_1,(select c.k_name from category c where c.K_NO = m.k_no2) as k_2,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
@@ -34,7 +34,7 @@ from member m where m.mg_no2 = 2
 
 
 
-create view operatorJoin
+create view operatorJoin  -- operator 화면 view
 as
 select o.op_no, up.f_originalfilename,cg.k_name,o.op_showflag 
 from OPERATOR o, CATEGORY cg,UPFILE up
@@ -42,7 +42,7 @@ where o.K_NO = cg.K_NO and o.F_NO = up.F_NO
 
 
 
-create view operatorMemberView
+create view operatorMemberView -- operator 멤버 화면 view
 as
 select m_userid,m_no,mg_no2,m_name,m_joindate,(select c.k_name from category c where c.K_NO = m.k_no1)as k_1 ,
 (select c.k_name from category c where c.K_NO = m.k_no2) as k_2 ,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
@@ -52,7 +52,7 @@ where mg_no2=2;
 
 
 
-create view operatorHostView
+create view operatorHostView -- operator host 화면 view
 as
 select m_userid,m_no,m_name,m_joindate,m_bankname,m_accoutn,(select c.k_name from category c where c.K_NO = m.k_no1)as k_1 ,
 (select c.k_name from category c where c.K_NO = m.k_no2) as k_2 ,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
