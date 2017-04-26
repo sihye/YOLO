@@ -77,7 +77,12 @@ select*from messagsend;
 
 
 
-
+CREATE OR REPLACE VIEW FOLLOWCLASS
+AS SELECT f.*,c.*
+FROM FOLLOW  f,CLASS  c
+WHERE f.FL_WUSERID=c.M_USERID;
+select*from FOLLOWCLASS;
+select*from follow;
 
 
 create view noticeboardview   --관리자 notice view
@@ -93,3 +98,8 @@ as
 select m.M_NO,M_USERID, m.M_NAME,m.M_BANKNAME,m.M_ACCOUNT ,m.M_TEL1, m.M_TEL2, m.M_TEL3, m.M_EMAIL1, m.M_EMAIL2, m.M_ADDRESS, m.M_ADDRESSDETAIL, m.M_JOINDATE,
 (select c.k_name from category c where c.K_NO = m.k_no1) as k_1,(select c.k_name from category c where c.K_NO = m.k_no2) as k_2,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
 from member m where m.mg_no2 = 3
+
+
+create view badclassview --클래스 신고 view
+as
+select n.*,c.m_userid,(select k.k_name from  category k where k.K_NO =c.c_no ) as K_NAME ,c_name,c.c_del  from notify n , class c where n.C_NO = c.C_NO;

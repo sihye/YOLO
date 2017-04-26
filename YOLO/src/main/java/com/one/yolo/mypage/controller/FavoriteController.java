@@ -24,6 +24,8 @@ import com.one.yolo.common.Utility;
 import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.crecla.model.ClassVO;
 import com.one.yolo.favoriteclass.model.FavoriteClassService;
+import com.one.yolo.follow.model.FollowService;
+import com.one.yolo.follow.model.FollowVO;
 
 @Controller
 @RequestMapping("/mypage/Favorite")
@@ -35,6 +37,9 @@ public class FavoriteController {
 
 	@Autowired
 	private ClassService claService;
+	
+	@Autowired
+	private FollowService followService;
 
 	@RequestMapping("/FavoriteClass.do")
 	public String FavoriteClass(@ModelAttribute SearchVO searchVO
@@ -119,10 +124,36 @@ public class FavoriteController {
 
 
 	@RequestMapping("/Favoritehost.do")
-	public String Favoritehost(){
-		logger.info("Favoritehost 화면 보여주기");
-
+	public String Favoritehost(HttpServletRequest request,Model model){
+		HttpSession session = request.getSession();
+		session.setAttribute("userid", "hong");
+		String userid =(String)session.getAttribute("userid");
+		logger.info("Favoritehost 화면 보여주기,파라미터 userid={}",userid);
+		List<FollowVO> alist = followService.selectFollow(userid);
+		logger.info("follow 조회 결과, alist.size()={}", alist.size());
+		model.addAttribute("alist",alist);
 		return "mypage/Favorite/Favoritehost";
+	}
+	@RequestMapping("/FollowDelete.do")
+	public String FollowDelete(@RequestParam(required=false,defaultValue="0") int flNo,Model model){
+		logger.info("찜하기 삭제 처리, 파라미터 flNo={} ", flNo);
+		int cnt=0;
+
+		if(flNo!=0 ){
+			cnt =followService.deleteFollow(flNo);
+		}
+
+		logger.info("관심호스트 삭제 cnt={}", cnt);
+		String msg="",url="/mypage/Favorite/Favoritehost.do";
+		if(cnt==1){
+			msg="삭제 성공";
+		}else{
+			msg="삭제 실패";
+		}
+
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		return "common/message";
 	}
 
 	@RequestMapping("/seeClass.do")

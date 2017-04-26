@@ -1,6 +1,6 @@
 --[insert.sql]
 --categorygroup
-
+--commit;
 select * from categorygroup;
 
 insert into categorygroup
@@ -99,7 +99,7 @@ values('kim','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답
 insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER)
 values('chang','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답');
 
-
+--rollback;
 --class
 select * from class;
 
@@ -315,5 +315,12 @@ values(2,'신고2','개인취향');
 insert into notify
 (C_NO,N_CODE,N_CONTENT)
 values(3,'신고3','개인취향');
+
+insert into follow
+values(FOLLOW_seq.nextval,'hong','kim',sysdate);
+insert into follow
+values(FOLLOW_seq.nextval,'hong','chang',sysdate);
+insert into follow
+values(FOLLOW_seq.nextval,'hong','hong',sysdate);
 
 commit;

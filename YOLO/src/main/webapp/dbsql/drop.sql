@@ -36,13 +36,13 @@ DROP TABLE classqnaboard;
 DROP TABLE classboard;
 
 -- 게시판분류
-DROP TABLE boardgroup;
+DROP TABLE boardgroup CASCADE CONSTRAINTS;
 -- 쪽지관리
 DROP TABLE messagemaga;
 
 -- 쪽지
 DROP TABLE message;
-
+rollback
 
 -- 공지사항
 DROP TABLE noticeboard;
@@ -62,7 +62,8 @@ DROP TABLE paymentcancel;
 -- 관리자메인관리
 DROP TABLE operator;
 
-
+--관심호스트
+DROP TABLE follow;
 
 --신고NOTIFY 
 DROP TABLE NOTIFY;
@@ -89,3 +90,4 @@ DROP SEQUENCE QUESTION_seq;
 DROP SEQUENCE SHOPPINGBASKET_seq;
 DROP SEQUENCE UPFILE_seq;
 DROP SEQUENCE USEBOARD_seq;
+DROP SEQUENCE FOLLOW_seq;
