@@ -7,7 +7,8 @@ package com.one.yolo.common;
  */
 
 public class SearchVO {
-
+	private int flNo;
+	
 	private String userid;
 	/** 검색조건 */
 	private String searchCondition = "";
@@ -55,7 +56,18 @@ public class SearchVO {
 		this.searchStartDate = bean.searchStartDate;
 		this.searchEndDate = bean.searchEndDate;
 		this.userid = bean.userid;
+		this.flNo = bean.flNo;
 	}
+
+	public int getFlNo() {
+		return flNo;
+	}
+
+
+	public void setFlNo(int flNo) {
+		this.flNo = flNo;
+	}
+
 
 	public String getUserid() {
 		return userid;
@@ -149,10 +161,10 @@ public class SearchVO {
 
 	@Override
 	public String toString() {
-		return "SearchVO [userid=" + userid + ", searchCondition=" + searchCondition + ", searchKeyword="
-				+ searchKeyword + ", searchStartDate=" + searchStartDate + ", searchEndDate=" + searchEndDate
-				+ ", searchUseYn=" + searchUseYn + ", currentPage=" + currentPage + ", blockSize=" + blockSize
-				+ ", firstRecordIndex=" + firstRecordIndex + ", lastRecordIndex=" + lastRecordIndex
+		return "SearchVO [flNo=" + flNo + ", userid=" + userid + ", searchCondition=" + searchCondition
+				+ ", searchKeyword=" + searchKeyword + ", searchStartDate=" + searchStartDate + ", searchEndDate="
+				+ searchEndDate + ", searchUseYn=" + searchUseYn + ", currentPage=" + currentPage + ", blockSize="
+				+ blockSize + ", firstRecordIndex=" + firstRecordIndex + ", lastRecordIndex=" + lastRecordIndex
 				+ ", recordCountPerPage=" + recordCountPerPage + "]";
 	}
 

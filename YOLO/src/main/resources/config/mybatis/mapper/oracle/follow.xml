@@ -7,19 +7,29 @@
 		select * from FOLLOW
 		where FL_USERID=#{userid}
 	</select>
-	<!-- <select id="selectFollowClass" parameterType="SearchVO" resultType="map"> 
-		select FL_NO, C_NO,FL_USERID, M_USERID, C_PLACE, C_PRICE, C_PAYMENTWAY, C_NAME 
-		from ( select rownum as RNUM ,LIST.* from ( select * from FOLLOWCLASS where 
-		FL_USERID=#{userid} )LIST ) <![CDATA[ where RNUM>#{firstRecordIndex} and 
-		RNUM <=#{firstRecordIndex} + #{recordCountPerPage} ]]> </select> -->
+	<select id="selectFollowClass" parameterType="SearchVO"
+		resultType="map">
+		select FL_NO, C_NO,FL_USERID, M_USERID, C_PLACE, C_PRICE,
+		C_PAYMENTWAY, C_NAME
+		from ( 
+		select rownum as RNUM ,LIST.* from ( 
+		select * from FOLLOWCLASS
+		where FL_NO=#{flNo}
+		 )LIST ) 
+		<![CDATA[
+		 where RNUM>#{firstRecordIndex} and 
+		RNUM <=#{firstRecordIndex} + #{recordCountPerPage} 
+		]]>
+	</select>
 
 	<select id="selectTotalRecord" parameterType="SearchVO"
 		resultType="int">
 		select count(*) from FOLLOWCLASS
-		where SB_USERID=#{userid}
+		where FL_NO=#{flNo}
 	</select>
 	<delete id="deleteFollow" parameterType="int">
-		delete from FOLLOW where FL_NO=#{no}
+		delete from FOLLOW where
+		FL_NO=#{no}
 	</delete>
 </mapper>
 

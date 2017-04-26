@@ -124,14 +124,36 @@ public class FavoriteController {
 
 
 	@RequestMapping("/Favoritehost.do")
-	public String Favoritehost(HttpServletRequest request,Model model){
+	public String Favoritehost(@ModelAttribute SearchVO searchVO,HttpServletRequest request,Model model){
 		HttpSession session = request.getSession();
 		session.setAttribute("userid", "hong");
 		String userid =(String)session.getAttribute("userid");
-		logger.info("Favoritehost 화면 보여주기,파라미터 userid={}",userid);
+		logger.info("Favoritehost 화면 보여주기,파라미터 userid={},searchVO={}",userid,searchVO);
 		List<FollowVO> alist = followService.selectFollow(userid);
 		logger.info("follow 조회 결과, alist.size()={}", alist.size());
+		//[1] PaginationInfo 객체 생성 
+				//=> firstRecordIndex 를 계산하기 위함
+				PaginationInfo pagingInfo = new PaginationInfo();
+				pagingInfo.setBlockSize(Utility.BLOCKSIZE);
+				pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+				pagingInfo.setCurrentPage(searchVO.getCurrentPage());
+
+				//[2] SearchVO 값 셋팅
+				searchVO.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+				searchVO.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+
+				List<Map<String, Object>> classList = followService.selectFollowClass(searchVO);
+				logger.info("호스트클래스 조회 결과 classList.size()={}",classList.size());
+
+				int totalRecord =followService.selectTotalRecord(searchVO);
+				logger.info("호스트클래스 조회-전체레코드 개수조회 결과, totalRecord={}",			
+						totalRecord);
+
+				pagingInfo.setTotalRecord(totalRecord);
+				
 		model.addAttribute("alist",alist);
+		model.addAttribute("classList",classList);
+		model.addAttribute("pagingInfo", pagingInfo);
 		return "mypage/Favorite/Favoritehost";
 	}
 	@RequestMapping("/FollowDelete.do")

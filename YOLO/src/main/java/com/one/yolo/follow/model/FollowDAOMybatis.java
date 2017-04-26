@@ -1,9 +1,12 @@
 package com.one.yolo.follow.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
+
+import com.one.yolo.common.SearchVO;
 
 @Repository
 public class FollowDAOMybatis extends SqlSessionDaoSupport implements FollowDAO{
@@ -17,6 +20,16 @@ public class FollowDAOMybatis extends SqlSessionDaoSupport implements FollowDAO{
 	@Override
 	public int deleteFollow(int flNo) {
 		return getSqlSession().delete(namespace+".deleteFollow",flNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectFollowClass(SearchVO searchVO) {
+		return getSqlSession().selectList(namespace+".selectFollowClass",searchVO);
+	}
+	
+	public int selectTotalRecord(SearchVO searchVo){
+		return getSqlSession().selectOne(namespace
+				+".selectTotalRecord", searchVo);
 	}
 
 }

@@ -1,8 +1,13 @@
 package com.one.yolo.follow.model;
 
 import java.util.List;
+import java.util.Map;
+
+import com.one.yolo.common.SearchVO;
 
 public interface FollowService {
 	public List<FollowVO> selectFollow(String userid);
 	public int deleteFollow(int flNo);
+	public List<Map<String, Object>> selectFollowClass(SearchVO searchVO);
+	public int selectTotalRecord(SearchVO searchVo);
 }

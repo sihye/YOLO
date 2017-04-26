@@ -6,16 +6,15 @@
 function delNoFunc(delNo) { 
 	location.href='<c:url value="/mypage/Favorite/FollowDelete.do?flNo='+delNo+'" />';
 }
+function pageFunc(curPage){
+	document.frmPage.currentPage.value=curPage;
+	frmPage.submit();
+}
 </script>
 <!-- 페이징 처리를 위한 form 태그 -->
 <form name="frmPage" method="post"
-	action='<c:url value="/mypage/Favorite/FavoriteClass.do" />'>
-	<input type="hidden" name="currentPage"> <input type="hidden"
-		name="searchCondition" value="${param.searchCondition }"> <input
-		type="hidden" name="searchKeyword" value="${param.searchKeyword}">
-	<input type="hidden" name="searchStartDate"
-		value="${param.searchStartDate}"> <input type="hidden"
-		name="searchEndDate" value="${param.searchEndDate}">
+	action='<c:url value="/mypage/Favorite/Favoritehost.do?flNo=${param.flNo }&flWuserid=${param.flWuserid }"/>'>
+	<input type="hidden" name="currentPage">
 </form>
 <div class="col-md-10">
 	<ul class="nav nav-tabs nav-justified">
@@ -31,19 +30,24 @@ function delNoFunc(delNo) {
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th>전체(${fn:length(alist)})</th>
+				<th>전체(${fn:length(alist)})
+					<button onclick="delNoFunc(${param.flNo})" style="float: right;"
+						id="btDelete" class="btn btn-primary btn-xs" type="button">삭제</button>
+				</th>
 			</tr>
 			<tr>
 				<td>
 					<ul class="nav nav-pills" id="ul1">
+						<c:if test="${empty alist}">
+								<p>등록된 호스트가 없습니다</p>
+						</c:if>
 						<c:set var="i" value="0" />
 						<c:forEach var="alist" items="${alist }">
-							<li role="presentation" style="width: 19.5%;">
-							<a href="#">${alist.flWuserid }<button onclick="delNoFunc(${alist.flNo})"
-										style="float: right;" id="btDelete"
-										class="btn btn-primary btn-xs" type="button">삭제</button></a>
-									
+							
+							<li role="presentation" style="width: 19.5%;"><a
+								href='<c:url value="/mypage/Favorite/Favoritehost.do?flNo=${alist.flNo }&flWuserid=${alist.flWuserid }"/>'>${alist.flWuserid }</a>
 							</li>
+
 							<c:set var="i" value="${i+1}" />
 						</c:forEach>
 					</ul>
@@ -51,11 +55,11 @@ function delNoFunc(delNo) {
 			</tr>
 		</thead>
 	</table>
-	<h2>선택 호스트 클래스</h2>
-
+	<c:if test="${!empty classList}">
+	<h2>선택 호스트 클래스(${param.flWuserid })</h2>
 	<br>
 	<form method="post"
-		action='<c:url value="/mypage/Favorite/FavoriteClass.do" />'>
+		action='<c:url value="/mypage/Favorite/Favoritehost.do" />'>
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -67,16 +71,15 @@ function delNoFunc(delNo) {
 
 				</tr>
 			</thead>
-			<tbody>
-				<%-- <c:forEach var="map" items="${alist }">
+			<tbody>				
+				<c:forEach var="map" items="${classList }">
 				<tr>
 					<td><a href='<c:url value="/class/claDetail.do?cNo=${map['C_NO'] }"/>'>${map["C_NAME"] }</a></td>
 					<td>${map["C_PLACE"] }</td>
 					<td>${map["C_PRICE"] }</td>
 					<td>${map["C_PAYMENTWAY"] }</td>
-					<td>${map["SC_REGDATE"] }</td>
 				</tr>
-				</c:forEach> --%>
+				</c:forEach>
 
 			</tbody>
 			<tfoot>
@@ -117,17 +120,6 @@ function delNoFunc(delNo) {
 			</ul>
 		</nav>
 	</div>
-
+	</c:if>
 </div>
-
-
-=======
-			<div class="col-md-10">
-				<ul class="nav nav-tabs nav-justified">
-					<li><a href='<c:url value="/mypage/Favorite/FavoriteClass.do"/>'>관심클래스</a></li>
-					<li class="active"><a href='<c:url value="/mypage/Favorite/Favoritehost.do"/>'>관심호스트</a></li>
-					<li><a href='<c:url value="/mypage/Favorite/seeClass.do"/>'>최근 본 클래스</a></li>
-				</ul>
-			</div>
->>>>>>> branch 'master' of https://github.com/sihye/YOLO.git
 <%@ include file="../mypagebottom.jsp"%>
