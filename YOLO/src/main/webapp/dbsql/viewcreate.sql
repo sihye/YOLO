@@ -103,3 +103,8 @@ from member m where m.mg_no2 = 3
 create view badclassview --클래스 신고 view
 as
 select n.*,c.m_userid,(select k.k_name from  category k where k.K_NO =c.c_no ) as K_NAME ,c_name,c.c_del  from notify n , class c where n.C_NO = c.C_NO;
+
+
+
+--메인 베너 뷰
+select o.op_no,(select cg.k_name from category cg where o.K_NO = cg.K_NO)as k_name,f.F_FILENAME from operator o , upfile f where o.F_NO = f.F_NO;
