@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,7 +85,7 @@ public class ClaController {
 				vo.setcDetailimg1(imgUrl[1]);
 				vo.setcDetailimg2("");
 				vo.setcDetailimg3("");
-			}else if(fileList.size()==2){
+			}else if(fileList.size()==3){
 				vo.setcMainimg(imgUrl[0]);
 				vo.setcDetailimg1(imgUrl[1]);
 				vo.setcDetailimg2(imgUrl[2]);
@@ -116,8 +117,11 @@ public class ClaController {
 
 
 	@RequestMapping("/claDetail.do")
-	public String claDetail(int cNo, Model model, HttpServletResponse response){
-		logger.info("클래스 디테일 파람no={}",cNo);
+	public String claDetail(@RequestParam int cNo,HttpSession session, Model model, HttpServletResponse response){
+		String userid=(String)session.getAttribute("userid");
+		logger.info("클래스 디테일 파람no={}, session userid={}",cNo,userid);
+		int cnt=claService.hitUpdate(cNo);
+		logger.info("hit update cnt={}",cnt);
 		String claNo = Integer.toString(cNo);
 		Cookie cookie =new Cookie("classNo"+claNo,claNo);
 		cookie.setPath("/");
@@ -126,6 +130,12 @@ public class ClaController {
 		
 		ClassVO vo=claService.selClass(cNo);	
 		String kName=cService.selCateNameByNo(vo.getkNo());
+		
+		userid="hong";
+		List<ClassVO> alist=claService.selInterCla(userid);
+		model.addAttribute("inClaList",	alist);
+		logger.info("관심클래스 list size={}",alist.size());
+		
 		model.addAttribute("claVo", vo);
 		model.addAttribute("kName", kName);
 		return "class/classDetail";

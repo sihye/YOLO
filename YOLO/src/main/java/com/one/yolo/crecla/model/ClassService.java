@@ -12,4 +12,6 @@ public interface ClassService {
 	public int badClassCount(SearchVO vo);
 	public int editBadClass(int no, String type);
 	public Map<String, Object> selectBadClassByCno(int no);
+	public List<ClassVO> selInterCla(String userid);
+	public int hitUpdate(int cNo);
 }

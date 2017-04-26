@@ -332,7 +332,7 @@
 						<input type="text" class="form-control" id="inputEmail3"
 							name="cplacedetail" >
 					</div>
-					좌표: <input type="text" id="location" name="location">
+					좌표: <input type="text" id="location" name="cCoordinate">
 				</div>
 				
 				</div>

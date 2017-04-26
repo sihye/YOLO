@@ -598,6 +598,50 @@ CREATE TABLE messagemaga (
 	MS_CHECK VARCHAR2(5) DEFAULT 'N'  -- 확인여부
 );
 
+-- 관심호스트
+CREATE TABLE follow (
+	FL_NO      NUMBER        NOT NULL, -- 팔로우번호
+	FL_USERID  VARCHAR2(500) NOT NULL, -- 팔로워아이디
+	FL_WUSERID VARCHAR2(500) NOT NULL, -- 팔로우아이디
+	FL_REGDATE DATE          NULL      -- 등록일
+);
+
+-- 관심호스트 기본키
+CREATE UNIQUE INDEX PK_follow
+	ON follow ( -- 관심호스트
+		FL_NO ASC -- 팔로우번호
+	);
+
+-- 관심호스트
+ALTER TABLE follow
+	ADD
+		CONSTRAINT PK_follow -- 관심호스트 기본키
+		PRIMARY KEY (
+			FL_NO -- 팔로우번호
+		);
+
+-- 관심호스트
+ALTER TABLE follow
+	ADD
+		CONSTRAINT FK_Member_TO_follow -- 회원 -> 관심호스트
+		FOREIGN KEY (
+			FL_USERID -- 팔로워아이디
+		)
+		REFERENCES Member ( -- 회원
+			M_USERID -- 아이디
+		);
+
+-- 관심호스트
+ALTER TABLE follow
+	ADD
+		CONSTRAINT FK_Member_TO_follow2 -- 회원 -> 관심호스트2
+		FOREIGN KEY (
+			FL_WUSERID -- 팔로우아이디
+		)
+		REFERENCES Member ( -- 회원
+			M_USERID -- 아이디
+		);
+
 -- 회원
 ALTER TABLE Member
 	ADD

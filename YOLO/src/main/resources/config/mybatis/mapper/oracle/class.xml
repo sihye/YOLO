@@ -62,6 +62,25 @@
  	<select id="selectBadClassByCno" parameterType="int" resultType="hashmap">
  		select *from badclassview where c_no =#{no}
  	</select>
+
+	<select id="selInterCla" parameterType="string" resultType="ClassVO">
+		select * from class
+		where k_no in((select m.K_NO1 from member m join category c
+		on m.K_NO1=c.K_NO
+		where m.M_USERID=#{userid}),(select m.K_NO2 from member m join category c
+		on m.K_NO1=c.K_NO
+		where m.M_USERID=#{userid}),(select m.K_NO3 from member m join category c
+		on m.K_NO1=c.K_NO
+		where m.M_USERID=#{userid}))
+	</select>
+
+	<update id="hitUpdate" parameterType="int">
+		update class
+		set
+		C_HITS=C_HITS+1
+		where c_no=#{cNo}
+	</update>
+ 	
 </mapper>
 
 

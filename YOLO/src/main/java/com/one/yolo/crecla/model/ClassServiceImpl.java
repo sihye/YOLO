@@ -42,5 +42,13 @@ public class ClassServiceImpl implements ClassService {
 	public Map<String, Object> selectBadClassByCno(int no) {
 		return dao.selectBadClassByCno(no);
 	}
-
+	
+	@Override
+	public List<ClassVO> selInterCla(String userid) {
+		return dao.selInterCla(userid);
+	}
+	@Override
+	public int hitUpdate(int cNo) {
+		return dao.hitUpdate(cNo);
+	}
 }

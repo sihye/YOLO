@@ -44,6 +44,14 @@ public class ClassDAOMybatis extends SqlSessionDaoSupport implements ClassDAO{
 
 		return getSqlSession().selectOne(nameSpace+".selectBadClassByCno",no);
 	}
+	@Override
+	public List<ClassVO> selInterCla(String userid) {
+		return getSqlSession().selectList(nameSpace+".selInterCla", userid);
+	}
+	@Override
+	public int hitUpdate(int cNo) {
+		return getSqlSession().update(nameSpace+".hitUpdate", cNo);
+	}
 
 
 }

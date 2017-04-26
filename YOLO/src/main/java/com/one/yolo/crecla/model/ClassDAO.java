@@ -13,4 +13,6 @@ public interface ClassDAO {
 	public int delClass(int no);
 	public int resetClass(int no);
 	public Map<String, Object> selectBadClassByCno(int no);
+	public List<ClassVO> selInterCla(String userid);
+	public int hitUpdate(int cNo);
 }
