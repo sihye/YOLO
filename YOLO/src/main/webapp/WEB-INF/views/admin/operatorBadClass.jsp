@@ -144,9 +144,11 @@ function pageFunc(curPage){
 	frmPage.submit();
 }
 function detail(no) {
+	var popupX = (window.screen.width / 2) - (400 / 2);
+	var popupY= (window.screen.height /2) - (200 / 2);
 	 window.open(
 			"<c:url value='/admin/badClassDetail.do?cno="+no+ "'/>", '신고내용',
-						'width=400,height=200,left=10,top=10,location=yes,resizable=yes'); 
+						'width=400,height=200,left='+popupX+',top='+(popupY)+',screenX='+popupX+',screenY='+popupY+',location=yes,resizable=yes'); 
 }
  
 	
