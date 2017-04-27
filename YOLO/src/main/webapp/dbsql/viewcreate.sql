@@ -1,14 +1,14 @@
 --[viewcreate.sql]
 
 
-
+--QNA게시판조회뷰
 CREATE OR REPLACE VIEW qnaboard
 AS SELECT q.*,c.C_NAME
 FROM classqnaboard q,class c
 WHERE q.C_NO=c.C_NO;
 select*from qnaboard;
 
-
+--후기게시판조회뷰
 CREATE OR REPLACE VIEW reviewboard
 AS SELECT a.*,c.C_NAME
 FROM CLASSBOARD  a,class c
@@ -17,6 +17,7 @@ select*from reviewboard;
 
 --DROP VIEW favoriteclass;
 
+--관심클래스 조회 뷰
 CREATE OR REPLACE VIEW favoriteclass
 AS select sb.*,c.C_NAME,c.C_PLACE,c.C_PRICE,c.C_PAYMENTWAY
 from MEMBER m,CLASS c,SHOPPINGBASKET sb
@@ -60,7 +61,7 @@ from member m
 where mg_no2=3;
 
 
-
+--결제내역 조회뷰
 CREATE OR REPLACE VIEW mypayment
 AS SELECT p.*,c.C_NAME,C_PRICE
 FROM payment p,class c
@@ -68,6 +69,7 @@ WHERE p.C_NO=c.C_NO;
 
 select*from mypayment;
 
+--받은메세지 조회 뷰
 CREATE OR REPLACE VIEW messagsend
 AS SELECT m.MS_USERID,m.MS_CONTENT,m.MS_REGDATE,m.MS_TITLE,m2.MS_NO,m2.MSMG_USERID,m2.MS_CHECK
 FROM message m,messagemaga m2
@@ -76,7 +78,7 @@ select*from messagsend;
 
 
 
-
+--관심호스트클래스 조회 뷰
 CREATE OR REPLACE VIEW FOLLOWCLASS
 AS SELECT f.*,c.*
 FROM FOLLOW  f,CLASS  c

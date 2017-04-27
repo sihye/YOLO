@@ -15,6 +15,7 @@ public class MessageServiceImpl implements MessageService{
 	private MessageDAO messageDao;
 
 	@Override
+	@Transactional
 	public int insertSend(MessageVO messageVo, MessageMagaVO messageMagaVo) {
 		messageDao.insertMessage(messageVo);
 		messageMagaVo.setMsNo(messageVo.getMsNo());

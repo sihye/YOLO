@@ -143,6 +143,15 @@
     		document.frmPage.currentPage.value=curPage;
     		frmPage.submit();
     	}
+        function onFunc(trNo) {
+			var tr2Id = document.getElementById("tr2"+trNo);
+			var style = window.getComputedStyle(tr2Id,null).getPropertyValue("display");
+			if(style=='none'){
+				tr2Id.style.display='';	
+			}else if(style=='table-row'){
+				tr2Id.style.display='none';	
+			}
+		}
             
         </script>
 
@@ -259,10 +268,36 @@
 							name="msItems[${i}].msNo" value="${map['MS_NO'] }"></td>
 						<td>${map["MS_NO"] }</td>
 						<td>${map["MS_USERID"] }</td>
-						<td>${map["MS_TITLE"] }</td>
+						<td><a href="#"  onclick="onFunc(${i})">${map["MS_TITLE"] }</td>
 						<td>${map["MS_CONTENT"] }</td>
-						<td>${map["MS_REGDATE"] }</td>
+						<td><fmt:formatDate value="${map['MS_REGDATE'] }" pattern="yyyyMMddHHmmss"/></td>
 						<td>미확인</td>
+					</tr>
+					<tr id="tr2${i }" style="display: none;">			
+					<td colspan="7">
+						<table class="table table-bordered" summary="보낸쪽지 내용" >
+							<caption>보낸메세지</caption>
+							<colgroup>
+								<col width="18%;" />
+								<col width="33%;" />
+								<col width="18%;" />
+								<col width="*;" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="row">보낸사람</th>
+									<td>${map["MS_USERID"] }</td>
+									<th scope="row">받은사람</th>
+									<td>${map["MSG_USERID"] }</td>
+								</tr>
+								<tr>
+									<th scope="row">제목</th>
+									<td colspan="3" class="goods">${map["MS_TITLE"] }</td>
+								</tr>
+							</tbody>
+						</table>
+						<p style="margin-top: 10px;">${map["MS_CONTENT"] }</p>
+					</td>
 					</tr>
 					<c:set var="i" value="${i+1}" />
 				</c:forEach>

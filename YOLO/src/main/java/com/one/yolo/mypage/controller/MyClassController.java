@@ -41,10 +41,9 @@ public class MyClassController {
 		return "mypage/MyClass/PartClass";
 	}
 	@RequestMapping("/Payment.do")
-	public String payment(@ModelAttribute SearchVO searchVO,HttpServletRequest request, Model model){
+	public String payment(@ModelAttribute SearchVO searchVO,HttpSession session, Model model){
 		//세션에 저장
-		HttpSession session = request.getSession();
-		session.setAttribute("userid", "hong");
+	
 		String userid =(String)session.getAttribute("userid");
 		searchVO.setUserid(userid);
 		logger.info("Payment 화면 보여주기 ,파라미터 searchVO={}",searchVO);

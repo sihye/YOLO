@@ -43,10 +43,9 @@ public class FavoriteController {
 
 	@RequestMapping("/FavoriteClass.do")
 	public String FavoriteClass(@ModelAttribute SearchVO searchVO
-			, Model model,HttpServletRequest request){
+			, Model model,HttpSession session){
 		//세션에 저장
-		HttpSession session = request.getSession();
-		session.setAttribute("userid", "hong");
+		
 		String userid =(String)session.getAttribute("userid");
 		searchVO.setUserid(userid);
 
@@ -104,8 +103,7 @@ public class FavoriteController {
 	}
 
 	@RequestMapping("/FavoriteClassdeleteId.do")
-	public String FavoriteClassdeleteId(HttpServletRequest request,Model model){
-		HttpSession session = request.getSession();
+	public String FavoriteClassdeleteId(Model model,HttpSession session){		
 		String userid =(String)session.getAttribute("userid"); 
 
 
@@ -124,9 +122,7 @@ public class FavoriteController {
 
 
 	@RequestMapping("/Favoritehost.do")
-	public String Favoritehost(@ModelAttribute SearchVO searchVO,HttpServletRequest request,Model model){
-		HttpSession session = request.getSession();
-		session.setAttribute("userid", "hong");
+	public String Favoritehost(@ModelAttribute SearchVO searchVO,HttpSession session,Model model){
 		String userid =(String)session.getAttribute("userid");
 		logger.info("Favoritehost 화면 보여주기,파라미터 userid={},searchVO={}",userid,searchVO);
 		List<FollowVO> alist = followService.selectFollow(userid);

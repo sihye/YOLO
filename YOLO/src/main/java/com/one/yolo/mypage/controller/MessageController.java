@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.one.yolo.common.PaginationInfo;
 import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
+import com.one.yolo.follow.model.FollowService;
+import com.one.yolo.follow.model.FollowVO;
 import com.one.yolo.member.model.MemberService;
 import com.one.yolo.message.model.MessageMagaVO;
 import com.one.yolo.message.model.MessageListVO;
@@ -37,7 +39,8 @@ public class MessageController {
 	private MessageService messageService;
 	@Autowired
 	private MemberService memberService;
-	
+	@Autowired
+	private FollowService followService;
 	@RequestMapping("/messageSend.do")
 	public String messageSend(){
 		logger.info("messageSend 화면 보여주기");
@@ -45,10 +48,8 @@ public class MessageController {
 		return "mypage/message/messageSend";
 	}
 	@RequestMapping("/sendbox.do")
-	public String sendbox(@ModelAttribute SearchVO searchVO,HttpServletRequest request, Model model){
+	public String sendbox(@ModelAttribute SearchVO searchVO,HttpSession session, Model model){
 		//세션에 저장
-				HttpSession session = request.getSession();
-				session.setAttribute("userid", "hong");
 				String userid =(String)session.getAttribute("userid");
 				searchVO.setUserid(userid);
 				logger.info("sendbox 화면 보여주기 ,파라미터 searchVO={}",searchVO);
@@ -105,10 +106,8 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/getbox.do")
-	public String getbox(@ModelAttribute SearchVO searchVO,HttpServletRequest request, Model model){
+	public String getbox(@ModelAttribute SearchVO searchVO,HttpSession session, Model model){
 		//세션에 저장
-		HttpSession session = request.getSession();
-		session.setAttribute("userid", "hong");
 		String userid =(String)session.getAttribute("userid");
 		searchVO.setUserid(userid);
 		logger.info("getbox 화면 보여주기 ,파라미터 searchVO={}",searchVO);
@@ -167,10 +166,8 @@ public class MessageController {
 	}
 	@RequestMapping("/insertMessage.do")
 	public String insertMessage(@ModelAttribute MessageVO messageVo,
-			@ModelAttribute MessageMagaVO messageMagaVo,Model model,HttpServletRequest request){
+			@ModelAttribute MessageMagaVO messageMagaVo,Model model,HttpSession session){
 		//세션에 저장
-		HttpSession session = request.getSession();
-		session.setAttribute("userid", "hong");
 		String userid =(String)session.getAttribute("userid");
 		messageVo.setMsUserid(userid);
 		
@@ -189,12 +186,19 @@ public class MessageController {
 		model.addAttribute("url",url);
 		return "common/message";
 	}
+	
 	@RequestMapping("/idSelect.do")
-	public String idSelect(){
-		logger.info("idSelect 화면 보여주기");
+	public String idSelect(HttpSession session,Model model){
+		String userid =(String)session.getAttribute("userid");
+		logger.info("idSelect 화면 보여주기 userid={}",userid);
+		List<FollowVO> alist = followService.selectFollow(userid);
+		logger.info("follow 조회 결과, alist.size()={}", alist.size());
+		
+		model.addAttribute("flList",alist);
 		
 		return "mypage/message/idSelect";
 	}
+	
 	@RequestMapping("/ajaxCheckId.do")
 	@ResponseBody
 	public Boolean ajaxCheckId(@RequestParam String msgUserid){
