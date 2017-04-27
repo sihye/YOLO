@@ -24,6 +24,7 @@ import com.one.yolo.category.model.CategoryVO;
 import com.one.yolo.common.FileUploadWebUtil;
 import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.crecla.model.ClassVO;
+import com.one.yolo.crecla.model.ScheduleVO;
 import com.one.yolo.upfile.model.UpfileService;
 import com.one.yolo.upfile.model.UpfileVO;
 
@@ -58,7 +59,7 @@ public class ClaController {
 	
 	//클래스 인서트
 	@RequestMapping(value="/clacre.do", method=RequestMethod.POST)
-	public String insertCla(HttpServletRequest req, @ModelAttribute ClassVO vo, Model model){
+	public String insertCla(HttpServletRequest req,@ModelAttribute ScheduleVO sVO , @ModelAttribute ClassVO vo, Model model){
 		logger.info("클래스 insert param vo={}",vo);
 		vo.setmUserid("hong");
 		
@@ -98,8 +99,8 @@ public class ClaController {
 			}
 		}		
 		logger.info("cla inset param vo(셋팅완료)={}",vo);
-		
-		int cnt=claService.claInsert(vo);
+
+		int cnt=claService.claInsert(vo,sVO);
 		String msg="",url="/class/clacre.do";
 		if(cnt>0){
 			

@@ -23,7 +23,7 @@
 
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -491,55 +491,67 @@
 
 			<div class="section" id="section3">
 				<div class="intro">
-					<h1>스케줄 등록하기</h1><br> 
-					<label for="radio-1">하루씩 등록하기</label> 
-					<input type="radio" name="radio-1" id="radio-1"> 
-					<label for="radio-2">한번에 등록하기</label> 
-					<input type="radio" name="radio-1" id="radio-2">
-				<script>
-					$(function() {
-						$("#exampleInputName2").datepicker();
-					});
-
-					var time = [ "1", "2", "3", "4", "5", "6", "7", "8", "9",
-							"10", "11", "12" ];
-				</script>
-				<div>
-					<p>하루씩 등록하기</p>
-					<div id="selDate">
-						<label for="exampleInputName2">날짜</label> <input type="text"
-							class="form-control" id="exampleInputName2"
-							placeholder="날짜를 입력하세요"> <label for="time">시간</label>
-						<%-- <select class="form-control" id="time">
-						<c:forEach var="i" begin="1"end="12">
-						<option>${i}</option>
-						</c:forEach>
-					</select>~
-					<select class="form-control">
-						<option>1</option>
-						<option>2</option>
-					</select> --%>
+					<h1>스케줄 등록하기</h1><br>
+					<div id="oneDay" class="sch">
+						<!-- 기간 -->
+						<div class="col-xs-3">
+							<script type="text/javascript">
+								$(function() {
+									$("#exampleInputName2").datepicker();
+									$("#exampleInputName1").datepicker();
+								})
+							</script>
+							<label for="exampleInputName2">시작 날짜</label> <input type="text"
+							class="form-control" id="exampleInputName2" name="scStartdate"
+							placeholder="날짜를 입력하세요">
+						</div>
+						<div class="col-xs-3">
+						<label for="exampleInputName1">끝나는 날짜</label> <input type="text"
+						class="form-control" id="exampleInputName1" name="scEnddate"
+						placeholder="날짜를 입력하세요">
+						</div>
+						<!-- 요일 -->						
+						<bR>
+						
+						<div class="checkbox">
+							<label><input type="checkbox" id="blankCheckbox"
+								value="월" aria-label="...">월 </label> <label><input
+								type="checkbox" id="blankCheckbox" value="화" name="scWeek" 
+								aria-label="...">화 </label> <label><input
+								type="checkbox" id="blankCheckbox" value="수" name="scWeek"
+								aria-label="...">수 </label> <label><input
+								type="checkbox" id="blankCheckbox" value="목" name="scWeek"
+								aria-label="...">목 </label>
+								<label><input
+								type="checkbox" id="blankCheckbox" value="금" name="scWeek"
+								aria-label="...">금 </label>
+								<label><input  
+								type="checkbox" id="blankCheckbox" value="토" name="scWeek"
+								aria-label="...">토 </label>
+								<label><input
+								type="checkbox" id="blankCheckbox" value="일" name="scWeek"
+								aria-label="...">일 </label>
+						</div>
+						
+						<!-- 시간 -->
+						<label for="radio-1">오전</label> 
+						<input type="radio" name="time" id="am"> 
+						<label for="radio-2">오후</label> 
+						<input type="radio" name="time" id="pm"> 
+						<select style="width: 5%;" class="form-control" name="scStarttime">
+							<c:forEach var="i" begin="1" end="12">
+								<option>${i}</option>
+							</c:forEach>
+						</select>
+						<select style="width: 5%;" class="form-control" name="scEndtime">
+							<c:forEach var="i" begin="1" end="12">
+								<option>${i}</option>
+							</c:forEach>
+						</select>
+					
 					</div>
-					<div id="field"></div>
-					<input type="button" value="추가" onclick="add_div()" id="timeReBt">
-					<input type="button" value="삭제" onclick="remove_div(this)"
-						id="timeAddBt"> <input type="button" value="등록"
-						id="timeAddBt">
-					<script type="text/javascript">
-						function add_div() {
-							var div = document.createElement('div');
-							div.innerHTML = document.getElementById('selDate').innerHTML;
-							document.getElementById('field').append(div);
-						}
-
-						function remove_div(obj) {
-							document.getElementById('field').removeChild(
-									obj.parentNode);
-						}
-					</script>
-				</div>
-
-				<input type="submit" value="제출">
+					<input type="submit" id="classSub" name="classSub" class="btn btn-info" value="제출">
+					</div>
 				</div>
 			</div>
 			
