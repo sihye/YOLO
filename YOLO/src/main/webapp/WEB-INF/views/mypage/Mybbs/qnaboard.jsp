@@ -234,7 +234,7 @@
 			<c:forEach var="map" items="${alist }">
 				<tr>
 					<td>${map["CQ_NO"] }</td>
-					<td>${map["C_NAME"] }</td>
+					<td><a href='<c:url value="/class/claDetail.do?cNo=${map['C_NO'] }"/>'>${map["C_NAME"] }</a></td>
 					<td>${map["CQ_CONTENT"] }</td>
 					<td>${map["C_REGDATE"] }</td>
 					<td>처리중</td>

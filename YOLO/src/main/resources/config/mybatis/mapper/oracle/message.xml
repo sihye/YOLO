@@ -104,10 +104,15 @@
 		]]>
 	</select>
 	
-	<select id="selectTotalRecord" parameterType="SearchVO"
+	<select id="selectTotalRecordSend" parameterType="SearchVO"
 		resultType="int">
 		select count(*) from messagsend 
 		<include refid="searchWhereSend"></include>
+	</select>
+	<select id="selectTotalRecordGet" parameterType="SearchVO"
+		resultType="int">
+		select count(*) from message 
+		<include refid="searchWhereGet"></include>
 	</select>
 	
 	<delete id="deleteMessageMaga" parameterType="int">

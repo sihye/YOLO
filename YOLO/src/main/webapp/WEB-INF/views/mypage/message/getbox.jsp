@@ -248,15 +248,15 @@
 		<table class="table table-hover">
 			<thead>
 				<tr style="background: skyblue">
-					<th><input type="checkbox" value="None" id="chkAll"
+					<th width="10%"><input type="checkbox" value="None" id="chkAll"
 						name="chkAll" /> </label>
 						</div></th>
-					<th>번호</th>
-					<th>보낸사람</th>
-					<th>제목</th>
-					<th>내용</th>
-					<th>받은시간</th>
-					<th>상태</th>
+					<th width="10%">번호</th>
+					<th width="15%">보낸사람</th>
+					<th width="15%">제목</th>
+					<th width="15%">내용</th>
+					<th width="25%">받은시간</th>
+					<th width="10%">상태</th>
 					
 				</tr>
 			</thead>
@@ -270,7 +270,7 @@
 						<td>${map["MS_USERID"] }</td>
 						<td><a href="#"  onclick="onFunc(${i})">${map["MS_TITLE"] }</td>
 						<td>${map["MS_CONTENT"] }</td>
-						<td><fmt:formatDate value="${map['MS_REGDATE'] }" pattern="yyyyMMddHHmmss"/></td>
+						<td><fmt:formatDate value="${map['MS_REGDATE'] }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 						<td>미확인</td>
 					</tr>
 					<tr id="tr2${i }" style="display: none;">			

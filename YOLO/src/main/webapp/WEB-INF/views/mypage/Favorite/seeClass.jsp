@@ -22,8 +22,7 @@ function delFunc() {
 	<h2>최근 본 클래스</h2>
 
 	<br>
-	<form method="post"
-		action='<c:url value="/mypage/Favorite/FavoriteClass.do" />'>
+	<form method="post">
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -39,7 +38,7 @@ function delFunc() {
 			<tbody>
 				<c:forEach var="vo" items="${alist }">
 					<tr>
-						<td>${vo.cName }</td>
+						<td><a href='<c:url value="/class/claDetail.do?cNo=${vo.cNo }"/>'>${vo.cName }</a></td>
 						<td>${vo.cPlace }</td>
 						<td>${vo.cPrice }</td>
 						<td>${vo.cPaymentway }</td>

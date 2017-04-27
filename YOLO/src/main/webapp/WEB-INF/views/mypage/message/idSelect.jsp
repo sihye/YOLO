@@ -68,19 +68,10 @@ function delNode()	{
 			i--;
 		}
 	}
+	
 }
 function Apply()
 {
-	
-	//2014.06.23. userId와 부모창의 login ID의 일치성은 부모창에서 보고 판단한다.
-	//해당창이 부모가 없으며( == 내가iframe이 아닌 경우) && 팝업창이 없으면. 
-	if (!(parent && parent != this) && (window.opener == null ||  window.opener.closed))
-	{
-		alert("쓰기페이지를 찾을 수 없습니다.\r\n창을 닫고 다시 시도해주시기 바랍니다.");				
-		closeWindow();
-		return;
-	}
-	
 	
 	var to_ids = document.getElementById("notBuddyReceiver").value;
 	var selection = document.getElementById("selection");
@@ -88,64 +79,27 @@ function Apply()
 	{
 		if ( confirm("받는 사람이 없습니다." + "\n\n창을 닫으시겠습니까?") ) // 확인눌렀는데 선택한 아이디가 없을경우
 		{
-			closeWindow();
+			 history.go(0)
 		}
 		else
 		{
 			return;
 		}
 	}
-	
-	if (window.opener == null && (!isBrowserIE) || (ieVersion >= 8) || (ieVersion < 8 && isTrident))
-	{
-		var postMsgData = {};
-		postMsgData.code = "sendMemoData";
-		postMsgData.userId = userId;
-		postMsgData.receiverList = [];
-		
-		for (var i = 0 ; i < selection.length ; i++)
-		{
-			temp_option = selection.options[i];
-			if ( temp_option.value!="")
-			{
-				tempArray = temp_option.text.split(' ');
-				var tempVar = {id: "", name:""};
-				if (tempArray.length>1)
-				{
-					tempVar.name = temp_option.text.split(' ')[0];
-				}
-				tempVar.id = temp_option.value;
-				
-				postMsgData.receiverList[i] = isBrowserIE ? JSON.stringify(tempVar) : tempVar;
-				
-			}
-		}
-		
-		parent.postMessage(isBrowserIE? JSON.stringify(postMsgData) : postMsgData, "http://" + currentDomain);
-		
-	}
-	else
-	{
-		for (var i=0; i< selection.length; i++)
-		{
-			temp_option = selection.options[i];
-			if ( temp_option.value!="")
-			{
-				tempArray = temp_option.text.split(' ');
-				if (tempArray.length>1)
-					to_ids += "\"" + temp_option.text.split(' ')[0] + "\"<" + temp_option.value + ">;";
-				else
-					to_ids += "<" + temp_option.value + ">;";
-			}
-		}
-		
-		$('textarea.to_input', window.opener.document).val(to_ids).focus();
-		
-	}
-	
-	closeWindow();
+	var receiverList = [];
 
-}
+	for (var i = 0 ; i < selection.length ; i++)
+	{
+		temp_option = selection.options[i];
+		if ( temp_option.value!="")
+		{
+			tempArray = temp_option.text.split(' ');
+			var tempVar = temp_option.value;		
+			receiverList[i]=tempVar;	
+		}
+	}
+	location.href='<c:url value="/mypage/message/messageSend.do?result='+receiverList+'" />';
+}	
 
 </script>
 <div class="modal-header">
@@ -165,9 +119,8 @@ function Apply()
 							<option value="${alist.flWuserid}">${alist.flWuserid}</option>
 						</c:forEach>
 					</select>
-					<input type="hidden" id="notBuddyReceiver" value=""/>
+					
 				</div>
-
 				<div class="col-md-2">
 					<br><br>
 					<span class="button icon"><button
@@ -187,6 +140,7 @@ function Apply()
 					<select name="selection" id="selection" multiple="multiple"
 						class="multiple">
 					</select>
+					<input type="hidden" id="notBuddyReceiver" value=""/>
 				</div>
 			</div>
 
@@ -195,7 +149,7 @@ function Apply()
 </div>
 <div class="modal-footer">
 
-	<span class="btn btn-sm btn-primary" id="Save"> 확인<i
+	<span class="btn btn-sm btn-primary" id="Save" onclick="Apply()"> 확인<i
 		class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
 	</span>
 	<button class="btn btn-sm btn-danger pull-right" data-dismiss="modal"

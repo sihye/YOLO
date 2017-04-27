@@ -124,7 +124,7 @@ public class ClaController {
 		int cnt=claService.hitUpdate(cNo);
 		logger.info("hit update cnt={}",cnt);
 		String claNo = Integer.toString(cNo);
-		Cookie cookie =new Cookie("classNo"+claNo,claNo);
+		Cookie cookie =new Cookie("classNo"+userid+claNo,claNo);
 		cookie.setPath("/");
 		cookie.setMaxAge(60*60*24);
 		response.addCookie(cookie);

@@ -233,9 +233,8 @@
 				<tr>
 					<td>${map["CB_NO"] }</td>
 					<td>
-					<a href
-				='<c:url value="/mypage/Mybbs/updateCount.do?no=${map['CB_NO'] }"/>'>
-					${map["C_NAME"] }</a></td>
+					<a href='<c:url value="/class/claDetail.do?cNo=${map['C_NO'] }"/>'>${map["C_NAME"] }</a>
+					</td>
 					<td>${map["CB_CONTENT"] }</td>
 					<td>${map["CB_REGDATE"] }</td>
 				</tr>
