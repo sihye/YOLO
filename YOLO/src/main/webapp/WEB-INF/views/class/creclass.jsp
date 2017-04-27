@@ -67,7 +67,7 @@
 							/* sectionsColor : [ '#1bbc9b', '#4BBFC3', '#7BAABE',
 									'whitesmoke', '#ccddff' ], */
 							anchors : [ 'firstPage', 'secondPage', '3rdPage',
-									'4thpage', '5thpage', '6thpage' ],
+									'4thpage'],
 							menu : '#menu',
 							continuousVertical : false
 						});
@@ -111,8 +111,6 @@
 		<li data-menuanchor="secondPage"><a href="#secondPage">주소 등록</a></li>
 		<li data-menuanchor="3rdPage"><a href="#3rdPage">클래스 갤러리 등록</a></li>
 		<li data-menuanchor="4thpage"><a href="#4thPage">클래스 스케줄 등록</a></li>
-		<li data-menuanchor="5thpage"><a href="#5thpage">클래스 추가정보 3</a></li>
-		<li data-menuanchor="6thpage"><a href="#6thpage">스케줄 등록</a></li>
 	</ul>
 	<form action="<c:url value="/class/clacre.do"/>"
 		class="form-horizontal container" enctype="multipart/form-data"
