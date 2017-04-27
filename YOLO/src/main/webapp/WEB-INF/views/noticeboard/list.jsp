@@ -125,6 +125,8 @@
 	</nav>
 </div>
 
+
+
 <div class="divSearch">
    	<form name="frmSearch" method="post" 
    		action="<c:url value='/noticeboard/list.do' />" >
