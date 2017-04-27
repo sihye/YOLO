@@ -15,4 +15,5 @@ public interface ClassDAO {
 	public Map<String, Object> selectBadClassByCno(int no);
 	public List<ClassVO> selInterCla(String userid);
 	public int hitUpdate(int cNo);
+	public int schInsert(ScheduleVO vo);
 }

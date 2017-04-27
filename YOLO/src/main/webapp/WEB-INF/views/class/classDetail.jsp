@@ -46,6 +46,7 @@ hr{
 #onHeader table{
 	margin: 0 auto;
 	padding-top: 400px;
+	width: 970px;
 }
 .header-wrap{
 }
@@ -129,11 +130,39 @@ hr{
 				<tr><td style="text-align: left;">
 					<div id="cate" >${kName}</div>
 				</td></tr>
-				<tr><td style="text-align: center; font-size: 50px;"><p>${claVo.cName}</p></td></tr>
-				<tr><td><span>${claVo.mUserid }</span><br><span>등록일 <fmt:formatDate value="${claVo.cRegdate}" type="date" pattern="yyyy/MM/dd (E)"/>
+				<tr><td style="text-align: center; font-size: 50px;"><p style="color: white;">${claVo.cName}</p></td></tr>
+				<tr><td><span style="color: white; font-size: 20px; ">${claVo.mUserid }</span><br><span style="color: white; font-size: 20px;">등록일 <fmt:formatDate value="${claVo.cRegdate}" type="date" pattern="yyyy/MM/dd (E)"/>
 	| 조회  ${claVo.cHits }</span></td></tr>
 			</tbody>
 		</table>
+		<!-- Button trigger modal -->
+<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal1">
+  예약하기
+</button>
+
+<!-- Modal -->
+<form action="" method="post" name="" id="">
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"
+      aria-label="Close" aria-hidden="true">×</button>
+        
+        <h4 class="modal-title" id="myModalLabel" style="color: black;">예약하기</h4>
+      </div>
+      <div class="modal-body" >
+        ...
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-default">예약하기</button>
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        
+      </div>
+    </div>
+  </div>
+</div>
+</form>
 	</div>
 	
 	<button> 예약하기</button>
@@ -303,8 +332,10 @@ hr{
 											<a
 												href="<c:url value='/class/claDetail.do?cNo=${claVo.cNo}'/>">${claVo.cName}</a>
 										</h1>
-										<h2>
-											2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span>
+										<h2 style="text-align: right;">
+											<i class="fa fa-eye " aria-hidden="true"></i>${claVo.cHits}
+											<i class="fa fa-heart-o" aria-hidden="true"></i>
+											<span class="property_size">(288ftsq)</span>
 										</h2>
 									</div></li>
 							</c:forEach>

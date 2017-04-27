@@ -6,7 +6,7 @@ import java.util.Map;
 import com.one.yolo.common.SearchVO;
 
 public interface ClassService {
-	public int claInsert(ClassVO vo);
+	public int claInsert(ClassVO vo, ScheduleVO sVo);
 	public ClassVO selClass(int cNo);
 	public List<Map<String, Object>>badClassView(SearchVO vo);
 	public int badClassCount(SearchVO vo);

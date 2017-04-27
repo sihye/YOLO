@@ -70,14 +70,14 @@ public class NoticeboardController {
 		return "noticeboard/list";
 	}
 	
-	@RequestMapping(value="write.do", method=RequestMethod.GET)
+	@RequestMapping(value="/write.do", method=RequestMethod.GET)
 	public String write_get(){
 		logger.info("공지사항 글쓰기 화면 보여주기");
 
 		return "noticeboard/write";
 	}
 	
-	@RequestMapping(value="write.do", method=RequestMethod.POST)
+	@RequestMapping(value="/write.do", method=RequestMethod.POST)
 	public String write_post(@ModelAttribute NoticeboardVO vo,
 			@ModelAttribute UpfileVO upfileVo,
 			HttpServletRequest request, Model model){
@@ -107,7 +107,7 @@ public class NoticeboardController {
 		return "redirect:/noticeboard/list.do";		
 	}
 	
-	@RequestMapping(value="updateCount.do")
+	@RequestMapping(value="/updateCount.do")
 	public String updateCount(
 			@RequestParam(value="no", defaultValue="0")
 			int no, Model model){
@@ -148,7 +148,7 @@ public class NoticeboardController {
 		
 	}
 	
-	@RequestMapping(value="edit.do", method=RequestMethod.GET)
+	@RequestMapping(value="/edit.do", method=RequestMethod.GET)
 	public String edit_get(@RequestParam (value="no", defaultValue="0") int no,
 			Model model){
 		logger.info("공지사항 수정화면, 파라미터no={}", no );
@@ -167,7 +167,7 @@ public class NoticeboardController {
 		return "noticeboard/edit";
 	}
 	
-	@RequestMapping(value="edit.do", method=RequestMethod.POST)
+	@RequestMapping(value="/edit.do", method=RequestMethod.POST)
 	public String edit_post(@ModelAttribute NoticeboardVO vo, 
 			Model model){
 		logger.info("공지사항 수정 처리, 파라미터 vo={}", vo);
@@ -189,7 +189,7 @@ public class NoticeboardController {
 		return "common/message";
 	}
 	
-	@RequestMapping(value="delete.do", method=RequestMethod.GET)
+	@RequestMapping(value="/delete.do", method=RequestMethod.GET)
 	public String delete_get(
 			@RequestParam(value="no", defaultValue="0") int no,
 			Model model){
