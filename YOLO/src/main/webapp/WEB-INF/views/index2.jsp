@@ -59,7 +59,7 @@
 		</div><!--  end advanced search section  -->
 	</section><!--  end search section  -->
 	<div class="container">
-		<div class="col-md-2"></div> 
+		<div class="col-md-2"></div>  
 		<div class="dropdown">
 			<ul class="nav nav-pills">
 				<c:forEach var="gvo" items="${gList}">
