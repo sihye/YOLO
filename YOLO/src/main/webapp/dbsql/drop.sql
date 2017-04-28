@@ -5,7 +5,7 @@ DROP TABLE membergroup CASCADE CONSTRAINTS;
 DROP TABLE Member CASCADE CONSTRAINTS;
 
 -- 질문항목
-DROP TABLE question;
+DROP TABLE question CASCADE CONSTRAINTS;
 
 -- 카테고리분류
 DROP TABLE categorygroup CASCADE CONSTRAINTS;
@@ -42,7 +42,7 @@ DROP TABLE messagemaga;
 
 -- 쪽지
 DROP TABLE message;
-rollback
+--rollback
 
 -- 공지사항
 DROP TABLE noticeboard;

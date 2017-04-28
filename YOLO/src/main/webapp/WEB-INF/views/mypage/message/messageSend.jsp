@@ -42,7 +42,7 @@
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#mUserid").focus();
+	$("#msgUserid").focus();
 	
 	$("#sendfrm").submit(function() {
 		if($("#msgUserid").val()==''){
@@ -60,7 +60,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("#msgUserid").keyup(function() {	
+	$("html").mouseover(function() {	
 		if($("#msgUserid").val()==''){		
 			$('#chkId').val("");
 			$("#error").hide();
@@ -111,7 +111,8 @@ $(document).ready(function() {
 				</div>
 				<div class="col-md-8">
 					<input type="text" class="form-control" name="msgUserid" id="msgUserid"
-						placeholder="받는 사람을 선택하거나 직접 입력해주세요.">				 
+						placeholder="받는 사람을 선택하거나 직접 입력해주세요."
+						value="${param.result }">				 
 				</div>
 				
 				<div class="col-md-1">

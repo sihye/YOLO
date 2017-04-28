@@ -10,6 +10,7 @@ function pageFunc(curPage){
 	document.frmPage.currentPage.value=curPage;
 	frmPage.submit();
 }
+
 </script>
 <!-- 페이징 처리를 위한 form 태그 -->
 <form name="frmPage" method="post"
@@ -42,10 +43,11 @@ function pageFunc(curPage){
 								<p>등록된 호스트가 없습니다</p>
 						</c:if>
 						<c:set var="i" value="0" />
-						<c:forEach var="alist" items="${alist }">
-							
-							<li role="presentation" style="width: 19.5%;"><a
-								href='<c:url value="/mypage/Favorite/Favoritehost.do?flNo=${alist.flNo }&flWuserid=${alist.flWuserid }"/>'>${alist.flWuserid }</a>
+						<c:forEach var="alist" items="${alist }">	
+							<li id="li${i }" role="presentation" style="width: 19.5%;">	
+							 	 <a href='<c:url value="/mypage/Favorite/Favoritehost.do?flNo=${alist.flNo }
+									&flWuserid=${alist.flWuserid }"/>'>${alist.flWuserid }
+								</a>
 							</li>
 
 							<c:set var="i" value="${i+1}" />

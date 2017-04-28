@@ -3,6 +3,8 @@ package com.one.yolo.mypage.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +32,9 @@ public class MybbsController {
 	private ReviewBoardService reviewboardService;
 
 	@RequestMapping("/qnaboard.do")
-	public String qnaboard(@ModelAttribute SearchVO searchVO, Model model){
-
+	public String qnaboard(@ModelAttribute SearchVO searchVO, Model model,HttpSession session){
+		String userid=(String)session.getAttribute("userid");
+		searchVO.setUserid(userid);
 		logger.info("qnaboard 화면 보여주기 ,파라미터 searchVO={}",searchVO);
 		//[1] PaginationInfo 객체 생성 
 		//=> firstRecordIndex 를 계산하기 위함
@@ -58,7 +61,9 @@ public class MybbsController {
 		return "mypage/Mybbs/qnaboard";
 	}
 	@RequestMapping("/reviewboard.do")
-	public String reviewboard(@ModelAttribute SearchVO searchVO,Model model){
+	public String reviewboard(@ModelAttribute SearchVO searchVO,Model model,HttpSession session){
+		String userid=(String)session.getAttribute("userid");
+		searchVO.setUserid(userid);
 		logger.info("reviewboard 화면 보여주기,파라미터 searchVO={}",searchVO);
 		//[1] PaginationInfo 객체 생성 
 		//=> firstRecordIndex 를 계산하기 위함

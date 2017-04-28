@@ -8,40 +8,38 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta charset="utf-8">
-		
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/sihye/reset.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/sihye/responsive.css">
+<meta charset="utf-8">
 
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/sihye/jquery.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/sihye/main.js"></script>
-	<!-- ckeditor -->
-	<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
-	<!-- Bootstrap -->
-	<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
-		rel="stylesheet">
-		
-	<link rel="stylesheet"
-		href="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/flexslider.css"
-		type="text/css">
-	<link rel="stylesheet"
-		href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/mainstyle.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/clear.css" />
+	href="${pageContext.request.contextPath}/css/sihye/reset.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/layout.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/mystyle.css" />
-	
+	href="${pageContext.request.contextPath}/css/sihye/responsive.css">
+
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/sihye/jquery.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/sihye/main.js"></script>
+<!-- ckeditor -->
+<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+<!-- Bootstrap -->
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/flexslider.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap-select.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/jquery.flexslider-min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/jquery.flexslider-min.js"></script>
+<link rel="stylesheet"
+	href="path/to/font-awesome/css/font-awesome.min.css">
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#name").focus();
@@ -132,13 +130,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('.flexslider').flexslider({
-			animation : "slide"
-		});
-
-	})
-	
-	$(document).ready(function(){
 		$("#frmLogin").submit(function(){
 			if($("#userid").val()==''){
 				alert('아이디를 입력하세요');

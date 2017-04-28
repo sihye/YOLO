@@ -27,9 +27,15 @@ public class MessageDAOMybatis extends SqlSessionDaoSupport implements MessageDA
 	}
 
 	@Override
-	public int selectTotalRecord(SearchVO searchVo) {
+	public int selectTotalRecordSend(SearchVO searchVo) {
 		return getSqlSession().selectOne(namespace
-				+".selectTotalRecord", searchVo);
+				+".selectTotalRecordSend", searchVo);
+	}
+	
+	@Override
+	public int selectTotalRecordGet(SearchVO searchVo) {
+		return getSqlSession().selectOne(namespace
+				+".selectTotalRecordGet", searchVo);
 	}
 
 	@Override
@@ -45,5 +51,7 @@ public class MessageDAOMybatis extends SqlSessionDaoSupport implements MessageDA
 	public List<Map<String, Object>> selectMessageGet(SearchVO searchVO) {
 		return getSqlSession().selectList(namespace+".selectMessageGet",searchVO);
 	}
+
+	
 
 }

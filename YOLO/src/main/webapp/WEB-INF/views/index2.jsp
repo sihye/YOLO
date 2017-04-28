@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="inc/top.jsp" %>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.flexslider').flexslider({
+			animation : "slide"
+		});
+
+	})
+</script>
 <section class="caption">
 	<div class="flexslider">
 		<ul class="slides">
@@ -12,10 +20,8 @@
 				src="${pageContext.request.contextPath}/img/0M0B0169.jpg" /></li>
 		</ul>
 	</div>
-	<!-- <h2 class="caption">Find You Dream Home</h2>
-				<h3 class="properties">Appartements - Houses - Mansions</h3> -->
 </section>
-</section><!--  end hero section  -->
+</section><!-- 이거 지우지마세요 탑이랑 연결됨 end hero section  -->
 
 
 	<section class="search">

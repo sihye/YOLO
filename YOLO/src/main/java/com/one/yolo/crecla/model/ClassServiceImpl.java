@@ -3,17 +3,29 @@ package com.one.yolo.crecla.model;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.one.yolo.common.SearchVO;
 
 @Service
 public class ClassServiceImpl implements ClassService {
+	private static final Logger logger=LoggerFactory.getLogger(ClassServiceImpl.class);
 	@Autowired
 	private ClassDAO dao;
+	
 	@Override
-	public int claInsert(ClassVO vo) {
+	@Transactional
+	public int claInsert(ClassVO vo, ScheduleVO sVo) {
+		int cnt=dao.claInsert(vo);
+		logger.info("클래스디비 인서트 cnt={}",cnt);
+		sVo.setC_No(vo.getcNo());
+		logger.info("스케줄 vo={}",sVo);
+		cnt=dao.schInsert(sVo);
+		logger.info("스케줄디비 인서트 cnt={}",cnt);
 		return dao.claInsert(vo);
 	}
 	@Override

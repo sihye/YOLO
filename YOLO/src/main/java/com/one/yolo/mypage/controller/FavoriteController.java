@@ -43,10 +43,9 @@ public class FavoriteController {
 
 	@RequestMapping("/FavoriteClass.do")
 	public String FavoriteClass(@ModelAttribute SearchVO searchVO
-			, Model model,HttpServletRequest request){
+			, Model model,HttpSession session){
 		//세션에 저장
-		HttpSession session = request.getSession();
-		session.setAttribute("userid", "hong");
+		
 		String userid =(String)session.getAttribute("userid");
 		searchVO.setUserid(userid);
 
@@ -104,8 +103,7 @@ public class FavoriteController {
 	}
 
 	@RequestMapping("/FavoriteClassdeleteId.do")
-	public String FavoriteClassdeleteId(HttpServletRequest request,Model model){
-		HttpSession session = request.getSession();
+	public String FavoriteClassdeleteId(Model model,HttpSession session){		
 		String userid =(String)session.getAttribute("userid"); 
 
 
@@ -124,9 +122,7 @@ public class FavoriteController {
 
 
 	@RequestMapping("/Favoritehost.do")
-	public String Favoritehost(@ModelAttribute SearchVO searchVO,HttpServletRequest request,Model model){
-		HttpSession session = request.getSession();
-		session.setAttribute("userid", "hong");
+	public String Favoritehost(@ModelAttribute SearchVO searchVO,HttpSession session,Model model){
 		String userid =(String)session.getAttribute("userid");
 		logger.info("Favoritehost 화면 보여주기,파라미터 userid={},searchVO={}",userid,searchVO);
 		List<FollowVO> alist = followService.selectFollow(userid);
@@ -179,7 +175,8 @@ public class FavoriteController {
 	}
 
 	@RequestMapping("/seeClass.do")
-	public String seeClass(HttpServletRequest request,Model model){
+	public String seeClass(HttpServletRequest request,Model model,HttpSession session){
+		String userid=(String)session.getAttribute("userid");
 		logger.info("seeClass 화면 보여주기");
 		Cookie[] cookies = request.getCookies() ;
 		List<ClassVO> alist=new ArrayList<ClassVO>();
@@ -190,7 +187,7 @@ public class FavoriteController {
 
 				// 저장된 쿠키 이름을 가져온다
 				String cName = c.getName();
-				if(cName.indexOf("classNo")!=-1){
+				if(cName.indexOf("classNo"+userid)!=-1){
 					// 쿠키값을 가져온다
 					String cNo = c.getValue() ;
 					if(cNo != null && !cNo.isEmpty()){
@@ -208,12 +205,13 @@ public class FavoriteController {
 	}
 	@RequestMapping("/seeClassdeleteNo.do")
 	public String seeClassdeleteNo(@RequestParam int cNo,Model model
-			,HttpServletRequest request,HttpServletResponse response){
+			,HttpServletRequest request,HttpServletResponse response,HttpSession session){
+		String userid=(String)session.getAttribute("userid");
 		logger.info("최근본클래스 삭제,파라미터 cNo={}",cNo);
 		String claNo = Integer.toString(cNo);
 		
 		// 특정 쿠키만 삭제하기
-	    Cookie kc = new Cookie("classNo"+claNo, null) ;
+	    Cookie kc = new Cookie("classNo"+userid+claNo, null) ;
 	    kc.setPath("/");
 	    kc.setMaxAge(0) ;
 	    response.addCookie(kc) ;
@@ -224,7 +222,9 @@ public class FavoriteController {
 	
 	
 	@RequestMapping("/seeClassdelete.do")
-	public String seeClassdelete(HttpServletRequest request,HttpServletResponse response){
+	public String seeClassdelete(HttpServletRequest request
+			,HttpServletResponse response,HttpSession session){
+		String userid=(String)session.getAttribute("userid");
 		logger.info("최근본클래스 비우기");
 		Cookie[] cookies = request.getCookies() ;
 		if(cookies != null){
@@ -234,7 +234,7 @@ public class FavoriteController {
 				
 				// 저장된 쿠키 이름을 가져온다
 				String cName = c.getName();			
-				if(cName.indexOf("classNo")!=-1){
+				if(cName.indexOf("classNo"+userid)!=-1){
 					c.setPath("/");
 					c.setMaxAge(0);			
 					response.addCookie(c);

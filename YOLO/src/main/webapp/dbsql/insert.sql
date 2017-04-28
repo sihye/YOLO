@@ -124,6 +124,7 @@ select*from classschedule;
 
 insert into classschedule
 values(CLASSSCHEDULE_seq.nextval,1,'스케줄1','2017','2018','일','1234','134');
+
 insert into classschedule
 values(CLASSSCHEDULE_seq.nextval,1,'스케줄2','2017','2018','일','1234','134');
 insert into classschedule

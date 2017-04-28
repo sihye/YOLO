@@ -15,18 +15,21 @@
 			where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
 			and CB_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
 			and to_date(#{searchEndDate},'YYYY-MM-DD')+1
+			and M_USERID=#{userid}
 			</when>
 			<when test="searchKeyword !=null and searchKeyword !=''" >
 				where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+				and M_USERID=#{userid}
 			</when>
 			<when test="searchStartDate !=null and searchStartDate !=''
 			 and searchEndDate !=null and searchEndDate !=''" >
 				where CB_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
 				and to_date(#{searchEndDate},'YYYY-MM-DD')+1
+				and M_USERID=#{userid}
 			</when>
 			
 			<otherwise>
-			
+				where M_USERID=#{userid}
 			</otherwise>
 
 		</choose>

@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../../inc/top.jsp" %>
-	<div class="container">
+	<div class="container" style="margin-top: 40px;">
 		<div class="row">
 			<div class="col-md-2">
 				<ul class="nav nav-pills nav-stacked">

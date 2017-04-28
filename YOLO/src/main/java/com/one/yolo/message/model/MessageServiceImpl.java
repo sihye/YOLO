@@ -15,6 +15,7 @@ public class MessageServiceImpl implements MessageService{
 	private MessageDAO messageDao;
 
 	@Override
+	@Transactional
 	public int insertSend(MessageVO messageVo, MessageMagaVO messageMagaVo) {
 		messageDao.insertMessage(messageVo);
 		messageMagaVo.setMsNo(messageVo.getMsNo());
@@ -22,8 +23,12 @@ public class MessageServiceImpl implements MessageService{
 		return messageDao.insertMessageMaga(messageMagaVo);
 	}
 	@Override
-	public int selectTotalRecord(SearchVO searchVo) {
-		return messageDao.selectTotalRecord(searchVo);
+	public int selectTotalRecordSend(SearchVO searchVo) {
+		return messageDao.selectTotalRecordSend(searchVo);
+	}
+	@Override
+	public int selectTotalRecordGet(SearchVO searchVo) {
+		return messageDao.selectTotalRecordGet(searchVo);
 	}
 
 	@Override
@@ -68,5 +73,6 @@ public class MessageServiceImpl implements MessageService{
 		}		
 		return cnt;
 	}
+	
 }
 
