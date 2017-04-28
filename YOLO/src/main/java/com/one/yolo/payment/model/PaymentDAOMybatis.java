@@ -23,4 +23,9 @@ public class PaymentDAOMybatis extends SqlSessionDaoSupport implements PaymentDA
 				+".selectTotalRecord", searchVo);
 	}
 
+	@Override
+	public int insertPaymentCancel(PaymentCancelVO paymentCancelVo) {
+		return getSqlSession().insert(namespace+".insertPaymentCancel",paymentCancelVo);
+	}
+
 }

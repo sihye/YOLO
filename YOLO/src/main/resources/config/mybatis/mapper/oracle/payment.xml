@@ -31,7 +31,7 @@
 	</sql>
 	<select id="selectPayment" parameterType="SearchVO" resultType="map">
 		select PM_NO, C_NO,M_USERID, PM_PAYMENTWAY, PM_PAYMENTDATE, PM_COMPLETECHECK,
-			PM_CANCELCHECK, C_PRICE, C_NAME
+			PM_CANCELCHECK, C_PRICE, C_NAME,PMC_PROQRESS
 		from
 		(
 		    select rownum as RNUM ,LIST.*
@@ -52,6 +52,14 @@
 		select count(*) from mypayment 
 		<include refid="searchWhere"></include>
 	</select>
+	
+	<insert id="insertPaymentCancel" parameterType="PaymentCancelVO">
+		<selectKey keyProperty="pmcNo" resultType="int" order="BEFORE">
+			select PAYMENTCANCEL_seq.nextval from dual
+		</selectKey>
+		insert into PAYMENTCANCEL(PMC_NO,PM_NO,PMC_CALCEL,PMC_DETAIL)
+		values(#{pmcNo},#{pmNo},#{pmcCalcel},#{pmcDetatl})
+	</insert>
 </mapper>
 
 

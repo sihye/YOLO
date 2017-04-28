@@ -183,8 +183,6 @@ public class MessageController {
 		}
 		
 		
-		
-		
 		String msg="",url="/mypage/message/messageSend.do";
 		if(cnt==array.length){
 			msg="보내기 성공";

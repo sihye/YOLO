@@ -23,4 +23,9 @@ public class PaymentServiceImpl implements PaymentService{
 	public List<Map<String, Object>> selectPayment(SearchVO searchVO) {
 		return paymentDao.selectPayment(searchVO);
 	}
+
+	@Override
+	public int insertPaymentCancel(PaymentCancelVO paymentCancelVo) {
+		return paymentDao.insertPaymentCancel(paymentCancelVo);
+	}
 }

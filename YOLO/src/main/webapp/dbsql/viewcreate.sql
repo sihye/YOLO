@@ -63,10 +63,11 @@ where mg_no2=3;
 
 --결제내역 조회뷰
 CREATE OR REPLACE VIEW mypayment
-AS SELECT p.*,c.C_NAME,C_PRICE
-FROM payment p,class c
-WHERE p.C_NO=c.C_NO;
-
+AS SELECT p.*,c.C_NAME,C_PRICE,pc.PMC_PROQRESS
+FROM payment p,class c,PAYMENTCANCEL pc
+WHERE p.C_NO=c.C_NO
+and p.PM_NO = pc.PM_NO;
+drop view mypayment;
 select*from mypayment;
 
 --받은메세지 조회 뷰

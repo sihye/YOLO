@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.one.yolo.common.PaginationInfo;
 import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
+import com.one.yolo.follow.model.FollowVO;
+import com.one.yolo.payment.model.PaymentCancelVO;
 import com.one.yolo.payment.model.PaymentService;
 
 @Controller
@@ -71,6 +73,33 @@ public class MyClassController {
 		model.addAttribute("pagingInfo", pagingInfo);
 		
 		return "mypage/MyClass/Payment";
+	}
+	@RequestMapping("/paymentcancel.do")
+	public String paymentcancel(){
+		logger.info("idSelect 화면 보여주기");
+	
+		
+		return "mypage/MyClass/paymentcancel";
+	}
+	@RequestMapping("/insertPaymentCancel.do")
+	public String insertPaymentCancel(@ModelAttribute PaymentCancelVO vo,Model model){
+		if(vo.getPmcDetatl()==null||vo.getPmcDetatl().isEmpty()){
+			vo.setPmcDetatl(vo.getPmcCalcel());
+		}
+		logger.info("insertPaymentCancel 화면 보여주기,파라미터 vo={}",vo);
+		
+		int cnt = paymentService.insertPaymentCancel(vo);
+		
+		String msg="",url="/mypage/MyClass/Payment.do";
+		if(cnt>0){
+			msg="결제취소 신청 완료";
+		}else{
+			msg="결제취소 신청 실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		return "common/message";
 	}
 }
 

@@ -219,9 +219,10 @@
 
 					<th width="20%">클래스명</th>
 					<th width="20%">날짜</th>
-					<th width="20%">가격</th>
-					<th width="20%">결제방법</th>
-					<th width="20%">상태</th>
+					<th width="15%">가격</th>
+					<th width="15%">결제방법</th>
+					<th width="15%">상태</th>
+					<th width="15%"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -231,7 +232,32 @@
 						<td>${map["PM_PAYMENTDATE"] }</td>
 						<td>${map["C_PRICE"] }</td>
 						<td>${map["PM_PAYMENTWAY"] }</td>
-						<td>결제완료</td>			
+						
+						<c:if test="${map['PM_COMPLETECHECK']=='N'&& map['PM_CANCELCHECK']=='N' }">
+							<td>결제대기</td>	
+						</c:if>
+						<c:if test="${map['PM_COMPLETECHECK']=='Y'&& map['PM_CANCELCHECK']=='N' }">
+							<td>결제완료</td>	
+						</c:if>
+						<c:if test="${ map['PM_COMPLETECHECK']=='Y'&& map['PM_CANCELCHECK']=='Y'&& map['PMC_PROQRESS']=='진행중' }">
+							<td>결제취소${map['PMC_PROQRESS'] }</td>	
+						</c:if>
+						<c:if test="${ map['PM_COMPLETECHECK']=='Y'&& map['PM_CANCELCHECK']=='Y'&& map['PMC_PROQRESS']=='완료' }">
+							<td>결제취소${map['PMC_PROQRESS'] }</td>	
+						</c:if>
+						<td>		
+						<a data-toggle="modal"
+						href='<c:url value="/mypage/MyClass/paymentcancel.do?pmNo=${map['PM_NO'] }"/>'
+						data-target="#modal-get" role="button" data-backdrop="static">
+						<span class="btn btn-primary">취소</span>
+						</a>
+						<div id="modal-get" class="modal fade" tabindex="-1" role="dialog"
+						aria-labelledby="받는사람 등록" aria-describedby="받는사람추가 모달">
+						<div class="modal-dialog" style="width: 500px; height: 300px">
+							<div class="modal-content"></div>
+						</div>
+						</div>
+						</td>			
 					</tr>
 				</c:forEach>
 			</tbody>		
