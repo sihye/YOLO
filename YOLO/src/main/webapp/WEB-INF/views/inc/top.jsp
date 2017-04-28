@@ -42,14 +42,7 @@
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/jquery.flexslider-min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('.flexslider').flexslider({
-			animation : "slide"
-		});
-
-	})
-	
+<script type="text/javascript">	
 	$(document).ready(function(){
 		$("#frmLogin").submit(function(){
 			if($("#userid").val()==''){
@@ -60,8 +53,7 @@
 				alert('비밀번호를 입력하세요');
 				$("#pwd").focus();
 				return false;
-			}
-			
+			}		
 		});
 	}); 
 </script>

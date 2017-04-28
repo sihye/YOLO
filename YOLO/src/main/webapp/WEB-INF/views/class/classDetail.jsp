@@ -152,7 +152,7 @@ hr{
         <h4 class="modal-title" id="myModalLabel" style="color: black;">예약하기</h4>
       </div>
       <div class="modal-body" >
-        ...
+      	스케줄 정보 뿌려줌
       </div>
       <div class="modal-footer">
       	<button type="button" class="btn btn-default">예약하기</button>
@@ -164,9 +164,6 @@ hr{
 </div>
 </form>
 	</div>
-	
-	<button> 예약하기</button>
-
 
 </div>
 <!-- 헤더이미지 끝 -->
