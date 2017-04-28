@@ -246,6 +246,7 @@
 							<td>결제취소${map['PMC_PROQRESS'] }</td>	
 						</c:if>
 						<td>		
+						
 						<a data-toggle="modal"
 						href='<c:url value="/mypage/MyClass/paymentcancel.do?pmNo=${map['PM_NO'] }"/>'
 						data-target="#modal-get" role="button" data-backdrop="static">
