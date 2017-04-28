@@ -147,7 +147,7 @@ CREATE TABLE Class (
    C_PAYMENTWAY VARCHAR2(500) not null,     -- 결제방법
    C_MAXPERSON  VARCHAR2(500) NULL,     -- 최대인원
    C_HITS       NUMBER        DEFAULT 0, -- 조회수
-   C_DEL        VARCHAR2(5)    NULL, -- 삭제여부
+   C_DEL        VARCHAR2(5)   DEFAULT 'N', -- 삭제여부
    C_REGDATE    DATE          DEFAULT sysdate-- 등록일
 );
 
