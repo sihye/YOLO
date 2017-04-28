@@ -35,15 +35,15 @@
 				alert('이름을 입력하세요');
 				$("#name").focus();
 				return false;
-			}else if(!validate_userid($("#userid").val())){
+			}else if(!validate_userid($("#useridreg").val())){
 				alert('아이디는 영문대소문자, 숫자, 언더바만 가능합니다');
-				$("#userid").focus();
+				$("#useridreg").focus();
 				return false;
-			}else if(!$("#pwd").val()){
+			}else if(!$("#pwdreg").val()){
 				alert('비밀번호를 입력하세요');
-				$("#pwd").focus();
+				$("#pwdreg").focus();
 				return false;
-			}else if($("#pwd").val()!=$("#pwd2").val()){
+			}else if($("#pwdreg").val()!=$("#pwd2").val()){
 				alert('비밀번호가 일치하지 않습니다');
 				$("#pwd2").focus();
 				return false;
@@ -68,12 +68,14 @@
 		});
 
 		$("#btnChkId").click(function(){
-			window.open("<c:url value='/member/checkUserid.do?userid="+$("#userid").val()+ "'/>", 'chk',
+			window.open("<c:url value='/member/checkUserid.do?userid="+$("#useridreg").val()+ "'/>", 'chk',
 			'width=400,height=300,left=10,top=10,location=yes,resizable=yes');
 		});
 		
 		
-		
+		$("#cancle").click(function() {
+			location.href="<c:url value='/index2.do'/>"
+		})
 		
 	});
 	
@@ -139,12 +141,12 @@
 			</div>
 			<div>
 				<label for="userid">회원ID</label> 
-				<input type="text" name="mUserid" id="userid" style="ime-mode: inactive">&nbsp; 
+				<input type="text" name="mUserid" id="useridreg" style="ime-mode: inactive">&nbsp; 
 				<button type="button" class="btn btn-primary" id="btnChkId" title="새창열림">중복확인</button>
 			</div>
 			<div>
 				<label for="pwd">비밀번호</label> 
-				<input type="Password" name="mPwd" id="pwd">
+				<input type="Password" name="mPwd" id="pwdreg">
 			</div>
 			<div>
 				<label for="pwd2">비밀번호 확인</label> 
@@ -244,7 +246,7 @@
 
 			<div class="center">
 				<button type="submit" class="btn btn-primary" id="wr_submit">회원 가입</button>
-				  <button type="button" class="btn btn-primary">취소</button>			
+				<button type="button" class="btn btn-primary" id="cancle">취소</button>			
 			</div>
 
 		</fieldset>

@@ -63,7 +63,7 @@
 			}
 			
 		});
-	});
+	}); 
 </script>
 <style type="text/css">
 #SEARCHDIV{
@@ -177,7 +177,7 @@
 		<c:if test="${!empty sessionScope.userid }">
 			
 			<a href="${pageContext.request.contextPath}/member/memberEdit.do"
-				class="login_btn">회원탈퇴</a>
+				class="btn btn-primary btn-lg login_btn">회원탈퇴</a>
 			<a class="dropdown">
 			<a data-toggle="dropdown" href="#" style="color: white;" class="login_btn"> ${sessionScope.userName} 님</a>
 					<ul class="dropdown-menu" role="menu">
