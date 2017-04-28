@@ -105,19 +105,19 @@ select * from class;
 
 insert into class
 values(CLASS_seq.nextval,'hong',1,'가나다라',20000,'abc','dasfasdf'
-,'ㄹㅇㄴㅁㄹㄴ','ㅇㄴㄻ','ㅁㅇㄴㄹ','ㅁㄴㅇㄹ','ㅈㅂㄷ','ㅂㅈㄷㅂ','ㅂㅈㄷㄱㅈ','ㅁㅇㄴ','ㅇㅁㄴ','ㅁㄴㅇ',0,'N',sysdate);
+,'ㄹㅇㄴㅁㄹㄴ','ㅇㄴㄻ','ㅁㅇㄴㄹ','ㅁㄴㅇㄹ','ㅈㅂㄷ','ㅇㄴㅇㄴㅁ','ㅂㅈㄷㅂ','ㅂㅈㄷㄱㅈ','ㅁㅇㄴ','ㅇㅁㄴ','ㅁㄴㅇ',0,'N',sysdate);
 insert into class
 values(CLASS_seq.nextval,'hong',1,'클래스',20000,'abc','dasfasdf'
-,'ㄹㅇㄴㅁㄹㄴ','ㅇㄴㄻ','ㅁㅇㄴㄹ','ㅁㄴㅇㄹ','ㅈㅂㄷ','ㅂㅈㄷㅂ','ㅂㅈㄷㄱㅈ','ㅁㅇㄴ','ㅇㅁㄴ','ㅁㄴㅇ',0,'N',sysdate);
+,'ㄹㅇㄴㅁㄹㄴ','ㅇㄴㄻ','ㅁㅇㄴㄹ','ㅁㄴㅇㄹ','ㅈㅂㄷ','ㄴㅇㅇ','ㅂㅈㄷㅂ','ㅂㅈㄷㄱㅈ','ㅁㅇㄴ','ㅇㅁㄴ','ㅁㄴㅇ',0,'N',sysdate);
 insert into class
-values(CLASS_seq.nextval,'kim',1,'클래스',20000,'abc','dasfasdf'
-,'ㄹㅇㄴㅁㄹㄴ','ㅇㄴㄻ','ㅁㅇㄴㄹ','ㅁㄴㅇㄹ','ㅈㅂㄷ','ㅂㅈㄷㅂ','ㅂㅈㄷㄱㅈ','ㅁㅇㄴ','ㅇㅁㄴ','ㅁㄴㅇ',0,'N',sysdate);
+values(CLASS_seq.nextval,'hong',1,'타파하',20000,'abc','dasfasdf'
+,'ㄹㅇㄴㅁㄹㄴ','ㅇㄴㄻ','ㅁㅇㄴㄹ','ㅁㄴㅇㄹ','ㅈㅂㄷ','ㅁㄴㅇ','ㅂㅈㄷㅂ','ㅂㅈㄷㄱㅈ','ㅁㅇㄴ','ㅇㅁㄴ','ㅁㄴㅇ',0,'N',sysdate);
 insert into class
 values(CLASS_seq.nextval,'chang',1,'클래스',20000,'abc','dasfasdf'
-,'ㄹㅇㄴㅁㄹㄴ','ㅇㄴㄻ','ㅁㅇㄴㄹ','ㅁㄴㅇㄹ','ㅈㅂㄷ','ㅂㅈㄷㅂ','ㅂㅈㄷㄱㅈ','ㅁㅇㄴ','ㅇㅁㄴ','ㅁㄴㅇ',0,'N',sysdate);
+,'ㄹㅇㄴㅁㄹㄴ','ㅇㄴㄻ','ㅁㅇㄴㄹ','ㅑㅕ','ㅁㄴㅇㄹ','ㅈㅂㄷ','ㅂㅈㄷㅂ','ㅂㅈㄷㄱㅈ','ㅁㅇㄴ','ㅇㅁㄴ','ㅁㄴㅇ',0,'N',sysdate);
 insert into class
 values(CLASS_seq.nextval,'hong',1,'카타파하',20000,'abc','dasfasdf'
-,'ㄹㅇㄴㅁㄹㄴ','ㅇㄴㄻ','ㅁㅇㄴㄹ','ㅁㄴㅇㄹ','ㅈㅂㄷ','ㅂㅈㄷㅂ','ㅂㅈㄷㄱㅈ','ㅁㅇㄴ','ㅇㅁㄴ','ㅁㄴㅇ',0,'N',sysdate);
+,'ㄹㅇㄴㅁㄹㄴ','ㅇㄴㄻ','ㅁㅇㄴㄹ','ㅇㄴㅇㄴ','ㅁㄴㅇㄹ','ㅈㅂㄷ','ㅂㅈㄷㅂ','ㅂㅈㄷㄱㅈ','ㅁㅇㄴ','ㅇㅁㄴ','ㅁㄴㅇ',0,'N',sysdate);
 
 --classschedule
 select*from classschedule;
@@ -233,13 +233,13 @@ select*from payment;
 
 insert into payment
 (PM_NO,C_NO,M_USERID,PM_PAYMENTWAY,PM_PAYMENTDATE,PM_COMPLETECHECK,PM_CANCELCHECK)
-values(1,1,'hong','카드',sysdate,'y','y');
+values(PAYMENT_seq.nextval,1,'hong','카드',sysdate,'N','N');
 insert into payment
 (PM_NO,C_NO,M_USERID,PM_PAYMENTWAY,PM_PAYMENTDATE,PM_COMPLETECHECK,PM_CANCELCHECK)
-values(2,1,'kim','현금',sysdate,'y','y');
+values(PAYMENT_seq.nextval,2,'hong','현금',sysdate,'Y','Y');
 insert into payment
 (PM_NO,C_NO,M_USERID,PM_PAYMENTWAY,PM_PAYMENTDATE,PM_COMPLETECHECK,PM_CANCELCHECK)
-values(3,1,'chang','수표',sysdate,'y','y');
+values(PAYMENT_seq.nextval,3,'hong','수표',sysdate,'Y','N');
 
 --booking
 select*from booking;
@@ -256,13 +256,13 @@ select*from paymentcancel;
 
 insert into paymentcancel
 (PMC_NO,PM_NO,PMC_DATE,PMC_PROQRESS,PMC_CALCEL,PMC_DETAIL)
-values(1,1,sysdate,'진행중','그냥','111');
+values(PAYMENTCANCEL_seq.nextval,1,sysdate,'진행중','그냥','111');
 insert into paymentcancel
 (PMC_NO,PM_NO,PMC_DATE,PMC_PROQRESS,PMC_CALCEL,PMC_DETAIL)
-values(2,2,sysdate,'진행중','실수','222');
+values(PAYMENTCANCEL_seq.nextval,2,sysdate,'완료','실수','222');
 insert into paymentcancel
 (PMC_NO,PM_NO,PMC_DATE,PMC_PROQRESS,PMC_CALCEL,PMC_DETAIL)
-values(3,3,sysdate,'진행중','soso','333');
+values(PAYMENTCANCEL_seq.nextval,3,sysdate,'진행중','soso','333');
 
 
 
