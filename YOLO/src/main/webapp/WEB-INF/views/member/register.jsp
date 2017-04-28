@@ -246,7 +246,7 @@
 
 			<div class="center">
 				<button type="submit" class="btn btn-primary" id="wr_submit">회원 가입</button>
-				<button type="button" class="btn btn-primary" id="cancle">취소</button>			
+				<button type="button" class="btn btn-primary" id="cancle">취소</button>	 		
 			</div>
 
 		</fieldset>
