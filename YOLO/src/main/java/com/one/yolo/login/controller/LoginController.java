@@ -44,15 +44,22 @@ public class LoginController {
 		logger.info("로그인 처리, 파라미터 userid={}, pwd={}", userid,pwd);
 		logger.info("파라미터 chkSaveId={}", chkSaveId);
 		
-		//2
+		//2  
 		int result = memberService.loginCheck(userid, pwd);
 		logger.info("로그인 처리 결과, result={}", result);
 		
-		String msg="", url="/login/login.do";
+		String msg="", url="/index2.do";
 		if(result==MemberService.LOGIN_OK){
 			MemberVO vo = memberService.selectByUserid(userid);
 			msg=vo.getmName()+ "님, 로그인되었습니다.";
-			url="/index2.do";
+			if(vo.getMgNo2()==1){
+				url="/admin/operator.do";
+				msg="관리자";
+			}else{
+				url="/index2.do";
+				msg=vo.getmUserid()+"님 환영합니다."; 
+				}
+			
 			
 			//세션에 저장
 			HttpSession session = request.getSession();

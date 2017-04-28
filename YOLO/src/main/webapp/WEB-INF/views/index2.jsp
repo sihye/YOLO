@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="inc/top.jsp" %>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.flexslider').flexslider({
@@ -58,7 +59,7 @@
 		</div><!--  end advanced search section  -->
 	</section><!--  end search section  -->
 	<div class="container">
-		<div class="col-md-2"></div>
+		<div class="col-md-2"></div>   
 		<div class="dropdown">
 			<ul class="nav nav-pills">
 				<c:forEach var="gvo" items="${gList}">

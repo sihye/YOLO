@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core"%> --%>
+<%@ include file="../inc/top.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +19,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap-select.min.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css" /> 
 
 
 <script type="text/javascript" src='<c:url value="/jquery/jquery-3.1.1.min.js" />'></script>
@@ -34,15 +35,15 @@
 				alert('이름을 입력하세요');
 				$("#name").focus();
 				return false;
-			}else if(!validate_userid($("#userid").val())){
+			}else if(!validate_userid($("#useridreg").val())){
 				alert('아이디는 영문대소문자, 숫자, 언더바만 가능합니다');
-				$("#userid").focus();
+				$("#useridreg").focus();
 				return false;
-			}else if(!$("#pwd").val()){
+			}else if(!$("#pwdreg").val()){
 				alert('비밀번호를 입력하세요');
-				$("#pwd").focus();
+				$("#pwdreg").focus();
 				return false;
-			}else if($("#pwd").val()!=$("#pwd2").val()){
+			}else if($("#pwdreg").val()!=$("#pwd2").val()){
 				alert('비밀번호가 일치하지 않습니다');
 				$("#pwd2").focus();
 				return false;
@@ -60,16 +61,26 @@
 				return false;
 			}
 			
+			 $("#mAddress").val($("#zipcode").val()+" - "+$("#address").val()+" / ");
+			 
+			 $("#mBirth").val($("#birth1").val()+$("#birth2").val()+$("#birth3").val());
+			
 		});
-		
+
 		$("#btnChkId").click(function(){
-			window.open("<c:url value='/member/checkUserid.do?userid="+$("#userid").val()+ "'/>", 'chk',
+			window.open("<c:url value='/member/checkUserid.do?userid="+$("#useridreg").val()+ "'/>", 'chk',
 			'width=400,height=300,left=10,top=10,location=yes,resizable=yes');
 		});
 		
 		
+		$("#cancle").click(function() {
+			location.href="<c:url value='/index2.do'/>"
+		})
+		
 	});
+	 
 	
+	 
 </script>
 
 
@@ -82,6 +93,10 @@
 	width: 350px;
 }
 </style>
+<style> 
+	.divForm { display: table; margin-left: auto; margin-right: auto; } 
+</style>
+
 <scRIPT language=Javascript>
 <!--
 	var maxChecked = 3; //선택가능 갯수
@@ -126,12 +141,12 @@
 			</div>
 			<div>
 				<label for="userid">회원ID</label> 
-				<input type="text" name="mUserid" id="userid" style="ime-mode: inactive">&nbsp; 
+				<input type="text" name="mUserid" id="useridreg" style="ime-mode: inactive">&nbsp; 
 				<button type="button" class="btn btn-primary" id="btnChkId" title="새창열림">중복확인</button>
 			</div>
 			<div>
 				<label for="pwd">비밀번호</label> 
-				<input type="Password" name="mPwd" id="pwd">
+				<input type="Password" name="mPwd" id="pwdreg">
 			</div>
 			<div>
 				<label for="pwd2">비밀번호 확인</label> 
@@ -139,12 +154,13 @@
 			</div>
 			<div>
 				<label for="zipcode" name="zipcode">주소</label> 
-				<input type="text" name="mZipcode" id="zipcode" ReadOnly title="우편번호" class="width_80 postcodify_postcode"> 
+				<input type="text" name="zipcode" id="zipcode" ReadOnly title="우편번호" class="width_80 postcodify_postcode" value=""> 
 				<button type="button" class="btn btn-primary" id="postcodify_search_button" title="새창열림">우편번호 찾기</button><br />
 				<span class="sp1">&nbsp;</span> 
-				<input type="text" name="mAddress" ReadOnly title="주소" class="width_350 postcodify_address"><br /> 
+				<input type="text" name="address" ReadOnly title="주소" class="width_350 postcodify_address" id="address" value=""><br /> 
 				<span class="sp1">&nbsp;</span> 
 				<input type="text" name="mAddressdetail" title="상세주소" class="width_350 postcodify_details">
+				<input type="hidden" name="mAddress" id="mAddress" value="">
 			</div>
 			<div>
 				<label for="hp1">핸드폰</label>&nbsp; <select name="mTel1" id="hp1"
@@ -158,6 +174,32 @@
 				</select> - 
 				<input type="text" name="mTel2" id="hp2" maxlength="4" title="휴대폰 가운데자리" class="width_80">- 
 				<input type="text" name="mTel3" id="hp3" maxlength="4" title="휴대폰 뒷자리" class="width_80">
+			</div>
+			<div>
+				<label for="birth">생년월일</label> 
+				<input type="text" name="mBirth1" id="birth1" title="생년" style="width: 50px" maxlength="4">&nbsp;년&nbsp;
+				<select name="mBirth2" id="birth2" title="월" style="width: 50px; height: 22px;"
+					title="월">
+					<option value="01">1</option>
+					<option value="02">2</option>
+					<option value="03">3</option>
+					<option value="04">4</option>
+					<option value="05">5</option>
+					<option value="06">6</option>
+					<option value="07">7</option>
+					<option value="08">8</option>
+					<option value="09">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				</select>&nbsp;월&nbsp;
+				<input type="text" name="mBirth3" id="birth3" title="일" style="width: 25px" maxlength="2">&nbsp;일&nbsp;
+				<input type="hidden" name="mBirth" id="mBirth" value="">
+			</div>
+			<div>
+				<label for="gender">성별</label>
+				<input type="radio" name="mGender" value="M">&nbsp;남자&nbsp; 
+				<input type="radio" name="mGender" value="F">&nbsp;여자&nbsp; 
 			</div>
 			<div>
 				<label for="email1">이메일 주소</label> <input type="text" name="mEmail1"
@@ -176,40 +218,6 @@
 			</div>
 			<div>
 				<FORM action=# method=post name="kNo">
-				<!-- <label for="hobby">라이프 스타일</label>
-					<input value='kNo' onclick=CountChecked(this) type=checkbox>독서/글쓰기 
-					<input value='kNo' onclick=CountChecked(this) type=checkbox>봉사활동
-					<input value='kNo' onclick=CountChecked(this) type=checkbox>바리스타/바텐더 
-					<input value='4' onclick=CountChecked(this) type=checkbox>반려동물<BR> 
-					<input value='CSS' onclick=CountChecked(this) type=checkbox>사진/영상
-					<input value='HTML' onclick=CountChecked(this) type=checkbox>요리/베이킹 
-					<input value='커뮤니티' onclick=CountChecked(this) type=checkbox>라이프 스타일 기타<br><br>
-				<label for="hobby">외국어</label>
-					<input value='프로그램' onclick=CountChecked(this) type=checkbox>영어 
-					<input value='디자인' onclick=CountChecked(this) type=checkbox>중국어 
-					<input value='웹표준' onclick=CountChecked(this) type=checkbox>일본어
-					<input value='웹접근성' onclick=CountChecked(this) type=checkbox>외국어 기타<BR> <br>
-				<label for="hobby">디자인/미술</label>
-					<input value='프로그램' onclick=CountChecked(this) type=checkbox>캘리그라피
-					<input value='디자인' onclick=CountChecked(this) type=checkbox>일러스트
-					<input value='웹접근성' onclick=CountChecked(this) type=checkbox>디자인 기타<BR> <br>
-				<label for="hobby">음악/공연</label>
-					<input value='프로그램' onclick=CountChecked(this) type=checkbox>피아노
-					<input value='디자인' onclick=CountChecked(this) type=checkbox>기타/우쿨렐라
-					<input value='프로그램' onclick=CountChecked(this) type=checkbox>보컬
-					<input value='디자인' onclick=CountChecked(this) type=checkbox>댄스/무용
-					<input value='웹접근성' onclick=CountChecked(this) type=checkbox>음악/공연 기타<BR> <br>
-				<label for="hobby">뷰티/미용</label>
-					<input value='프로그램' onclick=CountChecked(this) type=checkbox>헤어
-					<input value='디자인' onclick=CountChecked(this) type=checkbox>네일
-					<input value='프로그램' onclick=CountChecked(this) type=checkbox>메이크업
-					<input value='웹접근성' onclick=CountChecked(this) type=checkbox>뷰티/미용 기타<BR> <br>
-				<label for="hobby">스포츠</label>
-					<input value='프로그램' onclick=CountChecked(this) type=checkbox>축구
-					<input value='디자인' onclick=CountChecked(this) type=checkbox>야구
-					<input value='프로그램' onclick=CountChecked(this) type=checkbox>테니스
-					<input value='디자인' onclick=CountChecked(this) type=checkbox>요가
-					<input value='웹접근성' onclick=CountChecked(this) type=checkbox>스포츠 기타<BR> <br> -->
 				<c:forEach var="cg" items="${cgList }">
 					<label for="hobby">${cg.kgName}</label>	
 					<c:forEach var="c" items="${cList }">
@@ -238,12 +246,8 @@
 
 			<div class="center">
 				<button type="submit" class="btn btn-primary" id="wr_submit">회원 가입</button>
-				  <button type="button" class="btn btn-primary">취소</button>			
+				<button type="button" class="btn btn-primary" id="cancle">취소</button>	 		
 			</div>
-			
-			
-
-
 
 		</fieldset>
 
@@ -253,4 +257,4 @@
 	
 </div>
 </article>
-
+<%@ include file="../inc/bottom.jsp" %>

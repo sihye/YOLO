@@ -26,7 +26,7 @@ public class ClassServiceImpl implements ClassService {
 		logger.info("스케줄 vo={}",sVo);
 		cnt=dao.schInsert(sVo);
 		logger.info("스케줄디비 인서트 cnt={}",cnt);
-		return dao.claInsert(vo);
+		return cnt;
 	}
 	@Override
 	public ClassVO selClass(int cNo) {

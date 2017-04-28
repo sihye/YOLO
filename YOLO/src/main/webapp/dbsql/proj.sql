@@ -31,6 +31,8 @@ CREATE TABLE Member (
 	M_NAME           VARCHAR2(500) NOT NULL, -- 이름
 	M_EMAIL1         VARCHAR2(500) NULL,     -- 이메일
 	M_EMAIL2         VARCHAR2(500) NULL,     -- 이메일2
+	M_BIRTH          VARCHAR2(500) NOT NULL, -- 생년월일
+	M_GENDER         VARCHAR2(100) NOT NULL, -- 성별
 	M_ADDRESS        VARCHAR2(500) NULL,     -- 주소
 	M_ADDRESSDETAIL  VARCHAR2(500) NULL,     -- 주소
 	M_BANKNAME       VARCHAR2(500) NULL,     -- 은행명
@@ -145,7 +147,7 @@ CREATE TABLE Class (
    C_PAYMENTWAY VARCHAR2(500) not null,     -- 결제방법
    C_MAXPERSON  VARCHAR2(500) NULL,     -- 최대인원
    C_HITS       NUMBER        DEFAULT 0, -- 조회수
-   C_DEL        VARCHAR2(5)    NULL, -- 삭제여부
+   C_DEL        VARCHAR2(5)   DEFAULT 'N', -- 삭제여부
    C_REGDATE    DATE          DEFAULT sysdate-- 등록일
 );
 
