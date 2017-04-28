@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,13 +64,24 @@ public class AdminController {
 	private ClassService classService;
 
 	@RequestMapping(value="/operator.do",method=RequestMethod.GET)
-	public String upfile_get(Model model){
+	public String upfile_get(HttpSession session ,Model model){
+		
+		String userid = (String)session.getAttribute("userid");
+		if((userid !=null && !userid.isEmpty()) || userid==null || userid.isEmpty()){
+			if(!userid.equals("admin")){
+				model.addAttribute("msg","잘못된 url입니다.");
+				model.addAttribute("url","/index2.do");
+				return "common/message";
+			}
+		}
+		
 		logger.info("operator_get");
 		List<CategoryVO> list = categoryservice.selectAll();
 		List<Map<String,Object>> map = operAtorservice.selectJoin();
 		model.addAttribute("list",list);
 		model.addAttribute("map",map);
 		return "admin/operator";
+		
 	}
 
 	@RequestMapping(value="/operatorInsert.do",method=RequestMethod.GET)

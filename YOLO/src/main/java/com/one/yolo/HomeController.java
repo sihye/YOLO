@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,15 +49,32 @@ public class HomeController {
 		return "home";
 	}
 	@RequestMapping("index2.do")
-	public void index2(Model modle){
+	public String index2(HttpSession session,HttpServletResponse response,Model modle){
 		logger.info("메인 페이지 보여주기");
 		List<CategoryGroupVO> gList=cService.selCateGroupAll();
 		List<CategoryVO> cList=cService.selectCateAll();
 		
-		modle.addAttribute("gList", gList);
-		modle.addAttribute("cList", cList);
-		logger.info("glist size={}",gList.size());
-		logger.info("clist size={}",cList.size());
+		String userid = (String)session.getAttribute("userid");
+		logger.info("관리자 로그아웃 session id = {}",userid);
+		
+		if(userid !=null && !userid.isEmpty()){
+			if(userid.equals("admin")){
+				logger.info("admin에서 넘어온 경우");
+				session.removeAttribute("userid");
+				Cookie ck = new Cookie("ck_userid", userid);
+				ck.setPath("/");
+				ck.setMaxAge(0); 
+				response.addCookie(ck);
+			}
+		}
+			
+			modle.addAttribute("gList", gList);
+			modle.addAttribute("cList", cList);
+			logger.info("glist size={}",gList.size());
+			logger.info("clist size={}",cList.size());
+			
+			return "index2";
+		
 	}
 	
 
