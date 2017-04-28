@@ -11,7 +11,7 @@ public class MemberVO {
 	private String mName;
 	private String mEmail1;
 	private String mEmail2;
-	private String mAddress;
+	private String mAddress;  
 	private String mAddressdetail;
 	private String mBankname;
 	private String mAccount;

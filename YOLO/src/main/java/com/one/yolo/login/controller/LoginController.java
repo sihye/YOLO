@@ -44,7 +44,7 @@ public class LoginController {
 		logger.info("로그인 처리, 파라미터 userid={}, pwd={}", userid,pwd);
 		logger.info("파라미터 chkSaveId={}", chkSaveId);
 		
-		//2
+		//2  
 		int result = memberService.loginCheck(userid, pwd);
 		logger.info("로그인 처리 결과, result={}", result);
 		
@@ -57,7 +57,7 @@ public class LoginController {
 				msg="관리자";
 			}else{
 				url="/index2.do";
-				msg=vo.getmUserid()+"님 환영합니다.";
+				msg=vo.getmUserid()+"님 환영합니다."; 
 				}
 			
 			

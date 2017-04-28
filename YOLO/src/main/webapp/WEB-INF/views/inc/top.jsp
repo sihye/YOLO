@@ -204,7 +204,7 @@
 				<label for="pwd">비밀번호</label> 
 				<input type="Password" name="mPwd" id="pwd1">
 			</div>
-			<div>
+			<div>  
 				<label for="pwd2">비밀번호 확인</label> 
 				<input type="Password" name="mPwd2" id="pwd2"> 
 			</div>

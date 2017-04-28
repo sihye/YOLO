@@ -111,7 +111,7 @@
 		select count(*) from OPERATORMEMBERVIEW 
 		<include refid="searchWhere"></include>
 	</select>
-	
+	  
 	<update id="memberOut" parameterType="string">
 		update member
 		set m_leavedate=sysdate
