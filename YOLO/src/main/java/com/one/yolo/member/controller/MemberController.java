@@ -31,7 +31,7 @@ public class MemberController {
 	=LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
-	private MemberService memberService;
+	private MemberService memberService; 
 	
 	@Autowired
 	private CategoryService categoryService;
