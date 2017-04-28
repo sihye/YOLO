@@ -38,6 +38,17 @@ public class MemberController {
 	
 	@Autowired
 	private CategoryGroupService categoryGroupService;
+	
+	@RequestMapping("/agreement.do")
+	public String agreement(){
+		//1
+		logger.info("회원약관 화면 보여주기");
+
+		//2
+
+		//3
+		return "member/agreement";
+	}
 
 	
 	

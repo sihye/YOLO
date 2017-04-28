@@ -31,6 +31,8 @@ CREATE TABLE Member (
 	M_NAME           VARCHAR2(500) NOT NULL, -- 捞抚
 	M_EMAIL1         VARCHAR2(500) NULL,     -- 捞皋老
 	M_EMAIL2         VARCHAR2(500) NULL,     -- 捞皋老2
+	M_BIRTH          VARCHAR2(500) NOT NULL, -- 积斥岿老
+	M_GENDER         VARCHAR2(100) NOT NULL, -- 己喊
 	M_ADDRESS        VARCHAR2(500) NULL,     -- 林家
 	M_ADDRESSDETAIL  VARCHAR2(500) NULL,     -- 林家
 	M_BANKNAME       VARCHAR2(500) NULL,     -- 篮青疙

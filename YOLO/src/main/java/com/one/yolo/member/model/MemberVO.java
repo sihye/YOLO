@@ -17,7 +17,7 @@ public class MemberVO {
 	private String mAccount;
 	private Timestamp mJoindate;
 	private Timestamp mLeavedate;
-	private int kNo1;
+	private int kNo1; 
 	private int kNo2;
 	private int kNo3;
 	private String mTel1;

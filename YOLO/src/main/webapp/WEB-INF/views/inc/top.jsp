@@ -168,8 +168,8 @@
 		<!-- 로그인 후 -->
 		<c:if test="${!empty sessionScope.userid }">
 			
-			<a href="${pageContext.request.contextPath}/member/memberEdit.do"
-				class="btn btn-primary btn-lg login_btn">회원탈퇴</a>
+			<a href="${pageContext.request.contextPath}/member/agreement.do"
+				class="btn btn-primary btn-lg login_btn" >회원탈퇴</a>
 			<a class="dropdown">
 			<a data-toggle="dropdown" href="#" style="color: white;" class="btn btn-primary btn-lg login_btn"> ${sessionScope.userName} 님</a>
 					<ul class="dropdown-menu" role="menu">
