@@ -26,14 +26,6 @@
 		type="text/css">
 	<link rel="stylesheet"
 		href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/mainstyle.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/clear.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/layout.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/mystyle.css" />
 	
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap-select.min.css" />

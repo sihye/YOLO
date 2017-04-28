@@ -31,7 +31,7 @@
 	</sql>
 	<select id="selectPayment" parameterType="SearchVO" resultType="map">
 		select PM_NO, C_NO,M_USERID, PM_PAYMENTWAY, PM_PAYMENTDATE, PM_COMPLETECHECK,
-			PM_CANCELCHECK, C_PRICE, C_NAME,PMC_PROQRESS
+			PM_CANCELCHECK, C_PRICE, C_NAME
 		from
 		(
 		    select rownum as RNUM ,LIST.*
@@ -45,6 +45,9 @@
 		where RNUM>#{firstRecordIndex} 
 		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
 		]]>
+	</select>
+	<select id="selectPaymentCancel" resultType="PaymentCancelVO">
+		select*from PAYMENTCANCEL
 	</select>
 	
 	<select id="selectTotalRecord" parameterType="SearchVO"
@@ -60,6 +63,16 @@
 		insert into PAYMENTCANCEL(PMC_NO,PM_NO,PMC_CALCEL,PMC_DETAIL)
 		values(#{pmcNo},#{pmNo},#{pmcCalcel},#{pmcDetatl})
 	</insert>
+	<select id="cancelCount" parameterType="int" resultType="int">
+		select count(*)from PAYMENTCANCEL 
+		where PM_NO=#{pmNo}
+	</select>
+	<update id="cancelcheckYN" parameterType="PaymentVO">
+		update payment
+		set PM_CANCELCHECK=#{pmCancelcheck}
+		where PM_NO=#{pmNo}
+	</update>
+	
 </mapper>
 
 

@@ -28,4 +28,19 @@ public class PaymentDAOMybatis extends SqlSessionDaoSupport implements PaymentDA
 		return getSqlSession().insert(namespace+".insertPaymentCancel",paymentCancelVo);
 	}
 
+	@Override
+	public int cancelCount(int pmNo) {
+		return getSqlSession().selectOne(namespace+".cancelCount",pmNo);
+	}
+
+	@Override
+	public int cancelcheckYN(PaymentVO paymentVo) {
+		return getSqlSession().update(namespace+".cancelcheckYN",paymentVo);
+	}
+
+	@Override
+	public List<PaymentCancelVO> selectPaymentCancel() {
+		return getSqlSession().selectList(namespace+".selectPaymentCancel");
+	}
+
 }

@@ -6,7 +6,6 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <style>
-
 </style>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -129,11 +128,11 @@
 <!-- 페이징 처리를 위한 form 태그 -->
 <form name="frmPage" method="post"
 	action='<c:url value="/mypage/MyClass/Payment.do" />'>
-	<input type="hidden" name="currentPage"> <input
-		type="hidden" name="searchKeyword" value="${param.searchKeyword}">
-	<input type="hidden" name="searchStartDate"
-		value="${param.searchStartDate}"> <input type="hidden"
-		name="searchEndDate" value="${param.searchEndDate}">
+	<input type="hidden" name="currentPage"> <input type="hidden"
+		name="searchKeyword" value="${param.searchKeyword}"> <input
+		type="hidden" name="searchStartDate" value="${param.searchStartDate}">
+	<input type="hidden" name="searchEndDate"
+		value="${param.searchEndDate}">
 </form>
 <div class="col-md-10">
 	<ul class="nav nav-tabs nav-justified">
@@ -202,8 +201,9 @@
 							</span>
 						</div>
 						<div class="search1" style="margin-top: 10px;">
-							<label>클래스명:</label> <input class="txt" id="searchKeyword" name="searchKeyword"
-								type="text" /> <input type="submit" value="조회하기">
+							<label>클래스명:</label> <input class="txt" id="searchKeyword"
+								name="searchKeyword" type="text" /> <input type="submit"
+								value="조회하기">
 						</div>
 					</td>
 				</tr>
@@ -213,57 +213,73 @@
 	</form>
 	<!-- //기간별조회 -->
 	<br>
-		<table class="table table-hover">
-			<thead>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th width="20%">클래스명</th>
+				<th width="25%">날짜</th>
+				<th width="15%">가격</th>
+				<th width="15%">결제방법</th>
+				<th width="15%">상태</th>
+				<th width="10%"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="map" items="${alist }">
 				<tr>
+					<td>${map["C_NAME"] }</td>
+					<td>${map["PM_PAYMENTDATE"] }</td>
+					<td>${map["C_PRICE"] }</td>
+					<td>${map["PM_PAYMENTWAY"] }</td>
 
-					<th width="20%">클래스명</th>
-					<th width="20%">날짜</th>
-					<th width="15%">가격</th>
-					<th width="15%">결제방법</th>
-					<th width="15%">상태</th>
-					<th width="15%"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="map" items="${alist }">
-					<tr>
-						<td>${map["C_NAME"] }</td>
-						<td>${map["PM_PAYMENTDATE"] }</td>
-						<td>${map["C_PRICE"] }</td>
-						<td>${map["PM_PAYMENTWAY"] }</td>
-						
-						<c:if test="${map['PM_COMPLETECHECK']=='N'&& map['PM_CANCELCHECK']=='N' }">
-							<td>결제대기</td>	
-						</c:if>
-						<c:if test="${map['PM_COMPLETECHECK']=='Y'&& map['PM_CANCELCHECK']=='N' }">
-							<td>결제완료</td>	
-						</c:if>
-						<c:if test="${ map['PM_COMPLETECHECK']=='Y'&& map['PM_CANCELCHECK']=='Y'&& map['PMC_PROQRESS']=='진행중' }">
-							<td>결제취소${map['PMC_PROQRESS'] }</td>	
-						</c:if>
-						<c:if test="${ map['PM_COMPLETECHECK']=='Y'&& map['PM_CANCELCHECK']=='Y'&& map['PMC_PROQRESS']=='완료' }">
-							<td>결제취소${map['PMC_PROQRESS'] }</td>	
-						</c:if>
-						<td>		
-						
-						
-						<a data-toggle="modal"
+					<c:if
+						test="${map['PM_COMPLETECHECK']=='N'&& map['PM_CANCELCHECK']=='N' }">
+						<td>결제대기</td>
+						<td><a data-toggle="modal"
 						href='<c:url value="/mypage/MyClass/paymentcancel.do?pmNo=${map['PM_NO'] }"/>'
 						data-target="#modal-get" role="button" data-backdrop="static">
-						<span class="btn btn-primary">취소</span>
-						</a>
+							<span class="btn btn-primary btn-xs">취소</span>
+					</a>
 						<div id="modal-get" class="modal fade" tabindex="-1" role="dialog"
-						aria-labelledby="받는사람 등록" aria-describedby="받는사람추가 모달">
-						<div class="modal-dialog" style="width: 500px; height: 300px">
-							<div class="modal-content"></div>
-						</div>
-						</div>
-						</td>			
-					</tr>
-				</c:forEach>
-			</tbody>		
-		</table>
+							aria-labelledby="받는사람 등록" aria-describedby="받는사람추가 모달">
+							<div class="modal-dialog" style="width: 500px; height: 300px">
+								<div class="modal-content"></div>
+							</div>
+						</div></td>
+					</c:if>
+					<c:if
+						test="${map['PM_COMPLETECHECK']=='Y'&& map['PM_CANCELCHECK']=='N' }">
+						<td>결제완료</td>
+						<td><a data-toggle="modal"
+						href='<c:url value="/mypage/MyClass/paymentcancel.do?pmNo=${map['PM_NO'] }"/>'
+						data-target="#modal-get" role="button" data-backdrop="static">
+							<span class="btn btn-primary btn-xs">취소</span>
+					</a>
+						<div id="modal-get" class="modal fade" tabindex="-1" role="dialog"
+							aria-labelledby="받는사람 등록" aria-describedby="받는사람추가 모달">
+							<div class="modal-dialog" style="width: 500px; height: 300px">
+								<div class="modal-content"></div>
+							</div>
+						</div></td>
+					</c:if>
+					<c:forEach var="alist" items="${pcList }">
+						<c:if test="${map['PM_NO']==alist.pmNo }">
+							<c:if
+						test="${map['PM_CANCELCHECK']=='Y'&& alist.pmcProqress=='진행중' }">
+						<td colspan="2">결제취소${alist.pmcProqress }</td>
+					</c:if>
+					<c:if
+						test="${map['PM_CANCELCHECK']=='Y'&& alist.pmcProqress=='완료' }">
+						<td colspan="2">결제취소${alist.pmcProqress] }</td>
+					</c:if>
+						</c:if>
+					</c:forEach>
+					
+					
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </div>
 <div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->

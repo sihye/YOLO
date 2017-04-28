@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class PaymentCancelVO {
 	private int pmcNo;
-	private String pmNo;
+	private int pmNo;
 	private Timestamp pmcDate;
 	private String pmcProqress;
 	private String pmcCalcel;
@@ -15,10 +15,11 @@ public class PaymentCancelVO {
 	public void setPmcNo(int pmcNo) {
 		this.pmcNo = pmcNo;
 	}
-	public String getPmNo() {
+	
+	public int getPmNo() {
 		return pmNo;
 	}
-	public void setPmNo(String pmNo) {
+	public void setPmNo(int pmNo) {
 		this.pmNo = pmNo;
 	}
 	public Timestamp getPmcDate() {

@@ -28,4 +28,21 @@ public class PaymentServiceImpl implements PaymentService{
 	public int insertPaymentCancel(PaymentCancelVO paymentCancelVo) {
 		return paymentDao.insertPaymentCancel(paymentCancelVo);
 	}
+
+	@Override
+	public int cancelCount(int pmNo) {
+		return paymentDao.cancelCount(pmNo);
+	}
+
+	@Override
+	public int cancelcheckYN(PaymentVO paymentVo) {
+		return paymentDao.cancelcheckYN(paymentVo);
+	}
+
+	@Override
+	public List<PaymentCancelVO> selectPaymentCancel() {
+		return paymentDao.selectPaymentCancel();
+	}
+	
+	
 }

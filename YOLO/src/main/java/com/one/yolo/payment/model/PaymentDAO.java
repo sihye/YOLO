@@ -9,4 +9,7 @@ public interface PaymentDAO {
 	public List<Map<String, Object>> selectPayment(SearchVO searchVO);
 	public int selectTotalRecord(SearchVO searchVo);
 	public int insertPaymentCancel(PaymentCancelVO paymentCancelVo);
+	public int cancelCount(int pmNo);
+	public int cancelcheckYN(PaymentVO paymentVo);
+	public List<PaymentCancelVO> selectPaymentCancel();
 }
