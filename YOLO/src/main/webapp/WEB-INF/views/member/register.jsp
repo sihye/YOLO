@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core"%> --%>
+<%@ include file="../inc/top.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +19,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap-select.min.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css" /> 
 
 
 <script type="text/javascript" src='<c:url value="/jquery/jquery-3.1.1.min.js" />'></script>
@@ -90,6 +91,10 @@
 	width: 350px;
 }
 </style>
+<style> 
+	.divForm { display: table; margin-left: auto; margin-right: auto; } 
+</style>
+
 <scRIPT language=Javascript>
 <!--
 	var maxChecked = 3; //선택가능 갯수
@@ -250,3 +255,4 @@
 	
 </div>
 </article>
+<%@ include file="../inc/bottom.jsp" %>

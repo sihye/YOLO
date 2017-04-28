@@ -40,6 +40,21 @@
 	src="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/jquery.flexslider-min.js"></script>
 <link rel="stylesheet"
 	href="path/to/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/mainstyle.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/clear.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/layout.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/mystyle.css" />
+	<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/bootstrap-select.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css" /> 
+
+	<script type="text/javascript" src='<c:url value="/js/member.js" />'></script>
+	
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#name").focus();
@@ -128,6 +143,9 @@
 	/* document.write(maxChecked); */
 </script>
 
+
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#frmLogin").submit(function(){
@@ -171,8 +189,10 @@
 		</ul>
 
 		<!-- 로그인 전 --> <c:if test="${empty sessionScope.userid }">
-			<a class="btn btn-primary btn-lg login_btn" data-toggle="modal"
-				data-target="#myModal2">Join</a>
+			<!-- <a class="btn btn-primary btn-lg login_btn" data-toggle="modal"
+				data-target="#myModal2">Join</a> -->
+				
+				<a class="btn btn-primary btn-lg login_btn" href="${pageContext.request.contextPath}/member/register.do">Join</a>
 
 			<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
@@ -184,7 +204,7 @@
 							</button>
 							<h4 class="modal-title" id="myModalLabel">Modal title</h4>
 						</div>
-						<div class="divForm modal-body">
+						<div class="divForm modal-body container">
 	<form id="frm1" name="frm1" method="post"
 		action='<c:url value="/member/join.do" />'>
 		<fieldset>
