@@ -55,7 +55,7 @@
 				return false;
 			}		
 		});
-	});
+	}); 
 </script>
 <style type="text/css">
 #SEARCHDIV{
@@ -169,9 +169,9 @@
 		<c:if test="${!empty sessionScope.userid }">
 			
 			<a href="${pageContext.request.contextPath}/member/memberEdit.do"
-				class="login_btn">회원탈퇴</a>
+				class="btn btn-primary btn-lg login_btn">회원탈퇴</a>
 			<a class="dropdown">
-			<a data-toggle="dropdown" href="#" style="color: white;" class="login_btn"> ${sessionScope.userName} 님</a>
+			<a data-toggle="dropdown" href="#" style="color: white;" class="btn btn-primary btn-lg login_btn"> ${sessionScope.userName} 님</a>
 					<ul class="dropdown-menu" role="menu">
 						<li role="presentation"><a role="menuitem" tabindex="-1"
 							href="${pageContext.request.contextPath}/mypage/Favorite/FavoriteClass.do">마이페이지</a></li>
