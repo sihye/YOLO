@@ -28,6 +28,8 @@
 	label{
 		padding-right: 20px;
 	}
+	
+	.simpleForm { display: table; margin-left: auto; margin-right: auto; } 
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -47,6 +49,7 @@
 		action='<c:url value= "/member/memberOut.do"/>'>
 		<fieldset>
 			<legend>회원탈퇴</legend>
+			
 			<p class="p">회원탈퇴하시겠습니까</p>
 			<div>
 				<label for="pwd">비밀번호</label>

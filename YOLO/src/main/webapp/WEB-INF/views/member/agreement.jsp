@@ -19,6 +19,8 @@
 			}	
 		});
 	});
+	
+
 
 
 	
@@ -59,10 +61,9 @@
 		<input type="text" name="reason2" id="email3" title="직접입력인 경우 이메일주소 뒷자리"
         	style="visibility:hidden; width: 60%">
 		</div>
-		
 		<br>
 		<div class="align_center">
-			<input type="submit" value="확인" >
+			<input type="submit" value="확인">
 			<input type="reset" value="취소">			
 		</div>
 		

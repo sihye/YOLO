@@ -181,9 +181,7 @@
 						href="${pageContext.request.contextPath}/member/memberOut.do">회원탈퇴</a></li>
 					</ul>
 				</a>
-				
-				
-				
+	
 		</c:if> 
 		 </nav>
 	</div>
