@@ -215,6 +215,7 @@
 	<br>
 	<table class="table table-hover">
 		<thead>
+		
 			<tr>
 				<th width="20%">클래스명</th>
 				<th width="25%">날짜</th>
@@ -223,6 +224,7 @@
 				<th width="15%">상태</th>
 				<th width="10%"></th>
 			</tr>
+			
 		</thead>
 		<tbody>
 			<c:forEach var="map" items="${alist }">
