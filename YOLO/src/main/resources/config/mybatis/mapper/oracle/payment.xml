@@ -39,6 +39,9 @@
 		    (
 		        select*from mypayment	       
 		        <include refid="searchWhere"></include>
+		        <if test='pmCancelcheck=="N" '>
+		        	and PM_CANCELCHECK='N'
+		        </if>
 		    )LIST
 		)	
 		<![CDATA[
@@ -54,6 +57,9 @@
 		resultType="int">
 		select count(*) from mypayment 
 		<include refid="searchWhere"></include>
+		<if test='pmCancelcheck=="N" '>
+		        	and PM_CANCELCHECK='N'
+		 </if>
 	</select>
 	
 	<insert id="insertPaymentCancel" parameterType="PaymentCancelVO">
