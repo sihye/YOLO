@@ -110,4 +110,6 @@ select n.*,c.m_userid,(select k.k_name from  category k where k.K_NO =c.c_no ) a
 
 
 --∏ﬁ¿Œ ∫£≥  ∫‰
+create view mainbannerList
+as
 select o.op_no,(select cg.k_name from category cg where o.K_NO = cg.K_NO)as k_name,f.F_FILENAME from operator o , upfile f where o.F_NO = f.F_NO;

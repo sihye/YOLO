@@ -292,29 +292,6 @@ a{
 	
 	
   
-	<%-- <form class="form-inline" role="form" name="frm1" id="frm1" method="post" action='<c:url value="/admin/operatorInsert.do"/>' enctype="multipart/form-data">
-	  <div class="form-group">
-	  </div>
-	  <div class="form-group">
-	   <select id="Select1" name="kNo" class="selectpicker" style="height:30px">
-	   <option value="">
-	   	검색 목록
-	   </option>
-	   <option value="M_USERID">
-	   ID 검색
-	   </option>
-	   <option value="M_NAME">
-	   이름 검색
-	   </option>
-		</select>
-		</div>
-	   <div class="form-group">
-	   <input type="text"> 
-		
-		<input type="submit" id="btSubmit" value="검색">
-		
-	  </div>
-	</form> --%>
 	<div class="divList">
 	<div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->

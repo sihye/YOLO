@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="../inc/top.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -29,6 +28,8 @@
 	label{
 		padding-right: 20px;
 	}
+	
+	.simpleForm { display: table; margin-left: auto; margin-right: auto; } 
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -48,6 +49,7 @@
 		action='<c:url value= "/member/memberOut.do"/>'>
 		<fieldset>
 			<legend>회원탈퇴</legend>
+			
 			<p class="p">회원탈퇴하시겠습니까</p>
 			<div>
 				<label for="pwd">비밀번호</label>
@@ -61,7 +63,4 @@
 	</form>
 </article>
 
-
-
-
-
+<%@ include file="../inc/bottom.jsp" %>

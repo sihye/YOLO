@@ -9,6 +9,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
+	
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mainstyle.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/clear.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mystyle.css"/>
 		
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/sihye/reset.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/sihye/responsive.css">
@@ -163,7 +168,7 @@
 			<a href="${pageContext.request.contextPath}/member/agreement.do"
 				class="btn btn-primary btn-lg login_btn" >회원탈퇴</a>
 			<a class="dropdown">
-			<a data-toggle="dropdown" href="#" style="color: white;" class="btn btn-primary btn-lg login_btn"> ${sessionScope.userName} 님</a>
+			<a data-toggle="dropdown" href="#"  class="btn btn-primary btn-lg login_btn"> ${sessionScope.userName} 님</a>
 					<ul class="dropdown-menu" role="menu">
 						<li role="presentation"><a role="menuitem" tabindex="-1"
 							href="${pageContext.request.contextPath}/mypage/Favorite/FavoriteClass.do">마이페이지</a></li>
@@ -176,9 +181,7 @@
 						href="${pageContext.request.contextPath}/member/memberOut.do">회원탈퇴</a></li>
 					</ul>
 				</a>
-				
-				
-				
+	
 		</c:if> 
 		 </nav>
 	</div>
