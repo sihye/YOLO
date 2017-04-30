@@ -10,6 +10,9 @@ public class SearchVO {
 	private int flNo;
 	
 	private String userid;
+	
+	private int searchKno=0;
+	
 	/** 검색조건 */
 	private String searchCondition = "";
 
@@ -168,6 +171,16 @@ public class SearchVO {
 				+ ", recordCountPerPage=" + recordCountPerPage + "]";
 	}
 
+	public int getSearchKno() {
+		return searchKno;
+	}
+
+	public void setSearchKno(int searchKno) {
+		this.searchKno = searchKno;
+	}
+
+	
+	
 
 
 

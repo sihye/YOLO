@@ -24,6 +24,10 @@ where op_no= #{no}
 	select *from operator where op_no=#{no}
 </select>
 
+<select id="mainBannerList" resultType="hashmap">
+	select *from MAINBANNERLIST
+</select>
+
 </mapper>
 
 

@@ -36,6 +36,12 @@ public class OperAtorServiceImpl implements OperAtorService {
 	public Map<String, Object> opjoinSelectByOpno(int no) {
 		return dao.opjoinSelectByOpno(no);
 	}
+
+	@Override
+	public List<Map<String, Object>> mainBannerList() {
+		return dao.mainBannerList();
+	}
+	
 	
 	
 	

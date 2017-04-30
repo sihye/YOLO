@@ -28,6 +28,31 @@
  		</choose>
  
  	</sql>
+ 	
+<sql id="searchBanner">
+ 		 <choose>
+		        <when test="searchKno!=0">
+		        	where k_no =#{searchKno} and C_DEL='N'
+		        </when>
+		        <when test="searchKno==0">
+		        	where C_DEL='N'
+		        </when>
+		       <otherwise>
+		       
+		       </otherwise>
+		</choose>
+ 
+</sql>
+ 	
+ 	
+ 	
+ 	
+
+
+
+
+ 	
+ 	
  
 	<insert id="claInsert" parameterType="ClassVO">
 		<selectKey keyProperty="cNo" resultType="int" order="BEFORE">
@@ -89,6 +114,28 @@
 		insert into classschedule
 		values(#{scNo},#{cNo},1,#{scStartdate},#{scEnddate},#{scWeek},#{scStarttime},#{scEndtime})
 	</insert>
+	
+	<select id="selectClassBycNo" parameterType="SearchVO" resultType="ClassVO">
+		select *
+		from
+		(
+		    select rownum as RNUM ,LIST.*
+		    from
+		    (
+		        select * from class 
+		       <include refid="searchBanner"></include>
+		        order by c_no desc
+		    )LIST
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	<select id="selectClassCount" parameterType="SearchVO" resultType="int">
+		select count(*) from class
+		<include refid="searchBanner"></include>
+	</select>
  	
 </mapper>
 

@@ -63,4 +63,19 @@ public class ClassServiceImpl implements ClassService {
 	public int hitUpdate(int cNo) {
 		return dao.hitUpdate(cNo);
 	}
+	@Override
+	public List<ClassVO> selectClassBykNo(SearchVO vo) {
+		
+		return dao.selectClassBykNo(vo);
+	}
+	@Override
+	public int selectClassCount(SearchVO vo) {
+		return dao.selectClassCount(vo);
+	}
+	
+	
+
+	
+	
+	
 }

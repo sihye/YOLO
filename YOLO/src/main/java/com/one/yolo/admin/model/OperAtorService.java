@@ -9,5 +9,6 @@ public interface OperAtorService {
 	public int delupdate(int op_no);
 	public OperAtorVO selectByNo(int op_no);
 	public Map<String,Object> opjoinSelectByOpno(int no);
+	public List<Map<String, Object>> mainBannerList();
 	
 }
