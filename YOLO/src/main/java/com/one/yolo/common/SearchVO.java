@@ -11,6 +11,8 @@ public class SearchVO {
 	
 	private String userid;
 	
+	private String pmCancelcheck;
+	
 	private int searchKno=0;
 	
 	/** 검색조건 */
@@ -78,6 +80,14 @@ public class SearchVO {
 
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+
+	public String getPmCancelcheck() {
+		return pmCancelcheck;
+	}
+
+	public void setPmCancelcheck(String pmCancelcheck) {
+		this.pmCancelcheck = pmCancelcheck;
 	}
 
 	public String getSearchStartDate() {
@@ -164,11 +174,12 @@ public class SearchVO {
 
 	@Override
 	public String toString() {
-		return "SearchVO [flNo=" + flNo + ", userid=" + userid + ", searchCondition=" + searchCondition
-				+ ", searchKeyword=" + searchKeyword + ", searchStartDate=" + searchStartDate + ", searchEndDate="
-				+ searchEndDate + ", searchUseYn=" + searchUseYn + ", currentPage=" + currentPage + ", blockSize="
-				+ blockSize + ", firstRecordIndex=" + firstRecordIndex + ", lastRecordIndex=" + lastRecordIndex
-				+ ", recordCountPerPage=" + recordCountPerPage + "]";
+		return "SearchVO [flNo=" + flNo + ", userid=" + userid + ", pmCancelcheck=" + pmCancelcheck + ", searchKno="
+				+ searchKno + ", searchCondition=" + searchCondition + ", searchKeyword=" + searchKeyword
+				+ ", searchStartDate=" + searchStartDate + ", searchEndDate=" + searchEndDate + ", searchUseYn="
+				+ searchUseYn + ", currentPage=" + currentPage + ", blockSize=" + blockSize + ", firstRecordIndex="
+				+ firstRecordIndex + ", lastRecordIndex=" + lastRecordIndex + ", recordCountPerPage="
+				+ recordCountPerPage + "]";
 	}
 
 	public int getSearchKno() {

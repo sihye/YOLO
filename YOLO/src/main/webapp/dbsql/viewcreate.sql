@@ -65,8 +65,7 @@ where mg_no2=3;
 CREATE OR REPLACE VIEW mypayment
 AS SELECT p.*,c.C_NAME,C_PRICE
 FROM payment p,class c
-WHERE p.C_NO=c.C_NO
-and p.PM_NO = pc.PM_NO;
+WHERE p.C_NO=c.C_NO;
 --drop view mypayment;
 select*from mypayment;
 
