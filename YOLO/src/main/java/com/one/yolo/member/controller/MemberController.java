@@ -306,7 +306,7 @@ public class MemberController {
 		String userid=(String) session.getAttribute("userid");
 		logger.info("회원탈퇴 처리, 파라미터 userid={},pwd={}", userid,pwd);
 		logger.info("reason={}",vo.getmReason());
-		vo.setmReason("qwer");
+		
 		int result 
 		= memberService.loginCheck(userid,pwd);
 		String msg="", url="/member/memberOut.do";

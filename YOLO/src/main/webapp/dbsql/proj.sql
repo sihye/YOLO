@@ -46,7 +46,8 @@ CREATE TABLE Member (
 	M_TEL2           VARCHAR2(500) NULL,     -- 핸드폰
 	M_TEL3           VARCHAR2(500) NULL,     -- 핸드폰
 	Q_QUESTIONNO     NUMBER        NOT NULL, -- 질문번호
-	M_QUESTIONANSWER VARCHAR2(500) NULL      -- 질문답
+	M_QUESTIONANSWER VARCHAR2(500) NULL,      -- 질문답
+	M_REASON         VARCHAR2(500) NULL      -- 탈퇴이유
 );
 
 -- 회원 기본키

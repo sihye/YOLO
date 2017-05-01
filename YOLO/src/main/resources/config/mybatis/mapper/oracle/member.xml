@@ -114,7 +114,7 @@
 	  
 	<update id="memberOut" parameterType="MemberVO">
 		update member
-		set m_leavedate=sysdate, m_reason='fgh'
+		set m_leavedate=sysdate, m_reason=#{mReason}
 		where m_userid=#{mUserid}
 	</update>
 	
