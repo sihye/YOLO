@@ -112,9 +112,9 @@
 		<include refid="searchWhere"></include>
 	</select>
 	  
-	<update id="memberOut" parameterType="string">
+	<update id="memberOut" parameterType="MemberVO">
 		update member
-		set m_leavedate=sysdate
+		set m_leavedate=sysdate,m_reason=#{mReason}
 		where m_userid=#{mUserid}
 	</update>
 	

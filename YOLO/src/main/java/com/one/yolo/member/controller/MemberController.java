@@ -302,6 +302,15 @@ public class MemberController {
 		return "member/checkUserid";
 	}
 	
+	@RequestMapping(value="/agreement.do",method=RequestMethod.POST)
+	public String out_post1(@RequestParam String mReason,HttpSession session,HttpServletResponse response,Model model){
+		String userid=(String) session.getAttribute("userid");
+		
+		logger.info("파라미터 userid={},mReason={}",userid,mReason);
+		
+		return "member/agreement";
+	}
+	
 	@RequestMapping(value="/memberOut.do",method=RequestMethod.GET)
 	public String out_get(){
 		logger.info("회원탈퇴화면 보여주기");
@@ -310,7 +319,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/memberOut.do", method=RequestMethod.POST)
-	public String edit_post(@RequestParam String pwd,
+	public String out_post(@RequestParam String pwd,
 			HttpSession session, HttpServletResponse response, 
 			Model model){
 		String userid=(String) session.getAttribute("userid");
