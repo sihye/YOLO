@@ -4,8 +4,14 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.useboard">
 	<sql id="searchWhere">
-		<if test="searchKeyword !=null and searchKeyword !=''">
+		<if test="ubType !=null ">
+			where ub_type=#{ubType} 
+		</if>
+		<if test="ubType==null and searchCondition !=null and searchKeyword !='' ">
 			where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+		</if>
+		<if test="searchKeyword !=null and searchKeyword !=''">
+			and ${searchCondition} like '%'|| #{searchKeyword} ||'%'
 		</if>
 	</sql>
 	<!-- <sql id="searchWhere">
@@ -20,7 +26,7 @@
 		select * from useboard
 	</select> -->
 	
-	<select id="selectUse" parameterType="SearchVO" resultType="useboardVO">
+	<select id="selectUseboard" parameterType="useboardVO" resultType="useboardVO">
 		select *
 		from
 		(
@@ -38,7 +44,7 @@
 		]]>
 	</select>
 	
-	<select id="selectTotalRecord" parameterType="SearchVO" resultType="int">
+	<select id="selectTotalRecord" parameterType="useboardVO" resultType="int">
 		select count(*) from useboard
 		<include refid="searchWhere"></include>
 	</select> 	

@@ -38,7 +38,6 @@ function pageFunc(curPage){
 				본 클래스</a></li>
 	</ul>
 	<br>
-	<br>
 	<h2>관심클래스</h2>
 
 	<br>
@@ -53,28 +52,30 @@ function pageFunc(curPage){
 					<th width="20%">가격</th>
 					<th width="20%">결제방법</th>
 					<th width="20%">등록일</th>
-					
+
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="map" items="${alist }">
-				<tr>
-					<td><a href='<c:url value="/class/claDetail.do?cNo=${map['C_NO'] }"/>'>${map["C_NAME"] }</a></td>
-					<td>${map["C_PLACE"] }</td>
-					<td>${map["C_PRICE"] }</td>
-					<td>${map["C_PAYMENTWAY"] }</td>
-					<td>${map["SC_REGDATE"] }</td>
-					<td><button id="del" class="btn btn-primary" type="button" 
-					onclick="delNoFunc(${map['SB_NO']})">삭제</button></td>
-				</tr>
+					<tr>
+						<td><a
+							href='<c:url value="/class/claDetail.do?cNo=${map['C_NO'] }"/>'>${map["C_NAME"] }</a></td>
+						<td>${map["C_PLACE"] }</td>
+						<td>${map["C_PRICE"] }</td>
+						<td>${map["C_PAYMENTWAY"] }</td>
+						<td>${map["SC_REGDATE"] }</td>
+						<td><button id="del" class="btn btn-primary" type="button"
+								onclick="delNoFunc(${map['SB_NO']})">삭제</button></td>
+					</tr>
 				</c:forEach>
-	
+
 			</tbody>
 			<tfoot>
 				<tr>
 					<td colspan="6" style="text-align: center">
-					<button id="alldel" class="btn btn-primary" type="button"
-					onclick="delIdFunc()">관심클래스 비우기</button></td>
+						<button id="alldel" class="btn btn-primary" type="button"
+							onclick="delIdFunc()">관심클래스 비우기</button>
+					</td>
 				</tr>
 			</tfoot>
 		</table>
@@ -88,9 +89,9 @@ function pageFunc(curPage){
 		<ul class="pagination">
 
 			<c:if test="${pagingInfo.firstPage>1 }">
-				<li><a href="#" aria-label="Previous" 
-				onclick="pageFunc(${pagingInfo.firstPage-1})">
-				<span aria-hidden="true">&laquo;</span></a></li>
+				<li><a href="#" aria-label="Previous"
+					onclick="pageFunc(${pagingInfo.firstPage-1})"> <span
+						aria-hidden="true">&laquo;</span></a></li>
 			</c:if>
 
 			<c:forEach var="i" begin="${pagingInfo.firstPage }"
@@ -105,9 +106,9 @@ function pageFunc(curPage){
 
 			<!-- 다음 블럭으로 이동 ▶-->
 			<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
-				<li><a href="#" aria-label="Previous" 
-				onclick="pageFunc(${pagingInfo.lastPage+1})">
-				<span aria-hidden="true">&raquo;</span></a></li>			
+				<li><a href="#" aria-label="Previous"
+					onclick="pageFunc(${pagingInfo.lastPage+1})"> <span
+						aria-hidden="true">&raquo;</span></a></li>
 			</c:if>
 
 			<!--  페이지 번호 끝 -->

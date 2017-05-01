@@ -14,4 +14,7 @@ public interface ClassService {
 	public Map<String, Object> selectBadClassByCno(int no);
 	public List<ClassVO> selInterCla(String userid);
 	public int hitUpdate(int cNo);
+	public List<Map<String, Object>> selectClassBykNo(SearchVO vo);
+	public int selectClassCount(SearchVO vo);
+	public ScheduleVO selSch(int cNo);
 }

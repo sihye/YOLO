@@ -2,11 +2,8 @@ package com.one.yolo.useboard.model;
 
 import java.util.List;
 
-
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
-
-import com.one.yolo.common.SearchVO;
 
 @Repository
 public class UseboardDAOMybatis extends SqlSessionDaoSupport 
@@ -15,13 +12,14 @@ public class UseboardDAOMybatis extends SqlSessionDaoSupport
 	private String namespace="config.mybatis.mapper.oracle.useboard";
 	
 	@Override
-	public List<UseboardVO> selectUseboard(SearchVO searchVo){
-		return getSqlSession().selectList(namespace+".selectUse", searchVo);
+	public List<UseboardVO> selectUseboard(UseboardVO vo){
+		List<UseboardVO> aa = getSqlSession().selectList(namespace+".selectUseboard", vo); 
+		return aa;
 	}
 
 	@Override
-	public int selectTotalRecord(SearchVO searchVo) {
-		return getSqlSession().selectOne(namespace+".selectTotalRecord", searchVo);
+	public int selectTotalRecord(UseboardVO vo) {
+		return getSqlSession().selectOne(namespace+".selectTotalRecord", vo);
 	}
 	
 	@Override

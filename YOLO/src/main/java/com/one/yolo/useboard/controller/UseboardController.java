@@ -16,7 +16,6 @@ import com.one.yolo.common.PaginationInfo;
 import com.one.yolo.common.Utility;
 import com.one.yolo.useboard.model.UseboardService;
 import com.one.yolo.useboard.model.UseboardVO;
-import com.one.yolo.common.SearchVO;
 
 @Controller
 @RequestMapping(value="/useboard")
@@ -28,24 +27,24 @@ public class UseboardController {
 	@Autowired
 	private UseboardService useboardService;
 	
-	@RequestMapping("/list.do")
-	public String Useboardlist(@ModelAttribute SearchVO searchVo, Model model){
+	@RequestMapping(value="/list.do")
+	public String Useboardlist(@ModelAttribute UseboardVO vo , Model model){
 		/*logger.info("Useboardlist화면목록 ");*/
-		logger.info("Useboardlist화면목록  searchVo={}", searchVo);
+		logger.info("Useboardlist화면목록  vo={},  type={}", vo,vo.getUbType());
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(Utility.BLOCKSIZE);
 		pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setCurrentPage(vo.getCurrentPage());	
 		
-		searchVo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		vo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		List<UseboardVO> uList = useboardService.selectUseboard(searchVo);
+		List<UseboardVO> uList = useboardService.selectUseboard(vo);
 		logger.info("조회 결과 uList.size()={}", uList.size());
 		logger.info("조회 결과 uList={}", uList);
 		
-		int totalRecord =useboardService.selectTotalRecord(searchVo);
+		int totalRecord =useboardService.selectTotalRecord(vo);
 		logger.info("조회 전체레코드 개수조회 결과, totalRecord={}",
 				totalRecord);
 		
@@ -57,7 +56,7 @@ public class UseboardController {
 		return "useboard/list";
 	}
 	
-	@RequestMapping(value="write.do", method=RequestMethod.GET)
+	@RequestMapping(value="/write.do", method=RequestMethod.GET)
 	public String write_get(){
 		logger.info("공지사항 글쓰기 화면 보여주기");
 
@@ -74,7 +73,7 @@ public class UseboardController {
 		return "redirect:/useboard/list.do";		
 	}
 	
-	@RequestMapping(value="updateCount.do")
+	@RequestMapping(value="/updateCount.do")
 	public String updateCount(
 			@RequestParam(value="no", defaultValue="0")
 			int no, Model model){
@@ -94,7 +93,7 @@ public class UseboardController {
 	
 	
 	
-	@RequestMapping(value="detail.do")
+	@RequestMapping(value="/detail.do")
 	public String detail(@RequestParam
 			(value="no", defaultValue="0") int no, 
 			Model model){
@@ -115,7 +114,7 @@ public class UseboardController {
 		
 	}
 	
-	@RequestMapping(value="edit.do", method=RequestMethod.GET)
+	@RequestMapping(value="/edit.do", method=RequestMethod.GET)
 	public String edit_get(@RequestParam (value="no", defaultValue="0") int no,
 			Model model){
 		logger.info("공지사항 수정화면, 파라미터no={}", no );
@@ -134,7 +133,7 @@ public class UseboardController {
 		return "useboard/edit";
 	}
 	
-	@RequestMapping(value="edit.do", method=RequestMethod.POST)
+	@RequestMapping(value="/edit.do", method=RequestMethod.POST)
 	public String edit_post(@ModelAttribute UseboardVO vo, 
 			Model model){
 		logger.info("공지사항 수정 처리, 파라미터 vo={}", vo);
@@ -156,7 +155,7 @@ public class UseboardController {
 		return "common/message";
 	}
 	
-	@RequestMapping(value="delete.do", method=RequestMethod.GET)
+	@RequestMapping(value="/delete.do", method=RequestMethod.GET)
 	public String delete_get(
 			@RequestParam(value="no", defaultValue="0") int no,
 			Model model){

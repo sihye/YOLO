@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.one.yolo.common.SearchVO;
 @Repository
@@ -56,6 +57,20 @@ public class ClassDAOMybatis extends SqlSessionDaoSupport implements ClassDAO{
 	public int schInsert(ScheduleVO vo) {
 		return getSqlSession().insert(nameSpace+".schInsert", vo);
 	}
-
+	@Override
+	public List<Map<String, Object>> selectClassBykNo(SearchVO vo) {
+		return getSqlSession().selectList(nameSpace+".selectClassBycNo",vo);
+	}
+	@Override
+	public int selectClassCount(SearchVO vo) {
+		return getSqlSession().selectOne(nameSpace+".selectClassCount",vo);
+	}
+	@Override
+	public ScheduleVO selSch(int cNo) {
+		return getSqlSession().selectOne(nameSpace+".selSch", cNo);
+	}
+	
+	
+	
 
 }

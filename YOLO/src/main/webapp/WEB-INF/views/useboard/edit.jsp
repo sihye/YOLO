@@ -33,7 +33,7 @@
 </head>
 <br>
 <br>
-<div class="divForm">
+<div class="col-md-10">
 <h2>이용안내수정</h2>
 <br>
 <br>
@@ -46,32 +46,32 @@
         		value="${vo.bgNo}" />
             	
     <fieldset>
-        <div class="form-group">
+        <div class="col-md-10">
             <label class="col-sm-2 control-label" for="title">제목</label>
-            <div class="col-sm-6">
+            <div class="col-sm-8">
             <input type="text" id="ubTitle" name="ubTitle" class="form-control" placeholder="제목"
             	value="${vo.ubTitle}" />
             </div>
         </div>
         <br>
-        <div class="form-group">
+        <div class="col-md-10">
             <label class="col-sm-2 control-label" for="mUserid">작성자</label>
-            <div class="col-sm-6">
+            <div class="col-sm-8">
             <input type="text" id="mUserid" name="mUserid" class="form-control" placeholder="작성자" readonly
             	value="${vo.mUserid}"/>
             </div>
         </div>
         <br>
-        <div class="form-group"> 
+        <div class="col-md-10"> 
         	<label class="col-sm-2 control-label" for="content">내용</label>
        <!-- ckeditor 반영  -->
-        	<div class="col-sm-6">   
+        	<div class="col-sm-8">   
         	<textarea class="ckeditor" id="ubContent" name="ubContent" placeholder="내용" >${vo.ubContent}</textarea>
  			</div>
         </div>
         <br>
         
-     	<div align="center">
+     	<div class="col-md-10">
             <input class="btn btn-default" type = "submit" value="수정"/>
             <input class="btn btn-default"type = "Button" value="목록" 
    				onclick="location.href='<c:url value="/useboard/list.do"/>'" />         
@@ -80,6 +80,6 @@
 </form>    
 </div>
 
-<%@ include file="../inc/bottom.jsp" %>	
+<%@ include file="../noticeboard/boardbottom.jsp" %>
 </body>
 </html>

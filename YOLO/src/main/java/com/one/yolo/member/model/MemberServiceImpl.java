@@ -76,9 +76,9 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 
-	public int memberOut(String userid) {
+	public int memberOut(MemberVO vo) {
 
-		return memberDao.memberOut(userid);
+		return memberDao.memberOut(vo);
 	}
 
 	public List<Map<String, Object>> MemberSelectPG(SearchVO vo) {

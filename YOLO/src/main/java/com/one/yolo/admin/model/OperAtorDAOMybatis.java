@@ -36,6 +36,12 @@ public class OperAtorDAOMybatis extends SqlSessionDaoSupport implements OperAtor
 	public Map<String, Object> opjoinSelectByOpno(int no) {
 		return getSqlSession().selectOne(namespace+".opjoinSelectByOpno",no);
 	}
+
+	@Override
+	public List<Map<String, Object>> mainBannerList() {
+		return getSqlSession().selectList(namespace+".mainBannerList");
+	}
+	
 	
 	
 	

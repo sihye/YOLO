@@ -243,6 +243,9 @@ insert into payment
 (PM_NO,C_NO,M_USERID,PM_PAYMENTWAY,PM_PAYMENTDATE,PM_COMPLETECHECK,PM_CANCELCHECK)
 values(PAYMENT_seq.nextval,3,'hong','¼öÇ¥',sysdate,'Y','N');
 
+delete from payment
+where PM_NO=1;
+
 --booking
 select*from booking;
 
@@ -273,15 +276,15 @@ select*from operator;
 
 insert into operator
 (OP_NO,F_NO,K_NO,OP_SHOWFLAG)
-values(1,1,1,'');
+values(1,2,1,'');
 
 insert into operator
 (OP_NO,F_NO,K_NO,OP_SHOWFLAG)
-values(2,1,2,'');
+values(2,3,2,'');
 
 insert into operator
 (OP_NO,F_NO,K_NO,OP_SHOWFLAG)
-values(3,1,3,'');
+values(3,4,3,'');
 --message
 select*from message;
 

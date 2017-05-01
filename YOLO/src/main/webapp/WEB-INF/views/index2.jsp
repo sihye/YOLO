@@ -8,17 +8,45 @@
 			animation : "slide"
 		});
 
-	})
+	});
+	function pageFunc(curPage){
+	document.frmPage.currentPage.value=curPage;
+	var cno=document.frmPage.searchKno.value;
+	if(cno==""){
+		cno=0;
+		document.frmPage.searchKno.value=cno;
+	}
+	
+	frmPage.submit();
+	}
+	function bannerFunc(curKno){
+		document.frmPage.searchKno.value=curKno;
+		document.frmPage.currentPage.value=1;
+		frmPage.submit();	
+	}
+
 </script>
+
+<!-- 페이징 처리를 위한 form 태그 -->
+<form name="frmPage" method="post"
+	action='<c:url value="/index2.do" />'>
+	<input type="hidden" name="currentPage"> <input type="hidden"
+		name="searchCondition" value="${param.searchCondition }"> <input
+		type="hidden" name="searchKeyword" value="${param.searchKeyword}">
+	<input type="hidden" name="searchStartDate"
+		value="${param.searchStartDate}"> <input type="hidden"
+		name="searchEndDate" value="${param.searchEndDate}">
+	<input type="hidden" name="searchKno" value="${param.searchKno }">
+</form>
+
+
 <section class="caption">
 	<div class="flexslider">
 		<ul class="slides">
-			<li><img style="height: 400PX;"
-				src="${pageContext.request.contextPath}/img/index2 (1).jpg" /></li>
-			<li><img style="height: 400PX;"
-				src="${pageContext.request.contextPath}/img/index1.jpg" /></li>
-			<li><img style="height: 400PX;"
-				src="${pageContext.request.contextPath}/img/0M0B0169.jpg" /></li>
+		<c:forEach var="map" items="${bList }">
+			<li><a href="#" onclick="bannerFunc(${map['K_NO']})"><img style="height: 400PX;"
+				src="${pageContext.request.contextPath}/upload/${map['F_FILENAME'] }" alt="${map['K_NAME'] }"></a></li>
+		</c:forEach>
 		</ul>
 	</div>
 </section>
@@ -80,119 +108,64 @@
 	<section class="listings">
 		<div class="wrapper">
 			<ul class="properties_list">
+			<c:forEach var="map" items="${classList }">
 				<li>
-					<a href="#">
-						<img src="img/property_1.jpg" alt="" title="" class="property_img"/>
+					<a href="<c:url value='/class/claDetail.do?cNo=${map["C_NO"] }' />">
+						<img src="<c:url value='/upload/${map["C_MAINIMG"] }' />" alt="" title="" width="100%" height="250px"/>
 					</a>
-					<span class="price">$2500</span>
+					<span class="price"><fmt:formatNumber value="${map['C_PRICE'] }" />원</span>
 					<div class="property_details">
 						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
+							${map["C_NAME"] }
 						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
+						<c:set var="arr" value="${fn:split(map['C_PLACE'],'(') }" />
+						<h2><c:out value="${arr[0]}"/><br>(<c:out value="${arr[1]}"/></h2>
+						<h2 style="text-align: right;">
+											<i class="fa fa-eye " aria-hidden="true"></i>${map["C_HITS"]}
+											<i class="fa fa-heart-o" aria-hidden="true"></i>
+											<span class="property_size">${map["FCOUNT"] }</span>
+						</h2>
+
+						
 					</div>
 				</li>
-				<li>
-					<a href="#">
-						<img src="img/property_2.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$1000</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="img/property_3.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="img/property_1.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$2500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="img/property_2.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$1000</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="img/property_3.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="img/property_1.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$2500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="img/property_2.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$1000</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
-				<li>
-					<a href="#">
-						<img src="img/property_3.jpg" alt="" title="" class="property_img"/>
-					</a>
-					<span class="price">$500</span>
-					<div class="property_details">
-						<h1>
-							<a href="#">Fuisque dictum tortor at purus libero</a>
-						</h1>
-						<h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
-					</div>
-				</li>
+			</c:forEach>
 			</ul>
-			<div class="more_listing">
-				<a href="#" class="more_listing_btn">View More Listings</a>
-			</div>
 		</div>
 	</section>	<!--  end listing section  -->
+		<div class="divList">
+	<div class="divPage" style="text-align: center">
+	<!-- 페이지 번호 추가 -->
+	<!-- 이전 블럭으로 이동 ◀-->
+	<nav>
+		<ul class="pagination">
+			<c:if test="${pagingInfo.firstPage>1 }">
+				<li><a href="#" aria-label="Previous" 
+				onclick="pageFunc(${pagingInfo.firstPage-1})">
+				<span aria-hidden="true">&laquo;</span></a></li>
+			</c:if>
+
+			<c:forEach var="i" begin="${pagingInfo.firstPage }"
+				end="${pagingInfo.lastPage }">
+				<c:if test="${i==pagingInfo.currentPage }">
+					<li class="active"><a href="#"> ${i}<span class="sr-only">${i }</span></a></li>
+				</c:if>
+				<c:if test="${i!=pagingInfo.currentPage }">
+					<li><a href="#" onclick="pageFunc(${i})">${i}</a></li>
+				</c:if>
+			</c:forEach>
+
+			<!-- 다음 블럭으로 이동 ▶-->
+			<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
+				<li><a href="#" aria-label="Previous" 
+				onclick="pageFunc(${pagingInfo.lastPage+1})">
+				<span aria-hidden="true">&raquo;</span></a></li>			
+			</c:if>
+
+			<!--  페이지 번호 끝 -->
+		</ul>
+	</nav>
+</div>
+</div>
 <%@ include file="inc/bottom.jsp" %>
 

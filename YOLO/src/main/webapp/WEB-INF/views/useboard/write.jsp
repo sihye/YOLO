@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp" %>  
+<%@ include file="boardtop.jsp" %>		 
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -27,47 +27,39 @@
 	});
 </script>
 
-<style type="text/css">
-	.divForm{
-		margin:20px 0;
-		margin-left: 400px;
-		margin-right: 400px;
-		font-size: 1.5em;
-	}
-</style>
-
 </head>
 <br>
 <br>
-<div class="divForm">
-<h2>이용안내 쓰기</h2>
+<div class="col-md-10">
+<h2 align="center">이용안내 쓰기</h2>
 <br>
 <br>
 <form id="frmWrite" name="frmWrite" method="post" 
 	action='<c:url value="/useboard/write.do"/>'>
  <fieldset>
 		<%-- <input type="hidden" name="bgNo" value="${bgNo}" /> --%>
-        <div class="form-group">
+        <div class="col-md-10">
             <label class="col-sm-2 control-label" for="title">제목</label>
-            <div class="col-sm-6">  
+            <span class="col-sm-8">  
             <input type="text" id="ubTitle" name="ubTitle" class="form-control" placeholder="제목"/>
-            </div>
-        </div><br>
-        <div class="form-group">
+        	</span>
+        </div>
+      	<br>
+        <div class="col-md-10">
             <label class="col-sm-2 control-label" for="name">작성자</label>
-            <div class="col-sm-6">  
+            <span class="col-sm-8">  
             <input type="text" id="mUserid" name="mUserid" class="form-control" readonly 
             placeholder="작성자" <%-- value="${vo.mUserid}" --%>>
-            </div>
+            </span>
         </div><br>
-        <div class="form-group">  
+        <div class="col-md-10">  
         	<label class="col-sm-2 control-label" for="content">내용</label> 
         	<!-- ckeditor 반영  -->
-        	<div class="col-sm-6">   
+        	<div class="col-sm-8">   
         	<textarea class="ckeditor" id="nbContent" name="ubContent" placeholder="내용" >${vo.ubContent}</textarea>
  			</div>
         </div><br>
-        <div align="center">
+        <div class="col-md-10">
             <input class="btn btn-default" type = "submit" value="등록"/>
             <input class="btn btn-default" type = "Button" value="글목록" 
             onclick
@@ -77,7 +69,7 @@
 </form>
 </div>   
 
-<%@ include file="../inc/bottom.jsp" %>	              
+<%@ include file="../noticeboard/boardbottom.jsp" %>	            
 </body>
 </html>
 

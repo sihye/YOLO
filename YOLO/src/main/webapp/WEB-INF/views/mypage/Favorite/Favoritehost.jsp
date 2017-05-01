@@ -58,9 +58,10 @@ function pageFunc(curPage){
 	</table>
 	<c:if test="${empty classList}">
 		<h2>선택 호스트 클래스(${param.flWuserid })</h2>
-	<br>
+	<br>	
 		<p>등록된 클래스가 없습니다</p>
 	</c:if>
+	
 	<c:if test="${!empty classList}">
 	<h2>선택 호스트 클래스(${param.flWuserid })</h2>
 	<br>

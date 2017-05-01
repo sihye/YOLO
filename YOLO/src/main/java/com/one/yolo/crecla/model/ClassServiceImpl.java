@@ -22,7 +22,7 @@ public class ClassServiceImpl implements ClassService {
 	public int claInsert(ClassVO vo, ScheduleVO sVo) {
 		int cnt=dao.claInsert(vo);
 		logger.info("클래스디비 인서트 cnt={}",cnt);
-		sVo.setC_No(vo.getcNo());
+		sVo.setcNo(vo.getcNo());
 		logger.info("스케줄 vo={}",sVo);
 		cnt=dao.schInsert(sVo);
 		logger.info("스케줄디비 인서트 cnt={}",cnt);
@@ -63,4 +63,23 @@ public class ClassServiceImpl implements ClassService {
 	public int hitUpdate(int cNo) {
 		return dao.hitUpdate(cNo);
 	}
+	@Override
+	public List<Map<String, Object>> selectClassBykNo(SearchVO vo) {
+		
+		return dao.selectClassBykNo(vo);
+	}
+	@Override
+	public int selectClassCount(SearchVO vo) {
+		return dao.selectClassCount(vo);
+	}
+	@Override
+	public ScheduleVO selSch(int cNo) {
+		return dao.selSch(cNo);
+	}
+	
+	
+
+	
+	
+	
 }

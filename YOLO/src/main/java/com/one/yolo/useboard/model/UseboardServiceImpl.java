@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.one.yolo.common.SearchVO;
-
 @Service
 public class UseboardServiceImpl 
 	implements UseboardService {
@@ -15,13 +13,13 @@ public class UseboardServiceImpl
 	private UseboardDAO dao;
 	
 	@Override
-	public List<UseboardVO> selectUseboard(SearchVO searchVo) {
-		return dao.selectUseboard(searchVo);
+	public List<UseboardVO> selectUseboard(UseboardVO vo) {
+		return dao.selectUseboard(vo);
 	}
 
 	@Override
-	public int selectTotalRecord(SearchVO searchVo) {
-		return dao.selectTotalRecord(searchVo);
+	public int selectTotalRecord(UseboardVO vo) {
+		return dao.selectTotalRecord(vo);
 	}
 
 	@Override

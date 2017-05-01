@@ -27,6 +27,7 @@ public class MemberVO {
 	private String mQuestionanswer;
 	private String mBirth;
 	private String mGender;
+	private String mReason;
 	public String getmUserid() {
 		return mUserid;
 	}
@@ -165,6 +166,12 @@ public class MemberVO {
 	public void setmGender(String mGender) {
 		this.mGender = mGender;
 	}
+	public String getmReason() {
+		return mReason;
+	}
+	public void setmReason(String mReason) {
+		this.mReason = mReason;
+	}
 	@Override
 	public String toString() {
 		return "MemberVO [mUserid=" + mUserid + ", mgNo2=" + mgNo2 + ", mNo=" + mNo + ", mPwd=" + mPwd + ", mName="
@@ -173,8 +180,9 @@ public class MemberVO {
 				+ ", mJoindate=" + mJoindate + ", mLeavedate=" + mLeavedate + ", kNo1=" + kNo1 + ", kNo2=" + kNo2
 				+ ", kNo3=" + kNo3 + ", mTel1=" + mTel1 + ", mTel2=" + mTel2 + ", mTel3=" + mTel3 + ", qQuestionno="
 				+ qQuestionno + ", mQuestionanswer=" + mQuestionanswer + ", mBirth=" + mBirth + ", mGender=" + mGender
-				+ "]";
+				+ ", mReason=" + mReason + "]";
 	}
+	
 	
 	
 }

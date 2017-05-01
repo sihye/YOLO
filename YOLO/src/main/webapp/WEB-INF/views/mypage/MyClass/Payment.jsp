@@ -15,9 +15,7 @@
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 
 <script>                
-
         $(document).ready(function() {
-
             //datepicker 한국어로 사용하기 위한 언어설정
             $.datepicker.setDefaults($.datepicker.regional['ko']);     
         
@@ -29,7 +27,6 @@
                 
                     var eleId = $(this).attr("id");
                     var optionName = "";
-
                     if(eleId.indexOf("StartDate") > 0) {
                         eleId = eleId.replace("StartDate", "EndDate");
                         optionName = "minDate";
@@ -37,12 +34,10 @@
                         eleId = eleId.replace("EndDate", "StartDate");
                         optionName = "maxDate";
                     }
-
                     $("#"+eleId).datepicker( "option", optionName, selectedDate );        
                     $(".searchDate").find(".chkbox2").removeClass("on"); 
                 }
             }); 
-
             //시작일.
             /*$('#searchStartDate').datepicker("option","onClose", function( selectedDate ) {    
                 // 시작일 datepicker가 닫힐때
@@ -51,7 +46,6 @@
                 $(".searchDate").find(".chkbox2").removeClass("on");
             });
             */
-
             //종료일.
             /*$('#searchEndDate').datepicker("option","onClose", function( selectedDate ) {    
                 // 종료일 datepicker가 닫힐때
@@ -60,12 +54,10 @@
                 $(".searchDate").find(".chkbox2").removeClass("on");
             });
             */
-
             $(".dateclick").dateclick();    // DateClick
             $(".searchDate").schDate();        // searchDate
             
         });
-
         // Search Date
         jQuery.fn.schDate = function(){
             var $obj = $(this);
@@ -75,7 +67,6 @@
                 $('input:checked').parent(".chkbox2").addClass("on");                    
             });
         };
-
         // DateClick
         jQuery.fn.dateclick = function(){
             var $obj = $(this);
@@ -83,15 +74,11 @@
                 $(this).parent().find("input").focus();
             });
         }    
-
         
         function setSearchDate(start){
-
             var num = start.substring(0,1);
             var str = start.substring(1,2);
-
             var today = new Date();
-
             //var year = today.getFullYear();
             //var month = today.getMonth() + 1;
             //var day = today.getDate();
@@ -107,7 +94,6 @@
                 today.setMonth(today.getMonth() - num);
                 today.setDate(today.getDate() + 1);
             }
-
             var startDate = $.datepicker.formatDate('yy-mm-dd', today);
             $('#searchStartDate').val(startDate);
                     
@@ -262,15 +248,15 @@
 							</div>
 						</div></td>
 					</c:if>
-					<c:forEach var="alist" items="${pcList }">
-						<c:if test="${map['PM_NO']==alist.pmNo }">
+					<c:forEach var="pcList" items="${pcList }">
+						<c:if test="${map['PM_NO']==pcList.pmNo }">
 							<c:if
-						test="${map['PM_CANCELCHECK']=='Y'&& alist.pmcProqress=='진행중' }">
-						<td colspan="2">결제취소${alist.pmcProqress }</td>
+						test="${map['PM_CANCELCHECK']=='Y'&& pcList.pmcProqress=='진행중' }">
+						<td colspan="2">결제취소${pcList.pmcProqress }</td>
 					</c:if>
 					<c:if
-						test="${map['PM_CANCELCHECK']=='Y'&& alist.pmcProqress=='완료' }">
-						<td colspan="2">결제취소${alist.pmcProqress] }</td>
+						test="${map['PM_CANCELCHECK']=='Y'&& pcList.pmcProqress=='완료' }">
+						<td colspan="2">결제취소${pcList.pmcProqress }</td>
 					</c:if>
 						</c:if>
 					</c:forEach>

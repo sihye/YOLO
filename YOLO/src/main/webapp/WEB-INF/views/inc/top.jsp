@@ -9,11 +9,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-	
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mainstyle.css"/>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/clear.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mystyle.css"/>
 		
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/sihye/reset.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/sihye/responsive.css">
@@ -25,7 +20,7 @@
 	<!-- Bootstrap -->
 	<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 		rel="stylesheet">
-		
+			
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/flexslider.css"
 		type="text/css">
@@ -165,7 +160,7 @@
 		<!-- 로그인 후 -->
 		<c:if test="${!empty sessionScope.userid }">
 			
-			<a href="${pageContext.request.contextPath}/member/agreement.do"
+			<a href="${pageContext.request.contextPath}/member/memberOut.do"
 				class="btn btn-primary btn-lg login_btn" >회원탈퇴</a>
 			<a class="dropdown">
 			<a data-toggle="dropdown" href="#"  class="btn btn-primary btn-lg login_btn"> ${sessionScope.userName} 님</a>

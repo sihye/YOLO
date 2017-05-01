@@ -87,6 +87,12 @@ hr{
 .sharerimg{
 	width: 50px;
 }
+.cal{
+	margin-top: 5px;
+}
+.modal-body{
+	height: 300px;
+}
 /*갤러리*/
 .img-thumbnail{
 	width: 500px;
@@ -136,7 +142,7 @@ hr{
 			</tbody>
 		</table>
 		<!-- Button trigger modal -->
-<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal1">
+<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal1" style="text-align: right;">
   예약하기
 </button>
 
@@ -151,10 +157,36 @@ hr{
         
         <h4 class="modal-title" id="myModalLabel" style="color: black;">예약하기</h4>
       </div>
-      <div class="modal-body" >
-      	스케줄 정보 뿌려줌
+      <div class="modal-body" style="height: 150px;" >
+      <h4 class="modal-title" id="myModalLabel" style="color: black;">${claVo.cName}</h4>
+      <%-- <h3 style="color: black;">${kName}</h3> --%>
+      	<img alt="클릭해서 날짜 선택" src="<c:url value='/images/Time-And-Date-Calendar-icon.png'/>" align="left" class="cal" style="width: 20px;">
+      	<div class="col-xs-5">    	
+			<select class="form-control">
+				  <option>클릭해서 날짜 선택하기</option>
+				  <c:forEach var="day" items="${dayslist}">
+				  	<option name="">${day}</option>
+				  </c:forEach>
+	      	</select>
+	      	
+      	</div>
+      	<div class="col-xs-5">
+      		<select class="form-control">
+      			<option>클릭해서 시간 선택하기</option>
+      			<c:if test="${! empty sch.scStarttime1 }">
+      				<option>${sch.scStarttime1 }~${sch.scEndtime1 }</option>
+      			</c:if>
+      			<c:if test="${! empty sch.scStarttime2 }">
+      				<option>${sch.scStarttime2 }~${sch.scEndtime2 }</option>
+      			</c:if>
+      			<c:if test="${! empty sch.scStarttime3 }">
+      				<option>${sch.scStarttime3 }~${sch.scEndtime3 }</option>
+      			</c:if>
+      		</select>
+      	</div>
       </div>
       <div class="modal-footer">
+      	
       	<button type="button" class="btn btn-default">예약하기</button>
         <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
         

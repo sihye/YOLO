@@ -67,12 +67,16 @@ public class AdminController {
 	public String upfile_get(HttpSession session ,Model model){
 		
 		String userid = (String)session.getAttribute("userid");
-		if((userid !=null && !userid.isEmpty()) || userid==null || userid.isEmpty()){
+		if((userid !=null && !userid.isEmpty())){
 			if(!userid.equals("admin")){
 				model.addAttribute("msg","잘못된 url입니다.");
 				model.addAttribute("url","/index2.do");
 				return "common/message";
 			}
+		}else if(userid==null || userid.isEmpty()){
+			model.addAttribute("msg","잘못된 url입니다.");
+			model.addAttribute("url","/index2.do");
+			return "common/message";
 		}
 		
 		logger.info("operator_get");
@@ -228,7 +232,7 @@ public class AdminController {
 
 	@RequestMapping("/operatorMember.do")
 	public String operatorMember_get(@ModelAttribute SearchVO searchVo, Model model){
-		logger.info("qnaboard 화면 보여주기 ,파라미터 searchVO={}",searchVo);
+		logger.info("member 화면 보여주기 ,파라미터 searchVO={}",searchVo);
 		//[1] PaginationInfo 객체 생성 
 		//=> firstRecordIndex 를 계산하기 위함
 		PaginationInfo pagingInfo = new PaginationInfo();
