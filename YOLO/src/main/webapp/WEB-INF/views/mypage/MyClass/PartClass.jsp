@@ -46,6 +46,7 @@ function pageFunc(curPage){
 			<tbody>
 				<c:forEach var="map" items="${alist }">
 					<tr>
+					<c:if test="${map['PM_CANCELCHECK']=='N'}">
 						<td><a
 							href='<c:url value="/class/claDetail.do?cNo=${map['C_NO'] }"/>'>${map["C_NAME"] }</a></td>
 						<td>${map["M_USERID"] }</td>
@@ -57,16 +58,17 @@ function pageFunc(curPage){
 						<c:if test="${map['PM_COMPLETECHECK'] =='Y'}">
 							<td>참여중</td>
 						</c:if>
-										
+					</c:if>
 					</tr>
 				</c:forEach>
-
+				<c:if test="${empty alist}">
+				<tr><td colspan="5">참여중인 클래스가 없습니다.</td></tr>
+				</c:if>
 			</tbody>
 			<tfoot>
 			</tfoot>
 		</table>
 	</form>
-	<hr />
 </div>
 <div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->
