@@ -107,13 +107,6 @@
 		where c_no=#{cNo}
 	</update>
 	
-	<insert id="schInsert" parameterType="ScheduleVO">
-		<selectKey keyProperty="scNo" order="BEFORE" resultType="int">
-			select CLASSSCHEDULE_seq.nextval from dual
-		</selectKey>
-		insert into classschedule
-		values(#{scNo},#{cNo},1,#{scStartdate},#{scEnddate},#{scWeek},#{scStarttime},#{scEndtime})
-	</insert>
 	
 	<select id="selectClassBycNo" parameterType="SearchVO" resultType="hashmap">
 		select *
@@ -135,6 +128,32 @@
 	<select id="selectClassCount" parameterType="SearchVO" resultType="int">
 		select count(*) from mainClassView
 		<include refid="searchBanner"></include>
+	</select>
+	
+	<insert id="schInsert" parameterType="ScheduleVO">
+		<selectKey keyProperty="scNo" order="BEFORE" resultType="int">
+			select CLASSSCHEDULE_seq.nextval from dual
+		</selectKey>
+		
+		insert into classschedule (sc_no,c_no,sc_code,sc_startdate,sc_enddate,sc_week,sc_starttime1,sc_endtime1
+		<if test="scStarttime2!=null and scStarttime2!=''">
+		,sc_starttime2,sc_endtime2
+		</if>
+		<if test="scStarttime3!=null and scStarttime3!=''">
+		,sc_starttime3,sc_endtime3
+		</if>)
+		values(#{scNo},#{cNo},1,#{scStartdate},#{scEnddate},#{scWeek},#{scStarttime1},#{scEndtime1}	
+		<if test="scStarttime2!=null and scStarttime2!=''">
+		,#{scStarttime2},#{scEndtime2}
+		</if>
+		<if test="scStarttime3!=null and scStarttime3!=''">
+		,#{scStarttime3},#{scEndtime3}
+		</if>)
+	</insert>
+	
+	<select id="selSch" parameterType="int" resultType="ScheduleVO">
+		select * from CLASSSCHEDULE
+			where c_no=#{cNo}
 	</select>
  	
 </mapper>

@@ -189,13 +189,11 @@ ALTER TABLE Class
 -- 클래스예약
 CREATE TABLE booking (
 	BK_NO       NUMBER        NOT NULL, -- 예약번호
-	P_NO        NUMBER        NOT NULL, -- 결제번호
 	BK_USERID   VARCHAR2(500) NOT NULL, -- 아이디
 	SC_NO       NUMBER        NOT NULL, -- 스케줄번호
-	BK_DATE     DATE          DEFAULT sysdate NULL     , -- 예약일
-	BK_ENDCHECK VARCHAR2(500) DEFAULT 'N'  NULL     -- 종료유무
+	BK_DATE     DATE          DEFAULT sysdate, -- 예약일
+	BK_ENDCHECK VARCHAR2(500) DEFAULT 'N' -- 종료유무
 );
-
 
 -- 클래스예약 기본키
 CREATE UNIQUE INDEX PK_booking
@@ -210,6 +208,30 @@ ALTER TABLE booking
 		PRIMARY KEY (
 			BK_NO -- 예약번호
 		);
+
+-- 클래스예약
+ALTER TABLE booking
+	ADD
+		CONSTRAINT FK_classschedule_TO_booking -- 스케줄 -> 클래스예약
+		FOREIGN KEY (
+			SC_NO -- 스케줄번호
+		)
+		REFERENCES classschedule ( -- 스케줄
+			SC_NO -- 스케줄번호
+		);
+
+-- 클래스예약
+ALTER TABLE booking
+	ADD
+		CONSTRAINT FK_Member_TO_booking -- 회원 -> 클래스예약
+		FOREIGN KEY (
+			BK_USERID -- 아이디
+		)
+		REFERENCES Member ( -- 회원
+			M_USERID -- 아이디
+		);
+		
+
 
 -- 스케줄
 CREATE TABLE classschedule (
@@ -536,14 +558,16 @@ ALTER TABLE shoppingbasket
 		);
 
 -- 결제
+-- 결제
 CREATE TABLE payment (
 	PM_NO            NUMBER        NOT NULL, -- 결제번호
 	C_NO             NUMBER        NOT NULL, -- 클래스번호
 	M_USERID         VARCHAR2(500) NOT NULL, -- 아이디
+	BK_NO            NUMBER        NULL,     -- 예약번호
 	PM_PAYMENTWAY    VARCHAR2(500) NULL,     -- 결제방법
 	PM_PAYMENTDATE   DATE          NULL,     -- 결제일
-	PM_COMPLETECHECK VARCHAR2(500) DEFAULT 'N' NULL     , -- 결제완료여부
-	PM_CANCELCHECK   VARCHAR2(500) DEFAULT 'N' NULL     -- 결제취소여부
+	PM_COMPLETECHECK VARCHAR2(500)      DEFAULT 'N' , -- 결제완료여부
+	PM_CANCELCHECK   VARCHAR2(500)      DEFAULT'N' -- 결제취소여부
 );
 
 -- 결제 기본키
@@ -559,6 +583,41 @@ ALTER TABLE payment
 		PRIMARY KEY (
 			PM_NO -- 결제번호
 		);
+
+-- 결제
+ALTER TABLE payment
+	ADD
+		CONSTRAINT FK_Member_TO_payment -- 회원 -> 결제
+		FOREIGN KEY (
+			M_USERID -- 아이디
+		)
+		REFERENCES Member ( -- 회원
+			M_USERID -- 아이디
+		);
+
+-- 결제
+ALTER TABLE payment
+	ADD
+		CONSTRAINT FK_Class_TO_payment -- 클래스 -> 결제
+		FOREIGN KEY (
+			C_NO -- 클래스번호
+		)
+		REFERENCES Class ( -- 클래스
+			C_NO -- 클래스번호
+		);
+
+-- 결제
+ALTER TABLE payment
+	ADD
+		CONSTRAINT FK_booking_TO_payment -- 클래스예약 -> 결제
+		FOREIGN KEY (
+			BK_NO -- 예약번호
+		)
+		REFERENCES booking ( -- 클래스예약
+			BK_NO -- 예약번호
+		);
+		
+
 
 -- 결제취소
 CREATE TABLE paymentcancel (
@@ -745,38 +804,7 @@ ALTER TABLE Class
 			K_NO -- 카테고리번호
 		);
 
--- 클래스예약
-ALTER TABLE booking
-	ADD
-		CONSTRAINT FK_classschedule_TO_booking -- 스케줄 -> 클래스예약
-		FOREIGN KEY (
-			SC_NO -- 스케줄번호
-		)
-		REFERENCES classschedule ( -- 스케줄
-			SC_NO -- 스케줄번호
-		);
 
--- 클래스예약
-ALTER TABLE booking
-	ADD
-		CONSTRAINT FK_Member_TO_booking -- 회원 -> 클래스예약
-		FOREIGN KEY (
-			BK_USERID -- 아이디
-		)
-		REFERENCES Member ( -- 회원
-			M_USERID -- 아이디
-		);
-
--- 클래스예약
-ALTER TABLE booking
-	ADD
-		CONSTRAINT FK_payment_TO_booking -- 결제 -> 클래스예약
-		FOREIGN KEY (
-			P_NO -- 결제번호
-		)
-		REFERENCES payment ( -- 결제
-			PM_NO -- 결제번호
-		);
 
 -- 스케줄
 ALTER TABLE classschedule
@@ -930,28 +958,6 @@ ALTER TABLE shoppingbasket
 		)
 		REFERENCES classschedule ( -- 스케줄
 			SC_NO -- 스케줄번호
-		);
-
--- 결제
-ALTER TABLE payment
-	ADD
-		CONSTRAINT FK_Member_TO_payment -- 회원 -> 결제
-		FOREIGN KEY (
-			M_USERID -- 아이디
-		)
-		REFERENCES Member ( -- 회원
-			M_USERID -- 아이디
-		);
-
--- 결제
-ALTER TABLE payment
-	ADD
-		CONSTRAINT FK_Class_TO_payment -- 클래스 -> 결제
-		FOREIGN KEY (
-			C_NO -- 클래스번호
-		)
-		REFERENCES Class ( -- 클래스
-			C_NO -- 클래스번호
 		);
 
 -- 결제취소

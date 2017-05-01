@@ -16,4 +16,5 @@ public interface ClassService {
 	public int hitUpdate(int cNo);
 	public List<Map<String, Object>> selectClassBykNo(SearchVO vo);
 	public int selectClassCount(SearchVO vo);
+	public ScheduleVO selSch(int cNo);
 }

@@ -65,6 +65,10 @@ public class ClassDAOMybatis extends SqlSessionDaoSupport implements ClassDAO{
 	public int selectClassCount(SearchVO vo) {
 		return getSqlSession().selectOne(nameSpace+".selectClassCount",vo);
 	}
+	@Override
+	public ScheduleVO selSch(int cNo) {
+		return getSqlSession().selectOne(nameSpace+".selSch", cNo);
+	}
 	
 	
 	
