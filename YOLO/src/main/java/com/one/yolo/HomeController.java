@@ -77,6 +77,11 @@ public class HomeController {
 		
 	}
 	
-
+	@RequestMapping("about.do")
+	public String about(){
+		logger.info("소개 페이지");
+		
+		return "about";
+	}
 	
 }
