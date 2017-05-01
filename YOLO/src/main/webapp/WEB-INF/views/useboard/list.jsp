@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../noticeboard/boardtop.jsp" %>	
+<%@ include file="boardtop.jsp" %>
 
 <script type="text/javascript">
 	function pageFunc(curPage) {
@@ -41,7 +41,7 @@
 </head>	
 <br>
 <br>
-<div class="divList">
+<div div class="col-md-10">
 <h2 align="center">이용안내</h2>
 	<br>
 	<br>
@@ -269,7 +269,7 @@
 			
 		
 
-<div class="divSearch">
+<div class="col-md-10" align="center">
    	<form name="frmSearch" method="post" 
    		action="<c:url value='/useboard/list.do' />" >
         <select name="searchCondition">

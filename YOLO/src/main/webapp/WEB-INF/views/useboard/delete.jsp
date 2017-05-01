@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp" %>
+<%@ include file="boardtop.jsp" %>
 
 
 
 
-<style type="text/css">
+<!-- <style type="text/css">
 	.divForm{
 		margin:20px 0;
 		margin-left: 200px;
@@ -29,7 +29,7 @@
 	.divForm fieldset	{
 		border:0;
 	}
-</style>
+</style> -->
 
 <script type="text/javascript" 
 	src='<c:url value="/jquery/jquery-3.1.1.min.js" />'></script>
@@ -47,11 +47,11 @@
 </script>
 </head>
 <body>
-<div class="divForm">
+<div div class="col-md-10">
 	<h2>이용안내 삭제화면</h2>
 	<br>
 	<br>
-<form id="frmDel" name="frmDelete" method="post"	
+<form id="frmDel" name="frmDelete" method="post" div class="col-md-10"	
 	action='<c:url value="/useboard/delete.do" />'>
 	<input type="hidden" name="no" value="${param.no }">
 		<fieldset>
@@ -67,6 +67,6 @@
     </form>
 </div>
 
-<%@ include file="../inc/bottom.jsp" %>	
+<%@ include file="../noticeboard/boardbottom.jsp" %>	
 </body>
 </html>
