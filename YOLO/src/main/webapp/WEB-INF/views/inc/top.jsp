@@ -161,7 +161,7 @@
 		<!-- 로그인 후 -->
 		<c:if test="${!empty sessionScope.userid }">
 			
-			<a href="${pageContext.request.contextPath}/member/agreement.do"
+			<a href="${pageContext.request.contextPath}/member/memberOut.do"
 				class="btn btn-primary btn-lg login_btn" >회원탈퇴</a>
 			<a class="dropdown">
 			<a data-toggle="dropdown" href="#"  class="btn btn-primary btn-lg login_btn"> ${sessionScope.userName} 님</a>

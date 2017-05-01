@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp" %>  
+<%@ include file="../test/top.jsp" %>	 
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -27,15 +27,6 @@
 	});
 </script>
 
-<style type="text/css">
-	.divForm{
-		margin:20px 0;
-		margin-left: 400px;
-		margin-right: 400px;
-		font-size: 1.5em;
-	}
-</style>
-
 </head>
 <br>
 <br>
@@ -49,21 +40,22 @@
 		<%-- <input type="hidden" name="bgNo" value="${bgNo}" /> --%>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="title">제목</label>
-            <div class="col-sm-6">  
+            <span class="col-sm-8">  
             <input type="text" id="ubTitle" name="ubTitle" class="form-control" placeholder="제목"/>
-            </div>
-        </div><br>
+        	</span>
+        </div>
+      	<br>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="name">작성자</label>
-            <div class="col-sm-6">  
+            <span class="col-sm-8">  
             <input type="text" id="mUserid" name="mUserid" class="form-control" readonly 
             placeholder="작성자" <%-- value="${vo.mUserid}" --%>>
-            </div>
+            </span>
         </div><br>
         <div class="form-group">  
         	<label class="col-sm-2 control-label" for="content">내용</label> 
         	<!-- ckeditor 반영  -->
-        	<div class="col-sm-6">   
+        	<div class="col-sm-8">   
         	<textarea class="ckeditor" id="nbContent" name="ubContent" placeholder="내용" >${vo.ubContent}</textarea>
  			</div>
         </div><br>
@@ -77,7 +69,7 @@
 </form>
 </div>   
 
-<%@ include file="../inc/bottom.jsp" %>	              
+<%@ include file="../test/bottom.jsp" %>             
 </body>
 </html>
 

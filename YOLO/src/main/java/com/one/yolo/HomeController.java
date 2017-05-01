@@ -85,7 +85,7 @@ public class HomeController {
 		searchVo.setRecordCountPerPage(6);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		List<ClassVO> classList= claService.selectClassBykNo(searchVo);
+		List<Map<String, Object>> classList= claService.selectClassBykNo(searchVo);
 		logger.info("클래스  classList.size()={}",classList.size());
 		int totalRecord = claService.selectClassCount(searchVo);
 		logger.info("클래스 목록 조회-전체레코드 개수조회 결과, totalRecord={}",			

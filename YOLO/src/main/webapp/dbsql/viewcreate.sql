@@ -107,8 +107,12 @@ as
 select n.*,c.m_userid,(select k.k_name from  category k where k.K_NO =c.c_no ) as K_NAME ,c_name,c.c_del  from notify n , class c where n.C_NO = c.C_NO;
 
 
-
---메인 베너 뷰
+--메인배너 뷰
 create view mainbannerList
 as
-select o.op_no,(select cg.k_name from category cg where o.K_NO = cg.K_NO)as k_name,f.F_FILENAME from operator o , upfile f where o.F_NO = f.F_NO;
+select o.op_no,o.op_showflag,(select cg.k_no from category cg where o.K_NO = cg.K_NO)as k_no,f.F_FILENAME from operator o , upfile f where o.F_NO = f.F_NO and op_showflag='Y';
+
+--메인클레스 뷰
+create view mainClassView
+as
+select c.*,(select count(*) from SHOPPINGBASKET f where c.c_no = f.c_no) as FCOUNT from class c where c_del='N' ;

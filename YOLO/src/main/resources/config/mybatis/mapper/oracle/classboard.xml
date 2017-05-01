@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.mybatis.mapper.oracle.classboard">
+<sql id="searchWhere">
+		<choose>
+			<when test="searchKeyword !=null and searchKeyword !=''" >
+				and ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+			</when>
+			<when test="searchStartDate !=null and searchStartDate !=''
+			 and searchEndDate !=null and searchEndDate !=''" >
+				and CB_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
+				and to_date(#{searchEndDate},'YYYY-MM-DD')+1 
+			</when>
+			<when test="searchKeyword !=null and searchKeyword !=''
+			 and searchStartDate !=null and searchStartDate !=''
+		 	and searchEndDate !=null and searchEndDate !=''" >
+				and ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+			and
+			 CB_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
+			and to_date(#{searchEndDate},'YYYY-MM-DD')+1 
+			</when>
+			<otherwise>
+			
+			</otherwise>
+
+		</choose>
+
+	</sql>
+
+
+
+
+	<select id="selectClassBoard" parameterType="ClassBoardVO" resultType="ClassBoardVO">
+		select *
+			from
+			(
+			    select rownum as RNUM ,LIST.*
+			    from
+			    (
+			        select * from classboard
+			        where c_no=#{cNo} 
+			        <include refid="searchWhere"></include>
+			        order by cb_no desc 
+			    )LIST
+			)
+			<![CDATA[
+			where RNUM>#{firstRecordIndex} 
+			and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+			]]>
+	</select>
+	
+	<select id="selectClassBoardCount" parameterType="ClassBoardVO" resultType="int">
+		select count(*) from classboard 
+		where c_no=#{cNo} 
+	   <include refid="searchWhere"></include>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+

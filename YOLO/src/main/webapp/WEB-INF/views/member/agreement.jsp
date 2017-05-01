@@ -50,7 +50,7 @@
 		
 		<div class="container"> 
 		<h3>탈퇴 사유</h3> 
-		<select class="form-control" style="width: 60%" id="email2"> 
+		<select class="form-control" style="width: 60%" id="email2" name="mReason"> 
 		<option value="1">잣같아서</option> 
 		<option value="2">그냥</option> 
 		<option value="3">쏘쏘</option> 
@@ -58,7 +58,7 @@
 		<option value="5">트와이스</option> 
 		<option value="etc">직접입력</option>
 		</select><br>
-		<input type="text" name="reason2" id="email3" title="직접입력인 경우 이메일주소 뒷자리"
+		<input type="text" id="email3" title="직접입력인 경우 이메일주소 뒷자리"
         	style="visibility:hidden; width: 60%">
 		</div>
 		<br>

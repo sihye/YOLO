@@ -44,7 +44,7 @@
 <br>
 <br>
 <form id="frmWrite" name="frmWrite" method="post" 
-	action='<c:url value="/noticeboard/write.do"/>'>
+	action='<c:url value="/noticeboard/write.do"/>'  enctype="multipart/form-data">
  <fieldset>
 		<%-- <input type="hidden" name="bgNo" value="${bgNo}" /> --%>
         <div class="form-group">
@@ -56,8 +56,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="name">작성자</label>
             <div class="col-sm-6">  
-            <input type="text" id="mUserid" name="mUserid" class="form-control" readonly 
-            placeholder="작성자" <%-- value="${vo.mUserid}" --%>>
+            <input type="text" id="mUserid" name="mUserid" class="form-control" placeholder="작성자"/>
             </div>
         </div><br>
         <div class="form-group">  
@@ -73,6 +72,17 @@
             onclick
            ="location.href='<c:url value="/noticeboard/list.do"/>'" />        
         </div>
+         <div align="center">
+        <p>
+		<!-- <label for="uploadFile">첨부파일</label>        
+		<input type="file" name="uploadFile" id="uploadFile" size="36">(최대 2M) </p>   
+		<p>
+		<label for="uploadFile">첨부파일</label>        
+		<input type="file" name="uploadFile" id="uploadFile" size="36">(최대 2M) </p>
+		<p>
+		<label for="uploadFile">첨부파일</label>        
+		<input type="file" name="uploadFile" id="uploadFile" size="36">(최대 2M) </p>
+		</div> -->
     </fieldset>
 </form>
 </div>   
