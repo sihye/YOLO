@@ -1,33 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp" %>		
+<%@ include file="boardtop.jsp" %>			
 
 <script type="text/javascript">
 	function pageFunc(curPage) {
 		document.frmPage.currentPage.value=curPage;
 		frmPage.submit();
 	}
-</script>
+</script>	
+<style>
+.divList,.divList table {
+     width: 100%;
+}
 
-<style type="text/css">
-	.divList{
-		margin:20px 0;
-		margin-left: 200px;
-		margin-right: 200px;
-		font-size: 1.5em;
-	}
-	
-	.align_center{
-		text-align: center;
-	}
-	
-	.divSearch{
-		text-align:center;		
-		padding:10px 0 5px 0;
-		font-size: 1em;
-	}	
 </style>
-
 <!-- 페이징 처리를 위한 form 시작-->
 <form name="frmPage" method="post" 
 	action='<c:url value="/noticeboard/list.do"/>'>
@@ -44,12 +30,12 @@
 <!-- 페이징 처리 form 끝 -->	
 
 <!-- <body> -->
-<!-- <h2>공지사항</h2> -->
+<!-- <h2>공지사항</h2> -->	
 </head>	
 <br>
 <br>
 <div class="divList">
-<h2>공지사항</h2>
+<h2 align="center">공지사항</h2>
 	<br>
 	<br>
 	<table class="table table-hover"
@@ -127,26 +113,26 @@
 
 
 
-<div class="divSearch">
+<div align="center">
    	<form name="frmSearch" method="post" 
    		action="<c:url value='/noticeboard/list.do' />" >
-        <%-- <select name="searchCondition"><!-- ${vo.nbTitle} -->
-            <option value="nb_title" 
+        <select name="searchCondition" class="btn btn-default"><!-- ${vo.nbTitle} -->
+            <option value="nb_title"
             	<c:if test="${'nb_title'==param.searchCondition }">
             		selected            	
             	</c:if>
             	>제목</option><!-- ${vo.nbContent} -->
-            <option value="nb_content" 
+            <option value="nb_content"
             	<c:if test="${'nb_content'==param.searchCondition }">
             		selected            	
             	</c:if>
             >내용</option><!-- ${vo.mUserid} -->
-            <option value="m_userid" 
+         <%--    <option value="m_userid" 
             	<c:if test="${'m_userid'==param.searchCondition }">
             		selected            	
             	</c:if>
-            >작성자</option>
-        </select>  --%>
+            >작성자</option>--%>
+        </select>  
         
         <%-- searchCondition option 제거함 --%>
         <input class="btn btn-default" type="text" name="searchKeyword" title="검색어 입력" placeholder="Notice Search..."
@@ -162,7 +148,7 @@
 <div style="text-align:right;">
     <a href="<c:url value='/noticeboard/write.do'/>" >공지사항추가</a>
 </div>
-<%@ include file="../inc/bottom.jsp" %>
+<%@ include file="boardbottom.jsp" %>
 </body>
 </html>
 

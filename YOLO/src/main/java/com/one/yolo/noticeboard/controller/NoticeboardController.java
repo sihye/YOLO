@@ -84,16 +84,27 @@ public class NoticeboardController {
 		logger.info("공지사항 글쓰기 처리, 파라미터 NoticeboardVO={}", vo);
 		
 		//파일 업로드
-		List<Map<String, Object>> fileList 
-		=fileUploadWebUtil.fileUpload(request, FileUploadWebUtil.IMAGE_UPLOAD);
+		List<Map<String, Object>> fileList = fileUploadWebUtil.fileUpload(request, FileUploadWebUtil.IMAGE_UPLOAD);
 		
 		String fileName="", originalFileName="";
 		long fileSize=0;
 		if(!fileList.isEmpty()){
+			int i=0;
 			for(Map<String, Object> map : fileList){
-				fileName = (String) map.get("fileName");
-				fileSize = (Long) map.get("fileSize");
-				originalFileName = (String) map.get("originalFileName");
+				
+				UpfileVO upFileVo = new UpfileVO((String) map.get("fileName"), (String) map.get("originalFileName"), (Long) map.get("fileSize"));
+				upFileservice.insertUpfile(upFileVo);
+				logger.info("공지사항 글쓰기 처리, 파라미터 UpfileVO={}", upFileVo);
+				if(i==0){
+					vo.setfNo1(upFileVo.getfNo());
+				}
+				else if(i==1){
+					vo.setfNo2(upFileVo.getfNo());
+				}
+				else if(i==2) {
+					vo.setfNo3(upFileVo.getfNo());
+				}
+				i++;
 			}//for
 		}//if
 		

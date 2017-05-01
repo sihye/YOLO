@@ -7,6 +7,15 @@ public class UpfileVO {
 	private String fOriginalfilename;
 	private long fFilesize;
 	
+	public UpfileVO(){
+		//Default
+	}
+	
+	public UpfileVO(String filename, String originalfilename, long filesize) {
+		this.fFilename = filename;
+		this.fOriginalfilename = originalfilename;
+		this.fFilesize = filesize;
+	}
 	
 	public int getfNo() {
 		return fNo;

@@ -3,18 +3,18 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.noticeboard">
-	<!-- <sql id="searchWhere">
-		<if test="searchKeyword !=null and searchKeyword !=''">
-			where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
-		</if>
-	</sql> -->
 	<sql id="searchWhere">
+		<if test="searchKeyword !=null and searchKeyword !=''">
+			where lower(${searchCondition}) like '%'|| lower(#{searchKeyword}) ||'%'
+		</if>
+	</sql>
+	<!-- <sql id="searchWhere">
 		<if test="searchKeyword !=null and searchKeyword !=''">
 			where lower(M_USERID) like '%'|| lower(#{searchKeyword}) ||'%' and nb_delflag='N'
 			or lower(nb_content) like '%'|| lower(#{searchKeyword}) ||'%' and nb_delflag='N'
 			or lower(NB_TITLE) like '%'|| lower(#{searchKeyword}) ||'%' and nb_delflag='N'
 		</if>
-	</sql>
+	</sql> -->
 	
 	<!-- <select id="selectNotice" resultType="NoticeboardVO">
 		select * from noticeboard
@@ -48,8 +48,8 @@
 			select NOTICEBOARD_seq.nextval from dual
 		</selectKey>
 		 insert into noticeboard
-      	(NB_NO,M_USERID,BG_NO,NB_TITLE,NB_CONTENT)
-      	values(#{nbNo},#{mUserid},3,#{nbTitle},#{nbContent})
+      	(NB_NO,M_USERID,BG_NO,NB_TITLE,NB_CONTENT,F_NO1,F_NO2,F_NO3)
+      	values(#{nbNo},#{mUserid},3,#{nbTitle},#{nbContent},,#{fNo1},#{fNo2},#{fNo3})
 	</insert>
 	
 	<select id="selectNo" parameterType="int" resultType="NoticeboardVO">
