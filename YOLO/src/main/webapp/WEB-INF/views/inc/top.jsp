@@ -20,7 +20,7 @@
 	<!-- Bootstrap -->
 	<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 		rel="stylesheet">
-		
+			
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/flexslider.css"
 		type="text/css">
@@ -49,6 +49,7 @@
 		});
 	}); 
 </script>
+
 <style type="text/css">
 #SEARCHDIV{
 	border: 1PX solid white;
