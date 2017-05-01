@@ -49,7 +49,6 @@
 		});
 	}); 
 </script>
-
 <style type="text/css">
 #SEARCHDIV{
 	border: 1PX solid white;
