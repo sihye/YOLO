@@ -39,19 +39,7 @@ public class MemberController {
 	@Autowired
 	private CategoryGroupService categoryGroupService;
 	
-	@RequestMapping("/agreement.do")
-	public String agreement(){
-		//1
-		logger.info("회원약관 화면 보여주기");
 
-		//2
-
-		//3
-		return "member/agreement";
-	}
-
-	
-	
 	@RequestMapping(value="/register.do", method=RequestMethod.GET)
 	public String register(Model model){
 		logger.info("회원가입 화면 보여주기");
@@ -302,14 +290,7 @@ public class MemberController {
 		return "member/checkUserid";
 	}
 	
-	@RequestMapping(value="/agreement.do",method=RequestMethod.POST)
-	public String out_post1(@RequestParam String mReason,HttpSession session,HttpServletResponse response,Model model){
-		String userid=(String) session.getAttribute("userid");
-		
-		logger.info("파라미터 userid={},mReason={}",userid,mReason);
-		
-		return "member/agreement";
-	}
+
 	
 	@RequestMapping(value="/memberOut.do",method=RequestMethod.GET)
 	public String out_get(){
@@ -319,18 +300,20 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/memberOut.do", method=RequestMethod.POST)
-	public String out_post(@RequestParam String pwd,
+	public String out_post(@ModelAttribute MemberVO vo,String pwd,
 			HttpSession session, HttpServletResponse response, 
 			Model model){
 		String userid=(String) session.getAttribute("userid");
 		logger.info("회원탈퇴 처리, 파라미터 userid={},pwd={}", userid,pwd);
-
+		logger.info("reason={}",vo.getmReason());
+		vo.setmReason("qwer");
 		int result 
-		= memberService.loginCheck(userid, pwd);
+		= memberService.loginCheck(userid,pwd);
 		String msg="", url="/member/memberOut.do";
 
 		if(result==MemberService.LOGIN_OK){
-			int cnt = memberService.memberOut(userid);
+			vo.setmUserid(userid);
+			int cnt = memberService.memberOut(vo);
 			logger.info("회원탈퇴 결과, cnt={}", cnt);
 			if(cnt>0){
 				session.invalidate();
