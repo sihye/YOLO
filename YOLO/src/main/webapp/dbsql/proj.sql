@@ -332,8 +332,9 @@ CREATE TABLE classboard (
 	CB_REGDATE   DATE          NULL,     -- 등록일
 	CB_READCOUNT NUMBER        NULL,     -- 조회수
 	CB_CONTENT   CLOB          NULL,     -- 내용
-	CB_GRADE     NUMBER        NULL,     -- 평점
-	CB_FILENAME  VARCHAR2(500) NULL      -- 파일명
+	F_NO1  NUMBER NULL      -- 파일번호
+	F_NO2  NUMBER NULL      -- 파일번호
+	F_NO3  NUMBER NULL      -- 파일번호
 );
 
 -- 클래스후기게시판 기본키
@@ -349,6 +350,16 @@ ALTER TABLE classboard
 		PRIMARY KEY (
 			CB_NO -- 후기번호
 		);
+
+alter table classboard
+add constraint classboard_FNO1_fk foreign key (f_no1) references upfile(f_no);
+
+alter table classboard
+add constraint classboard_FNO2_fk foreign key (f_no2) references upfile(f_no);
+
+alter table classboard
+add constraint classboard_FNO3_fk foreign key (f_no3) references upfile(f_no);
+
 
 -- 쪽지
 select * from message;

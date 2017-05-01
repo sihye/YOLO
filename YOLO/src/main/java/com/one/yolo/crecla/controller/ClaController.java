@@ -21,7 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.one.yolo.category.model.CategoryGroupVO;
 import com.one.yolo.category.model.CategoryService;
 import com.one.yolo.category.model.CategoryVO;
+import com.one.yolo.classboard.model.ClassBoardService;
+import com.one.yolo.classboard.model.ClassBoardVO;
 import com.one.yolo.common.FileUploadWebUtil;
+import com.one.yolo.common.PaginationInfo;
+import com.one.yolo.common.SearchVO;
+import com.one.yolo.common.Utility;
 import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.crecla.model.ClassVO;
 import com.one.yolo.crecla.model.ScheduleVO;
@@ -41,7 +46,8 @@ public class ClaController {
 	private UpfileService uService;
 	@Autowired
 	private FileUploadWebUtil fileUploadWebUtil;
-
+	@Autowired
+	private ClassBoardService claBoardService;
 
 	
 	//클래스 생성 페이지 보여주기
@@ -118,9 +124,14 @@ public class ClaController {
 
 
 	@RequestMapping("/claDetail.do")
-	public String claDetail(@RequestParam int cNo,HttpSession session, Model model, HttpServletResponse response){
+	public String claDetail(@RequestParam int cNo,@RequestParam(value="boardtype",required=false, defaultValue="") String boardtype,@ModelAttribute ClassBoardVO claboardvo  ,HttpSession session, Model model, HttpServletResponse response){
 		String userid=(String)session.getAttribute("userid");
 		logger.info("클래스 디테일 파람no={}, session userid={}",cNo,userid);
+		if(boardtype.isEmpty() || boardtype.equals("")){
+			boardtype="main";
+		}
+		logger.info("type ={}",boardtype);
+		claboardvo.setcNo(cNo);
 		int cnt=claService.hitUpdate(cNo);
 		logger.info("hit update cnt={}",cnt);
 		String claNo = Integer.toString(cNo);
@@ -128,6 +139,22 @@ public class ClaController {
 		cookie.setPath("/");
 		cookie.setMaxAge(60*60*24);
 		response.addCookie(cookie);
+		//페이징 처리
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		pagingInfo.setCurrentPage(claboardvo.getCurrentPage());
+	
+		claboardvo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		claboardvo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		List<ClassBoardVO> claBoardList = claBoardService.selectClassBoard(claboardvo);
+		logger.info("클래스  classList.size()={}",claBoardList.size());
+		int totalRecord = claBoardService.selectClassBoardCount(claboardvo);
+		logger.info("클래스 목록 조회-전체레코드 개수조회 결과, totalRecord={}",			
+				totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
+		
 		
 		ClassVO vo=claService.selClass(cNo);	
 		String kName=cService.selCateNameByNo(vo.getkNo());
@@ -139,6 +166,9 @@ public class ClaController {
 		
 		model.addAttribute("claVo", vo);
 		model.addAttribute("kName", kName);
+		model.addAttribute("claBoardList",claBoardList);
+		model.addAttribute("pagingInfo",pagingInfo);
+		model.addAttribute("boardType",boardtype);
 		return "class/classDetail";
 	}
 	

@@ -58,7 +58,7 @@ public class ClassDAOMybatis extends SqlSessionDaoSupport implements ClassDAO{
 		return getSqlSession().insert(nameSpace+".schInsert", vo);
 	}
 	@Override
-	public List<ClassVO> selectClassBykNo(SearchVO vo) {
+	public List<Map<String, Object>> selectClassBykNo(SearchVO vo) {
 		return getSqlSession().selectList(nameSpace+".selectClassBycNo",vo);
 	}
 	@Override

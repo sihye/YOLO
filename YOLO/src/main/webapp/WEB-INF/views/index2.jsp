@@ -108,22 +108,25 @@
 	<section class="listings">
 		<div class="wrapper">
 			<ul class="properties_list">
-			<c:forEach var="list" items="${classList }">
+			<c:forEach var="map" items="${classList }">
 				<li>
-					<a href="<c:url value='/class/claDetail.do?cNo=${list.cNo }' />">
-						<img src="<c:url value='/upload/${list.cMainimg }' />" alt="" title="" class="property_img"/>
+					<a href="<c:url value='/class/claDetail.do?cNo=${map["C_NO"] }' />">
+						<img src="<c:url value='/upload/${map["C_MAINIMG"] }' />" alt="" title="" width="100%" height="250px"/>
 					</a>
-					<span class="price"><fmt:formatNumber value="${list.cPrice }" />원</span>
+					<span class="price"><fmt:formatNumber value="${map['C_PRICE'] }" />원</span>
 					<div class="property_details">
 						<h1>
-							${list.cName }
+							${map["C_NAME"] }
 						</h1>
-						<c:if test="${fn:length(list.cDetailinfo)>288}">
-						<h2><c:out value="${fn:substring(list.cDetailinfo,0,1)}"/>....<span class="property_size"></span></h2>
-						</c:if>
-						<c:if test="${fn:length(list.cDetailinfo) <288 }">
-						<h2>${list.cDetailinfo }<span class="property_size"></span></h2>
-						</c:if>
+						<c:set var="arr" value="${fn:split(map['C_PLACE'],'(') }" />
+						<h2><c:out value="${arr[0]}"/><br>(<c:out value="${arr[1]}"/></h2>
+						<h2 style="text-align: right;">
+											<i class="fa fa-eye " aria-hidden="true"></i>${map["C_HITS"]}
+											<i class="fa fa-heart-o" aria-hidden="true"></i>
+											<span class="property_size">${map["FCOUNT"] }</span>
+						</h2>
+
+						
 					</div>
 				</li>
 			</c:forEach>

@@ -115,14 +115,14 @@
 		values(#{scNo},#{cNo},1,#{scStartdate},#{scEnddate},#{scWeek},#{scStarttime},#{scEndtime})
 	</insert>
 	
-	<select id="selectClassBycNo" parameterType="SearchVO" resultType="ClassVO">
+	<select id="selectClassBycNo" parameterType="SearchVO" resultType="hashmap">
 		select *
 		from
 		(
 		    select rownum as RNUM ,LIST.*
 		    from
 		    (
-		        select * from class 
+		        select * from mainClassView 
 		       <include refid="searchBanner"></include>
 		        order by c_no desc
 		    )LIST
@@ -133,7 +133,7 @@
 		]]>
 	</select>
 	<select id="selectClassCount" parameterType="SearchVO" resultType="int">
-		select count(*) from class
+		select count(*) from mainClassView
 		<include refid="searchBanner"></include>
 	</select>
  	

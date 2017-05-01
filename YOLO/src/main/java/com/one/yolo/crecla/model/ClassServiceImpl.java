@@ -64,7 +64,7 @@ public class ClassServiceImpl implements ClassService {
 		return dao.hitUpdate(cNo);
 	}
 	@Override
-	public List<ClassVO> selectClassBykNo(SearchVO vo) {
+	public List<Map<String, Object>> selectClassBykNo(SearchVO vo) {
 		
 		return dao.selectClassBykNo(vo);
 	}
