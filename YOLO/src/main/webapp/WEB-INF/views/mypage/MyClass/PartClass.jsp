@@ -27,7 +27,6 @@ function pageFunc(curPage){
 	</ul>
 	<br>
 	<h2>클래스 신청 내역</h2>
-
 	<br>
 	<form method="post"
 		action='<c:url value="/mypage/Favorite/FavoriteClass.do" />'>
