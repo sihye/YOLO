@@ -572,7 +572,7 @@ CREATE TABLE payment (
 	PM_NO            NUMBER        NOT NULL, -- 결제번호
 	C_NO             NUMBER        NOT NULL, -- 클래스번호
 	M_USERID         VARCHAR2(500) NOT NULL, -- 아이디
-	BK_NO            NUMBER        NULL,     -- 예약번호
+	BK_NO            NUMBER        NOT NULL,     -- 예약번호
 	PM_PAYMENTWAY    VARCHAR2(500) NULL,     -- 결제방법
 	PM_PAYMENTDATE   DATE          NULL,     -- 결제일
 	PM_COMPLETECHECK VARCHAR2(500)      DEFAULT 'N' , -- 결제완료여부

@@ -142,11 +142,17 @@ $(document).ready(function() {
 function pageFunc(curPage){
 	document.frmPage.currentPage.value=curPage;
 	frmPage.submit();
-	}
-
+}
+function detail(no) {
+	var popupX = (window.screen.width / 2) - (400 / 2);
+	var popupY= (window.screen.height /2) - (200 / 2);
+	 window.open(
+			"<c:url value='/admin/badClassDetail.do?cno="+no+ "'/>", '신고내용',
+						'width=400,height=200,left='+popupX+',top='+(popupY)+',screenX='+popupX+',screenY='+popupY+',location=yes,resizable=yes'); 
+}
+ 
 	
 </script>
-
 <style>
 .bootstrap-select>.dropdown-toggle {
 	width: 60%;
@@ -211,13 +217,13 @@ a {
 	</form>
 
 
-	<h2>결제 내역</h2>
+	<h2>신고 클래스 관리</h2>
 	<br>
 
 	<table class="table table-hover">
 		<tr>
 			<th>NO</th>
-			<th></th>
+			<th>카테고리</th>
 			<th>신고 클래스</th>
 			<th>클래스 호스트</th>
 			<th>신고 유형</th>
