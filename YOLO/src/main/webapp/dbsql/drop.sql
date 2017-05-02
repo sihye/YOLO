@@ -54,7 +54,7 @@ DROP TABLE useboard;
 DROP TABLE shoppingbasket;
 
 -- 결제
-DROP TABLE payment;
+DROP TABLE payment CASCADE CONSTRAINTS;
 
 -- 결제취소
 DROP TABLE paymentcancel;

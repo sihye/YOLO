@@ -187,6 +187,48 @@ ALTER TABLE Class
 		REFERENCES category ( -- 카테고리
 			K_NO -- 카테고리번호
 		);
+-- 스케줄
+CREATE TABLE classschedule (
+	SC_NO        NUMBER        NOT NULL, -- 스케줄번호
+	C_NO         NUMBER        NOT NULL, -- 클래스번호
+	SC_CODE      VARCHAR2(500) NOT NULL, -- 스케줄구분
+	SC_STARTDATE VARCHAR2(500) NULL,     -- 시작일
+	SC_ENDDATE   VARCHAR2(500) NULL,     -- 종료일
+	SC_WEEK      VARCHAR2(500) NULL,     -- 요일
+	SC_STARTTIME1 VARCHAR2(500) NULL,     -- 시작시간
+	SC_ENDTIME1   VARCHAR2(500) NULL,       -- 종료시간
+	SC_STARTTIME2 VARCHAR2(500) NULL,     -- 시작시간
+	SC_ENDTIME2   VARCHAR2(500) NULL,       -- 종료시간
+	SC_STARTTIME3 VARCHAR2(500) NULL,     -- 시작시간
+	SC_ENDTIME3   VARCHAR2(500) NULL      -- 종료시간
+);
+
+
+-- 스케줄 기본키
+CREATE UNIQUE INDEX PK_classschedule
+	ON classschedule ( -- 스케줄
+		SC_NO ASC -- 스케줄번호
+	);
+
+-- 스케줄
+ALTER TABLE classschedule
+	ADD
+		CONSTRAINT PK_classschedule -- 스케줄 기본키
+		PRIMARY KEY (
+			SC_NO -- 스케줄번호
+		);
+
+-- 스케줄
+ALTER TABLE classschedule
+	ADD
+		CONSTRAINT FK_Class_TO_classschedule -- 클래스 -> 스케줄
+		FOREIGN KEY (
+			C_NO -- 클래스번호
+		)
+		REFERENCES Class ( -- 클래스
+			C_NO -- 클래스번호
+		);
+		
 -- 클래스예약
 CREATE TABLE booking (
 	BK_NO       NUMBER        NOT NULL, -- 예약번호
@@ -236,47 +278,7 @@ ALTER TABLE booking
 		
 
 
--- 스케줄
-CREATE TABLE classschedule (
-	SC_NO        NUMBER        NOT NULL, -- 스케줄번호
-	C_NO         NUMBER        NOT NULL, -- 클래스번호
-	SC_CODE      VARCHAR2(500) NOT NULL, -- 스케줄구분
-	SC_STARTDATE VARCHAR2(500) NULL,     -- 시작일
-	SC_ENDDATE   VARCHAR2(500) NULL,     -- 종료일
-	SC_WEEK      VARCHAR2(500) NULL,     -- 요일
-	SC_STARTTIME1 VARCHAR2(500) NULL,     -- 시작시간
-	SC_ENDTIME1   VARCHAR2(500) NULL,       -- 종료시간
-	SC_STARTTIME2 VARCHAR2(500) NULL,     -- 시작시간
-	SC_ENDTIME2   VARCHAR2(500) NULL,       -- 종료시간
-	SC_STARTTIME3 VARCHAR2(500) NULL,     -- 시작시간
-	SC_ENDTIME3   VARCHAR2(500) NULL      -- 종료시간
-);
 
-
--- 스케줄 기본키
-CREATE UNIQUE INDEX PK_classschedule
-	ON classschedule ( -- 스케줄
-		SC_NO ASC -- 스케줄번호
-	);
-
--- 스케줄
-ALTER TABLE classschedule
-	ADD
-		CONSTRAINT PK_classschedule -- 스케줄 기본키
-		PRIMARY KEY (
-			SC_NO -- 스케줄번호
-		);
-
--- 스케줄
-ALTER TABLE classschedule
-	ADD
-		CONSTRAINT FK_Class_TO_classschedule -- 클래스 -> 스케줄
-		FOREIGN KEY (
-			C_NO -- 클래스번호
-		)
-		REFERENCES Class ( -- 클래스
-			C_NO -- 클래스번호
-		);
 
 -- 업로드파일
 
@@ -361,8 +363,8 @@ CREATE TABLE classboard (
 	CB_REGDATE   DATE          NULL,     -- 등록일
 	CB_READCOUNT NUMBER        NULL,     -- 조회수
 	CB_CONTENT   CLOB          NULL,     -- 내용
-	F_NO1  NUMBER NULL      -- 파일번호
-	F_NO2  NUMBER NULL      -- 파일번호
+	F_NO1  NUMBER NULL ,     -- 파일번호
+	F_NO2  NUMBER NULL ,     -- 파일번호
 	F_NO3  NUMBER NULL      -- 파일번호
 );
 
@@ -391,7 +393,6 @@ add constraint classboard_FNO3_fk foreign key (f_no3) references upfile(f_no);
 
 
 -- 쪽지
-select * from message;
 CREATE TABLE message (
 	MS_NO      NUMBER        NOT NULL, -- 쪽지번호
 	MS_USERID   VARCHAR2(500) NOT NULL, -- 보낸사람
@@ -527,6 +528,8 @@ CREATE TABLE shoppingbasket   (
 	C_NO       NUMBER        NULL,     -- 클래스번호
 	SC_REGDATE DATE          DEFAULT sysdate  NULL-- 등록일
 );
+alter table shoppingbasket
+add (SC_NO NUMBER NOT NULL);
 
 -- 찜하기 기본키
 CREATE UNIQUE INDEX PK_shoppingbasket  
@@ -564,7 +567,6 @@ ALTER TABLE shoppingbasket
 			C_NO -- 클래스번호
 		);
 
--- 결제
 -- 결제
 CREATE TABLE payment (
 	PM_NO            NUMBER        NOT NULL, -- 결제번호

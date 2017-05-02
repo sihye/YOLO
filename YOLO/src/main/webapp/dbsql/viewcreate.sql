@@ -26,24 +26,24 @@ and c.C_NO = sb.C_NO;
 select*from favoriteclass;
 --commit
 
-create view ExcelMemberView -- excel 파일 다운로드 정보 view
+create OR REPLACE VIEW ExcelMemberView -- excel 파일 다운로드 정보 view
 as
 select m.M_NO,M_USERID, m.M_NAME, m.M_TEL1, m.M_TEL2, m.M_TEL3, m.M_EMAIL1, m.M_EMAIL2, m.M_ADDRESS, m.M_ADDRESSDETAIL, m.M_JOINDATE,
 (select c.k_name from category c where c.K_NO = m.k_no1) as k_1,(select c.k_name from category c where c.K_NO = m.k_no2) as k_2,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
-from member m where m.mg_no2 = 2
+from member m where m.mg_no2 = 2;
 
 
 
 
-create view operatorJoin  -- operator 화면 view
+create OR REPLACE VIEW operatorJoin  -- operator 화면 view
 as
 select o.op_no, up.f_originalfilename,cg.k_name,o.op_showflag 
 from OPERATOR o, CATEGORY cg,UPFILE up
-where o.K_NO = cg.K_NO and o.F_NO = up.F_NO
+where o.K_NO = cg.K_NO and o.F_NO = up.F_NO;
 
 
 
-create view operatorMemberView -- operator 멤버 화면 view
+create OR REPLACE VIEW operatorMemberView -- operator 멤버 화면 view
 as
 select m_userid,m_no,mg_no2,m_name,m_joindate,(select c.k_name from category c where c.K_NO = m.k_no1)as k_1 ,
 (select c.k_name from category c where c.K_NO = m.k_no2) as k_2 ,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
@@ -53,9 +53,9 @@ where mg_no2=2;
 
 
 
-create view operatorHostView -- operator host 화면 view
+create OR REPLACE VIEW operatorHostView -- operator host 화면 view
 as
-select m_userid,m_no,m_name,m_joindate,m_bankname,m_accoutn,(select c.k_name from category c where c.K_NO = m.k_no1)as k_1 ,
+select m_userid,m_no,m_name,m_joindate,m_bankname,m_account,(select c.k_name from category c where c.K_NO = m.k_no1)as k_1 ,
 (select c.k_name from category c where c.K_NO = m.k_no2) as k_2 ,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
 from member m  
 where mg_no2=3;
@@ -87,32 +87,32 @@ select*from FOLLOWCLASS;
 select*from follow;
 
 
-create view noticeboardview   --관리자 notice view
+create OR REPLACE VIEW noticeboardview   --관리자 notice view
 as
 select nb_no,nb_title,nb_regdate,nb_readcount,(select f_filename from upfile u where n.f_no1=u.f_no) as f_1,(select f_filename from upfile u where n.f_no2=u.f_no) as f_2,(select f_filename from upfile u where n.f_no3=u.f_no) as f_3
 from noticeboard n
-where nb_delflag='N'
+where nb_delflag='N';
 
 
 
-create view ExcelHostView   --관리자 host 엑셀
+create OR REPLACE VIEW ExcelHostView   --관리자 host 엑셀
 as
 select m.M_NO,M_USERID, m.M_NAME,m.M_BANKNAME,m.M_ACCOUNT ,m.M_TEL1, m.M_TEL2, m.M_TEL3, m.M_EMAIL1, m.M_EMAIL2, m.M_ADDRESS, m.M_ADDRESSDETAIL, m.M_JOINDATE,
 (select c.k_name from category c where c.K_NO = m.k_no1) as k_1,(select c.k_name from category c where c.K_NO = m.k_no2) as k_2,(select c.k_name from category c where c.K_NO = m.k_no3) as k_3
-from member m where m.mg_no2 = 3
+from member m where m.mg_no2 = 3;
 
 
-create view badclassview --클래스 신고 view
+create OR REPLACE VIEW badclassview --클래스 신고 view
 as
 select n.*,c.m_userid,(select k.k_name from  category k where k.K_NO =c.c_no ) as K_NAME ,c_name,c.c_del  from notify n , class c where n.C_NO = c.C_NO;
 
 
 --메인배너 뷰
-create view mainbannerList
+create OR REPLACE VIEW mainbannerList
 as
 select o.op_no,o.op_showflag,(select cg.k_no from category cg where o.K_NO = cg.K_NO)as k_no,f.F_FILENAME from operator o , upfile f where o.F_NO = f.F_NO and op_showflag='Y';
 
 --메인클레스 뷰
-create view mainClassView
+create OR REPLACE VIEW mainClassView
 as
 select c.*,(select count(*) from SHOPPINGBASKET f where c.c_no = f.c_no) as FCOUNT from class c where c_del='N' ;
