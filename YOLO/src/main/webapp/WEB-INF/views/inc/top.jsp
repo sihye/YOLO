@@ -76,7 +76,7 @@
 		<ul>
 			<!-- 상단 네비 -->
 
-			<li><a href="#">About</a></li>
+			<li><a href="${pageContext.request.contextPath}/about.do">About</a></li>
 			<li><a href="#">Notice</a></li>
 			<li><a href="#">Guide</a></li>
 			<li><a href="#">Contact</a></li>
