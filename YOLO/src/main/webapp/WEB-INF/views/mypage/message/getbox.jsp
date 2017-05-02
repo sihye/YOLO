@@ -249,7 +249,7 @@
 			<thead>
 				<tr style="background: skyblue">
 					<th width="10%"><input type="checkbox" value="None" id="chkAll"
-						name="chkAll" /> </label>
+						name="chkAll" />
 						</div></th>
 					<th width="10%">번호</th>
 					<th width="15%">보낸사람</th>
