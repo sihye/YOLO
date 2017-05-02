@@ -13,7 +13,7 @@
 	document.frmPage.currentPage.value=curPage;
 	var cno=document.frmPage.searchKno.value;
 	if(cno==""){
-		cno=0;
+		cno=0; 
 		document.frmPage.searchKno.value=cno;
 	}
 	

@@ -29,8 +29,8 @@ CREATE TABLE Member (
 	M_NO             NUMBER        NOT NULL, -- 회원번호
 	M_PWD            VARCHAR2(500) NOT NULL, -- 비밀번호
 	M_NAME           VARCHAR2(500) NOT NULL, -- 이름
-	M_EMAIL1         VARCHAR2(500) NULL,     -- 이메일
-	M_EMAIL2         VARCHAR2(500) NULL,     -- 이메일2
+	M_EMAIL1         VARCHAR2(500) NOT NULL, -- 이메일
+	M_EMAIL2         VARCHAR2(500) NOT NULL,  -- 이메일2
 	M_BIRTH          VARCHAR2(500) NOT NULL, -- 생년월일
 	M_GENDER         VARCHAR2(100) NOT NULL, -- 성별
 	M_ADDRESS        VARCHAR2(500) NULL,     -- 주소

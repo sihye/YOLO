@@ -51,6 +51,10 @@
 				return false;
 			}		
 		});
+		
+		$("#cancle").click(function() {
+			$('#myModal').modal('hide')
+		})
 	}); 
 </script>
 <style type="text/css">
@@ -134,16 +138,16 @@
 										<label for="pwd">&nbsp;&nbsp;&nbsp;비밀번호</label> <input
 											type="password" name="pwd" id="pwd" style="width: 160px">
 									</div>
-									<div class="align_right">
+									<div class="align_right" style="padding-left: 145px">
 										<input type="checkbox" name="chkSaveId" id="chkId"
 											<c:if test="${!empty cookie.ck_userid }">
 						checked="checked"
 					</c:if>>
 										<label for="chkId">아이디 저장하기</label><br>
 									</div>
-									<div class="align_center">
+									<div class="align_center" style="padding-left: 70px;">
 										<button type="submit" class="btn btn-primary">로그인</button>
-										<button type="button" class="btn btn-primary">
+										<button type="button" class="btn btn-primary" id="cancle">
 											취소 <span class="sr-only">Close</span>
 										</button>
 

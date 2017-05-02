@@ -214,14 +214,14 @@ values(3,'chang',1,'M',sysdate,'5','내용3','Y');
 select*from shoppingbasket ;
 
 insert into shoppingbasket
-(SB_NO,SB_USERID,C_NO,SC_REGDATE)
-values(SHOPPINGBASKET_seq.nextval,'hong',1,sysdate);
+(SB_NO,SB_USERID,C_NO,SC_REGDATE,SC_NO)
+values(SHOPPINGBASKET_seq.nextval,'hong',1,sysdate,1);
 insert into shoppingbasket
 (SB_NO,SB_USERID,C_NO,SC_REGDATE)
-values(SHOPPINGBASKET_seq.nextval,'kim',1,sysdate);
+values(SHOPPINGBASKET_seq.nextval,'kim',1,sysdate,2);
 insert into shoppingbasket
 (SB_NO,SB_USERID,C_NO,SC_REGDATE)
-values(SHOPPINGBASKET_seq.nextval,'chang',1,sysdate);
+values(SHOPPINGBASKET_seq.nextval,'chang',1,sysdate,1);
 insert into shoppingbasket
 (SB_NO,SB_USERID,C_NO,SC_REGDATE)
 values(SHOPPINGBASKET_seq.nextval,'hong',2,sysdate);
@@ -242,9 +242,6 @@ values(PAYMENT_seq.nextval,2,'hong','현금',sysdate,'Y','Y');
 insert into payment
 (PM_NO,C_NO,M_USERID,PM_PAYMENTWAY,PM_PAYMENTDATE,PM_COMPLETECHECK,PM_CANCELCHECK)
 values(PAYMENT_seq.nextval,3,'hong','수표',sysdate,'Y','N');
-
-delete from payment
-where PM_NO=1;
 
 --booking
 select*from booking;
