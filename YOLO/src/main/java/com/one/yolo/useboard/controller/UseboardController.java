@@ -56,6 +56,64 @@ public class UseboardController {
 		return "useboard/list";
 	}
 	
+	@RequestMapping(value="/uselist.do")
+	public String Useboarduselist(@ModelAttribute UseboardVO vo , Model model){
+		/*logger.info("Useboarduselist화면목록 ");*/
+		logger.info("Useboarduselist화면목록  vo={},  type={}", vo,vo.getUbType());
+		
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		pagingInfo.setCurrentPage(vo.getCurrentPage());	
+		
+		vo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		List<UseboardVO> uList = useboardService.selectUseboard(vo);
+		logger.info("조회 결과 uList.size()={}", uList.size());
+		logger.info("조회 결과 uList={}", uList);
+		
+		int totalRecord =useboardService.selectTotalRecord(vo);
+		logger.info("조회 전체레코드 개수조회 결과, totalRecord={}",
+				totalRecord);
+		
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		model.addAttribute("uList",uList);
+		model.addAttribute("pagingInfo",pagingInfo);
+		
+		return "useboard/uselist";
+	}
+	
+	@RequestMapping(value="/paylist.do")
+	public String Useboardpaylist(@ModelAttribute UseboardVO vo , Model model){
+		/*logger.info("Useboardpaylist화면목록 ");*/
+		logger.info("Useboardlist화면목록  vo={},  type={}", vo,vo.getUbType());
+		
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		pagingInfo.setCurrentPage(vo.getCurrentPage());	
+		
+		vo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		List<UseboardVO> uList = useboardService.selectUseboard(vo);
+		logger.info("조회 결과 uList.size()={}", uList.size());
+		logger.info("조회 결과 uList={}", uList);
+		
+		int totalRecord =useboardService.selectTotalRecord(vo);
+		logger.info("조회 전체레코드 개수조회 결과, totalRecord={}",
+				totalRecord);
+		
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		model.addAttribute("uList",uList);
+		model.addAttribute("pagingInfo",pagingInfo);
+		
+		return "useboard/paylist";
+	}
+	
 	@RequestMapping(value="/write.do", method=RequestMethod.GET)
 	public String write_get(){
 		logger.info("공지사항 글쓰기 화면 보여주기");

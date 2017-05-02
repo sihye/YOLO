@@ -89,7 +89,7 @@ public class NoticeboardVO {
 	public String toString() {
 		return "NoticeboardVO [nbNo=" + nbNo + ", mUserid=" + mUserid + ", bgNo=" + bgNo + ", nbTitle=" + nbTitle
 				+ ", nbRegdate=" + nbRegdate + ", nbReadcount=" + nbReadcount + ", nbContent=" + nbContent
-				+ ", nbDelflag=" + nbDelflag + "]";
+				+ ", nbDelflag=" + nbDelflag + ", fNo1=" + fNo1 + ", fNo2=" + fNo2 + ", fNo3=" + fNo3 + "]";
 	}
 	
 }

@@ -7,11 +7,11 @@
 		document.frmPage.currentPage.value=curPage;
 		frmPage.submit();
 	}
-	 function typeFunc(type) {
+ 	function typeFunc(type) {
 		document.frmPage.ubType.value=type;
 		document.frmPage.currentPage.value=1;
 		frmPage.submit(); 
-	} 
+	}  
 	
 	function showContent($obj) {
 		if($("pre", $obj).css('display') === 'none') {
@@ -21,7 +21,6 @@
 			$("pre", $obj).hide();
 		}
 	}
-
 	
 </script>
 
@@ -50,16 +49,12 @@
 </head>	
 <br>
 <br>
-<div class="col-md-10">
-<h2 align="center">이용안내</h2>
-	<br>
-	<br>
 	<div class="container">
 		<div class="col-md-10">
 			<ul class="nav nav-tabs nav-justified">
-				<li class="active"><a href='<c:url value="/useboard/list.do"/>'  role="tab" data-toggle="tab" 
+				<li><a href='<c:url value="/useboard/list.do"/>'  role="tab" data-toggle="tab" 
 				onclick="typeFunc(1);"> 자주묻는 질문</a></li>
-				<li><a href='<c:url value="/useboard/uselistedDDDDDDDD.do"/>'  role="tab" data-toggle="tab" 
+				<li class="active"><a href='<c:url value="/useboard/uselist.do"/>'  role="tab" data-toggle="tab" 
 				onclick="typeFunc(2);">이용 관련</a></li>
 				<li><a href='<c:url value="/useboard/paylist.do"/>'  role="tab" data-toggle="tab" 
 				onclick="typeFunc(3);">결제 관련</a></li>
@@ -67,45 +62,26 @@
 
 					<!-- Tab panes -->
 					<div class="tab-content">
-						<div role="tabpanel" class="tab-pane active" id="/useboard/list.do">
-							
-						
-
-						<!-- <div role="tabpanel" class="tab-pane" id="use"> -->
-
-							
-					
-						<div class="tab-content">
-							
-						</div>
-						<br>
-						<br>
-						
+						<div role="tabpanel" class="tab-pane" id="/useboard/uselist.do">
 						<ul id="ulTemp">
 							<c:forEach var="vo" items="${uList }" varStatus="status">
 								<li onclick="showContent($(this))">
-									<span>0${status.index+1}  ${vo.ubTitle}</span>
+									<span>${status.index+1}  ${vo.ubTitle}</span>
 									<pre style="display: none;">${vo.ubContent}</pre>
 								</li>
 							</c:forEach>
 						</ul>
 						
 
-						<!-- div role="tabpanel" class="tab-pane" id="pay"> -->
 						
 						</div>
-						</div>
-						</div>
-						</div>
-						</div>
-						
-						
+					</div>
 						
 
 
 <div class="col-md-10" align="center">
    	<form name="frmSearch" method="post" 
-   		action="<c:url value='/useboard/list.do' />" >
+   		action="<c:url value='/useboard/uselist.do' />" >
         <select name="searchCondition">
             <option value="ub_title" class="btn btn-default"
             	<c:if test="${'ub_title'==param.searchCondition }">

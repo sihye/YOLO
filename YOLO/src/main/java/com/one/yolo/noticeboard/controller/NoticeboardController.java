@@ -161,6 +161,7 @@ public class NoticeboardController {
 	
 	@RequestMapping(value="/edit.do", method=RequestMethod.GET)
 	public String edit_get(@RequestParam (value="no", defaultValue="0") int no,
+			@ModelAttribute UpfileVO upfileVo,
 			Model model){
 		logger.info("공지사항 수정화면, 파라미터no={}", no );
 		if(no==0){
@@ -173,13 +174,23 @@ public class NoticeboardController {
 		NoticeboardVO vo = noticeboardService.selectNo(no);
 		logger.info("수정화면 vo={}",vo);
 		
+		
+		UpfileVO uv1 = upFileservice.selectByFno(vo.getfNo1());
+		UpfileVO uv2 = upFileservice.selectByFno(vo.getfNo2());
+		UpfileVO uv3 = upFileservice.selectByFno(vo.getfNo3());
+		
+		
+		model.addAttribute("uv1",uv1);
+		model.addAttribute("uv2",uv2);
+		model.addAttribute("uv3",uv3);
 		model.addAttribute("vo",vo);
 		
 		return "noticeboard/edit";
 	}
 	
 	@RequestMapping(value="/edit.do", method=RequestMethod.POST)
-	public String edit_post(@ModelAttribute NoticeboardVO vo, 
+	public String edit_post(@ModelAttribute NoticeboardVO vo,
+			@ModelAttribute UpfileVO upfileVo,
 			Model model){
 		logger.info("공지사항 수정 처리, 파라미터 vo={}", vo);
 		String msg="", url="";

@@ -49,7 +49,7 @@
 		</selectKey>
 		 insert into noticeboard
       	(NB_NO,M_USERID,BG_NO,NB_TITLE,NB_CONTENT,F_NO1,F_NO2,F_NO3)
-      	values(#{nbNo},#{mUserid},3,#{nbTitle},#{nbContent},,#{fNo1},#{fNo2},#{fNo3})
+      	values(#{nbNo},#{mUserid},3,#{nbTitle},#{nbContent},#{fNo1},#{fNo2},#{fNo3})
 	</insert>
 	
 	<select id="selectNo" parameterType="int" resultType="NoticeboardVO">

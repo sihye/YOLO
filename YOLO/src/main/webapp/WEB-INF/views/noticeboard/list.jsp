@@ -34,8 +34,9 @@
 </head>	
 <br>
 <br>
-<div class="col-md-10">
-	<div>
+<div class="col-md-12">
+	<div class="col-md-2" align="left"></div>
+	<div class="col-md-10">
 	<h2 align="center">공지사항</h2>
 		<br>
 		<br>
@@ -44,12 +45,11 @@
 		
 		<thead>
 		  <tr>
-		    <th width="10%" style="text-align: center">번호</th>
-		    <th width="30%" style="text-align: center">제목</th>
-		    <th width="20%" style="text-align: center">내용</th>
-		    <th width="15%" style="text-align: center">작성자</th>
-		    <th width="15%" style="text-align: center">작성일</th>
-		    <th width="10%" style="text-align: center">조회수</th>
+		    <th width="10%" style="text-align: center;">번호</th>
+		    <th width="20%" style="text-align: center;">제목</th>
+		    <th width="45%" style="text-align: center;">내용</th>
+		    <th width="15%" style="text-align: center;">작성일</th>
+		    <th width="10%" style="text-align: center;">조회수</th>
 		  </tr>
 		</thead> 
 		<tbody>
@@ -67,8 +67,7 @@
 					<a href
 					='<c:url value="/noticeboard/updateCount.do?no=${vo.nbNo}"/>'>${vo.nbTitle}</a>
 				</td>
-				<td>${vo.nbContent}</td>	
-				<td>${vo.mUserid}</td>
+				<td style="text-align: left;">${vo.nbContent}</td>	
 				<td><fmt:formatDate value="${vo.nbRegdate}" pattern="yyyy-MM-dd"/> </td>
 				<td>${vo.nbReadcount}</td>		
 			</tr>
@@ -77,7 +76,8 @@
 		  </tbody>
 	</table>	   
 	</div>
-
+	<div class="col-md-12">
+	<div align="left" class="col-md-2"></div>
 	<div class="divPage" style="text-align: center" >
 		<!-- 페이지 번호 추가 -->
 		<!-- 이전 블럭으로 이동 ◀-->
@@ -113,10 +113,11 @@
 		</nav>
 		</div>
 	</div>
+</div>
 
-
-
-	<div class="col-md-10">
+<div class="col-md-12">
+	<div class="col-md-2" align="left"></div>
+		<div class="col-md-10">
 	   	<form name="frmSearch" method="post" align="center"
 	   		action="<c:url value='/noticeboard/list.do' />" >
 	        <select name="searchCondition" class="btn btn-default"><!-- ${vo.nbTitle} -->
@@ -142,15 +143,18 @@
 	        <input class="btn btn-default" type="submit" value="검색">
 	
 			<!-- <input type="submit" value="검색"> -->
-		
-	    </form>
+
+				<div style="text-align: right;">
+					<a href="<c:url value='/noticeboard/write.do'/>">공지사항추가</a>
+				</div>
+			</form>
 	</div>
-</div>	
-
-
-<div style="text-align:right;">
-    <a href="<c:url value='/noticeboard/write.do'/>" >공지사항추가</a>
 </div>
+
+</div>
+	
+
+<br><br>
 <%@ include file="boardbottom.jsp" %>
 </body>
 </html>
