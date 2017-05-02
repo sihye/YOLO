@@ -29,7 +29,65 @@
 		</choose>
 
 	</sql>
-	<select id="selectPayment" parameterType="SearchVO" resultType="map">
+	
+	
+	<sql id="searchWhereOperatorPayment">
+		<choose>
+			<when test="searchKeyword !=null and searchKeyword !=''" >
+				where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+			</when>
+			<when test="searchStartDate !=null and searchStartDate !=''
+			 and searchEndDate !=null and searchEndDate !=''" >
+				where PM_PAYMENTDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
+				and to_date(#{searchEndDate},'YYYY-MM-DD')+1 
+			</when>
+			<when test="searchKeyword !=null and searchKeyword !=''
+			 and searchStartDate !=null and searchStartDate !=''
+		 	and searchEndDate !=null and searchEndDate !=''" >
+				where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+			and
+			 PM_PAYMENTDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
+			and to_date(#{searchEndDate},'YYYY-MM-DD')+1 
+			</when>
+			<otherwise>
+			
+			</otherwise>
+
+		</choose>
+
+	</sql>
+	<sql id="searchWhereOperatorPaymentCancel">
+		<choose>
+			<when test="searchKeyword !=null and searchKeyword !=''" >
+				where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+			</when>
+			<when test="searchStartDate !=null and searchStartDate !=''
+			 and searchEndDate !=null and searchEndDate !=''" >
+				where PMC_DATE between to_date(#{searchStartDate},'YYYY-MM-DD')
+				and to_date(#{searchEndDate},'YYYY-MM-DD')+1 
+			</when>
+			<when test="searchKeyword !=null and searchKeyword !=''
+			 and searchStartDate !=null and searchStartDate !=''
+		 	and searchEndDate !=null and searchEndDate !=''" >
+				where ${searchCondition} like '%'|| #{searchKeyword} ||'%'
+			and
+			 PMC_DATE between to_date(#{searchStartDate},'YYYY-MM-DD')
+			and to_date(#{searchEndDate},'YYYY-MM-DD')+1 
+			</when>
+			<otherwise>
+			
+			</otherwise>
+
+		</choose>
+
+	</sql>
+
+	
+	
+	
+	
+
+<select id="selectPayment" parameterType="SearchVO" resultType="map">
 		select PM_NO, C_NO,M_USERID, PM_PAYMENTWAY, PM_PAYMENTDATE, PM_COMPLETECHECK,
 			PM_CANCELCHECK, C_PRICE, C_NAME
 		from
@@ -78,6 +136,52 @@
 		set PM_CANCELCHECK=#{pmCancelcheck}
 		where PM_NO=#{pmNo}
 	</update>
+	
+	<select id="selectPaymentView" parameterType="SearchVO" resultType="hashmap">
+		select *
+		from
+		(
+		    select rownum as RNUM ,LIST.*
+		    from
+		    (
+		        select*from paymentview	       
+		        <include refid="searchWhereOperatorPayment"></include>
+		    )LIST
+		)	
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+	<select id="selectPaymentViewCount" parameterType="SearchVO" resultType="int">
+	select count(*) from paymentview
+	<include refid="searchWhereOperatorPayment"></include>
+	</select>
+	
+	
+	<select id="selectPaymentCancelView" parameterType="SearchVO" resultType="hashmap">
+	select *
+		from
+		(
+		    select rownum as RNUM ,LIST.*
+		    from
+		    (
+		        select*from paymentcancelView	       
+		        <include refid="searchWhereOperatorPaymentCancel"></include>
+		    )LIST
+		)	
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+	</select>
+	
+		
+	<select id="selectPaymentCancelViewCount" parameterType="SearchVO" resultType="int">
+	select count(*) from paymentcancelView
+	<include refid="searchWhereOperatorPaymentCancel"></include>
+	</select>
 	
 </mapper>
 

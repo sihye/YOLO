@@ -12,4 +12,8 @@ public interface PaymentDAO {
 	public int cancelCount(int pmNo);
 	public int cancelcheckYN(PaymentVO paymentVo);
 	public List<PaymentCancelVO> selectPaymentCancel();
+	public List<Map<String, Object>> selectPaymentView(SearchVO vo);
+	public int selectPaymentViewCount (SearchVO vo);
+	public List<Map<String, Object>> selectPaymentCancelView(SearchVO vo);
+	public int selectPaymentCancelViewCount(SearchVO vo);
 }

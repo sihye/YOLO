@@ -107,7 +107,7 @@ function setSearchDate(start){
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	if($("#searchCondition").val()=='PM_PAYMENTDATE'){
+	if($("#searchCondition").val()=='PMC_DATE'){
 		$("#searchKeyword").hide();
 		$(".clearfix").show();
 	}else{
@@ -122,7 +122,7 @@ $(document).ready(function() {
 	
 	$("#searchCondition").change(function() {
 		var selCondition = $(this).val();
-		if(selCondition == 'PM_PAYMENTDATE'){
+		if(selCondition == 'PMC_DATE'){
 			$("#searchKeyword").hide();
 			$(".clearfix").show();
 		}else{
@@ -200,7 +200,7 @@ a {
 
 	<!-- 페이징 처리를 위한 form 태그 -->
 	<form name="frmPage" method="post"
-		action='<c:url value="/admin/payment.do" />'>
+		action='<c:url value="/admin/paymentcancel.do" />'>
 		<input type="hidden" name="currentPage"> <input type="hidden"
 			name="searchCondition" value="${param.searchCondition }"> <input
 			type="hidden" name="searchKeyword" value="${param.searchKeyword}">
@@ -210,48 +210,38 @@ a {
 	</form>
 
 
-	<h2>결제 내역</h2>
+	<h2>결제 취소내역</h2>
 	<br>
 
 	<table class="table table-hover">
 		<tr>
 			<th>NO</th>
+			<th>결제번호</th>
 			<th>회원명</th>
-			<th>클래스명</th>
-			<th>결제금액</th>
 			<th>결제방법</th>
-			<th>결제일</th>
-			<th>결제완료여부</th>
-			<th>결제취소여부</th>
+			<th>결제금액</th>
+			<th>결제취소사유</th>
+			<th>취소 신청일</th>
+			<th>결제취소진행상황</th>
+			
 		</tr>
 		<c:if test="${!empty alist }">
 			<c:forEach var="map" items="${alist }">
 				<tr>
+					<td>${map["PMC_NO"]}</td>
 					<td>${map["PM_NO"]}</td>
 					<td>${map["M_USERID"]}</td>
-					<td>${map["C_NAME"]}</td>
-					<td><fmt:formatNumber value="${map['C_PRICE'] }" pattern="#,###" />원</td>
 					<td>${map["PM_PAYMENTWAY"] }</td>
-					<td><fmt:formatDate value="${map['PM_PAYMENTDATE'] }" pattern="yyyy-MM-dd" /></td>
-					<td>
-						<c:if test="${map['PM_COMPLETECHECK'] eq 'Y' }">
-						결제완료
-						</c:if>
-						<c:if test="${map['PM_COMPLETECHECK'] eq 'N' }">
-						결제진행중
-						</c:if>
-					</td>
-					<td>
-						<c:if test="${map['PM_CANCELCHECK'] eq 'Y' }">
-						 <a href='<c:url value="/admin/paymentcancel.do?pmNo=${map['PM_NO'] }" />'>취소신청</a>
-						</c:if>
-					</td>
+					<td><fmt:formatNumber value="${map['PRICE'] }" pattern="#,###" />원</td>
+					<td>${map["PMC_CALCEL"] }</td>
+					<td><fmt:formatDate value="${map['PMC_DATE'] }" pattern="yyyy-MM-dd" /></td>
+					<td>${map["PMC_PROQRESS"] }</td>
 					
 			</c:forEach>
 		</c:if>
 	</table>
 	<c:if test="${empty alist }">
-		<span class="center">해당 결제 내역이 존재하지 않습니다.</span>
+		<span class="center">해당 결제취소 내역이 존재하지 않습니다.</span>
 	</c:if>
 
 	<hr>
@@ -303,17 +293,17 @@ a {
 		<form id="frm1" name="frm1" method="post">
 			<select id="searchCondition" name="searchCondition"
 				style="height: 26px">
-				<option value="C_NAME"
-					<c:if test="${param.searchCondition eq 'C_NAME' }" >selected="selected"</c:if>>
-					클래스명 검색</option>
 				<option value="M_USERID"
 					<c:if test="${param.searchCondition eq 'M_USERID' }" >selected="selected"</c:if>>
 					회원명 검색</option>
-				<option value="PM_PAYMENTDATE"
-					<c:if test="${param.searchCondition eq 'PM_PAYMENTDATE' }" >selected="selected"</c:if>>
-					결제일 검색</option>
+				<option value="PM_NO"
+					<c:if test="${searchVO.searchCondition eq 'PM_NO' }" >selected="selected"</c:if>>
+					결제번호 검색</option>	
+				<option value="PMC_DATE"
+					<c:if test="${param.searchCondition eq 'PMC_DATE' }" >selected="selected"</c:if>>
+					취소일 검색</option>
 			</select> <input type="text" id="searchKeyword" name="searchKeyword"
-				style="height: 25px" value="${param.searchKeyword}">
+				style="height: 25px" value="${searchVO.searchKeyword}">
 			<div class="clearfix">
 				<!-- 시작일 -->
 				<span class="dset"> <input type="text"

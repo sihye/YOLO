@@ -43,6 +43,29 @@ public class PaymentServiceImpl implements PaymentService{
 	public List<PaymentCancelVO> selectPaymentCancel() {
 		return paymentDao.selectPaymentCancel();
 	}
+
+	@Override
+	public List<Map<String, Object>> selectPaymentView(SearchVO vo) {
+		return paymentDao.selectPaymentView(vo);
+	}
+
+	@Override
+	public int selectPaymentViewCount(SearchVO vo) {
+		return paymentDao.selectPaymentViewCount(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectPaymentCancelView(SearchVO vo) {
+		return paymentDao.selectPaymentCancelView(vo);
+	}
+
+	@Override
+	public int selectPaymentCancelViewCount(SearchVO vo) {
+		return paymentDao.selectPaymentCancelViewCount(vo);
+	}
+	
+	
+	
 	
 	
 }

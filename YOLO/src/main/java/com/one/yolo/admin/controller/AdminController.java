@@ -32,6 +32,7 @@ import com.one.yolo.member.model.MemberService;
 import com.one.yolo.member.model.MemberVO;
 import com.one.yolo.noticeboard.model.NoticeboardService;
 import com.one.yolo.noticeboard.model.NoticeboardVO;
+import com.one.yolo.payment.model.PaymentService;
 import com.one.yolo.upfile.model.UpfileService;
 import com.one.yolo.upfile.model.UpfileVO;
 
@@ -59,6 +60,9 @@ public class AdminController {
 
 	@Autowired
 	ExcelUtil excelUtil;
+	
+	@Autowired
+	private PaymentService paymentService;
 
 	@Autowired
 	private ClassService classService;
@@ -122,8 +126,20 @@ public class AdminController {
 
 	@RequestMapping(value="/opmain.do", method=RequestMethod.GET)
 
-	public String main_get(Model model){
+	public String main_get(Model model , HttpSession session){
 		logger.info("operator_get");
+		String userid = (String)session.getAttribute("userid");
+		if((userid !=null && !userid.isEmpty())){
+			if(!userid.equals("admin")){
+				model.addAttribute("msg","잘못된 url입니다.");
+				model.addAttribute("url","/index2.do");
+				return "common/message";
+			}
+		}else if(userid==null || userid.isEmpty()){
+			model.addAttribute("msg","잘못된 url입니다.");
+			model.addAttribute("url","/index2.do");
+			return "common/message";
+		}
 		List<Map<String,Object>> map = operAtorservice.selectJoin();
 
 		model.addAttribute("map",map);
@@ -231,7 +247,19 @@ public class AdminController {
 	}
 
 	@RequestMapping("/operatorMember.do")
-	public String operatorMember_get(@ModelAttribute SearchVO searchVo, Model model){
+	public String operatorMember_get(@ModelAttribute SearchVO searchVo, Model model,HttpSession session){
+		String userid = (String)session.getAttribute("userid");
+		if((userid !=null && !userid.isEmpty())){
+			if(!userid.equals("admin")){
+				model.addAttribute("msg","잘못된 url입니다.");
+				model.addAttribute("url","/index2.do");
+				return "common/message";
+			}
+		}else if(userid==null || userid.isEmpty()){
+			model.addAttribute("msg","잘못된 url입니다.");
+			model.addAttribute("url","/index2.do");
+			return "common/message";
+		}
 		logger.info("member 화면 보여주기 ,파라미터 searchVO={}",searchVo);
 		//[1] PaginationInfo 객체 생성 
 		//=> firstRecordIndex 를 계산하기 위함
@@ -299,28 +327,7 @@ public class AdminController {
 	}
 
 
-	/*	if(upvo!=null){
-		String oldFileName=oldupvo.getfFilename();
-		vo.setfNo(upvo.getfNo());
-		logger.info("old파일 네임 = {}",oldFileName);
-		//=> [2] 기존 파일이 있다면 삭제
-		if(oldFileName!=null && !oldFileName.isEmpty()){
-			String upPath = upFileservice.getUploadPath(request,"File");
-			File oldFile = new File(upPath, oldFileName);
-			if(oldFile.exists()){
-				boolean bool =oldFile.delete();
-				logger.info("기존 파일 삭제 여부:{}", bool);
-				vo.setfNo(upvo.getfNo());
-				cnt = operAtorservice.insertOperAtor(vo);
-				upFileservice.deleteByFno(oldupvo.getfNo());
-			}
-		}
-
-	}else{
-		vo.setfNo(oldupvo.getfNo());
-		cnt = operAtorservice.insertOperAtor(vo);
-	}*/
-
+	
 
 	@RequestMapping("/excelup.do")
 	public String excelup(HttpServletRequest request,Model model){
@@ -364,7 +371,19 @@ public class AdminController {
 	}
 
 	@RequestMapping("/noticeBoard.do")
-	public String noticeBoard_get(@ModelAttribute SearchVO searchVo, Model model){
+	public String noticeBoard_get(@ModelAttribute SearchVO searchVo, Model model,HttpSession session){
+		String userid = (String)session.getAttribute("userid");
+		if((userid !=null && !userid.isEmpty())){
+			if(!userid.equals("admin")){
+				model.addAttribute("msg","잘못된 url입니다.");
+				model.addAttribute("url","/index2.do");
+				return "common/message";
+			}
+		}else if(userid==null || userid.isEmpty()){
+			model.addAttribute("msg","잘못된 url입니다.");
+			model.addAttribute("url","/index2.do");
+			return "common/message";
+		}
 		logger.info("notice 화면 보여주기 ,파라미터 searchVO={}",searchVo);
 		//[1] PaginationInfo 객체 생성 
 		//=> firstRecordIndex 를 계산하기 위함
@@ -396,7 +415,19 @@ public class AdminController {
 	}
 
 	@RequestMapping("/operatorHost.do")
-	public String operatorHost_get(@ModelAttribute SearchVO searchVo, Model model){
+	public String operatorHost_get(@ModelAttribute SearchVO searchVo, Model model,HttpSession session){
+		String userid = (String)session.getAttribute("userid");
+		if((userid !=null && !userid.isEmpty())){
+			if(!userid.equals("admin")){
+				model.addAttribute("msg","잘못된 url입니다.");
+				model.addAttribute("url","/index2.do");
+				return "common/message";
+			}
+		}else if(userid==null || userid.isEmpty()){
+			model.addAttribute("msg","잘못된 url입니다.");
+			model.addAttribute("url","/index2.do");
+			return "common/message";
+		}
 		logger.info("host 화면 보여주기 ,파라미터 searchVO={}",searchVo);
 		//[1] PaginationInfo 객체 생성 
 		//=> firstRecordIndex 를 계산하기 위함
@@ -484,8 +515,19 @@ public class AdminController {
 	}
 
 	@RequestMapping("/operatorBadClass.do")
-	public String opBadClass(@ModelAttribute SearchVO searchVo, Model model){
-
+	public String opBadClass(@ModelAttribute SearchVO searchVo, Model model, HttpSession session){
+		String userid = (String)session.getAttribute("userid");
+		if((userid !=null && !userid.isEmpty())){
+			if(!userid.equals("admin")){
+				model.addAttribute("msg","잘못된 url입니다.");
+				model.addAttribute("url","/index2.do");
+				return "common/message";
+			}
+		}else if(userid==null || userid.isEmpty()){
+			model.addAttribute("msg","잘못된 url입니다.");
+			model.addAttribute("url","/index2.do");
+			return "common/message";
+		}
 
 		logger.info("BadClass 화면 보여주기 ,파라미터 searchVO={}",searchVo);
 		//[1] PaginationInfo 객체 생성 
@@ -543,6 +585,101 @@ public class AdminController {
 
 		model.addAttribute("map",map);
 		return "admin/badClassDetail";
+	}
+	
+	@RequestMapping("/payment.do")
+	public String payment(@ModelAttribute SearchVO searchVo,Model model, HttpSession session){
+		String userid = (String)session.getAttribute("userid");
+		if((userid !=null && !userid.isEmpty())){
+			if(!userid.equals("admin")){
+				model.addAttribute("msg","잘못된 url입니다.");
+				model.addAttribute("url","/index2.do");
+				return "common/message";
+			}
+		}else if(userid==null || userid.isEmpty()){
+			model.addAttribute("msg","잘못된 url입니다.");
+			model.addAttribute("url","/index2.do");
+			return "common/message";
+		}
+		logger.info("결재 내역 보여주기 SearchVO ={}",searchVo);
+		
+		//[1] PaginationInfo 객체 생성 
+				//=> firstRecordIndex 를 계산하기 위함
+				PaginationInfo pagingInfo = new PaginationInfo();
+				pagingInfo.setBlockSize(Utility.BLOCKSIZE);
+				pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+				pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+
+				//[2] SearchVO 값 셋팅
+				searchVo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+				searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+
+				List<Map<String, Object>> alist = paymentService.selectPaymentView(searchVo);
+				logger.info("결재내역  alist.size()={}",alist.size());
+
+				int totalRecord = paymentService.selectPaymentViewCount(searchVo);
+				logger.info("결재내역 갯수, totalRecord={}",			
+						totalRecord);
+
+				pagingInfo.setTotalRecord(totalRecord);
+
+
+				model.addAttribute("alist",alist);
+				model.addAttribute("pagingInfo", pagingInfo);
+
+
+
+				return "admin/payment";
+	}
+	
+	@RequestMapping("/paymentcancel.do")
+	public String paymentcancel(@ModelAttribute SearchVO searchVo,@RequestParam(value="pmNo",required=false, defaultValue="0") int pmNo, Model model,HttpSession session){
+		String userid = (String)session.getAttribute("userid");
+		if((userid !=null && !userid.isEmpty())){
+			if(!userid.equals("admin")){
+				model.addAttribute("msg","잘못된 url입니다.");
+				model.addAttribute("url","/index2.do");
+				return "common/message";
+			}
+		}else if(userid==null || userid.isEmpty()){
+			model.addAttribute("msg","잘못된 url입니다.");
+			model.addAttribute("url","/index2.do");
+			return "common/message";
+		}
+		logger.info("결재 취소 내역 보여주기 SearchVO ={}",searchVo);
+		logger.info("결재 취소 내역 pmNo={}",pmNo);
+		//[1] PaginationInfo 객체 생성 
+				//=> firstRecordIndex 를 계산하기 위함
+				PaginationInfo pagingInfo = new PaginationInfo();
+				pagingInfo.setBlockSize(Utility.BLOCKSIZE);
+				pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+				pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+
+				//[2] SearchVO 값 셋팅
+				searchVo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+				searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+				
+				if(pmNo!=0){
+					searchVo.setSearchKeyword(pmNo+"");
+					searchVo.setSearchCondition("PM_NO");
+				}
+				
+				List<Map<String, Object>> alist = paymentService.selectPaymentCancelView(searchVo);
+				logger.info("결재취소내역  alist.size()={}",alist.size());
+
+				int totalRecord = paymentService.selectPaymentCancelViewCount(searchVo);
+				logger.info("결재취소내역 갯수, totalRecord={}",			
+						totalRecord);
+
+				pagingInfo.setTotalRecord(totalRecord);
+
+
+				model.addAttribute("alist",alist);
+				model.addAttribute("pagingInfo", pagingInfo);
+
+
+
+				return "admin/paymentcancel";
 	}
 }
 

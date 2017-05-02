@@ -130,11 +130,11 @@ footer {
 						</ul> <!-- /.nav-second-level --></li>
 						
 						
-						<li><a href="#"><i class="fa fa-wrench fa-fw"></i>결제 내역
+						<li><a href="#"><i class="fa fa-wrench fa-fw"></i>결제 정보
 						<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="<c:url value='/admin/payment.do'/>">결제내역</a></li>
-							<li><a href="<c:url value='/admin/paymentcancel.do'/>">결제취소내역</a></li>
+							<li><a href="<c:url value='/admin/payment.do'/>">결제 내역</a></li>
+							<li><a href="<c:url value='/admin/paymentcancel.do'/>">결제취소 내역</a></li>
 						</ul> <!-- /.nav-second-level --></li>
 							
 					<li><a href="<c:url value='/admin/operatorBadClass.do'/>"><i
