@@ -111,7 +111,7 @@
 		<option value="etc">직접입력</option>
 		</select><br>
 		<input type="text" id="email3" title="직접입력인 경우 이메일주소 뒷자리"
-        	style="visibility:hidden; width: 60%">
+        	style="visibility:hidden; width: 60%" name="mReason">
 		</div>
 		<br>
 	
