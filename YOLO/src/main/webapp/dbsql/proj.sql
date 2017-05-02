@@ -193,6 +193,8 @@ CREATE TABLE booking (
 	BK_USERID   VARCHAR2(500) NOT NULL, -- 아이디
 	SC_NO       NUMBER        NOT NULL, -- 스케줄번호
 	BK_DATE     DATE          DEFAULT sysdate, -- 예약일
+	BK_BDATE    VARCHAR2(500) NOT NULL,  --클래스 예약일
+	BK_TIME     VARCHAR2(500) NULL,     -- 예약시간
 	BK_ENDCHECK VARCHAR2(500) DEFAULT 'N' -- 종료유무
 );
 
