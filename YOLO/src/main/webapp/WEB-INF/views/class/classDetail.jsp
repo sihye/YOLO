@@ -13,8 +13,13 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <link rel="stylesheet" type="text/css" href='<c:url value="/css/mypage.css" />'>
+<!-- 결제 -->
+<script src="https://service.iamport.kr/js/iamport.payment-1.1.4.js" type="text/javascript"></script>
+
 <script>
 $(document).ready(function() {
+	//결제
+	IMP.init('imp97437286');
     //datepicker 한국어로 사용하기 위한 언어설정
     $.datepicker.setDefaults($.datepicker.regional['ko']);     
     // Datepicker            
@@ -159,7 +164,8 @@ hr{
 	background-image: url("<c:url value='/upload/${claVo.cMainimg}'/>");
 	background-repeat: no-repeat;
 	height: 500px;
-	background-size: 100%;
+	width:100%;
+	background-size: 100% 100%;
 }
 #onHeader {
 	color: white;
@@ -220,9 +226,7 @@ hr{
 	width: 500px;
 	height: 300px;
 }
-.modal{
 
-}
 </style>
 <form name="frmPage" method="post"
 action='<c:url value="/class/claDetail.do?cNo=${claVo.cNo }" />'>
@@ -282,7 +286,7 @@ name="searchEndDate" value="${param.searchEndDate}">
 </button>
 
 <!-- Modal -->
-<form action="<c:url value='/class/booking.do'/>" method="post" name="bookingFrm" id="bookingFrm">
+<form action="<c:url value='/class/booking.do?cNo=${claVo.cNo }'/>" method="post" name="bookingFrm" id="bookingFrm">
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -326,7 +330,7 @@ name="searchEndDate" value="${param.searchEndDate}">
       	<input type="text" name="bkBdate" id="bkBdate"  style="color: black;">
       	<input type="text" name="bkTime" id="bkTime" style="color: black;">
       	<input type="text"  name="scNo" id="scNo"  style="color: black;">
-      	<button type="button" class="btn btn-default">예약하기</button>
+      	<button type="submit" class="btn btn-default" id="pay">예약하기</button>
         <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
         
       </div>
@@ -348,9 +352,10 @@ name="searchEndDate" value="${param.searchEndDate}">
 					$("#timeSel").change(function(){
 						$("#bkTime").val($("#timeSel").val())
 					})
-				})				
+				})
+			
 			})
-		</script>
+</script>
 	</div>
 
 </div>
@@ -535,7 +540,7 @@ name="searchEndDate" value="${param.searchEndDate}">
 	</div>
   <div id="tabs-2">
   	<!-- 큐앤에이 -->
-  	<c:import url="/class/classqna.do"></c:import>
+  	<%-- <c:import url="/class/classqna.do"></c:import> --%>
   </div>
    <div id="tabs-3" >
   	<!-- 후기 -->
