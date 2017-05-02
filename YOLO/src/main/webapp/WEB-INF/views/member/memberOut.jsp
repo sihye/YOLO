@@ -46,6 +46,11 @@
 				return false;
 			}				
 		});
+		
+		$("#no").click(function() {
+			history.back();
+		})
+		
 	});
 	
 
@@ -110,19 +115,18 @@
 		<option value="5">트와이스</option> 
 		<option value="etc">직접입력</option>
 		</select><br>
-		<input type="text" id="email3" title="직접입력인 경우 이메일주소 뒷자리"
-        	style="visibility:hidden; width: 60%" name="mReason">
+		<input type="text" style="visibility:hidden; width: 60%" name="mReason">
 		</div>
 		<br>
 	
 		<div>
 		<h3>비밀번호를 입력해 주세요</h3>
-		<input class="form-control" type="password" placeholder="Default input" name="pwd" id="pwd">
+		<input class="form-control" type="password" placeholder="비밀번호를 입력하세요" name="pwd" id="pwd">
 		<div class="align_center">
 				<!-- <input type="submit" value="회원탈퇴">
 				<input type="reset" value="취소"> -->
 				<button type="submit" class="btn btn-primary">회원탈퇴</button>
-  				<button type="button" class="btn btn-default">취소</button>
+  				<button type="button" class="btn btn-default" id="no">취소</button>
 			</div>
 		</div>	
 		</div>

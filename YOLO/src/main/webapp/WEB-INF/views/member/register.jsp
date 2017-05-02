@@ -84,7 +84,7 @@
 		});
 		
 		
-		$("#cancle").click(function() {
+		$("#cancle1").click(function() {
 			location.href="<c:url value='/index2.do'/>"
 		})
 		
@@ -175,7 +175,7 @@
 			</div>
 			<div>
 				<label for="hp1">핸드폰</label>&nbsp; <select name="mTel1" id="hp1"
-					title="휴대폰 앞자리">
+					title="휴대폰 앞자리" style="height: 25px">
 					<option value="010">010</option>
 					<option value="011">011</option>
 					<option value="016">016</option>
@@ -204,7 +204,41 @@
 					<option value="11">11</option>
 					<option value="12">12</option>
 				</select>&nbsp;월&nbsp;
-				<input type="text" name="mBirth3" id="birth3" title="일" style="width: 25px" maxlength="2">&nbsp;일&nbsp;
+				<select name="mBirth3" id="birth3" title="일" style="width: 50px; height: 22px;"
+					title="월">
+					<option value="01">1</option>
+					<option value="02">2</option>
+					<option value="03">3</option>
+					<option value="04">4</option>
+					<option value="05">5</option>
+					<option value="06">6</option>
+					<option value="07">7</option>
+					<option value="08">8</option>
+					<option value="09">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+					<option value="31">31</option>
+				</select>&nbsp;월&nbsp;
+				<!-- <input type="text" name="mBirth3" id="birth3" title="일" style="width: 25px" maxlength="2">&nbsp;일&nbsp; -->
 				<input type="hidden" name="mBirth" id="mBirth" value="">
 			</div>
 			<div>
@@ -215,7 +249,7 @@
 			<div>
 				<label for="email1">이메일 주소</label> <input type="text" name="mEmail1"
 					id="email1" title="이메일주소 앞자리">@ <select name="mEmail2"
-					id="email2" title="이메일주소 뒷자리">
+					id="email2" title="이메일주소 뒷자리" style="height: 25px">
 					<option value="naver.com">naver.com</option>
 					<option value="hanmail.net">hanmail.net</option>
 					<option value="nate.com">nate.com</option>
@@ -257,7 +291,7 @@
 
 			<div class="center">
 				<button type="submit" class="btn btn-primary" id="wr_submit">회원 가입</button>
-				<button type="button" class="btn btn-primary" id="cancle">취소</button>	 		
+				<button type="button" class="btn btn-primary" id="cancle1">취소</button>	 		
 			</div>
 
 		</fieldset>
