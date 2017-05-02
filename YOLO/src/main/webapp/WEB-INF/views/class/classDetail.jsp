@@ -220,6 +220,9 @@ hr{
 	width: 500px;
 	height: 300px;
 }
+.modal{
+
+}
 </style>
 <form name="frmPage" method="post"
 action='<c:url value="/class/claDetail.do?cNo=${claVo.cNo }" />'>
@@ -316,28 +319,13 @@ name="searchEndDate" value="${param.searchEndDate}">
       			</c:if>
       		</select>
       	</div>
+      	
       </div>
-		<script type="text/javascript">
-			$(function(){
-				$("booking").click(function(){
-					console.log("펑션들어옴")
-					alert("ㅇㅇ");
-					$("#scNo").val(${sch.scNo});
-					$("#dateSel").change(function(){
-						$("#bkBdate").val($("#dateSel").val())
-					})
-					$("#timeSel").change(function(){
-						$("#bkTime").val($("#timeSel").val())
-					})
-				})
-				alert(${sch.scNo});
-				
-			})
-		</script>
+		
       <div class="modal-footer">
-      	<input type="text" name="bkBdate" id="bkBdate" value="">
-      	<input type="text" name="bkTime" id="bkTime"  value="">
-      	<input type="text" name="scNo" id="scNo"  value="">
+      	<input type="text" name="bkBdate" id="bkBdate"  style="color: black;">
+      	<input type="text" name="bkTime" id="bkTime" style="color: black;">
+      	<input type="text"  name="scNo" id="scNo"  style="color: black;">
       	<button type="button" class="btn btn-default">예약하기</button>
         <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
         
@@ -346,6 +334,23 @@ name="searchEndDate" value="${param.searchEndDate}">
   </div>
 </div>
 </form>
+<script type="text/javascript">
+			$(function(){
+				$("#booking").click(function(){
+					console.log("펑션들어옴")
+					console.log(${sch.scNo})
+					$("#scNo").val(${sch.scNo});
+					$("#dateSel").change(function(){
+						var selDate=$("#dateSel").val();
+						$("#bkBdate").val(selDate);
+						console.log(selDate);
+					})
+					$("#timeSel").change(function(){
+						$("#bkTime").val($("#timeSel").val())
+					})
+				})				
+			})
+		</script>
 	</div>
 
 </div>
@@ -530,6 +535,7 @@ name="searchEndDate" value="${param.searchEndDate}">
 	</div>
   <div id="tabs-2">
   	<!-- 큐앤에이 -->
+  	<c:import url="/class/classqna.do"></c:import>
   </div>
    <div id="tabs-3" >
   	<!-- 후기 -->
@@ -538,7 +544,6 @@ name="searchEndDate" value="${param.searchEndDate}">
 	<h2>후기</h2>
 	<br>
 	<form>
-
 		<!-- search -->
 		<table class="searchBox">
 			<caption>조회</caption>
