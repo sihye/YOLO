@@ -56,6 +56,17 @@
 				alert('휴대폰은 숫자를 입력하셔야 합니다');
 				$("#hp2").focus();
 				return false;
+			}else if(!$("#email1").val()){
+				alert('이메일을 입력하세요');
+				$("#email1").focus();
+				return false;
+			}else if($("#email2").val()=="etc"){
+				if(!$("#email3").val()){
+					alert('이메일을 입력하세요');
+					$("#email3").focus();
+					return false;
+				}
+				
 			}else if(!$("input:checkbox[id='hobby']").is(":checked") == true){
 				alert("관심사는 하나 이상 체크하셔야 합니다");	
 				return false;
