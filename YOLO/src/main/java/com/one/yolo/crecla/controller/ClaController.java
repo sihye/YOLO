@@ -72,8 +72,10 @@ public class ClaController {
 	@RequestMapping(value="/clacre.do", method=RequestMethod.POST)
 	public String insertCla(HttpSession session,HttpServletRequest req,@ModelAttribute ScheduleVO sVO , @ModelAttribute ClassVO vo, Model model){
 		logger.info("클래스 insert param vo={}",vo);
-		vo.setmUserid((String)session.getAttribute("userid"));
-		vo.setmUserid("hong");
+		String userid=(String)session.getAttribute("userid");		
+		logger.info("session userid={}",userid);
+		vo.setmUserid(userid);
+		vo.setmUserid("test");
 		//파일 업로드 처리
 		List<Map<String, Object>> fileList= fileUploadWebUtil.fileUpload(req, FileUploadWebUtil.IMAGE_UPLOAD);
 		logger.info("업로드 이미지 filelist size={}",fileList.size());

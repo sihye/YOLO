@@ -13,13 +13,11 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <link rel="stylesheet" type="text/css" href='<c:url value="/css/mypage.css" />'>
-<!-- 결제 -->
-<script src="https://service.iamport.kr/js/iamport.payment-1.1.4.js" type="text/javascript"></script>
+
 
 <script>
 $(document).ready(function() {
-	//결제
-	IMP.init('imp97437286');
+	
     //datepicker 한국어로 사용하기 위한 언어설정
     $.datepicker.setDefaults($.datepicker.regional['ko']);     
     // Datepicker            
