@@ -61,6 +61,52 @@
 		select count(*) from qnaboard 
 		<include refid="searchWhere"></include>
 	</select>
+	<insert id="insertqna" parameterType="QnaBoardVO">
+		<selectKey keyProperty="cqNo" resultType="int" order="BEFORE">
+			select CLASSQNABOARD_seq.nextval from dual
+		</selectKey>
+		insert into classqnaboard(CQ_NO,C_NO,M_USERID,CQ_CONTENT,CQ_SECRETCHECK)
+		values(#{cqNo},#{cNo},#{mUserid},#{cqContent},#{cqSecretcheck})	
+	</insert>
+	<select id="selectqna" parameterType="int" resultType="QnaBoardVo">
+		select*from classqnaboard
+		where C_NO=#{cNo}
+		order by CQ_NO desc
+	</select>
+	<insert id="insertRepay" parameterType="QnaRepayVO">
+		<selectKey keyProperty="cqrNo" resultType="int" order="BEFORE">
+			select CLASSQNAREPAY_seq.nextval from dual
+		</selectKey>
+		insert into classqnarepay(CQR_NO,CQ_NO,M_USERID,CQR_CONTENT)
+		values(#{cqrNo},#{cqNo},#{mUserid},#{cqrContent})	
+	</insert>
+	<update id="updateRepayCheck" parameterType="int">
+		update classqnaboard
+			set CQ_REPAYCHECK='Y'
+		where CQ_NO=#{cqNo}
+	</update>
+	<select id="selectRepay" resultType="QnaRepayVO">
+		select*from classqnarepay
+	</select>
+	<update id="updateqnaDelflag" parameterType="int">
+		update classqnaboard
+			set CQ_DELFLAG='Y'
+		where CQ_NO=#{cqNo}
+	</update>
+	<update id="updaterepayDelflag" parameterType="int">
+		update classqnarepay
+			set CQR_DELFLAG='Y'
+		where CQ_NO=#{cqNo}
+	</update>
+	<select id="countrepay" parameterType="int" resultType="int">
+		select count(*)from classqnaboard
+		where CQ_NO=#{cqNo} and CQ_REPAYCHECK='Y'
+	</select>
+	<update id="updateRepayCheckN" parameterType="int">
+		update classqnaboard
+			set CQ_REPAYCHECK='N'
+		where CQ_NO=#{cqNo}
+	</update>
 </mapper>
 
 

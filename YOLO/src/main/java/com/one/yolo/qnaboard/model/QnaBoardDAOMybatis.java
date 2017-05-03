@@ -21,5 +21,41 @@ public class QnaBoardDAOMybatis extends SqlSessionDaoSupport implements QnaBoard
 		return getSqlSession().selectOne(namespace
 				+".selectTotalRecord", searchVo);
 	}
+	@Override
+	public int insertqna(QnaBoardVO qnaBoardVo) {
+		return getSqlSession().insert(namespace+".insertqna",qnaBoardVo);
+	}
+	@Override
+	public List<QnaBoardVO> selectqna(int cNo) {
+		return getSqlSession().selectList(namespace+".selectqna",cNo);
+	}
+	@Override
+	public int insertRepay(QnaRepayVO qnaRepayVo) {
+		return getSqlSession().insert(namespace+".insertRepay",qnaRepayVo);
+	}
+	@Override
+	public int updateRepayCheck(int cqNo) {
+		return getSqlSession().update(namespace+".updateRepayCheck",cqNo);
+	}
+	@Override
+	public List<QnaRepayVO> selectRepay() {
+		return getSqlSession().selectList(namespace+".selectRepay");
+	}
+	@Override
+	public int updateqnaDelflag(int cqNo) {
+		return getSqlSession().update(namespace+".updateqnaDelflag",cqNo);
+	}
+	@Override
+	public int updaterepayDelflag(int cqNo) {
+		return getSqlSession().update(namespace+".updaterepayDelflag",cqNo);
+	}
+	@Override
+	public int countrepay(int cqNo) {
+		return getSqlSession().selectOne(namespace+".countrepay",cqNo);
+	}
+	@Override
+	public int updateRepayCheckN(int cqNo) {
+		return getSqlSession().update(namespace+".updateRepayCheckN",cqNo);
+	}
 
 }
