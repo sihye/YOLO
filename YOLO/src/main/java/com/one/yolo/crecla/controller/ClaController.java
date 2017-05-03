@@ -271,4 +271,16 @@ public class ClaController {
 		return "class/searchClass";
 	}
 	
+	@RequestMapping(value ="/classBoardWrith.do", method=RequestMethod.GET)
+	public String classBoardWrith(HttpSession session,@RequestParam int cNo,Model model){
+		String userid=(String)session.getAttribute("userid");
+		logger.info("classBoardWrith 화면 보여주기 userid={}, cNo={},",userid,cNo);
+		
+		model.addAttribute("userid",userid);
+		model.addAttribute("cNo",cNo);
+		
+		return "class/classBoardWrith";
+		
+	}
+	
 }
