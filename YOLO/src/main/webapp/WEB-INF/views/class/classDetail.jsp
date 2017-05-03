@@ -121,6 +121,8 @@ $(document).ready(function() {
 		active:show,
 	});
 	
+
+	
 	
 	
 });
@@ -130,11 +132,14 @@ $(document).ready(function() {
 		document.frmPage.boardtype.value='cb';
 		frmPage.submit();
 	}
+
+	
 	
 </script>
 <script>
 	$(function() {
 		$("#tabs").tabs();
+		
 	});
 </script>
 <style>
@@ -235,6 +240,7 @@ type="hidden" name="searchKeyword" value="${param.searchKeyword}">
 value="${param.searchStartDate}"> <input type="hidden"
 name="searchEndDate" value="${param.searchEndDate}">
 <input type="hidden" name="boardtype" id="boardtype">
+
 </form>
 <!-- 헤더 이미지 -->
 <div class="mainImg">
@@ -616,6 +622,7 @@ name="searchEndDate" value="${param.searchEndDate}">
 	</form>
 	<br>
 	<!-- //기간별조회 -->
+	
 	<table class="table table-hover">
 		<thead>
 			<tr style="background: skyblue">
@@ -636,7 +643,7 @@ name="searchEndDate" value="${param.searchEndDate}">
 			<c:forEach var="list" items="${claBoardList }">
 				<tr>
 					<td>${list.cbNo }</td>
-					<td><a href='#'>${list.cbTitle }</a></td>
+					<td><a href="#">${list.cbTitle }</a></td>
 					<td>${list.mUserid }</td>
 					<td><fmt:formatDate value="${list.cbRegdate }" pattern="yyyy-MM-dd"/></td>
 					<td>${list.cbReadcount }</td>
@@ -645,6 +652,9 @@ name="searchEndDate" value="${param.searchEndDate}">
 			</c:if>
 		</tbody>
 	</table>
+	<c:if test="${!empty sessionScope.userid }">
+	<input type="button" value="후기쓰기" onclick="location.href='<c:url value='/class/classBoardWrith.do?cNo=${claVo.cNo }'/>'">
+	</c:if>
 	<div class="divList">
 	<div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->

@@ -66,10 +66,9 @@
 </head>
 <body>
 	<section class="hero"> <header>
-	<div class="wrapper">
-		<a href="${pageContext.request.contextPath}/index2.do" class="logo"
-			style="font-size: 30px;">YOLO</a> <a href="#" class="hamburger"></a>
-
+	<div class="wrapper" style="padding-bottom:  80%;"><a href="${pageContext.request.contextPath}/index2.do" style="padding-left: 150px;">
+		<img src="${pageContext.request.contextPath}/img/3.png" style="width: 100px; padding-top: 30px;">
+		</a>
 
 		<nav>
 
@@ -79,7 +78,7 @@
 			<li><a href="${pageContext.request.contextPath}/about.do">About</a></li>
 			<li><a href="#">Notice</a></li>
 			<li><a href="#">Guide</a></li>
-			<li><a href="#">Contact</a></li>
+			<li><a href="${pageContext.request.contextPath}/contact.do">Contact</a></li>
 		</ul>
 
 		<!-- 로그인 전 --> <c:if test="${empty sessionScope.userid }">
@@ -165,21 +164,8 @@
 
 	</c:if> <!-- 로그인 후 --> <c:if test="${!empty sessionScope.userid }">
 
-		<a href="${pageContext.request.contextPath}/member/memberOut.do"
-			class="btn btn-primary btn-lg login_btn">회원탈퇴</a>
-
-		<%-- <a data-toggle="dropdown" class="btn btn-primary login_btn">
-			${sessionScope.userName} 님</a>
-		<ul class="dropdown-menu" role="menu">
-			<li><a
-				href="${pageContext.request.contextPath}/mypage/Favorite/FavoriteClass.do">마이페이지</a></li>
-			<li><a href="#">쪽지함</a></li>
-			<li class="divider"></li>
-			<li><a href="${pageContext.request.contextPath}/login/logout.do">로그아웃</a></li>
-			<li><a
-				href="${pageContext.request.contextPath}/member/memberOut.do">회원탈퇴</a></li>
-		</ul>
-		</a> --%>
+		<a href="${pageContext.request.contextPath}/login/logout.do"
+			class="btn btn-primary btn-lg login_btn">로그아웃</a>
 
 		
 		
@@ -190,7 +176,7 @@
   <ul class="dropdown-menu" role="menu">
     <li><a href="${pageContext.request.contextPath}/mypage/Favorite/FavoriteClass.do">마이페이지</a></li>
 					<li><a href="#">쪽지함</a></li>
-					<li><a href="${pageContext.request.contextPath}/login/logout.do">로그아웃</a></li>
+					<li><a href="#">클래스 등록</a></li>
 					<li><a href="${pageContext.request.contextPath}/member/memberOut.do">회원탈퇴</a></li>
   </ul>
 </div>

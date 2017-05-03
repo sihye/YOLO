@@ -144,7 +144,18 @@ function pageFunc(curPage){
 	frmPage.submit();
 	}
 
+function detail(cno) {
+
+	var popupX = (window.screen.width / 2) - (400 / 2);
+	// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+	var popupY= (window.screen.height /2) - (200 / 2);
+	// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+
+	//창을 여는부분
+	window.open('/yolo/admin/badClassDetail.do?cno='+cno,'신고내용','width=400,height=200');
 	
+
+}
 </script>
 
 <style>
@@ -211,13 +222,13 @@ a {
 	</form>
 
 
-	<h2>결제 내역</h2>
+	<h2>클래스 신고 내역</h2>
 	<br>
 
 	<table class="table table-hover">
 		<tr>
 			<th>NO</th>
-			<th></th>
+			<th>카테고리</th>
 			<th>신고 클래스</th>
 			<th>클래스 호스트</th>
 			<th>신고 유형</th>
@@ -232,7 +243,7 @@ a {
 					<td>${map["K_NAME"]}</td>
 					<td>${map["C_NAME"]}</td>
 					<td>${map["M_USERID"] }</td>
-					<td><a href="#" onclick="detail(${map['C_NO']} )">${map["N_CODE"] }</a></td>
+					<td><a href="#" onclick='detail(${map["C_NO"]})'>${map["N_CODE"] }</a></td>
 					<td><fmt:formatDate value="${map['N_REGDATE'] }"
 							pattern="yyyy-MM-dd" /></td>
 					<td>${map["C_DEL"] }</td>

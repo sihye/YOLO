@@ -262,8 +262,10 @@ a{
   			<th>NO</th>
   			<th>이름</th>
   			<th>아이디</th>
+  			<th>나이</th>
+  			<th>성별</th>
   			<th>은행명</th>
-  			<th>계좌번호</th>
+  			<th>계좌 번호</th>		
   			<th>가입일자</th>
   			<th>관심목록1</th>
   			<th>관심목록2</th>
@@ -275,6 +277,8 @@ a{
   			<td>${map["M_NO"]}</td>
   			<td>${map["M_NAME"]}</td>
   			<td>${map["M_USERID"]}</td>
+  			<td>${map["M_AGE"] }</td>
+  			<td>${map["M_GENDER"] }</td>
   			<td>${map["M_BANKNAME"]}</td>
   			<td>${map["M_ACCOUNT"]}</td>
   			<td><fmt:formatDate value="${map['M_JOINDATE'] }" pattern="yyyy-MM-dd"/></td>

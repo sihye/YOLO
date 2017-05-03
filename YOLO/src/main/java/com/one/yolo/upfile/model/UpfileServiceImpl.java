@@ -324,7 +324,24 @@ public class UpfileServiceImpl implements UpfileService{
 			                	  	vo.setmQuestionanswer(value);
 			                	  	System.out.println("qan ="+vo.getmQuestionanswer());
 			                	  	continue;
+			                
+			                case 11://생년월일
+			                		value=(int)cell.getNumericCellValue()+"";
+			                		vo.setmBirth(value);
+			                		System.out.println("생년월일 = "+vo.getmBirth());
+			                		continue;
+			                		
+			                case 12://성별
+			                	value=cell.getStringCellValue()+"";
+			                	if(value.equals("남")){
+			                		vo.setmGender("M");
+			                	}else{
+			                		vo.setmGender("F");
+			                	}
+			                	continue;
 			                }
+			              
+			                	
 				            System.out.println("각 셀 내용 :"+value);
 			            }
 			        list.add(vo);
@@ -510,9 +527,24 @@ public class UpfileServiceImpl implements UpfileService{
 		                	continue;
 		                	
 			                case 12:
-	                    	value=(int)(cell.getNumericCellValue())+"";
+	                    	value=cell.getStringCellValue()+"";
 	                    	vo.setmAccount(value);
-	                    	continue;	  	
+	                    	continue;	
+	                    	
+			                case 13:
+		                    	value=(int)cell.getNumericCellValue()+"";
+		                    	vo.setmBirth(value);
+		                    	continue;	 
+		                    	
+			                case 14:
+			                	value=cell.getStringCellValue()+"";
+			                	if(value.equals("남")){
+			                		vo.setmGender("M");
+			                	}else{
+			                		vo.setmGender("F");
+			                	}
+			                	continue;	  	
+	                    	
 			                }
 				            System.out.println("각 셀 내용 :"+value);
 			            }
