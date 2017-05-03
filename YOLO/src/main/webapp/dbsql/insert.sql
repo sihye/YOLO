@@ -93,13 +93,13 @@ values(3,3,'host');
 select * from member ;
 
 insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2)
-values('admin','1',MEMBER_seq.nextval,'123','관리자',sysdate,'1',1,'테스트질문답','990101','M','admin','naver.com');
+values('admin','1',MEMBER_seq.nextval,'123','관리자',sysdate,'1',1,'테스트질문답','19990101','M','admin','naver.com');
 insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2)
-values('hong','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','990101','M','admin','nate.com');
+values('hong','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','20090101','M','admin','nate.com');
 insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2)
-values('kim','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','990101','M','admin1','naver.com');
+values('kim','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','19900101','M','admin1','naver.com');
 insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2)
-values('chang','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','990101','M','admin1','nate.com');
+values('chang','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','20120101','M','admin1','nate.com');
 
 --rollback;
 --class

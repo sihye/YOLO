@@ -13,46 +13,7 @@
 </style>
 
 
-<script type="text/javascript">
-	CKEDITOR.replace( 'Contents',{
-			 'filebrowserUploadUrl':'../ckeditor/upload.jsp?'
-             +'realUrl=http://localhost:9090/yolo/class/uplod.do'
-             +'&realDir=/upload/',
-	           
-	    
-	});
-	
-	
-	
-	var editor;
-	CKEDITOR
-			.on(
-					'instanceReady',
-					function(ev) {
-						editor = ev.editor;
-						document.getElementById('readOnlyOn').style.display = '';
-						editor
-								.on(
-										'readOnly',
-										function() {
-											document
-													.getElementById('readOnlyOn').style.display = this.readOnly ? 'none'
-													: '';
-											document
-													.getElementById('readOnlyOff').style.display = this.readOnly ? ''
-													: 'none';
-										});
-					});
 
-	function toggleReadOnly(isReadOnly) {
-		editor.setReadOnly(isReadOnly);
-
-	    }
-	});
-
-	
-	
-</script>
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#msgUserid").focus();
@@ -89,7 +50,43 @@ $(document).ready(function() {
 		</div>
 		<br>
 		<textarea class="ckeditor" id="Contents" name="Contents"></textarea>
+		<script type="text/javascript">
+	CKEDITOR.replace( 'Contents',{
+			 'filebrowserUploadUrl':'<c:url value="/ckeditor/upload.jsp?'
+             +'realUrl=http://localhost:9090/yolo/class/uplod.do'
+             +'&realDir=/upload/"/>',
+	           
+	    
+	});
+	
+	/* var editor;
+	CKEDITOR
+			.on(
+					'instanceReady',
+					function(ev) {
+						editor = ev.editor;
+						document.getElementById('readOnlyOn').style.display = '';
+						editor
+								.on(
+										'readOnly',
+										function() {
+											document
+													.getElementById('readOnlyOn').style.display = this.readOnly ? 'none'
+													: '';
+											document
+													.getElementById('readOnlyOff').style.display = this.readOnly ? ''
+													: 'none';
+										});
+					}); */
 
+/* 	function toggleReadOnly(isReadOnly) {
+		editor.setReadOnly(isReadOnly);
+
+	    }); */
+
+	
+	
+</script>
 		<div style="text-align: center;">
 			<button type="submit" class="btn btn-default">보내기</button>
 		</div>

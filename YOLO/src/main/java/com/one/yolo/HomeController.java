@@ -118,4 +118,11 @@ public class HomeController {
 		return "about";
 	}
 	
+	@RequestMapping("contact.do")
+	public String contact(){
+		logger.info("컨텍트 페이지");
+		
+		return "contact";
+	}
+	
 }
