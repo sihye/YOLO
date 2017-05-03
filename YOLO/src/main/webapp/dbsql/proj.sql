@@ -42,9 +42,9 @@ CREATE TABLE Member (
 	K_NO1            NUMBER        NOT NULL,     -- 카테고리번호1
 	K_NO2            NUMBER        NULL,     -- 카테고리번호2
 	K_NO3            NUMBER        NULL, -- 카테고리번호3
-	M_TEL1           VARCHAR2(500) NULL,     -- 핸드폰
-	M_TEL2           VARCHAR2(500) NULL,     -- 핸드폰
-	M_TEL3           VARCHAR2(500) NULL,     -- 핸드폰
+	M_TEL1           VARCHAR2(500) NOT NULL,     -- 핸드폰
+	M_TEL2           VARCHAR2(500) NOT NULL,     -- 핸드폰
+	M_TEL3           VARCHAR2(500) NOT NULL,     -- 핸드폰
 	Q_QUESTIONNO     NUMBER        NOT NULL, -- 질문번호
 	M_QUESTIONANSWER VARCHAR2(500) NULL,      -- 질문답
 	M_REASON         VARCHAR2(500) NULL      -- 탈퇴이유
@@ -569,12 +569,12 @@ ALTER TABLE shoppingbasket
 
 -- 결제
 CREATE TABLE payment (
-	PM_NO            NUMBER        NOT NULL, -- 결제번호
+	PM_NO            VARCHAR2(100)        NOT NULL, -- 결제번호
 	C_NO             NUMBER        NOT NULL, -- 클래스번호
 	M_USERID         VARCHAR2(500) NOT NULL, -- 아이디
 	BK_NO            NUMBER        NOT NULL,     -- 예약번호
 	PM_PAYMENTWAY    VARCHAR2(500) NULL,     -- 결제방법
-	PM_PAYMENTDATE   DATE          NULL,     -- 결제일
+	PM_PAYMENTDATE   DATE          DEFAULT sysdate,     -- 결제일
 	PM_COMPLETECHECK VARCHAR2(500)      DEFAULT 'N' , -- 결제완료여부
 	PM_CANCELCHECK   VARCHAR2(500)      DEFAULT'N' -- 결제취소여부
 );

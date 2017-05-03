@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.one.yolo.common.PaginationInfo;
 import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
+import com.one.yolo.crecla.model.ClassService;
+import com.one.yolo.crecla.model.ClassVO;
 import com.one.yolo.follow.model.FollowVO;
+import com.one.yolo.mypage.model.HostClassService;
 import com.one.yolo.payment.model.PaymentCancelVO;
 import com.one.yolo.payment.model.PaymentService;
 import com.one.yolo.payment.model.PaymentVO;
@@ -31,13 +34,26 @@ public class MyClassController {
 	=LoggerFactory.getLogger(MyClassController.class);
 	@Autowired
 	private PaymentService paymentService;
+	@Autowired
+	private HostClassService hostService;
+	@Autowired
+	private ClassService claService;
 
 	@RequestMapping("/HostClass.do")
-	public String qnaboard(){
-		logger.info("HostClass 화면 보여주기");
-
+	public String qnaboard(HttpSession session, Model model){
+		String userid=(String)session.getAttribute("userid");
+		logger.info("HostClass 화면 보여주기 userid={}",userid);
+		
+		List<Map<String, Object>> hoClaList=hostService.selClaForHost(userid);
+		model.addAttribute("hList", hoClaList);
+		
+		List<ClassVO> claList=claService.selClaById(userid);
+		model.addAttribute("claList", claList);
+		
+		logger.info("호스트 클래스 sel hoclaList size={},claList size={}",hoClaList.size(),claList.size());
 		return "mypage/MyClass/HostClass";
 	}
+	
 	@RequestMapping("/PartClass.do")
 	public String PartClass(@ModelAttribute SearchVO searchVO,HttpSession session, Model model){
 		//세션에 저장

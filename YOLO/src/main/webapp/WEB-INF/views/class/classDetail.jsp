@@ -166,7 +166,7 @@ hr{
 .mainImg{
 	background-image: url("<c:url value='/upload/${claVo.cMainimg}'/>");
 	background-repeat: no-repeat;
-	height: 500px;
+	height: 400px;
 	width:100%;
 	background-size: 100% 100%;
 }
@@ -276,18 +276,34 @@ name="searchEndDate" value="${param.searchEndDate}">
 	<div id="onHeader">
 		<table>
 			<tbody>
-				<tr><td style="text-align: left;">
+				<tr><td style="text-align: left; padding-top: 50px;">
 					<div id="cate" >${kName}</div>
 				</td></tr>
 				<tr><td style="text-align: center; font-size: 50px;"><p style="color: white;">${claVo.cName}</p></td></tr>
-				<tr><td><span style="color: white; font-size: 20px; ">${claVo.mUserid }</span><br><span style="color: white; font-size: 20px;">등록일 <fmt:formatDate value="${claVo.cRegdate}" type="date" pattern="yyyy/MM/dd (E)"/>
+				<tr><td><span style="color: white; font-size: 20px; padding-top: 200px; ">${claVo.mUserid }</span><br><span style="color: white; font-size: 20px;">등록일 <fmt:formatDate value="${claVo.cRegdate}" type="date" pattern="yyyy/MM/dd (E)"/>
 	| 조회  ${claVo.cHits }</span></td></tr>
 			</tbody>
 		</table>
 		<!-- Button trigger modal -->
-<button type="button" class="btn btn-lg" id="booking" data-toggle="modal" data-target="#myModal1" style="text-align: right;">
+<button type="button" class="btn btn-lg" id="booking" data-toggle="modal" data-target="#myModal1" style="margin-left: 70%; margin-top: 50px; font-weight: bolder; font-size: 2em;">
   예약하기
 </button>
+<!-- <style>
+#booking {
+    background-color: #95badf;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 10px 2px 20px 30px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 20%;
+}
+</style> -->
 
 <!-- Modal -->
 <form action="<c:url value='/class/booking.do?cNo=${claVo.cNo }'/>" method="post" name="bookingFrm" id="bookingFrm">
@@ -396,7 +412,7 @@ name="searchEndDate" value="${param.searchEndDate}">
 			</div>
 			<div class="row">
 				<div class="col-md-3">최대인원</div>
-				<div class="col-md-4">${claVo.cMaxperson }명(현재 %%명 신청)</div>
+				<div class="col-md-4">${claVo.cMaxperson }명</div>
 			</div>
 
 			<div class="contents-title">추가 정보</div>

@@ -155,6 +155,11 @@
 		select * from CLASSSCHEDULE
 			where c_no=#{cNo}
 	</select>
+	
+	<select id="selClaById" parameterType="String" resultType="ClassVO">
+		select * from class
+where m_userid=#{userid}
+	</select>
  	
 </mapper>
 

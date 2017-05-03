@@ -183,6 +183,11 @@
 	<include refid="searchWhereOperatorPaymentCancel"></include>
 	</select>
 	
+	<insert id="insertPay" parameterType="PaymentVO">
+		insert into payment(pm_no,c_no,m_userid,bk_no,PM_PAYMENTWAY,PM_COMPLETECHECK)
+			values(#{pmNo},#{cNo},#{mUserid},#{bkNo},#{pmPaymentway},#{pmCompletecheck})
+	</insert>
+	
 </mapper>
 
 

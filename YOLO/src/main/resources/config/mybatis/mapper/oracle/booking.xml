@@ -10,6 +10,11 @@
 		insert into booking(bk_no,bk_userid,sc_no,bk_bdate,bk_time)
 			values(#{bkNo},#{bk_Userid},#{scNo},#{bkBdate},#{bkTime})
 	</insert>
+	
+	<select id="bookNum" parameterType="int" resultType="int">
+		select count(*) from booking
+where sc_no=#{scNo}
+	</select>
 
 
 </mapper>

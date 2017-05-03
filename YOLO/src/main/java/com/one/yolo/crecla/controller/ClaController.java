@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.one.yolo.booking.model.BookingService;
 import com.one.yolo.category.model.CategoryGroupVO;
 import com.one.yolo.category.model.CategoryService;
 import com.one.yolo.category.model.CategoryVO;
@@ -53,6 +54,8 @@ public class ClaController {
 	private FileUploadWebUtil fileUploadWebUtil;
 	@Autowired
 	private ClassBoardService claBoardService;
+	@Autowired
+	private BookingService bookService;
 
 	
 	//클래스 생성 페이지 보여주기
@@ -236,6 +239,9 @@ public class ClaController {
 		}
 		logger.info("최종 daylist={}",daysList.size());
 		
+		//신청자 수
+		int bookNum=bookService.bookNum(schVo.getScNo());
+		
 		
 		
 		model.addAttribute("inClaList",	alist);
@@ -246,6 +252,7 @@ public class ClaController {
 		model.addAttribute("boardType",boardtype);
 		model.addAttribute("sch", schVo);
 		model.addAttribute("dayslist", daysList);
+		model.addAttribute("bookNum", bookNum);
 		return "class/classDetail";
 	}
 	

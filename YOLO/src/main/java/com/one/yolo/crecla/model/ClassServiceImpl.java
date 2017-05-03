@@ -76,6 +76,10 @@ public class ClassServiceImpl implements ClassService {
 	public ScheduleVO selSch(int cNo) {
 		return dao.selSch(cNo);
 	}
+	@Override
+	public List<ClassVO> selClaById(String userid) {
+		return dao.selClaById(userid);
+	}
 	
 	
 

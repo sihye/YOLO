@@ -29,7 +29,7 @@ public class PaymentDAOMybatis extends SqlSessionDaoSupport implements PaymentDA
 	}
 
 	@Override
-	public int cancelCount(int pmNo) {
+	public int cancelCount(String pmNo) {
 		return getSqlSession().selectOne(namespace+".cancelCount",pmNo);
 	}
 
@@ -61,6 +61,11 @@ public class PaymentDAOMybatis extends SqlSessionDaoSupport implements PaymentDA
 	@Override
 	public int selectPaymentCancelViewCount(SearchVO vo) {
 		return getSqlSession().selectOne(namespace+".selectPaymentCancelViewCount",vo);
+	}
+
+	@Override
+	public int insertPay(PaymentVO vo) {
+		return getSqlSession().insert(namespace+".insertPay", vo);
 	}
 	
 	

@@ -129,3 +129,14 @@ create view paymentcancelView
 as
 select pc.* ,(select v.c_price from paymentview v where v.PM_NO = pc.pm_no) as price, 
 (select v.m_userid from paymentview v where v.PM_NO = pc.pm_no) as m_userid ,(select v.PM_PAYMENTWAY from paymentview v where v.PM_NO = pc.pm_no) as PM_PAYMENTWAY from paymentcancel pc
+
+--호스트의 클래스 정보 셀렉트
+CREATE OR REPLACE VIEW classforhost
+as
+select c.*,s.SC_ENDDATE, s.SC_ENDTIME1, s.SC_ENDTIME2, s.SC_ENDTIME3, s.SC_NO, s.SC_STARTDATE, s.SC_STARTTIME1, s.SC_STARTTIME2, s.SC_STARTTIME3, s.SC_WEEK
+,b.BK_BDATE, b.BK_DATE, b.BK_ENDCHECK, b.BK_NO, b.BK_TIME, b.BK_USERID,
+ p.PM_CANCELCHECK, p.PM_COMPLETECHECK, p.PM_NO, p.PM_PAYMENTDATE, p.PM_PAYMENTWAY from class c left join CLASSSCHEDULE s
+on c.C_NO = s.C_NO left join  booking b
+on b.SC_NO = s.SC_NO left join payment p
+on p.BK_NO = b.BK_NO;
+select * from classforhost;

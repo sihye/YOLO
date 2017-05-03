@@ -8,18 +8,24 @@
 		<li><a href='<c:url value="/mypage/MyClass/PartClass.do"/>'>참여클래스</a></li>
 		<li><a href='<c:url value="/mypage/MyClass/Payment.do"/>'>결제내역</a></li>
 	</ul>
-	<h3>총 1개</h3>
+	<c:if test="${empty claList }">
+		<h3>아직 등록된 클래스가 없습니다.</h3>
+		<a href="<c:url value='/class/clacre.do'/>">클래스 등록하러 가기!</a>
+	</c:if>
+	<c:if test="${!empty claList }">
+	<h3>총${fn:length(claList) }개 </h3>
 	<br><BR>
 		
 		<select class="form-control">
 			<option>클래스이름</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
+			<c:forEach var="vo" items="${claList}">
+				<option value="${vo.cNo}">${vo.cName}</option>
+			</c:forEach>
 		</select>
 		
 		<br>
 		<h4>클래스 상세</h4>
+		<form name="" action="">
 		<table class="table">
 			<tbody>
 				<tr >
@@ -61,7 +67,8 @@
 				</tr>
 			</tbody>
 		</table>
-
+		</form>
+	</c:if>
 </div>
 
 <%@ include file="../mypagebottom.jsp"%>

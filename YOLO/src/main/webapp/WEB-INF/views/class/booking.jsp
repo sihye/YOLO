@@ -173,24 +173,6 @@ margin-top: 10px;
 					  </label>
 					</div>
 			    </td>
-				<!-- <td>
-					<div class="radio" style="margin-left: 10px;">
-					  <label>
-					    <input type="radio" class="payment" name="payment" id="" value="account" >
-					    	무통장입금
-					  </label>
-					</div>
-			    </td>
-			</tr>
-			<tr>
-				<td>
-				<div class="radio" style="margin-left: 10px;">
-				  <label>
-				    <input type="radio" class="payment" name="payment" id="" value="card" >
-				 	신용카드결제
-				  </label>
-				</div>
-				</td> -->
 			</tr>
 		</table>	
 		</div>
@@ -203,7 +185,8 @@ margin-top: 10px;
 		  </label>
 		</div>
 		</div>
-		
+		<!-- <input type="text">
+		<input type="submit" value="예약하기" class="button"> -->
 		<div class="divInfo container" id="booking">
 			<button class="button">예약하기</button>
 		</div>
@@ -214,47 +197,77 @@ margin-top: 10px;
 		//결제
 		IMP.init('imp97437286');
 		$(".button").click(function(){
-			console.log($(".payment").val())
-			console.log($("input[name=payment]").val())
 			if($("#infochk").is(":checked")){
-				if($("payment").val()=='card'){
+				if($("input[type=radio][name=payment]:checked").val()=='card'){
 					IMP.request_pay({
 					    pg : 'html5_inicis',
 					    pay_method : 'card',
 					    merchant_uid : 'merchant_' + new Date().getTime(),
-					    name : '주문명:결제테스트',
-					    amount : 14000,
-					    buyer_email : 'iamport@siot.do',
-					    buyer_name : '구매자이름',
-					    buyer_tel : '010-1234-5678',
-					    buyer_addr : '서울특별시 강남구 삼성동',
-					    buyer_postcode : '123-456'
+					    name : '주문명:${claVo.cName}',
+					    amount : 100/* ${claVo.cPrice} */,
+					    buyer_email : '${memVo.mEmail1}@${memVo.mEmail2}',
+					    buyer_name : '${memVo.mName}',
+					    buyer_tel : '${memVo.mTel1}-${memVo.mTel3}-${memVo.mTel3}'
 					}, function(rsp) {
 					    if ( rsp.success ) {
-					        var msg = '결제가 완료되었습니다.';
-					        msg += '고유ID : ' + rsp.imp_uid;
+					    	console.log("ajax 성공")
+					    	console.log(rsp.merchant_uid)
+					    	$.ajax({
+					    		url:'<c:url value="/class/bookingOk.do"/>',		
+					    		type:'POST',
+					    		data:{
+					    			scNo:'${bookVo.scNo}',
+					    			bkBdate:'${bookVo.bkBdate}',
+					    			bkTime:'${bookVo.bkTime}',	
+					    			pmNo:rsp.merchant_uid,
+					    			pmPaymentway:'card',
+					    			cNo:${claVo.cNo}
+					    		},
+					    		dataType:'json',
+					    		success:function(res){
+					    			alert('결제가 완료됐습니다.');
+					    			location.href="<c:url value='/class/payOk.do?cNo=${claVo.cNo}'/>";
+					    		},error:function(xhr,status,error){
+					    			alert('결제가 정보 입력 실패! 다시 시도해 주세요.');
+					    			history.back();
+					    		}
+					    	})
+					        
+					       /*  msg += '고유ID : ' + rsp.imp_uid;
 					        msg += '상점 거래ID : ' + rsp.merchant_uid;
 					        msg += '결제 금액 : ' + rsp.paid_amount;
-					        msg += '카드 승인번호 : ' + rsp.apply_num;
+					        msg += '카드 승인번호 : ' + rsp.apply_num; */
 					    } else {
 					        var msg = '결제에 실패하였습니다.';
 					        msg += '에러내용 : ' + rsp.error_msg;
-					    }
-					    
-					    alert(msg);
+					        alert(msg);
+					    }  
 					});
-				}else if($("input[name=payment]").val()=='account'){
+				}else if($("input[type=radio][name=payment]:checked").val()=='account'){
+					//입금기한 셋팅
+					var today = new Date();
+					today.setDate(today.getDate() + 3);
+					Date.prototype.yyyymmdd = function()
+					 {
+					     var yyyy = this.getFullYear().toString();
+					     var mm = (this.getMonth() + 1).toString();
+					     var dd = this.getDate().toString();
+					 
+					     return yyyy + (mm[1] ? mm : '0'+mm[0]) + (dd[1] ? dd : '0'+dd[0]);
+					 }
+					var day=(today).yyyymmdd();
+					console.log(day);
+					
 					IMP.request_pay({
 					    pg : 'html5_inicis',
 					    pay_method : 'vbank',
 					    merchant_uid : 'merchant_' + new Date().getTime(),
-					    name : '주문명:결제테스트',
-					    amount : 14000,
-					    buyer_email : 'iamport@siot.do',
-					    buyer_name : '구매자이름',
-					    buyer_tel : '010-1234-5678',
-					    buyer_addr : '서울특별시 강남구 삼성동',
-					    buyer_postcode : '123-456'
+					    vbank_due:'${day}',
+					    name : '주문명:${claVo.cName}',
+					    amount : ${claVo.cPrice},
+					    buyer_email : '${memVo.mEmail1}@${memVo.mEmail2}',
+					    buyer_name : '${memVo.mName}',
+					    buyer_tel : '${memVo.mTel1}-${memVo.mTel3}-${memVo.mTel3}'
 					}, function(rsp) {
 					    if ( rsp.success ) {
 					        var msg = '결제가 완료되었습니다.';
@@ -269,18 +282,16 @@ margin-top: 10px;
 					    
 					    alert(msg);
 					});
-				}else if($("input[name=payment]").val()=='kakao'){
+				}else if($("input[type=radio][name=payment]:checked").val()=='kakao'){
 					console.log($("input[name=payment]").val()=='kakao')
 					IMP.request_pay({
 					    pg : 'kakao',
 					    merchant_uid : 'merchant_' + new Date().getTime(),
-					    name : '주문명:결제테스트',
-					    amount : 14000,
-					    buyer_email : 'iamport@siot.do',
-					    buyer_name : '구매자이름',
-					    buyer_tel : '010-1234-5678',
-					    buyer_addr : '서울특별시 강남구 삼성동',
-					    buyer_postcode : '123-456'
+					    name : '주문명:${claVo.cName}',
+					    amount : ${claVo.cPrice},
+					    buyer_email : '${memVo.mEmail1}@${memVo.mEmail2}',
+					    buyer_name : '${memVo.mName}',
+					    buyer_tel : '${memVo.mTel1}-${memVo.mTel3}-${memVo.mTel3}'
 					}, function(rsp) {
 					    if ( rsp.success ) {
 					        var msg = '결제가 완료되었습니다.';

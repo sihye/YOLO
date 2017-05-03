@@ -11,5 +11,9 @@ public class BookingServiceImpl implements BookingService {
 	public int insertBooking(BookingVO vo) {
 		return bDAO.insertBooking(vo);
 	}
+	@Override
+	public int bookNum(int scNo) {
+		return bDAO.bookNum(scNo);
+	}
 
 }

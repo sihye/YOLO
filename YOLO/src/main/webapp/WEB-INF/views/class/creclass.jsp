@@ -799,8 +799,8 @@ body {
 										return false;
 									}
 									$(".wrp").append($("#clock").html());
-									$(".wrp div:last input:first").attr('name',"scStarttime"+ i);
-									$(".wrp div:last input:last").attr('name',"scEndtime"+ i);
+									$(".wrp div:last input:first").attr('id',"scStarttime"+ i);
+									$(".wrp div:last input:last").attr('id',"scEndtime"+ i);
 									i++;
 									$(".clockpick").clockpick({
 										starthour : 0,
@@ -808,6 +808,45 @@ body {
 										showminutes : false,
 										layout : 'Horizontal'
 									});
+									$("#scEndtime2").click(function(){
+										var sTime=0;	
+										var arr=$("#scStarttime2").val().split(' ');//12:00 , PM
+										console.log(arr);
+										if(arr[1]=='PM'){
+											var arr2=arr[0].split(":");//12,00
+											sTime=Number(arr2[0])+13;
+											console.log(sTime);
+										}else if(arr[1]=='AM'){
+											var arr2=arr[0].split(":");//12,00											
+											sTime=Number(arr2[0])+1;
+										}
+										$("#scEndtime2").clockpick({
+											starthour : sTime,
+											endhour : 23,
+											showminutes : false,
+											layout : 'Horizontal'
+										});
+									})
+									$("#scEndtime3").click(function(){
+										var sTime=0;	
+										var arr=$("#scStarttime3").val().split(' ');//12:00 , PM
+										console.log(arr);
+										if(arr[1]=='PM'){
+											var arr2=arr[0].split(":");//12,00
+											sTime=Number(arr2[0])+13;
+											console.log(sTime);
+										}else if(arr[1]=='AM'){
+											var arr2=arr[0].split(":");//12,00											
+											sTime=Number(arr2[0])+1;
+										}
+										$("#scEndtime3").clockpick({
+											starthour : sTime,
+											endhour : 23,
+											showminutes : false,
+											layout : 'Horizontal'
+										});
+									})
+									
 								})
 								$(".clockpick").clockpick({
 									starthour : 0,
@@ -839,7 +878,7 @@ body {
 										layout : 'Horizontal'
 									});
 								})
-								$("#scEndtime2").click(function(){
+								/* $("#scEndtime2").click(function(){
 									var sTime=0;
 									
 									var arr=$("#scStarttime2").val().split(' ');//12:00 , PM
@@ -884,7 +923,7 @@ body {
 										showminutes : false,
 										layout : 'Horizontal'
 									});
-								})
+								}) */
 								
 								
 							})

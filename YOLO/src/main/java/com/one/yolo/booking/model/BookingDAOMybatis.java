@@ -9,5 +9,9 @@ public class BookingDAOMybatis extends SqlSessionDaoSupport implements BookingDA
 	public int insertBooking(BookingVO vo) {
 		return getSqlSession().insert(nameSpace+".insertBooking", vo);
 	}
+	@Override
+	public int bookNum(int scNo) {
+		return getSqlSession().selectOne(nameSpace+".bookNum", scNo);
+	}
 
 }

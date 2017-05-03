@@ -19,4 +19,5 @@ public interface ClassDAO {
 	public List<Map<String, Object>> selectClassBykNo(SearchVO vo);
 	public int selectClassCount(SearchVO vo);
 	public ScheduleVO selSch(int cNo);
+	public List<ClassVO> selClaById(String userid);
 }
