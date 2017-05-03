@@ -240,7 +240,6 @@
 
 
 
-
 					<c:if
 						test="${param.hostId !=sessionScope.userid && vo.mUserid !=sessionScope.userid}">
 						<c:if test="${vo.cqSecretcheck=='Y'&& vo.cqRepaycheck=='N' }">
