@@ -4,4 +4,4 @@
 	</div>
 </body>
 </html>
-<%@ include file="../inc/bottom.jsp" %>
+<%@ include file="../inc/bottom.jsp" %> 
