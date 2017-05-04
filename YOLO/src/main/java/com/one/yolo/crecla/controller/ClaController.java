@@ -32,11 +32,13 @@ import com.one.yolo.classboard.model.ClassBoardService;
 import com.one.yolo.classboard.model.ClassBoardVO;
 import com.one.yolo.common.FileUploadWebUtil;
 import com.one.yolo.common.PaginationInfo;
+import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
 import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.crecla.model.ClassVO;
 import com.one.yolo.crecla.model.ScheduleVO;
 import com.one.yolo.upfile.model.UpfileService;
+import com.one.yolo.upfile.model.UpfileVO;
 
 @Controller
 @RequestMapping("/class")
@@ -55,8 +57,10 @@ public class ClaController {
 	private ClassBoardService claBoardService;
 	@Autowired
 	private BookingService bookService;
-
 	
+	@Autowired
+	private UpfileService upfileService;
+
 	//클래스 생성 페이지 보여주기
 	@RequestMapping(value="/clacre.do", method=RequestMethod.GET)
 	public String showClaCre_get(@RequestParam(defaultValue="0", required=false)int kgNo,Model model){
@@ -286,14 +290,53 @@ public class ClaController {
 		return "class/classBoardWrith";
 		
 	}
-	  @RequestMapping(value = "/fileup.do", method = RequestMethod.POST)
-	    public void classWrithImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload) {
+	@RequestMapping(value ="/classBoardWrith.do", method=RequestMethod.POST)
+	public String classBoardWrith_post(HttpSession session,@ModelAttribute ClassBoardVO claVo ,HttpServletRequest request, Model model){
+		logger.info("클래스 insert param vo={}",claVo);
+		String userid=(String)session.getAttribute("userid");		
+		logger.info("session userid={}",userid);
+		claVo.setmUserid(userid);
+		//파일 업로드 처리
+		List<Map<String, Object>> fileList= fileUploadWebUtil.fileUpload(request, FileUploadWebUtil.IMAGE_UPLOAD);
+		logger.info("업로드 이미지 filelist size={}",fileList.size());
 		
-		 List<Map<String, Object>> flist= fileUploadWebUtil.fileUpload(request,FileUploadWebUtil.IMAGE_UPLOAD);
-		 
-		 System.out.println("%%%%%%%%%%%%%%%%"+flist.size()+"%%%%%%%%%%%%"+flist.get(0).get("originalFileName")+"%%%%%%%%%%"+flist.get(0).get("fileName")+"#############"+flist.get(0).get("fileSize"));
-
+		
+		List<UpfileVO> upfileList = new ArrayList<UpfileVO>();
+		if(fileList !=null && !fileList.isEmpty()){
+			for(int i =0; i<fileList.size(); i++){
+				UpfileVO fvo = new UpfileVO();
+				fvo.setfFilename((String)fileList.get(i).get("fileName"));
+				fvo.setfFilesize((long)((Integer)fileList.get(i).get("fileSize")));
+				fvo.setfFilename((String)fileList.get(i).get("originFileName"));
+				upfileList.add(fvo);
+				upfileService.insertUpfile(fvo);
+			}
+			
+		
+			
+			if(!upfileList.isEmpty() && upfileList != null){
+				for(int i=0; i<upfileList.size(); i++){
+					if(i==0){
+						claVo.setfNo1(upfileList.get(i).getfNo());
+					}else if(i==1){
+						claVo.setfNo2(upfileList.get(i).getfNo());
+					}else if(i==2){
+						claVo.setfNo3(upfileList.get(i).getfNo());
+					}
+				}//for
+			}
+			int cnt = claBoardService.insertClassBoard(claVo);
+						
+			
+		}
+		
+		
+		//업로드 완료된 경우
+		String msg = "", url="";
 		
 
-	  }
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		return "common/message";
+	}
 }

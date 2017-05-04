@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
@@ -18,11 +19,12 @@
 	boolean isMultipart = ServletFileUpload.isMultipartContent(request);  //multipart로 전송되었는가 체크
 	if (isMultipart) {
 		// 설정단계
- 		File temporaryDir = new File("c:\\tmp\\");  //업로드된 파일의 임시 저장 폴더
- 		String realDir = config.getServletContext().getRealPath(request.getParameter("realDir"));  //실제 저장될 파일경로
+ 		File temporaryDir = new File("D:\temp");  //업로드된 파일의 임시 저장 폴더
+ 		String realDir ="D:\\my_github\\YOLO\\YOLO\\src\\main\\webapp\\upload";  //실제 저장될 파일경로
+ 		System.out.println("realDir ="+realDir);
  		String sFunc = request.getParameter("CKEditorFuncNum");
  		String realUrl = request.getParameter("realUrl");
-
+		System.out.println("realUrl= "+realUrl);
  		// 디스크 기반의 파일 아이템 팩토리 생성
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(1 * 1024 * 1024);  //최대 메모리 크기
@@ -46,6 +48,21 @@
 					boolean isInMemory = fileItem.isInMemory();
 					long sizeInBytes = fileItem.getSize();
 					
+					
+					String now = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());//현재 시간
+					
+					int i =-1;
+					i=fileName.lastIndexOf(".");//파일 확장자 위치
+					String realFileName =fileName.substring(0,i)+"_"+now + fileName.substring(i,fileName.length());
+					System.out.println("###########"+realFileName);
+					System.out.println("###########"+fileName);
+					File oldFile = new File(realDir,fileName);
+					System.out.println("oldFile ="+oldFile.getName());
+					File newFile = new File(realDir,realFileName);
+					System.out.println("realfilename ="+newFile.getName());
+					oldFile.renameTo(newFile);
+					System.out.println("########"+oldFile.getName());
+					
 					/* 
 			 		out.println("[realDir] : "+ realDir +"<br/>");
 			     	out.println("[fieldName] : "+ fieldName +"<br/>");
@@ -54,11 +71,12 @@
 			        out.println("[isInMemory] : "+ isInMemory +"<br/>");
 			        out.println("[sizeInBytes] : "+ sizeInBytes +"<br/>");
 			 		*/
-			 		
-			 		out.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + sFunc + ", '"+ realUrl + fileName + "', '완료');</script>");
+			 		System.out.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + sFunc + ", '"+ realUrl + realFileName + "', '완료');</script>");
 
 			 		try {
-			 			File uploadedFile = new File(realDir, fileName);
+			 			File uploadedFile = new File(realDir, realFileName);
+			 			boolean fbool = uploadedFile.exists();
+			 			System.out.println(uploadedFile.getName()+"########fbool = "+fbool);
 			 			fileItem.write(uploadedFile);  //실제 디렉토리에 카피
 			 			fileItem.delete();   //temp폴더의 파일 제거
 			 		} catch(IOException ex) {
