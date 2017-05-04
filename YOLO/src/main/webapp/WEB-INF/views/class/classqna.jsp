@@ -215,7 +215,8 @@
 								<input type="hidden" id="cqNo" value="${vo.cqNo }">
 								<p style="color: #b6b6b6">${vo.mUserid }님의질문</p>
 								<P>${vo.cqContent }</P>
-								<p style="text-align: right; color: #b6b6b6;">${vo.cRegdate }</p>
+								<p style="text-align: right; color: #b6b6b6;">${vo.cRegdate }
+								<a style="cursor: pointer;" name="pDel">삭제</a></p>
 							</div>
 							<c:forEach var="repayVo" items="${repayList }">
 								<c:if test="${vo.cqNo==repayVo.cqNo&&repayVo.cqrDelflag=='N' }">

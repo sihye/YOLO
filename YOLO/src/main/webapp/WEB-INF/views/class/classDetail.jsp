@@ -560,7 +560,7 @@ name="searchEndDate" value="${param.searchEndDate}">
 	</div>
   <div id="tabs-2">
   	<!-- 큐앤에이 -->
-  	<%-- <c:import url="/class/classqna.do"></c:import> --%>
+  	<c:import url="/class/classqna.do?cNo=${claVo.cNo }&hostId=${claVo.mUserid }"></c:import>
   </div>
    <div id="tabs-3" >
   	<!-- 후기 -->
