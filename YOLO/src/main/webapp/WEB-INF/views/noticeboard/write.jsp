@@ -52,8 +52,8 @@
         </div><br><br>
         <div class="col-md-12">  
         	<label class="col-sm-1 control-label" for="content">내용</label> 
-        	<!-- ckeditor 반영  -->
         	<div class="col-sm-10">   
+        	<!-- ckeditor 반영  -->
         	<textarea class="ckeditor" id="nbContent" name="nbContent" placeholder="내용" >${vo.nbContent}</textarea>
  			</div>
         </div>

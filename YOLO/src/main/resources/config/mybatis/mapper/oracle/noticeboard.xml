@@ -47,9 +47,24 @@
 		<selectKey keyProperty="nbNo" resultType="int" order="BEFORE">
 			select NOTICEBOARD_seq.nextval from dual
 		</selectKey>
-		 insert into noticeboard
-      	(NB_NO,M_USERID,BG_NO,NB_TITLE,NB_CONTENT,F_NO1,F_NO2,F_NO3)
-      	values(#{nbNo},#{mUserid},3,#{nbTitle},#{nbContent},#{fNo1},#{fNo2},#{fNo3})
+		<choose>
+			<when test="fNo1!=0 and fNo2!=0 and fNo3!=0">
+			 insert into noticeboard
+	      	(NB_NO,M_USERID,BG_NO,NB_TITLE,NB_CONTENT,F_NO1,F_NO2,F_NO3)
+	      	values(#{nbNo},#{mUserid},3,#{nbTitle},#{nbContent},#{fNo1},#{fNo2},#{fNo3})</when>
+			<when test="fNo1==0 and fNo2==0 and fNo3==0">
+			 insert into noticeboard
+	      	(NB_NO,M_USERID,BG_NO,NB_TITLE,NB_CONTENT)
+	      	values(#{nbNo},#{mUserid},3,#{nbTitle},#{nbContent})</when>
+			<when test="fNo1!=0 and fNo2==0 and fNo3==0">
+			 insert into noticeboard
+	      	(NB_NO,M_USERID,BG_NO,NB_TITLE,NB_CONTENT,F_NO1)
+	      	values(#{nbNo},#{mUserid},3,#{nbTitle},#{nbContent},#{fNo1})</when>
+			<when test="fNo1!=0 and fNo2!=0 and fNo3==0">
+			 insert into noticeboard
+	      	(NB_NO,M_USERID,BG_NO,NB_TITLE,NB_CONTENT,F_NO1,F_NO2)
+	      	values(#{nbNo},#{mUserid},3,#{nbTitle},#{nbContent},#{fNo1},#{fNo2})</when>
+		</choose>  	
 	</insert>
 	
 	<select id="selectNo" parameterType="int" resultType="NoticeboardVO">
@@ -64,9 +79,28 @@
 	</update>
 	
 	<update id="updateNotice" parameterType="NoticeboardVO">
+		<choose>
+		<when test="fNo1!=0 and fNo2!=0 and fNo3!=0">
+		update noticeboard
+			set NB_TITLE=#{nbTitle}, NB_CONTENT=#{nbContent}, F_NO1=#{fNo1}, F_NO2=#{fNo1}, F_NO3=#{fNo1}
+		where nb_no=#{nbNo}
+		</when>
+		<when test="fNo1!=0 and fNo2!=0 and fNo3==0">
+		update noticeboard
+			set NB_TITLE=#{nbTitle}, NB_CONTENT=#{nbContent}, F_NO1=#{fNo1}, F_NO2=#{fNo1}
+		where nb_no=#{nbNo}
+		</when>
+		<when test="fNo1!=0 and fNo2==0 and fNo3==0">
+		update noticeboard
+			set NB_TITLE=#{nbTitle}, NB_CONTENT=#{nbContent}, F_NO1=#{fNo1}
+		where nb_no=#{nbNo}
+		</when>
+		<when test="fNo1==0 and fNo2==0 and fNo3==0">
 		update noticeboard
 			set NB_TITLE=#{nbTitle}, NB_CONTENT=#{nbContent}
 		where nb_no=#{nbNo}
+		</when>
+	</choose>	
 	</update>
 	
 	<delete id="deleteNoticeoard" parameterType="int">

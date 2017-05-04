@@ -24,8 +24,7 @@
 </script>
 
 </head>
-<br>
-<br>
+
 <div class="col-md-10">
 <h2 align="center">공지사항 수정</h2>
 <br>
@@ -118,11 +117,10 @@
             </c:if>
 		</div>
 		</div>
-	</div>	
-	
 	</fieldset>
 </form>    
 </div>
+
 
 <%@ include file="boardbottom.jsp" %> 
 </body>
