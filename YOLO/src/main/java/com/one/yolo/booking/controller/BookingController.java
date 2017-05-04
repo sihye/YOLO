@@ -49,7 +49,8 @@ public class BookingController {
 		return "class/booking";
 	}
 	@RequestMapping("/bookingOk.do")
-	public void bookingOk(HttpSession session,@RequestParam int cNo, @ModelAttribute BookingVO bVo, @ModelAttribute PaymentVO pVo){
+	@ResponseBody
+	public boolean bookingOk(HttpSession session,@RequestParam int cNo, @ModelAttribute BookingVO bVo, @ModelAttribute PaymentVO pVo){
 		String userid=(String)session.getAttribute("userid");
 		bVo.setBk_Userid(userid);
 		logger.info("예약하기 파람 userid={}, booking vo={}",userid,bVo);
@@ -58,6 +59,11 @@ public class BookingController {
 		logger.info("payment vo={}",pVo);
 		int cnt=payService.insertPay(pVo, bVo);
 		logger.info("bookincontroll cnt={}",cnt);
+		boolean b=false;
+		if(cnt>0){
+			b=true;
+		}
+		return b;
 	
 	}
 	@RequestMapping("/payOk.do")

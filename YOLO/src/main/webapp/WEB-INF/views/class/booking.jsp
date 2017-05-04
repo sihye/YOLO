@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
+<script type="text/javascript">
+	$(function(){
+		IMP.init('imp97437286');
+	})
+</script>
 <style>
 .wrp{
 background-color: #f5f5f5;
@@ -187,138 +192,64 @@ margin-top: 10px;
 		</div>
 		
 		<div class="divInfo container" id="booking">
-			<button class="button">예약하기</button>
+			<button class="button" id="bookingGo">예약하기</button>
 		</div> 
-		
+		<!-- 결제 연동 ajax -->
+		<script type="text/javascript">
+			$(function() {
+				$(".button").click(function(){
+					if($("#infochk").is(":checked")){
+						if($("input[type=radio][name=payment]:checked").val()=='card'){
+							IMP.request_pay({
+								 pg : 'html5_inicis',
+								    pay_method : 'card',
+								    merchant_uid : 'merchant_' + new Date().getTime(),
+								    name : '주문명:${claVo.cName}',
+								    amount : 100/* ${claVo.cPrice} 테스트100원*/,
+								    buyer_email : '${memVo.mEmail1}@${memVo.mEmail2}',
+								    buyer_name : '${memVo.mName}',
+								    buyer_tel : '${memVo.mTel1}-${memVo.mTel3}-${memVo.mTel3}'
+							}, function(rsp) {
+							    if ( rsp.success ) {		    	
+							    	$.ajax({
+							    		url:'<c:url value="/class/bookingOk.do"/>',
+							    		type:'POST',
+							    		data:{scNo:'${bookVo.scNo}',
+							    			bkBdate:'${bookVo.bkBdate}',
+							    			bkTime:'${bookVo.bkTime}',	
+							    			pmNo:rsp.merchant_uid,
+							    			pmPaymentway:'card',
+							    			cNo:'${claVo.cNo}'
+						    			},
+							    		dataType:'json',
+							    		success:function(res){
+							    			alert('결제가 완료됐습니다.');
+							    			location.href="<c:url value='/class/payOk.do?cNo=${claVo.cNo}'/>";
+							    		},error:function(xhr, status, error){
+							    			alert('결제가 정보 입력 실패! 다시 시도해 주세요.');
+							    			console.log(error)
+							    			history.back();
+							    		}			    		
+							    	});			    	
+							    	/* 
+							        var msg = '결제가 완료되었습니다.';
+							        msg += '고유ID : ' + rsp.imp_uid;
+							        msg += '상점 거래ID : ' + rsp.merchant_uid;
+							        msg += '결제 금액 : ' + rsp.paid_amount;
+							        msg += '카드 승인번호 : ' + rsp.apply_num; */
+							    } else {
+							        var msg = '결제에 실패하였습니다.';
+							        msg += '에러내용 : ' + rsp.error_msg;
+							        alert(msg);
+							    }			    
+							});
+						}//결제수단 카드이면
+					}//동의 체크 if
+				})
+			});
+		</script>
 
 	</div>
 </div>
-<script type="text/javascript">
-	$(function(){
-		//결제
-		IMP.init('imp97437286');
-		$(".button").click(function(){
-			if($("#infochk").is(":checked")){
-				if($("input[type=radio][name=payment]:checked").val()=='card'){
-					IMP.request_pay({
-					    pg : 'html5_inicis',
-					    pay_method : 'card',
-					    merchant_uid : 'merchant_' + new Date().getTime(),
-					    name : '주문명:${claVo.cName}',
-					    amount : 100/* ${claVo.cPrice} */,
-					    buyer_email : '${memVo.mEmail1}@${memVo.mEmail2}',
-					    buyer_name : '${memVo.mName}',
-					    buyer_tel : '${memVo.mTel1}-${memVo.mTel3}-${memVo.mTel3}'
-					}, function(rsp) {
-					    if ( rsp.success ) {
-					    	console.log("ajax 성공")
-					    	console.log(rsp.merchant_uid)
-					    	$.ajax({
-					    		url:'<c:url value="/class/bookingOk.do"/>',		
-					    		type:'POST',
-					    		data:{
-					    			scNo:'${bookVo.scNo}',
-					    			bkBdate:'${bookVo.bkBdate}',
-					    			bkTime:'${bookVo.bkTime}',	
-					    			pmNo:rsp.merchant_uid,
-					    			pmPaymentway:'card',
-					    			cNo:${claVo.cNo}
-					    		},
-					    		dataType:'json',
-					    		success:function(res){
-					    			alert('결제가 완료됐습니다.');
-					    			location.href="<c:url value='/class/payOk.do?cNo=${claVo.cNo}'/>";
-					    		},error:function(xhr,status,error){
-					    			alert('결제가 정보 입력 실패! 다시 시도해 주세요.');
-					    			history.back();
-					    		}
-					    	})
-					        
-					       /*  msg += '고유ID : ' + rsp.imp_uid;
-					        msg += '상점 거래ID : ' + rsp.merchant_uid;
-					        msg += '결제 금액 : ' + rsp.paid_amount;
-					        msg += '카드 승인번호 : ' + rsp.apply_num; */
-					    } else {
-					        var msg = '결제에 실패하였습니다.';
-					        msg += '에러내용 : ' + rsp.error_msg;
-					        alert(msg);
-					    }  
-					});
-				}else if($("input[type=radio][name=payment]:checked").val()=='account'){
-					//입금기한 셋팅
-					var today = new Date();
-					today.setDate(today.getDate() + 3);
-					Date.prototype.yyyymmdd = function()
-					 {
-					     var yyyy = this.getFullYear().toString();
-					     var mm = (this.getMonth() + 1).toString();
-					     var dd = this.getDate().toString();
-					 
-					     return yyyy + (mm[1] ? mm : '0'+mm[0]) + (dd[1] ? dd : '0'+dd[0]);
-					 }
-					var day=(today).yyyymmdd();
-					console.log(day);
-					
-					IMP.request_pay({
-					    pg : 'html5_inicis',
-					    pay_method : 'vbank',
-					    merchant_uid : 'merchant_' + new Date().getTime(),
-					    vbank_due:'${day}',
-					    name : '주문명:${claVo.cName}',
-					    amount : ${claVo.cPrice},
-					    buyer_email : '${memVo.mEmail1}@${memVo.mEmail2}',
-					    buyer_name : '${memVo.mName}',
-					    buyer_tel : '${memVo.mTel1}-${memVo.mTel3}-${memVo.mTel3}'
-					}, function(rsp) {
-					    if ( rsp.success ) {
-					        var msg = '결제가 완료되었습니다.';
-					        msg += '고유ID : ' + rsp.imp_uid;
-					        msg += '상점 거래ID : ' + rsp.merchant_uid;
-					        msg += '결제 금액 : ' + rsp.paid_amount;
-					        msg += '카드 승인번호 : ' + rsp.apply_num;
-					    } else {
-					        var msg = '결제에 실패하였습니다.';
-					        msg += '에러내용 : ' + rsp.error_msg;
-					    }
-					    
-					    alert(msg);
-					});
-				}else if($("input[type=radio][name=payment]:checked").val()=='kakao'){
-					console.log($("input[name=payment]").val()=='kakao')
-					IMP.request_pay({
-					    pg : 'kakao',
-					    merchant_uid : 'merchant_' + new Date().getTime(),
-					    name : '주문명:${claVo.cName}',
-					    amount : ${claVo.cPrice},
-					    buyer_email : '${memVo.mEmail1}@${memVo.mEmail2}',
-					    buyer_name : '${memVo.mName}',
-					    buyer_tel : '${memVo.mTel1}-${memVo.mTel3}-${memVo.mTel3}'
-					}, function(rsp) {
-					    if ( rsp.success ) {
-					        var msg = '결제가 완료되었습니다.';
-					        msg += '고유ID : ' + rsp.imp_uid;
-					        msg += '상점 거래ID : ' + rsp.merchant_uid;
-					        msg += '결제 금액 : ' + rsp.paid_amount;
-					        msg += '카드 승인번호 : ' + rsp.apply_num;
-					    } else {
-					        var msg = '결제에 실패하였습니다.';
-					        msg += '에러내용 : ' + rsp.error_msg;
-					    }
-					    
-					    alert(msg);
-					});
-				}else{
-					alert("결제방법을 선택해 주세요!")
-					$(".payment").focus();
-				}
-					
-					
-				
-			}else{
-				alert("개인정보 제 3자 제공 동의에 관한 내용에 동의하셔야 결제가 진행됩니다.")
-				$("#infochk").focus();
-			}
-		})
-	})
-</script>
+
 <%@ include file="../inc/bottom.jsp"%>

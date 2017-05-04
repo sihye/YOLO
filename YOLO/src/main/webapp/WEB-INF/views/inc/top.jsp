@@ -119,17 +119,19 @@
          <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
             aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
-               <div class="modal-content">
+               <div class="modal-content" style="width: 500px; height: 600px;">
                   <div class="modal-header">
                      <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span> <span class="sr-only">Close</span>
                      </button>
-                     <h4 class="modal-title" id="myModalLabel">로그인</h4>
+                     <h4 class="modal-title" id="myModalLabel"><img style="width: 170px;
+    margin-left: 160px;" alt="" src="${pageContext.request.contextPath}/img/3.png"></h4>
                   </div>
                   <div class="modal-body">
                      <form name="frmLogin" id="frmLogin" method="post"
                         action="<c:url value='/login/login.do'/>">
-                        <fieldset>
+                        <%@ include file="../login/nowLogin.jsp" %>
+                        <%-- <fieldset>
 
                            <div>
                               <label for="userid" style="margin-right: 14px">&nbsp;&nbsp;&nbsp;아이디</label>
@@ -155,7 +157,7 @@
 
                            </div>
 
-                        </fieldset>
+                        </fieldset> --%>
                      </form>
 
                   </div>
