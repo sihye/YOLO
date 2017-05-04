@@ -89,15 +89,11 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport implements MemberDAO{
 	public int hostInsert(MemberVO vo) {
 		return getSqlSession().insert(namespace+".hostInsert",vo);
 	}
-	
-	
-	
-	
-	
 
-	
-	
-	
+	@Override
+	public String findUserid(MemberVO vo) {
+		return getSqlSession().selectOne(namespace+".findUserid", vo);
+	}
 	
 	
 	

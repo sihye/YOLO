@@ -72,6 +72,9 @@
 				>
 				<label for="chkId">아이디 저장하기</label><br>
 			</div>	
+			<div>
+				<a href="${pageContext.request.contextPath}/member/findUserid.do"></a>
+			</div>
 			<div class="align_center">
 				<button type="submit" class="btn btn-primary">로그인</button>
 				<button type="button" class="btn btn-primary">취소</button>

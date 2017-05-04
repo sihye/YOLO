@@ -23,6 +23,12 @@ public class ClassBoardServiceImpl implements ClassBoardService{
 	public int selectClassBoardCount(ClassBoardVO vo) {
 		return dao.selectClassBoardCount(vo);
 	}
+
+
+	@Override
+	public int insertClassBoard(ClassBoardVO vo) {
+		return dao.insertClassBoard(vo);
+	}
 	
 	
 	
