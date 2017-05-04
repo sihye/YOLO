@@ -52,11 +52,7 @@ $(document).ready(function() {
 		<textarea class="ckeditor" id="Contents" name="Contents"></textarea>
 		<script type="text/javascript">
 	CKEDITOR.replace( 'Contents',{
-			 'filebrowserUploadUrl':'<c:url value="/ckeditor/upload.jsp?'
-             +'realUrl=http://localhost:9090/yolo/class/uplod.do'
-             +'&realDir=/upload/"/>',
-	           
-	    
+			 'filebrowserUploadUrl':'/yolo/class/fileup.do'	    
 	});
 	
 	/* var editor;

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.one.yolo.booking.model.BookingService;
 import com.one.yolo.category.model.CategoryGroupVO;
@@ -31,13 +32,11 @@ import com.one.yolo.classboard.model.ClassBoardService;
 import com.one.yolo.classboard.model.ClassBoardVO;
 import com.one.yolo.common.FileUploadWebUtil;
 import com.one.yolo.common.PaginationInfo;
-import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
 import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.crecla.model.ClassVO;
 import com.one.yolo.crecla.model.ScheduleVO;
 import com.one.yolo.upfile.model.UpfileService;
-import com.one.yolo.upfile.model.UpfileVO;
 
 @Controller
 @RequestMapping("/class")
@@ -282,12 +281,19 @@ public class ClaController {
 	public String classBoardWrith(HttpSession session,@RequestParam int cNo,Model model){
 		String userid=(String)session.getAttribute("userid");
 		logger.info("classBoardWrith 화면 보여주기 userid={}, cNo={},",userid,cNo);
-		
 		model.addAttribute("userid",userid);
 		model.addAttribute("cNo",cNo);
-		
 		return "class/classBoardWrith";
 		
 	}
-	
+	  @RequestMapping(value = "/fileup.do", method = RequestMethod.POST)
+	    public void classWrithImageUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload) {
+		
+		 List<Map<String, Object>> flist= fileUploadWebUtil.fileUpload(request,FileUploadWebUtil.IMAGE_UPLOAD);
+		 
+		 System.out.println("%%%%%%%%%%%%%%%%"+flist.size()+"%%%%%%%%%%%%"+flist.get(0).get("originalFileName")+"%%%%%%%%%%"+flist.get(0).get("fileName")+"#############"+flist.get(0).get("fileSize"));
+
+		
+
+	  }
 }
