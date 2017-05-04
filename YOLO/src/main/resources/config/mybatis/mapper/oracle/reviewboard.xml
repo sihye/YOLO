@@ -39,8 +39,8 @@
 	<select id="selectReviewBoard" parameterType="SearchVO" resultMap="ReviewBoarddResult">
 		<!-- select*from reviewboard
 		<include refid="searchWhere"></include> -->
-		select CB_NO, C_NO,M_USERID,CB_TITLE,CB_CONTENT, CB_GRADE,
-			CB_FILENAME, CB_REGDATE, C_NAME
+		select CB_NO, C_NO,M_USERID,CB_TITLE,CB_CONTENT,
+		CB_REGDATE,F_NO1,F_NO2,F_NO3, C_NAME
 		from
 		(
 		    select rownum as RNUM ,LIST.*
