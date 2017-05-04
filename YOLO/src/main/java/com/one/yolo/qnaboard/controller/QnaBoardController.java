@@ -50,7 +50,7 @@ public class QnaBoardController {
 		logger.info("qna게시판-insert,파라미터 qnaBoardVo={}",qnaBoardVo);
 		
 		int cnt = qnaboardService.insertqna(qnaBoardVo);
-		String msg="",url="/class/claDetail.do?cNo="+qnaBoardVo.getcNo();
+		String msg="",url="/class/claDetail.do?cNo="+qnaBoardVo.getcNo()+"&boardtype=qna";
 		if(cnt>0){
 			msg="qna 등록 성공";
 		}else{
@@ -67,7 +67,7 @@ public class QnaBoardController {
 		qnaRepayVo.setmUserid(userid);
 		logger.info("qna답변-insert,파라미터 qnaRepayVo={},cNo={}",qnaRepayVo,cNo);
 		int cnt =qnaboardService.insertRepay(qnaRepayVo);
-		String msg="",url="/class/claDetail.do?cNo="+cNo;
+		String msg="",url="/class/claDetail.do?cNo="+cNo+"&boardtype=qna";
 		if(cnt>0){
 			msg="qna 답변등록 성공";
 		}else{
@@ -83,7 +83,7 @@ public class QnaBoardController {
 		
 		int cnt = qnaboardService.updateqnaDelflag(cqNo);
 		
-		String msg="",url="/class/claDetail.do?cNo="+cNo;
+		String msg="",url="/class/claDetail.do?cNo="+cNo+"&boardtype=qna";
 		if(cnt>0){
 			msg="qna 삭제 성공";
 		}else{
@@ -100,7 +100,7 @@ public class QnaBoardController {
 		
 		int cnt = qnaboardService.updaterepayDelflag(cqNo);
 		
-		String msg="",url="/class/claDetail.do?cNo="+cNo;
+		String msg="",url="/class/claDetail.do?cNo="+cNo+"&boardtype=qna";
 		if(cnt>0){
 			msg="qna답변 삭제 성공";
 		}else{
