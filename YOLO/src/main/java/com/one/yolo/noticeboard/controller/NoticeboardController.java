@@ -199,7 +199,7 @@ public class NoticeboardController {
 		long fileSize = 0;
 		if (!fileList.isEmpty()) {
 			int i = 0;
-			for (Map<String, Object> map : fileList) {
+			for (Map<String, Object> map : fileList) { 
 
 				UpfileVO upFileVo = new UpfileVO((String) map.get("fileName"), (String) map.get("originalFileName"),
 						(Long) map.get("fileSize"));

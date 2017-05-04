@@ -81,7 +81,7 @@
 	<update id="updateNotice" parameterType="NoticeboardVO">
 		<choose>
 		<when test="fNo1!=0 and fNo2!=0 and fNo3!=0">
-		update noticeboard
+		update noticeboard 
 			set NB_TITLE=#{nbTitle}, NB_CONTENT=#{nbContent}, F_NO1=#{fNo1}, F_NO2=#{fNo1}, F_NO3=#{fNo1}
 		where nb_no=#{nbNo}
 		</when>

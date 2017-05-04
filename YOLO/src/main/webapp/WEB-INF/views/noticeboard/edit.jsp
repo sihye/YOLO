@@ -101,7 +101,7 @@
 	            	${uv2.fOriginalfilename }</i> 은 삭제됩니다.	
 	            </span>
             </c:if>
-		</div>
+		</div> 
 		</div>
 		<div class="col-md-12">
 		<div class="col-md-1"></div>

@@ -66,7 +66,7 @@
            ="location.href='<c:url value="/noticeboard/list.do"/>'" />        
         </div><br><br>
  
-		<div class="col-md-12">
+		<div class="col-md-12"> 
 			<div class="col-md-10">
 			<div align="left" class="col-md-1"></div>
 				<label for="uploadFile">첨부파일</label><br>

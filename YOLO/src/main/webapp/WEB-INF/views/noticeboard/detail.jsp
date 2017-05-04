@@ -28,7 +28,7 @@
 			<c:if test="${empty uv1.fFilename }">
 				<span style="color:darkgreen;font-weight: bold">
 					"첨부파일이 없습니다"</span>
-			</c:if>
+			</c:if> 
 			<span class="col-md-10">
 			<c:if test="${!empty uv1.fFilename }">
 				<i class="fa fa-file-o" aria-hidden="true">${uv1.fOriginalfilename }(${uv1.fFilesize }byte)</i>
