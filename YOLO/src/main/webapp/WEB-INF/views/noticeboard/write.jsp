@@ -5,13 +5,13 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#frmWrite").submit(function(event){
-			if($("#title").val()==""){
+			if($("#nbTitle").val()==""){
 				alert("제목을 입력하세요");
-				$('#title').focus();
+				$('#nbTitle').focus();
 				event.preventDefault();
-			}else if($('#content').val()==""){
+			}else if($('#nbContent').val()==""){
 				alert("내용를 입력하세요");
-				$('#content').focus();
+				$('#nbContent').focus();
 				event.preventDefault();
 			}			
 		});
@@ -67,19 +67,23 @@
         </div><br><br>
  
 		<div class="col-md-12">
-        <div align="left" class="col-md-1"></div>
-        <div class="col-md-10">
-			<label for="uploadFile">첨부파일</label>        
-			<input type="file" name="fileMap[0]" id="upfile" size="36">
-		</div>
-		</div>
-		<div class="col-md-12">
-        <div align="left" class="col-md-1"></div> 
-			<input type="file" name="fileMap[1]" id="upfile" size="36">
+			<div class="col-md-10">
+			<div align="left" class="col-md-1"></div>
+				<label for="uploadFile">첨부파일</label><br>
+			</div>	        
+	        <div class="col-md-10">
+	        <div align="left" class="col-md-1"></div>
+				<input type="file" name="fileMap[0]" id="upfile" size="36">
 			</div>
-		<div class="col-md-12">
-        <div align="left" class="col-md-1"></div> 
-			<input type="file" name="fileMap[2]" id="upfile" size="36">
+				
+			<div class="col-md-10">
+	        <div align="left" class="col-md-1"></div> 
+				<input type="file" name="fileMap[1]" id="upfile" size="36">
+			</div>
+			
+			<div class="col-md-10">
+	        <div align="left" class="col-md-1"></div> 
+				<input type="file" name="fileMap[2]" id="upfile" size="36">
 			</div>
 		</div>
 
