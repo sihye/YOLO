@@ -49,6 +49,7 @@
 }
 </style>
 <script>
+	
 	$(function() {
 		$("#cqSecretcheck").click(function() {
 			if($(this).is(":checked")){
@@ -70,7 +71,7 @@
 		
 		//답글링크를 눌렀을때 에디터 창을 뿌려주는 이벤트, 삭제링크를 눌렀을때 해당 댓글을 삭제하는 이벤트
         $(document).on("click","#textarea a", function(){//동적으로 버튼이 생긴 경우 처리 방식
-        	var cqNo = $("#cqNo").val();   
+        	var cqNo =$(this).parent().parent().find('input[type="hidden"]').val();
         	var cqRepaycheck = $("#cqRepaycheck").val();   
             if($(this).attr("name")=="pDel"){
                 if (confirm("질문을 삭제 하시면 밑에 답글도 모두 삭제 됩니다. 정말 삭제하시겠습니까?") == true){    //확인
@@ -147,10 +148,10 @@
 			<c:forEach var="vo" items="${qnaList }">
 				<c:if test="${vo.cqDelflag=='N' }">
 					<c:if test="${param.hostId ==sessionScope.userid }">
-						<c:if test="${vo.cqRepaycheck=='N' }">
+						<c:if test="${vo.cqRepaycheck=='N'}">
 							<div id="textarea" contentEditable="inherit">
-								<input type="hidden" id="cqNo" value="${vo.cqNo }"> <input
-									type="hidden" id="cqRepaycheck" value="${vo.cqRepaycheck }">
+								<input type="hidden" id="cqNo" value="${vo.cqNo }"> 
+								<input type="hidden" id="cqRepaycheck" value="${vo.cqRepaycheck }">
 								<p style="color: #b6b6b6">${vo.mUserid }님의질문</p>
 								<P>${vo.cqContent }</P>
 								<p style="text-align: right; color: #b6b6b6;">
@@ -160,7 +161,7 @@
 								</p>
 							</div>
 						</c:if>
-						<c:if test="${vo.cqRepaycheck=='Y' }">
+						<c:if test="${vo.cqRepaycheck=='Y'}">
 							<div id="textarea" contentEditable="inherit">
 								<input type="hidden" id="cqNo" value="${vo.cqNo }"> <input
 									type="hidden" id="cqRepaycheck" value="${vo.cqRepaycheck }">
@@ -170,7 +171,7 @@
 										style="cursor: pointer;" name="pDel">삭제</a></p>
 							</div>
 							<c:forEach var="repayVo" items="${repayList }">
-								<c:if test="${vo.cqNo==repayVo.cqNo &&repayVo.cqrDelflag=='N'}">
+								<c:if test="${vo.cqNo==repayVo.cqNo && repayVo.cqrDelflag=='N'}">
 									<div class="row">
 										<div class="col-md-1">
 											<img alt="a이미지" src='<c:url value="/img/aimg.png"/>'
@@ -178,6 +179,8 @@
 										</div>
 										<div class="col-md-11">
 											<div id="textarea" contentEditable="false">
+												<input type="hidden" id="cqNo" value="${vo.cqNo }"> <input
+									type="hidden" id="cqRepaycheck" value="${vo.cqRepaycheck }">
 												<p style="color: #b6b6b6">호스트 답변</p>
 												<p>${repayVo.cqrContent }</p>
 												<p style="text-align: right; color: #b6b6b6;">
@@ -190,6 +193,7 @@
 								</c:if>
 							</c:forEach>
 						</c:if>
+						
 					</c:if>
 
 
@@ -211,7 +215,7 @@
 						</c:if>
 						<c:if test="${vo.cqRepaycheck=='Y' }">
 							<div id="textarea" contentEditable="inherit">
-								<input type="hidden" id="cqNo" value="${vo.cqNo }">
+								
 								<p style="color: #b6b6b6">${vo.mUserid }님의질문</p>
 								<P>${vo.cqContent }</P>
 								<p style="text-align: right; color: #b6b6b6;">${vo.cRegdate }
@@ -226,6 +230,7 @@
 										</div>
 										<div class="col-md-11">
 											<div id="textarea" contentEditable="false">
+												<input type="hidden" id="cqNo" value="${vo.cqNo }">
 												<p style="color: #b6b6b6">호스트 답변</p>
 												<p>${repayVo.cqrContent }</p>
 												<p style="text-align: right; color: #b6b6b6;">
