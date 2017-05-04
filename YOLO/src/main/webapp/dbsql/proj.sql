@@ -484,17 +484,15 @@ add constraint NOTICEBOARD_FNO3_fk foreign key (f_no3) references upfile(f_no);
 
 -- 이용안내
 CREATE TABLE useboard (
-	UB_NO        NUMBER        NOT NULL, -- 게시판번호
-	M_USERID     VARCHAR2(500) NOT NULL, -- 운영자아이디
-	BG_NO        NUMBER        NOT NULL, -- 게시판분류번호
-	UB_TITLE     VARCHAR2(500) NOT NULL, -- 제목
-	UB_REGDATE   DATE          DEFAULT sysdate NULL     , -- 등록일
-	UB_READCOUNT NUMBER        DEFAULT 0 NULL     , -- 조회수
-	UB_CONTENT   CLOB          NOT NULL, -- 내용
-	UB_DELFLAG   VARCHAR2(500) DEFAULT 'N' NULL  ,    -- 삭제구분
-	F_NO1	     NUMBER	NULL        ,       --파일1
-	F_NO2	     NUMBER	NULL	    ,	
-	F_NO3	     NUMBER	NULL
+   UB_NO        NUMBER        NOT NULL, -- 게시판번호
+   M_USERID     VARCHAR2(500) NOT NULL, -- 운영자아이디
+   BG_NO        NUMBER        NOT NULL, -- 게시판분류번호
+   UB_TITLE     VARCHAR2(500) NOT NULL, -- 제목
+   UB_REGDATE   DATE          DEFAULT sysdate NULL     , -- 등록일
+   UB_READCOUNT NUMBER        DEFAULT 0 NULL     , -- 조회수
+   UB_CONTENT   CLOB          NOT NULL, -- 내용
+   UB_DELFLAG   VARCHAR2(500) DEFAULT 'N' NULL  ,    -- 삭제구분
+   UB_TYPE      NUMBER          DEFAULT 1 not NULL       --파일1
 );
 
 -- 이용안내 기본키
@@ -511,14 +509,6 @@ ALTER TABLE useboard
 			UB_NO -- 게시판번호
 		);
 
-alter table USEBOARD
-add constraint USEBOARD_FNO1_fk foreign key (f_no1) references upfile(f_no);
-
-alter table USEBOARD
-add constraint USEBOARD_FNO2_fk foreign key (f_no2) references upfile(f_no);
-
-alter table USEBOARD
-add constraint USEBOARD_FNO3_fk foreign key (f_no3) references upfile(f_no);
 
 
 -- 찜하기

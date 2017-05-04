@@ -185,11 +185,12 @@ margin-top: 10px;
 		  </label>
 		</div>
 		</div>
-		<!-- <input type="text">
-		<input type="submit" value="예약하기" class="button"> -->
+		
 		<div class="divInfo container" id="booking">
 			<button class="button">예약하기</button>
-		</div>
+		</div> 
+		
+
 	</div>
 </div>
 <script type="text/javascript">

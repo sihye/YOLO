@@ -141,36 +141,36 @@ insert into upfile
 values(UPFILE_seq.nextval,'file1','file2',1024);
 insert into upfile
 values(UPFILE_seq.nextval,'file1','file3',1024);
-
+commit;
 --classqnaboard
 select*from classqnaboard;
-
+select * from class;
 insert into classqnaboard
-values(CLASSQNABOARD_seq.nextval,1,'hong','fdsfs','N','N','N',sysdate);
+values(CLASSQNABOARD_seq.nextval,2,'test','fdsfs','N','N','N',sysdate);
 insert into classqnaboard
-values(CLASSQNABOARD_seq.nextval,1,'kim','fdsfs','N','N','N',sysdate);
+values(CLASSQNABOARD_seq.nextval,3,'test','fdsfs','N','N','N',sysdate);
 insert into classqnaboard
-values(CLASSQNABOARD_seq.nextval,1,'chang','fdsfs','N','N','N',sysdate);
+values(CLASSQNABOARD_seq.nextval,3,'test','fdsfs','N','N','N',sysdate);
 insert into classqnaboard
-values(CLASSQNABOARD_seq.nextval,1,'hong','fdsfs','N','N','N','2017-04-06');
+values(CLASSQNABOARD_seq.nextval,4,'test','fdsfs','N','N','N','2017-04-06');
 insert into classqnaboard
-values(CLASSQNABOARD_seq.nextval,4,'hong','fdsfs','N','N','N','2017-03-06');
+values(CLASSQNABOARD_seq.nextval,4,'test','fdsfs','N','N','N','2017-03-06');
 insert into classqnaboard
-values(CLASSQNABOARD_seq.nextval,5,'hong','fdsfs','N','N','N','2016-12-06');
+values(CLASSQNABOARD_seq.nextval,5,'test','fdsfs','N','N','N','2016-12-06');
 
 --classboard
 select*from classboard;
 
 insert into CLASSBOARD
-values(CLASSBOARD_seq.nextval,1,'hong','후기',sysdate,0,'fdsfsdsf',4,'fdsds');
+values(CLASSBOARD_seq.nextval,2,'hong','후기',sysdate,0,'fdsfsdsf',3,3,3);
 insert into CLASSBOARD
-values(CLASSBOARD_seq.nextval,1,'kim','후기',sysdate,0,'fdsfsdsf',4,'fdsds');
+values(CLASSBOARD_seq.nextval,2,'kim','후기',sysdate,0,'fdsfsdsf',3,3,3);
 insert into CLASSBOARD
-values(CLASSBOARD_seq.nextval,1,'chang','후기',sysdate,0,'fdsfsdsf',4,'fdsds');
+values(CLASSBOARD_seq.nextval,3,'kim','후기',sysdate,0,'fdsfsdsf',3,3,3);
 insert into CLASSBOARD
-values(CLASSBOARD_seq.nextval,4,'chang','후기','2014-03-15',0,'fdsfsdsf',4,'fdsds');
+values(CLASSBOARD_seq.nextval,4,'hong','후기','2014-03-15',0,'fdsfsdsf',3,3,3);
 insert into CLASSBOARD
-values(CLASSBOARD_seq.nextval,5,'chang','후기','2014-01-13',0,'fdsfsdsf',4,'fdsds');
+values(CLASSBOARD_seq.nextval,5,'hong','후기','2014-01-13',0,'fdsfsdsf',3,3,3);
 
 
 --boardgroup
@@ -198,36 +198,51 @@ values(3,'chang',3,'qwer',sysdate,3,'내~용','N');
 
 -- 이용안내
 select*from useboard;
-
+--commit;
 insert into useboard
-(UB_NO,M_USERID,BG_NO,UB_TITLE,UB_REGDATE,UB_READCOUNT,UB_CONTENT,UB_DELFLAG)
-values(1,'hong',1,'M',sysdate,'5','내용1','Y');
+(UB_NO,M_USERID,BG_NO,UB_TITLE,UB_REGDATE,UB_READCOUNT,UB_CONTENT,UB_DELFLAG,UB_TYPE)
+values(1,'hong',1,'M',sysdate,'5','내용1','Y',1);
 insert into useboard
-(UB_NO,M_USERID,BG_NO,UB_TITLE,UB_REGDATE,UB_READCOUNT,UB_CONTENT,UB_DELFLAG)
-values(2,'kim',1,'M',sysdate,'5','내용2','Y');
+(UB_NO,M_USERID,BG_NO,UB_TITLE,UB_REGDATE,UB_READCOUNT,UB_CONTENT,UB_DELFLAG,UB_TYPE)
+values(2,'hong',1,'M',sysdate,'5','내용1','Y',1);
 insert into useboard
-(UB_NO,M_USERID,BG_NO,UB_TITLE,UB_REGDATE,UB_READCOUNT,UB_CONTENT,UB_DELFLAG)
-values(3,'chang',1,'M',sysdate,'5','내용3','Y');
-
+(UB_NO,M_USERID,BG_NO,UB_TITLE,UB_REGDATE,UB_READCOUNT,UB_CONTENT,UB_DELFLAG,UB_TYPE)
+values(3,'hong',1,'M',sysdate,'5','내용1','Y',2);
+insert into useboard
+(UB_NO,M_USERID,BG_NO,UB_TITLE,UB_REGDATE,UB_READCOUNT,UB_CONTENT,UB_DELFLAG,UB_TYPE)
+values(4,'hong',1,'M',sysdate,'5','내용1','Y',2);
+insert into useboard
+(UB_NO,M_USERID,BG_NO,UB_TITLE,UB_REGDATE,UB_READCOUNT,UB_CONTENT,UB_DELFLAG,UB_TYPE)
+values(5,'hong',1,'M',sysdate,'5','내용1','Y',2);
+insert into useboard
+(UB_NO,M_USERID,BG_NO,UB_TITLE,UB_REGDATE,UB_READCOUNT,UB_CONTENT,UB_DELFLAG,UB_TYPE)
+values(6,'hong',1,'M',sysdate,'5','내용1','Y',3);
+insert into useboard
+(UB_NO,M_USERID,BG_NO,UB_TITLE,UB_REGDATE,UB_READCOUNT,UB_CONTENT,UB_DELFLAG,UB_TYPE)
+values(7,'hong',1,'M',sysdate,'5','내용1','Y',3);
 
 -- 찜하기
 select*from shoppingbasket ;
 
 insert into shoppingbasket
-(SB_NO,SB_USERID,C_NO,SC_REGDATE,SC_NO)
-values(SHOPPINGBASKET_seq.nextval,'hong',1,sysdate,1);
+(SB_NO,SB_USERID,C_NO,SC_REGDATE,sc_no)
+values(SHOPPINGBASKET_seq.nextval,'hong',2,sysdate,1);
 insert into shoppingbasket
-(SB_NO,SB_USERID,C_NO,SC_REGDATE)
-values(SHOPPINGBASKET_seq.nextval,'kim',1,sysdate,2);
+(SB_NO,SB_USERID,C_NO,SC_REGDATE,sc_no)
+values(SHOPPINGBASKET_seq.nextval,'hong',3,sysdate,2);
 insert into shoppingbasket
-(SB_NO,SB_USERID,C_NO,SC_REGDATE)
-values(SHOPPINGBASKET_seq.nextval,'chang',1,sysdate,1);
+(SB_NO,SB_USERID,C_NO,SC_REGDATE,sc_no)
+values(SHOPPINGBASKET_seq.nextval,'hong',4,sysdate,3);
 insert into shoppingbasket
-(SB_NO,SB_USERID,C_NO,SC_REGDATE)
-values(SHOPPINGBASKET_seq.nextval,'hong',2,sysdate);
+(SB_NO,SB_USERID,C_NO,SC_REGDATE,sc_no)
+values(SHOPPINGBASKET_seq.nextval,'hong',5,sysdate,1);
 insert into shoppingbasket
-(SB_NO,SB_USERID,C_NO,SC_REGDATE)
-values(SHOPPINGBASKET_seq.nextval,'hong',3,sysdate);
+(SB_NO,SB_USERID,C_NO,SC_REGDATE,sc_no)
+values(SHOPPINGBASKET_seq.nextval,'hong',3,sysdate,2);
+
+
+
+
 
 
 -- 결제
@@ -320,10 +335,10 @@ insert into notify
 values(3,'신고3','개인취향');
 
 insert into follow
-values(FOLLOW_seq.nextval,'hong','kim',sysdate);
+values(FOLLOW_seq.nextval,'test','kim',sysdate);
 insert into follow
-values(FOLLOW_seq.nextval,'hong','chang',sysdate);
+values(FOLLOW_seq.nextval,'test','test',sysdate);
 insert into follow
-values(FOLLOW_seq.nextval,'hong','hong',sysdate);
+values(FOLLOW_seq.nextval,'test','hong',sysdate);
 
 commit;
