@@ -112,7 +112,7 @@ public class MemberController {
 	
 	@RequestMapping("/join.do")
 	public String join(@ModelAttribute MemberVO memberVo,
-			@RequestParam(value="email3" ,required=false) String email3,
+			@RequestParam(value="mEmail3" ,required=false) String email3,
 			@RequestParam int[] kno,Model model){
 		
 		for(int i:kno){
@@ -230,6 +230,50 @@ public class MemberController {
 			model.addAttribute("url", url);
 			
 			return "common/message";
+	      
+	      
+	   
+	   }
+	
+	@RequestMapping(value="/findPwd.do",method=RequestMethod.GET)
+	public String findPwd_get(){
+		logger.info("비밀번호찾기 보여주기");
+		
+		return "member/findPwd";
+	}
+	
+	@RequestMapping(value="/findPwd.do")
+	   public String findPwd_post(@RequestParam String mName, @RequestParam String mUserid,Model model){
+	      logger.info("비밀번호 찾기");
+	      MemberVO memberVo = new MemberVO();
+	      memberVo.setmName(mName);
+	      memberVo.setmUserid(mUserid);
+	      
+	      String result = memberService.findPwd(memberVo);
+	      
+	      logger.info("결과 result = {}",result);
+	      
+	      MemberVO vo = new MemberVO();
+	      
+	      vo.setmUserid(result);
+	   
+	      model.addAttribute("result", result);
+	      model.addAttribute("mName", mName);
+	      model.addAttribute("mUserid", mUserid);
+	      
+	     String msg="", url="member/findPwd.do";
+			if(result==null){
+				msg="이름 또는 이메일이 일치하지 않습니다";
+				url="/member/findPwd.do";
+			}
+			
+			//3
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			
+			return "common/message";
+	      
+	  
 	      
 	      
 	   

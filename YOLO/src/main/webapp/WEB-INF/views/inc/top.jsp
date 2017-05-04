@@ -130,8 +130,8 @@
                   <div class="modal-body">
                      <form name="frmLogin" id="frmLogin" method="post"
                         action="<c:url value='/login/login.do'/>">
-                        <%@ include file="../login/nowLogin.jsp" %>
-                        <%-- <fieldset>
+                        <%-- <%@ include file="../login/nowLogin.jsp" %> --%>
+                         <fieldset>
 
                            <div>
                               <label for="userid" style="margin-right: 14px">&nbsp;&nbsp;&nbsp;아이디</label>
@@ -157,7 +157,7 @@
 
                            </div>
 
-                        </fieldset> --%>
+                        </fieldset> 
                      </form>
 
                   </div>

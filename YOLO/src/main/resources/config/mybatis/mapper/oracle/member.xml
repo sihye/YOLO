@@ -73,6 +73,13 @@
 		where m_name=#{mName} and m_email1=#{mEmail1} and m_email2=#{mEmail2}
 	</select>
 	
+	<select id="findPwd" parameterType="memberVO" resultType="String">
+		select q.Q_QUESTIONNAME
+		from member m, question q
+		where m.q_questionno = q.q_questionno
+		and m.m_name=#{mName}
+	</select>
+	
 	<select id="duplicateUserid" parameterType="string" 
 		resultType="int">
 		select count(*) from member
