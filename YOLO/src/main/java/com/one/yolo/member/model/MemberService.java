@@ -35,4 +35,6 @@ public interface MemberService {
 	
 	public int hostInsert(MemberVO vo);
 	
+	public String findUserid(MemberVO vo);
+	
 }

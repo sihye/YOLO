@@ -138,6 +138,7 @@
 
 <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 
+<nav>
 <article>
 <div class="divForm">
 	<form id="frm1" name="frm1" method="post"
@@ -271,7 +272,7 @@
 							type=checkbox name="kno">${c.kName}
 						</c:if>
 					</c:forEach><br>
-				</c:forEach>
+				</c:forEach><br>
 				</FORM>
 			<div> 
 				<input type="hidden" name="mgNo2" id="mgNo2" style="ime-mode: active" value="2">

@@ -12,6 +12,8 @@ $(document).ready(function(){
 			$('#email3').css("visibility","hidden");
 		}
 	});
+	
+	
 /*
 	$("#btnZipcode").click(function(){
 		window.open("/herb/zipcode/zipcode.do","zip",

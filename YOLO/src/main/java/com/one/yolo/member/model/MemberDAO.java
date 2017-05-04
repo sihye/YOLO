@@ -23,5 +23,7 @@ public interface MemberDAO {
 	public int HostSeletCount(SearchVO vo);
 	public List<Map<String, Object>> HostExcelView(SearchVO vo);
 	public int hostInsert(MemberVO vo);
+	
+	public String findUserid(MemberVO vo);
 
 }

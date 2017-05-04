@@ -68,6 +68,11 @@
 			
 	</insert>
 	
+	<select id="findUserid" parameterType="memberVO" resultType="String">
+		select m_userid from member
+		where m_name=#{mName} and m_email1=#{mEmail1} and m_email2=#{mEmail2}
+	</select>
+	
 	<select id="duplicateUserid" parameterType="string" 
 		resultType="int">
 		select count(*) from member

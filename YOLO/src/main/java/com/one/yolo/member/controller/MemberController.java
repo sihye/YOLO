@@ -192,6 +192,48 @@ public class MemberController {
 				return "common/message";
 			}
 	
+	@RequestMapping(value="/findUserid.do",method=RequestMethod.GET)
+	public String findUserid_get(){
+		logger.info("아이디찾기 보여주기");
+		
+		return "member/findUserid";
+	}
+	
+	@RequestMapping(value="/findUserid.do")
+	   public String findUserid(@RequestParam String mName, @RequestParam String mEmail1, @RequestParam String mEmail2,Model model){
+	      logger.info("아이디 찾기");
+	      MemberVO memberVo = new MemberVO();
+	      memberVo.setmName(mName);
+	      memberVo.setmEmail1(mEmail1);
+	      memberVo.setmEmail2(mEmail2);
+	      String result = memberService.findUserid(memberVo);
+	      logger.info("결과 result = {}",result);
+	      
+	      MemberVO vo = new MemberVO();
+	      vo.setmUserid(result);
+	   
+	      model.addAttribute("result", result);
+	      model.addAttribute("mName", mName);
+	      model.addAttribute("mEmail1", mEmail1);
+	      model.addAttribute("mEmail2", mEmail2);
+	      
+	      String msg="", url="/index2.do";
+			if(result!=null){
+				msg=mName+ "님 " +result;	
+			}else{
+				msg="이름 또는 이메일이 일치하지 않습니다";
+				url="/member/findUserid.do";
+			}
+			
+			//3
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			
+			return "common/message";
+	      
+	      
+	   
+	   }
 	
 	@RequestMapping(value="/memberEdit.do", method=RequestMethod.GET)
 	public String edit_get(HttpSession session, Model model){
@@ -265,10 +307,6 @@ public class MemberController {
 		return "common/message";
 	}
 
-	
-	
-	
-	
 	@RequestMapping("/checkUserid.do")
 	public String checkUserid(@RequestParam String userid,
 			Model model){

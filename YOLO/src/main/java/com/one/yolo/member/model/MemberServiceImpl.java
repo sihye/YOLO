@@ -116,6 +116,11 @@ public class MemberServiceImpl implements MemberService{
 	public int hostInsert(MemberVO vo) {
 		return memberDao.hostInsert(vo);
 	}
+
+	@Override
+	public String findUserid(MemberVO vo) {
+		return memberDao.findUserid(vo);
+	}
 	
 	
 	

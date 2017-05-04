@@ -108,14 +108,14 @@
 		<div class="container"> 
 		<h3>탈퇴 사유</h3> 
 		<select class="form-control" style="width: 60%" id="email2" name="mReason"> 
-		<option value="1">잣같아서</option> 
-		<option value="2">그냥</option> 
-		<option value="3">쏘쏘</option> 
-		<option value="4">엑쏘</option> 
-		<option value="5">트와이스</option> 
+		<option value="서비스 불만">서비스 불만</option> 
+		<option value="그냥">그냥</option> 
+		<option value="쏘쏘">쏘쏘</option> 
+		<option value="엑쏘">엑쏘</option> 
+		<option value="트와이스">트와이스</option> 
 		<option value="etc">직접입력</option>
 		</select><br>
-		<input type="text" style="visibility:hidden; width: 60%" name="mReason">
+		<input type="text" style="visibility:hidden; width: 60%" name="mReason" id="email3" >
 		</div>
 		<br>
 	
