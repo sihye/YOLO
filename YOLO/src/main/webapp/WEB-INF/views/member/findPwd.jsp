@@ -48,6 +48,7 @@
 			<button type="submit" class="btn btn-primary btn-sm">아이디 확인</button>
 			<c:if test="${result!=null}">
 				<p>${result}</p>
+				<input type="text">
 			</c:if>
 			
 		</form>

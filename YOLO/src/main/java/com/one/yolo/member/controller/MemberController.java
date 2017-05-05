@@ -263,15 +263,23 @@ public class MemberController {
 	      logger.info(mName);
 	      logger.info(mUserid);
 	      
-	    /* String msg="", url="";
+	    String msg="", url="";
 			if(result==null){
 				msg="이름 또는 이메일이 일치하지 않습니다";
 				url="/member/findPwd.do";
+				
+				model.addAttribute("msg", msg);
+				model.addAttribute("url", url);
+				
+				return "common/message";
+			}else{
+				msg="이름 또는 이메일이 일치";
+				
 			}
 			
 			//3
 			model.addAttribute("msg", msg);
-			model.addAttribute("url", url);*/
+			model.addAttribute("url", url);
 			
 			return "member/findPwd";
 	      
