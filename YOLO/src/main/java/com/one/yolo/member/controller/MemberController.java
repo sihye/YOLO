@@ -254,14 +254,16 @@ public class MemberController {
 	      logger.info("결과 result = {}",result);
 	      
 	      MemberVO vo = new MemberVO();
-	      
-	      vo.setmUserid(result);
+
 	   
 	      model.addAttribute("result", result);
 	      model.addAttribute("mName", mName);
 	      model.addAttribute("mUserid", mUserid);
 	      
-	     String msg="", url="member/findPwd.do";
+	      logger.info(mName);
+	      logger.info(mUserid);
+	      
+	    /* String msg="", url="";
 			if(result==null){
 				msg="이름 또는 이메일이 일치하지 않습니다";
 				url="/member/findPwd.do";
@@ -269,11 +271,11 @@ public class MemberController {
 			
 			//3
 			model.addAttribute("msg", msg);
-			model.addAttribute("url", url);
+			model.addAttribute("url", url);*/
 			
-			return "common/message";
+			return "member/findPwd";
 	      
-	  
+	     
 	      
 	      
 	   

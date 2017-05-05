@@ -46,13 +46,10 @@
 			<input type="text" name="mUserid" id="mUserid" 
 				value="${param.userid}">
 			<button type="submit" class="btn btn-primary btn-sm">아이디 확인</button>
-			<c:if test="${result!=null}"> <!-- 이미 아이디 존재 -->
+			<c:if test="${result!=null}">
 				<p>${result}</p>
 			</c:if>
-			<c:if test="${result== NONE_EXIST_ID}"> <!-- 아이디 존재하지 않음 -->
-				<button type="button" class="btn btn-primary btn-sm" id="btUse">사용하기</button>
-				<p>사용가능한 아이디입니다. [사용하기]버튼을 클릭하세요</p>
-			</c:if>
+			
 		</form>
 	</div>
 

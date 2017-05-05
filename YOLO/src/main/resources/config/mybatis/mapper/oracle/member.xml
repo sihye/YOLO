@@ -77,7 +77,7 @@
 		select q.Q_QUESTIONNAME
 		from member m, question q
 		where m.q_questionno = q.q_questionno
-		and m.m_name=#{mName}
+		and m.m_name=#{mName} and m.m_userid=#{mUserid}
 	</select>
 	
 	<select id="duplicateUserid" parameterType="string" 
