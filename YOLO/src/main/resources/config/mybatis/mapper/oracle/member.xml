@@ -80,6 +80,12 @@
 		and m.m_name=#{mName} and m.m_userid=#{mUserid}
 	</select>
 	
+	<select id="findPwd1" parameterType="memberVO" resultType="String">
+		select m_pwd 
+		from member
+		where m_birth=#{mBirth} and m_questionanswer=#{mQuestionanswer}
+	</select>
+	
 	<select id="duplicateUserid" parameterType="string" 
 		resultType="int">
 		select count(*) from member
