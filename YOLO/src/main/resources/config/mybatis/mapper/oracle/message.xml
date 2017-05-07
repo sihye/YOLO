@@ -40,20 +40,20 @@
 		 	and searchEndDate !=null and searchEndDate !=''" >
 				where MS_USERID like '%'|| #{searchKeyword} ||'%'
 			and MS_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
-			and to_date(#{searchEndDate},'YYYY-MM-DD')+1 and MSG_USERID=#{userid}
+			and to_date(#{searchEndDate},'YYYY-MM-DD')+1 and MSMG_USERID=#{userid}
 			</when>
 			<when test="searchKeyword !=null and searchKeyword !=''" >
 				where MS_USERID like '%'|| #{searchKeyword} ||'%'
-				and MSG_USERID=#{userid}
+				and MSMG_USERID=#{userid}
 			</when>
 			<when test="searchStartDate !=null and searchStartDate !=''
 			 and searchEndDate !=null and searchEndDate !=''" >
 				where MS_REGDATE between to_date(#{searchStartDate},'YYYY-MM-DD')
-				and to_date(#{searchEndDate},'YYYY-MM-DD')+1 and MSG_USERID=#{userid}
+				and to_date(#{searchEndDate},'YYYY-MM-DD')+1 and MSMG_USERID=#{userid}
 			</when>
 			
 			<otherwise>
-			where MSG_USERID=#{userid}
+			where MSMG_USERID=#{userid}
 			</otherwise>
 
 		</choose>
@@ -72,7 +72,7 @@
 	</insert>
 	
 	<select id="selectMessageSend" parameterType="SearchVO" resultMap="messageResult">
-		select MS_NO, MS_CONTENT,MS_USERID,MS_TITLE,MS_REGDATE,MSMG_USERID
+		select MS_NO, MS_CONTENT,MS_USERID,MS_TITLE,MS_REGDATE,MSMG_USERID,MS_CHECK
 		from
 		(
 		    select rownum as RNUM ,LIST.*
@@ -80,6 +80,7 @@
 		    (
 		        select*from messagsend	       
 		        <include refid="searchWhereSend"></include>
+		        order by MS_NO desc
 		    )LIST
 		)	
 		<![CDATA[
@@ -88,14 +89,15 @@
 		]]>
 	</select>
 	<select id="selectMessageGet" parameterType="SearchVO" resultMap="messageResult">
-		select MS_NO, MS_CONTENT,MS_USERID,MS_TITLE,MS_REGDATE,MSG_USERID
+		select MS_NO, MS_CONTENT,MS_USERID,MS_TITLE,MS_REGDATE,MSMG_USERID,MS_CHECK
 		from
 		(
 		    select rownum as RNUM ,LIST.*
 		    from
 		    (
-		        select*from message	       
+		        select*from messagsend	       
 		        <include refid="searchWhereGet"></include>
+		        order by MS_NO desc
 		    )LIST
 		)	
 		<![CDATA[
@@ -111,7 +113,7 @@
 	</select>
 	<select id="selectTotalRecordGet" parameterType="SearchVO"
 		resultType="int">
-		select count(*) from message 
+		select count(*) from messagsend 
 		<include refid="searchWhereGet"></include>
 	</select>
 	
@@ -121,7 +123,11 @@
 	<delete id="deleteMessage" parameterType="int">
 		delete from message where MS_NO=#{msNo}
 	</delete>
-	
+	<update id="messageCheck" parameterType="int">
+		update messagemaga
+		set MS_CHECK='Y'
+		where MS_NO=#{msNo}
+	</update>
 </mapper>
 
 

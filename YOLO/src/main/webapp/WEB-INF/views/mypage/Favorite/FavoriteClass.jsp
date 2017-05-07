@@ -5,11 +5,21 @@
 <script type="text/javascript">
 
 function delNoFunc(delNo) { 
-	location.href='<c:url value="/mypage/Favorite/FavoriteClassdeleteNo.do?SB_NO='+delNo+'" />';
+	if (confirm("선택한클래스 삭제하시겠습니까?") == true){    //확인
+		location.href='<c:url value="/mypage/Favorite/FavoriteClassdeleteNo.do?SB_NO='+delNo+'" />';
+    }else{   //취소
+        return;
+    }
+	
 }
 
 function delIdFunc() { 
-	location.href='<c:url value="/mypage/Favorite/FavoriteClassdeleteId.do" />';
+	if (confirm("모든 관심클래스가 삭제됩니다. 정말 삭제하시겠습니까?") == true){    //확인
+		location.href='<c:url value="/mypage/Favorite/FavoriteClassdeleteId.do" />';
+    }else{   //취소
+        return;
+    }
+	
 } 
 
 
@@ -39,7 +49,6 @@ function pageFunc(curPage){
 	</ul>
 	<br>
 	<h2>관심클래스</h2>
-
 	<br>
 	<form method="post"
 		action='<c:url value="/mypage/Favorite/FavoriteClass.do" />'>

@@ -14,4 +14,5 @@ public interface MessageDAO {
 	public int deleteMessageMaga(int messageMagaVo);
 	public List<Map<String, Object>> selectMessageGet(SearchVO searchVO);
 	public int deleteMessage(int messageVo);
+	public int messageCheck(int msNo);
 }

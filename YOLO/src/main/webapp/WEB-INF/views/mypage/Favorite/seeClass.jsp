@@ -3,10 +3,19 @@
 <%@ include file="mypageFavoritetop.jsp"%>
 <script type="text/javascript">
 function delNoFunc(delNo) { 
-	location.href='<c:url value="/mypage/Favorite/seeClassdeleteNo.do?cNo='+delNo+'" />';
+	if (confirm("선택한 클래스 삭제하시겠습니까?") == true){    //확인
+		location.href='<c:url value="/mypage/Favorite/seeClassdeleteNo.do?cNo='+delNo+'" />';
+    }else{   //취소
+        return;
+    }
 }
 function delFunc() { 
-	location.href='<c:url value="/mypage/Favorite/seeClassdelete.do" />';
+	if (confirm("모든 최근 본 클래스가 삭제됩니다. 정말 삭제하시겠습니까?") == true){    //확인
+		location.href='<c:url value="/mypage/Favorite/seeClassdelete.do" />';
+    }else{   //취소
+        return;
+    }
+	
 } 
 
 
@@ -18,9 +27,8 @@ function delFunc() {
 		<li class="active"><a
 			href='<c:url value="/mypage/Favorite/seeClass.do"/>'>최근 본 클래스</a></li>
 	</ul>
-	<br> <br>
+	<br>
 	<h2>최근 본 클래스</h2>
-
 	<br>
 	<form method="post">
 		<table class="table table-hover">

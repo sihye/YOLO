@@ -8,6 +8,9 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <style>
+p{
+word-wrap: break-word;
+}
 </style>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -32,9 +35,14 @@
     				return;
     			}
     			
-    			$("#frmList").prop("action", 
+    			if (confirm("선택한쪽지를 삭제하시겠습니까?") == true){    //확인
+    				$("#frmList").prop("action", 
     				"<c:url value='/mypage/message/deleteMultiSend.do'/>");
-    			$("#frmList").submit();
+    				$("#frmList").submit();
+    		    }else{   //취소
+    		        return;
+    		    }
+    			
     		});
         	
 
@@ -175,7 +183,6 @@
 	</ul>
 	<br>
 	<h2>보낸쪽지함</h2>
-	<br>
 	<form>
 	
 		<!-- search -->
@@ -254,10 +261,9 @@
 						</div></th>
 					<th width="10%">번호</th>
 					<th width="15%">받은사람</th>
-					<th width="15%">제목</th>
-					<th width="15%">내용</th>
-					<th width="25%">보낸시간</th>
-					<th width="10%">상태</th>
+					<th width="20%">제목</th>
+					<th width="30%">보낸시간</th>
+					<th width="15%">상태</th>
 
 				</tr>
 			</thead>
@@ -270,13 +276,22 @@
 						<td>${map["MS_NO"] }</td>
 						<td>${map["MSMG_USERID"] }</td>
 						<td><a href="#"  onclick="onFunc(${i})">${map["MS_TITLE"] }</a></td>
-						<td>${map["MS_CONTENT"] }</td>
 						<td><fmt:formatDate value="${map['MS_REGDATE'] }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						<td>미확인</td>
+						<td>
+							<c:if test="${map['MS_CHECK']=='N' }">
+							미확인
+						</c:if>
+						<c:if test="${map['MS_CHECK']=='Y' }">
+							확인
+						</c:if>
+						</td>
 					</tr>				
 					<tr id="tr2${i }" style="display: none;">			
-					<td colspan="7">
-						<table class="table table-bordered" summary="보낸쪽지 내용" >
+					<td colspan="6">
+						<label>받은사람:</label>&nbsp;${map["MSMG_USERID"] }<br>
+						<label>보낸시간:</label>&nbsp;<fmt:formatDate value="${map['MS_REGDATE'] }" pattern="yyyy-MM-dd HH:mm:ss"/>
+						<hr>
+						<%-- <table class="table table-bordered" summary="보낸쪽지 내용" >
 							<caption>보낸메세지</caption>
 							<colgroup>
 								<col width="18%;" />
@@ -296,7 +311,7 @@
 									<td colspan="3" class="goods">${map["MS_TITLE"] }</td>
 								</tr>
 							</tbody>
-						</table>
+						</table> --%>
 						<p style="margin-top: 10px;">${map["MS_CONTENT"] }</p>
 					</td>
 					</tr>
@@ -313,10 +328,9 @@
 				</tr>
 			</tfoot>
 		</table>
-</div>
-</form>
-
-<div class="divPage" style="text-align: center">
+		</form>
+		
+		<div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->
 	<!-- 이전 블럭으로 이동 ◀-->
 	<nav>
@@ -349,7 +363,8 @@
 		</ul>
 	</nav>
 </div>
-
-
 </div>
+
+
+
 <%@ include file="../mypagebottom.jsp"%>

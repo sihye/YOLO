@@ -13,4 +13,5 @@ public interface MessageService {
 	public int deleteMultiSend(List<MessageMagaVO> msmgList);
 	public int deleteMultiGet(List<MessageVO> msList);
 	public List<Map<String, Object>> selectMessageGet(SearchVO searchVO);
+	public int messageCheck(int msNo);
 }

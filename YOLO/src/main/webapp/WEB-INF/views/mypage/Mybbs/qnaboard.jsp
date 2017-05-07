@@ -125,6 +125,16 @@
     		document.frmPage.currentPage.value=curPage;
     		frmPage.submit();
     	}
+        
+        function onFunc(trNo) {
+			var tr2Id = document.getElementById("tr2"+trNo);
+			var style = window.getComputedStyle(tr2Id,null).getPropertyValue("display");
+			if(style=='none'){
+				tr2Id.style.display='';	
+			}else if(style=='table-row'){
+				tr2Id.style.display='none';	
+			}
+		}
             
         </script>
 
@@ -148,7 +158,6 @@
 	</ul>
 	<br>
 	<h2>문의/답변</h2>
-	<br>
 	<form>
 
 		<!-- search -->
@@ -231,20 +240,53 @@
 			</tr>
 		</thead>
 		<tbody>
+		<% pageContext.setAttribute("newLine", "\r\n"); %>
+			<c:set var="i" value="0" />
 			<c:forEach var="map" items="${alist }">
 				<tr>
 					<td>${map["CQ_NO"] }</td>
 					<td><a href='<c:url value="/class/claDetail.do?cNo=${map['C_NO'] }"/>'>${map["C_NAME"] }</a></td>
-					<td>${map["CQ_CONTENT"] }</td>
+					<td><a href="#"  onclick="onFunc(${i})">
+					<c:if test="${fn:length(map['CQ_CONTENT'])>15 }">
+							${fn:substring(map["CQ_CONTENT"], 0, 15) }...</a></td>
+						</c:if>
+						<c:if test="${fn:length(map['CQ_CONTENT'])<=15 }">
+							${map["CQ_CONTENT"] }</a></td>
+						</c:if>
 					<td>${map["C_REGDATE"] }</td>
-					<td>처리중</td>
+					<td>
+					<c:if test="${map['CQ_REPAYCHECK']=='N'}">
+					답변미완료
+					</c:if>
+					<c:if test="${map['CQ_REPAYCHECK']=='Y'}">
+					답변완료
+					</c:if>
+					</td>
 				</tr>
+				<tr id="tr2${i }" style="display: none;">			
+					<td colspan="5">
+						<img alt="q이미지" src='<c:url value="/img/icon_q.gif"/>'>
+						<label>질문</label>&nbsp;&nbsp;<fmt:formatDate value="${map['C_REGDATE'] }" pattern="yyyy-MM-dd HH:mm:ss"/>
+						<p style="margin-top: 10px;word-wrap: break-word;">:&nbsp;
+						${fn:replace(map["CQ_CONTENT"], newLine, "<br>")}
+						</p>
+						<c:forEach var="repayVo" items="${repayList }">
+						<c:if test="${map['CQ_NO']==repayVo.cqNo && repayVo.cqrDelflag=='N'}">
+						<hr>
+						<img alt="a이미지" src='<c:url value="/img/icon_a.gif"/>'>
+						<label>답변</label>&nbsp;&nbsp;<fmt:formatDate value="${repayVo.cqrRegdate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+						<p style="margin-top: 10px;word-wrap: break-word;">:&nbsp;
+						${fn:replace(repayVo.cqrContent, newLine, "<br>")}
+						</p>
+						</c:if>
+						</c:forEach>
+					</td>
+				</tr>
+			<c:set var="i" value="${i+1}" />
 			</c:forEach>
 		</tbody>
 	</table>
-</div>
-
-<div class="divPage" style="text-align: center">
+	<div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->
 	<!-- 이전 블럭으로 이동 ◀-->
 	<nav>
@@ -277,6 +319,6 @@
 		</ul>
 	</nav>
 </div>
-
+</div>
 
 <%@ include file="../mypagebottom.jsp"%>

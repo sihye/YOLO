@@ -147,7 +147,6 @@
 	</ul>
 	<br>
 	<h2>후기</h2>
-	<br>
 	<form>
 
 		<!-- search -->
@@ -241,8 +240,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-</div>
-<div class="divPage" style="text-align: center">
+	<div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->
 	<!-- 이전 블럭으로 이동 ◀-->
 	<nav>
@@ -275,4 +273,6 @@
 		</ul>
 	</nav>
 </div>
+</div>
+
 <%@ include file="../mypagebottom.jsp"%>

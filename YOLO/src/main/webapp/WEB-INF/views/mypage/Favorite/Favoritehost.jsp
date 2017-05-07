@@ -4,7 +4,11 @@
 
 <script type="text/javascript">
 function delNoFunc(delNo) { 
-	location.href='<c:url value="/mypage/Favorite/FollowDelete.do?flNo='+delNo+'" />';
+	if (confirm("선택한 호스트 삭제하시겠습니까?") == true){    //확인
+		location.href='<c:url value="/mypage/Favorite/FollowDelete.do?flNo='+delNo+'" />';
+    }else{   //취소
+        return;
+    }
 }
 function pageFunc(curPage){
 	document.frmPage.currentPage.value=curPage;

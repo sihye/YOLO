@@ -3,6 +3,17 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../../inc/top.jsp" %>
+<style>
+	h2{
+		font-size: 25px;
+		webkit-margin-before: 1.67em;
+	    webkit-margin-after: 1.67em;
+	    webkit-margin-start: 0px;
+	    webkit-margin-end: 0px;
+	    font-weight: bold;
+	    color: rgb(63, 148, 7);
+	}
+</style>
 	<div class="container" style="margin-top: 40px;">
 		<div class="row">
 			<div class="col-md-2">

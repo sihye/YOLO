@@ -1,12 +1,14 @@
 package com.one.yolo.qnaboard.model;
 
+import java.sql.Timestamp;
+
 public class QnaRepayVO {
 	private int cqrNo;
 	private int cqNo;
 	private String mUserid;
 	private String cqrContent;
 	private String cqrDelflag;
-	private String cqrRegdate;
+	private Timestamp cqrRegdate;
 	public int getCqrNo() {
 		return cqrNo;
 	}
@@ -37,10 +39,10 @@ public class QnaRepayVO {
 	public void setCqrDelflag(String cqrDelflag) {
 		this.cqrDelflag = cqrDelflag;
 	}
-	public String getCqrRegdate() {
+	public Timestamp getCqrRegdate() {
 		return cqrRegdate;
 	}
-	public void setCqrRegdate(String cqrRegdate) {
+	public void setCqrRegdate(Timestamp cqrRegdate) {
 		this.cqrRegdate = cqrRegdate;
 	}
 	@Override
