@@ -38,8 +38,8 @@
 
 <br>
 <div class="about1">
-	<span style="font-size: 30px; padding-left: 100px">YOLO는 여러분의 취미와 스터디를 위한</span><br>
-	<span style="font-size: 30px; padding-left: 180px">원데이 클래스 사이트 입니다.</span><br><br>
+	<span style="font-size: 30px; padding-left: 130px">YOLO는 여러분의 취미와 스터디를 위한</span><br>
+	<span style="font-size: 30px; padding-left: 200px">원데이 클래스 사이트 입니다.</span><br><br>
 	<span style="font-size: 28px;">원데이 클래스,YOLO와 함께!</span><br>
 	<img src="${pageContext.request.contextPath}/img/about.jpg">
 </div>

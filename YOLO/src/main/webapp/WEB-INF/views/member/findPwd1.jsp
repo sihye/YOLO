@@ -46,7 +46,7 @@
 				value="${param.questionanswer}">
 			<label for="birth">아이디</label>
 			<input type="text" name="mBirth" id="mBirth" 
-				value="${param.questionanswer}">	
+				value="${param.birth}">	
 			<button type="submit" class="btn btn-primary btn-sm">아이디 확인</button>
 
 			
