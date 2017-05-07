@@ -293,6 +293,9 @@ public class ClaController {
 	@RequestMapping(value ="/classBoardWrith.do", method=RequestMethod.POST)
 	public String classBoardWrith_post(HttpSession session,@ModelAttribute ClassBoardVO claVo ,HttpServletRequest request, Model model){
 		logger.info("클래스 insert param vo={}",claVo);
+		claVo.setfNo1(0);
+		claVo.setfNo2(0);
+		claVo.setfNo3(0);
 		String userid=(String)session.getAttribute("userid");		
 		logger.info("session userid={}",userid);
 		claVo.setmUserid(userid);
@@ -306,34 +309,42 @@ public class ClaController {
 			for(int i =0; i<fileList.size(); i++){
 				UpfileVO fvo = new UpfileVO();
 				fvo.setfFilename((String)fileList.get(i).get("fileName"));
-				fvo.setfFilesize((long)((Integer)fileList.get(i).get("fileSize")));
-				fvo.setfFilename((String)fileList.get(i).get("originFileName"));
+				logger.info("filesize ={}",(Long)fileList.get(i).get("fileSize"));
+				fvo.setfFilesize((Long) fileList.get(i).get("fileSize"));
+				fvo.setfOriginalfilename((String)fileList.get(i).get("originalFileName"));
 				upfileList.add(fvo);
 				upfileService.insertUpfile(fvo);
 			}
 			
-		
-			
 			if(!upfileList.isEmpty() && upfileList != null){
 				for(int i=0; i<upfileList.size(); i++){
+					UpfileVO upvo = new UpfileVO();
 					if(i==0){
-						claVo.setfNo1(upfileList.get(i).getfNo());
+						upvo=upfileService.selectByOname(upfileList.get(i).getfFilename());
+						logger.info("fno1={}",upvo.getfNo());
+						claVo.setfNo1(upvo.getfNo());
 					}else if(i==1){
-						claVo.setfNo2(upfileList.get(i).getfNo());
+						upvo=upfileService.selectByOname(upfileList.get(i).getfFilename());
+						logger.info("fno2={}",upvo.getfNo());
+						claVo.setfNo2(upvo.getfNo());
 					}else if(i==2){
-						claVo.setfNo3(upfileList.get(i).getfNo());
+						upvo=upfileService.selectByOname(upfileList.get(i).getfFilename());
+						logger.info("fno1={}",upvo.getfNo());
+						claVo.setfNo3(upvo.getfNo());
 					}
 				}//for
 			}
-			int cnt = claBoardService.insertClassBoard(claVo);
-						
-			
 		}
-		
+		logger.info("calVo 값 = {}",claVo);
+		int cnt = claBoardService.insertClassBoard(claVo);
 		
 		//업로드 완료된 경우
-		String msg = "", url="";
-		
+		String msg = "", url="/class/claDetail.do?boardtype=cb&cNo="+claVo.getcNo();
+		if(cnt>0){
+			msg = "등록완료";
+		}else{
+			msg="등록실패";
+		}
 
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
