@@ -34,5 +34,23 @@
 	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	
+	<interceptors>    	
+	    <interceptor>
+	        <mapping path="/mypage/Favorite/*" />
+	        <mapping path="/mypage/message/*" />
+	        <mapping path="/mypage/Mybbs/*" />
+	        <mapping path="/mypage/MyClass/*" />
+	        <mapping path="/mypage/myedit/*" />
+	        <mapping path="/member/memberEdit.do" />
+	        <mapping path="/member/memberOut.do" />
+	        <!-- <exclude-mapping path="/info/**"/>	 -->        
+	        <beans:ref bean ="loginInterceptor" />
+	    </interceptor>
+	    <interceptor>
+	        <mapping path="/admin/*" />
+	        <beans:ref bean ="adminLoginInerceptor" />
+	    </interceptor>
+	    	    
+	</interceptors>
 	
 </beans:beans>
