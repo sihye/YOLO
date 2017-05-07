@@ -37,19 +37,18 @@
 
 	<h2>비밀번호 찾기</h2>
 	<div>
+	<a>${result}</a>
 		<form name="frm2" method="post" id="frm2" 
-		action="<c:url value='/member/findPwd.do'/>">
-			<label for="name">이름</label>
-			<input type="text" name="mName" id="mName" 
-				value="${param.name}">
-			<label for="userid">아이디</label>
-			<input type="text" name="mUserid" id="mUserid" 
-				value="${param.userid}">
+		action="<c:url value='/member/findPwd1.do'/>">
+			
+			<label for="questionanswer">아이디</label>
+			<input type="text" name="mQuestionanswer" id="mQuestionanswer" 
+				value="${param.questionanswer}">
+			<label for="birth">아이디</label>
+			<input type="text" name="mBirth" id="mBirth" 
+				value="${param.birth}">	
 			<button type="submit" class="btn btn-primary btn-sm">아이디 확인</button>
-			<c:if test="${result!=null}">
-				<p>${result}</p>
-				<input type="text" name="mQuestionanswer" id="mQuestionanswer">
-			</c:if>
+
 			
 		</form>
 	</div>

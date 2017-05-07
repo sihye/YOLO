@@ -30,12 +30,18 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#msgUserid").focus();
+	$("#cbTitle").focus();
 	
 	$("#sendfrm").submit(function() {
-		 if($("#msTitle").val().length<1){
+		 if($("#cbTitle").val().length<1){
 			alert('제목을 입력하세요');
-			$("#msTitle").focus();
+			$("#cbTitle").focus();
+			return false;
+		}
+	$("#sendfrm").submit(function() {
+		 if($("#cbContent").val().length<1){
+			alert('내용을 입력하세요');
+			$("#cbContent").focus();
 			return false;
 		}
 	});
@@ -60,7 +66,7 @@ $(document).ready(function() {
 					<label for="msTitle">제목</label>
 				</div>
 				<div class="col-md-8">
-					<input type="text" class="form-control" name="cbTitle" id="msTitle"
+					<input type="text" class="form-control" name="cbTitle" id="cbTitle"
 						placeholder="제목을 입력하세요.">
 				</div>
 			</div>
@@ -88,15 +94,15 @@ $(document).ready(function() {
 				<br>
 				<div id="preview" >
 					<div id="image_preview">
-						<b>이미지1 미리보기</b><br> <img src="#" id="preview" class="preImg" />
+						<b>이미지1 미리보기</b><br> <img src="#" id="preview" class="preImg" height="300px"/>
 						<br /> <a href="#">Remove</a>
 					</div>
 					<div id="image_preview1">
-						<b>이미지 2 미리보기</b> <img src="#" id="preview1" class="preImg" /> <br />
+						<b>이미지 2 미리보기</b> <img src="#" id="preview1" class="preImg" height="300px"/> <br />
 						<a href="#">Remove</a>
 					</div>
 					<div id="image_preview2">
-						<b>이미지3 미리보기</b> <img src="#" id="preview2" class="preImg" /> <br />
+						<b>이미지3 미리보기</b> <img src="#" id="preview2" class="preImg" height="300px"/> <br />
 						<a href="#">Remove</a>
 					</div>
 				
@@ -212,11 +218,12 @@ $(document).ready(function() {
 	});
 	
 </script>
-		<div style="text-align: center;">
-			<button type="submit" class="btn btn-default">보내기</button>
-		</div>
+		
+			<button type="submit" class="btn btn-default" style="float: right;">보내기</button>
+	
 	<br> <br>	
 	</div>
+
 	</form>
 	</div>
 	</div>
