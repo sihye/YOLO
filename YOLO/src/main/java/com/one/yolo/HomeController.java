@@ -170,4 +170,6 @@ public class HomeController {
 		
 		return "common/message";
 	}
+	
+	
 }

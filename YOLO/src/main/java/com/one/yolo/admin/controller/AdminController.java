@@ -74,12 +74,12 @@ public class AdminController {
 		if((userid !=null && !userid.isEmpty())){
 			if(!userid.equals("admin")){
 				model.addAttribute("msg","잘못된 url입니다.");
-				model.addAttribute("url","/index2.do");
+				model.addAttribute("url","/adminLogin.do");
 				return "common/message";
 			}
 		}else if(userid==null || userid.isEmpty()){
 			model.addAttribute("msg","잘못된 url입니다.");
-			model.addAttribute("url","/index2.do");
+			model.addAttribute("url","/adminLogin.do");
 			return "common/message";
 		}
 		
@@ -680,6 +680,50 @@ public class AdminController {
 
 
 				return "admin/paymentcancel";
+	}
+	
+	@RequestMapping("/memberDetail.do")
+	public String memberDetail(@RequestParam String userid,Model model){
+		
+		logger.info("멤버 디테일 userid = {}",userid);
+		MemberVO memberVo = memberService.selectByUserid(userid);
+		
+		model.addAttribute("memberVo",memberVo);
+		
+		return "admin/memberDetail";
+	}
+	
+	
+	@RequestMapping(value="/memberDelPage.do", method=RequestMethod.GET)
+	public String memberDel_get(@RequestParam String mUserid,Model model){
+		logger.info("삭제 파라미터 mUserid = {}",mUserid);
+		model.addAttribute("mUserid",mUserid);
+		return "admin/memberDelPage";
+	}
+	
+	
+	@RequestMapping(value="/memberDelPage.do", method=RequestMethod.POST)
+	public String memberDel_post(@ModelAttribute MemberVO memberVo, Model model){
+		logger.info("member삭제 파라미터 memberVo ={}",memberVo);
+		int cnt = memberService.memberOut(memberVo);
+		String msg="",url="/admin/operatorMember.do";
+		if(cnt>0){
+			msg="삭제처리 완료 되었습니다.";
+		}else{
+			msg="삭제처리에 실패했습니다.";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+
+	}
+	
+	@RequestMapping(value="/memberEdit.do" ,method=RequestMethod.GET)
+		public String memberEdit_get(@RequestParam int mNo , Model model){
+		
+		return "/admin/memberEdit";
 	}
 }
 

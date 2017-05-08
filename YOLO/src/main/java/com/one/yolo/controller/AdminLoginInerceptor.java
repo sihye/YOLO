@@ -36,7 +36,7 @@ public class AdminLoginInerceptor extends HandlerInterceptorAdapter{
 		
 		//관리자 로그인 페이지는 제외시키기
 		String uri = request.getRequestURI();
-		if(uri.indexOf("/admin/adminLogin.do")!=-1){
+		if(uri.indexOf("/adminLogin.do")!=-1){
 			return true;
 		}
 		
@@ -48,7 +48,7 @@ public class AdminLoginInerceptor extends HandlerInterceptorAdapter{
 			out.println("<script>");
 			out.println("alert('먼저 관리자 로그인하세요');");
 			out.println("location.href='"+request.getContextPath()
-				+"/admin/adminLogin.do';");			
+				+"/adminLogin.do';");			
 			out.println("</script>");
 			return false;
 		}else{		
