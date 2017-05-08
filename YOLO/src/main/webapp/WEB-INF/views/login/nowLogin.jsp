@@ -37,7 +37,7 @@ hr{
 				<input name="pwd" class="form-control" placeholder="비밀번호" >
 			<td></tr>
 			<tr><td>
-				<button name="login" class="button" value="로그인">로그인</button>
+				<button name="login" class="button" value="로그인"></button>
 			<td></tr>
 			<tr><td>
 				<input type="checkbox" name="chkSaveId" id="chkId"<c:if test="${!empty cookie.ck_userid }">
@@ -50,7 +50,7 @@ hr{
 			<div  id="findid" style="text-align: center;   margin-top: 15px;">
 				<a href="${pageContext.request.contextPath}/member/findUserid.do">아이디 찾기</a>  |
 				<a href="${pageContext.request.contextPath}/member/findPwd.do">비밀번호 찾기</a>   |
-				<a href="${pageContext.request.contextPath}/member/register.do">회원가입</a>
+				<a href="${pageContext.request.contextPath}/member/agreement.do">회원가입</a>
 			</div>
 			<td></tr>
 			<tr><td>

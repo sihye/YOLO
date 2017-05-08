@@ -95,7 +95,7 @@
          <!-- <a class="btn btn-primary btn-lg login_btn" data-toggle="modal"
             data-target="#myModal2">Join</a> -->
          <a class="btn btn-primary btn-lg login_btn"
-            href="${pageContext.request.contextPath}/member/register.do">Join</a>
+            href="${pageContext.request.contextPath}/member/agreement.do">Join</a>
 
          <div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
             aria-labelledby="myModalLabel" aria-hidden="true">

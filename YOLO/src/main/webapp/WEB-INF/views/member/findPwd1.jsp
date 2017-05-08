@@ -17,50 +17,90 @@
 <script type="text/javascript" 
 	src='<c:url value="/jquery/jquery-3.1.1.min.js" />'></script>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#frm2").submit(function(){
-			if($("#mName").val()==''){
-				alert('이름을 입력하세요');
-				$("#mName").focus();
-				return false;
-			}else if($("#mUserid").val()==''){
-				alert('아이디를 입력하세요');
-				$("#mUserid").focus();
-				return false;
-			}		
-		});
-	});
 
-	
-</script>
 </head>
 <body>
-
-	<h2>비밀번호 찾기</h2>
+<div style="padding-left: 280px">
+<img src="${pageContext.request.contextPath}/img/pwd1.jpg">
+</div> 
+<article style="padding-left: 30%">
 	<div>
-	<a>${result}</a>
-		<form name="frm2" method="post" id="frm2" 
+	<span style="font-size: 22px">${result}</span>
+		<form name="frmId" method="post" id="frm2"
 		action="<c:url value='/member/findPwd1.do'/>">
-			
-			<label for="questionanswer">답변</label>
-			<input type="text" name="mQuestionanswer" id="mQuestionanswer" 
-				value="${param.questionanswer}">
-			<div>		
-			<label for="email1">이메일&nbsp;&nbsp;</label>
-			<input type="text" name="mEmail1" id="mEmail1" 
-				value="${param.email1}">
-				
-			<label for="email2">@</label>
-			<input type="text" name="mEmail2" id="mEmail2" 
-				value="${param.email2}">
+		<div>
+		<br>
+  		<input type="text" class="form-control" placeholder="답변을 입력하세요" aria-describedby="sizing-addon2" style="width: 50%"
+  				name="mQuestionanswer" id="mQuestionanswer" value="${param.mQuestionanswer}">
 		</div><br>
-			<button type="submit" class="btn btn-primary btn-sm">비밀번호 확인</button>
-
+		<div style="float: left">
+  		<input type="text" class="form-control" placeholder="이메일 @ 앞부분" style="width: 90%; float: left"
+  				name="mEmail1" id="mEmail1" value="${param.email1}"><label>&nbsp;@</label>
+  		</div>
+  		<div style="float: rigth">		
+  		<input type="text" class="form-control" placeholder="이메일 @ 뒷부분"  style="width: 25%; float: rigth"
+  				name="mEmail2" id="mEmail2" value="${param.email2}">			
+  		</div>	<br>
+		<div style="padding-left: 20%">				
+			<button type="button" class="btn btn-primary btn-sm" id="form_btn">비밀번호 찾기</button>
+		</div>
+		</form><br>
+		
+		<script type="text/javascript">
+		$('#form_btn').click(function(){
 			
-		</form>
+			
+				if($("#mQuestionanswer").val()==''){
+					alert('답변을 입력하세요');
+					$("mQuestionanswer").focus();
+					return false;
+				}else if($("#mEmail1").val()==''){
+					alert('이메일을 입력하세요');
+					$("#mEmail1").focus();
+					return false;
+				}else if($("#mEmail2").val()==''){
+					alert('이메일을 끝까지 입력하세요');
+					$("#mEmail2").focus();
+					return false;
+				}		
+			
+			
+			
+			$.ajax({
+			       url : '<c:url value="/member/findPwd1.do"/>',
+			       type : "POST",
+			       async: true,
+			       data : $('#frm2').serializeArray(),
+			       dataType : "text",
+			       success : function(data) {
+			    	  //alert(data);
+			          if(data == ""){
+			        	  alert("답변 또는 이메일이 틀렸습니다");
+			        	  $('#mQuestionanswer').val('');
+			        	  $('#mEmail1').val('');
+			        	  $('#mEmail2').val('');
+			          }else{
+			        	  var json = JSON.parse(data);
+			        	  alert(json.mName+"님의 비밀번호는 "+json.mPwd+" 입니다. 로그인 해주세요.");
+			        	  setTimeout(function(){
+			        		  location.href = '<c:url value="/index2.do"/>';
+			        	  }, 500);
+			          }
+			       },
+			       fail : function(request,status,error){
+			           alert("요청 code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"실패:"+error);
+			         },
+			       error:function(request,status,error){
+			           alert("요청 code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"에러:"+error);
+			         }
+			});
+		});
+		
+		</script>
 	</div>
-
+</article>
 </body>
 </html>
+</div>
+</div>
 <%@ include file="../inc/bottom.jsp" %>

@@ -40,30 +40,31 @@
 </script>
 </head>
 <body>
+<div style="padding-left: 280px">
+<img src="${pageContext.request.contextPath}/img/id.jpg">
+</div>
 <article style="padding-left: 30%">
-	<h2>아이디 찾기</h2>
+
 	<div>
 		<div>
-			아이디와 이메일을 입력하세요
+		 이름과 이메일을 입력하세요
 		</div>
 		<br>
 		<form name="frmId" method="post" id="frm1"
 		action="<c:url value='/member/findUserid.do'/>">
-		<DIV>
-			<label for="mName">이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-			<input type="text" name="mName" id="mName" 
-				value="${param.name}"><br><br>
-		</DIV>
-		<div>		
-			<label for="email1">이메일&nbsp;&nbsp;</label>
-			<input type="text" name="mEmail1" id="mEmail1" 
-				value="${param.email1}">
-				
-			<label for="email2">@</label>
-			<input type="text" name="mEmail2" id="mEmail2" 
-				value="${param.email2}">
+		<div>
+  		<input type="text" class="form-control" placeholder="이름을 입력하세요" aria-describedby="sizing-addon2" style="width: 50%"
+  				name="mName" id="mName" value="${param.name}">
 		</div><br>
-		<div style="padding-left: 25%">				
+		<div style="float: left">
+  		<input type="text" class="form-control" placeholder="이메일 @ 앞부분" style="width: 90%; float: left"
+  				name="mEmail1" id="mEmail1" value="${param.email1}"><label>&nbsp;@</label>
+  		</div>
+  		<div style="float: rigth">		
+  		<input type="text" class="form-control" placeholder="이메일 @ 뒷부분"  style="width: 25%; float: rigth"
+  				name="mEmail2" id="mEmail2" value="${param.email2}">			
+  		</div>	<br>
+		<div style="padding-left: 20%">				
 			<button type="submit" class="btn btn-primary btn-sm">아이디 찾기</button>
 		</div>
 		</form><br>
@@ -71,4 +72,6 @@
 </article>
 </body>
 </html>
+</div>
+</div>
 <%@ include file="../inc/bottom.jsp" %>

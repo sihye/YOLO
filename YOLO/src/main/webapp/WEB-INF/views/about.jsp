@@ -38,26 +38,10 @@
 
 <br>
 <div class="about1">
-	<span style="font-size: 30px; padding-left: 130px">YOLO는 여러분의 취미와 스터디를 위한</span><br>
-	<span style="font-size: 30px; padding-left: 200px">원데이 클래스 사이트 입니다.</span><br><br>
 	<span style="font-size: 28px;">원데이 클래스,YOLO와 함께!</span><br>
-	<img src="${pageContext.request.contextPath}/img/about.jpg">
+	<img src="${pageContext.request.contextPath}/img/about1.jpg">
 </div>
 
-<div>
-	<img src="${pageContext.request.contextPath}/img/20170502_184646.png" width="2000" height="400">
-</div>
 
-<div class="mainImg1">
-	
-	<!-- 헤더 위에 기본정보 -->
-	<div id="onHeader">
-				
-				<h1 style="color: white; font-size: 40px; padding-left: 35%; padding-top: 8%;">Hobby & Study 컨넥팅 서비스</h1><br><br><br>
-				<span style="color: white; font-size: 20px; padding-left: 35%; padding-top: 30%">모든 클래스를 한 곳에 모아서 찾아 볼 수 있는 서비스입니다.</span><br>
-				<span style="color: white; font-size: 20px; padding-left: 28%; padding-top: 17%">자기개발에서 취미, 취업, 외국어, 전문지식까지 그 어떤 스터디도 YOLO에서 함께하세요.</span>
-	</div>
-
-</div>
 
 	<%@ include file="inc/bottom.jsp"%>

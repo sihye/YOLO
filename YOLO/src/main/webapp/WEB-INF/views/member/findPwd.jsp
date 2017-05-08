@@ -30,32 +30,41 @@
 				return false;
 			}		
 		});
+
 	});
 
 	
 </script>
 </head>
 <body>
+<div style="padding-left: 280px">
+<img src="${pageContext.request.contextPath}/img/pwd.jpg">
+</div>
+<article style="padding-left: 30%">
 
-	<h2>비밀번호 찾기</h2>
 	<div>
-		<form name="frm2" method="post" id="frm2" 
+		<div>
+		 이름과 아이디를 입력하세요
+		</div>
+		<br>
+		<form name="frmId" method="post" id="frm2"
 		action="<c:url value='/member/findPwd.do'/>">
-			<label for="name">이름</label>
-			<input type="text" name="mName" id="mName" 
-				value="${param.name}">
-			<label for="userid">아이디</label>
-			<input type="text" name="mUserid" id="mUserid" 
-				value="${param.userid}">
+		<div>
+  		<input type="text" class="form-control" placeholder="이름을 입력하세요" aria-describedby="sizing-addon2" style="width: 50%"
+  				name="mName" id="mName" value="${param.name}">
+		</div><br>
+		<div>
+  		<input type="text" class="form-control" placeholder="아이디를 입력하세요" aria-describedby="sizing-addon2" style="width: 50%"
+  				name="mUserid" id="mUserid" value="${param.userid}">
+		</div><br>
+		<div style="padding-left: 20%">				
 			<button type="submit" class="btn btn-primary btn-sm">비밀번호 찾기</button>
-			<c:if test="${result!=null}">
-				<p>${result}</p>
-				<input type="text" name="mQuestionanswer" id="mQuestionanswer">
-			</c:if>
-			
-		</form>
+		</div>
+		</form><br>
 	</div>
-
+</article>
 </body>
 </html>
+</div>
+</div>
 <%@ include file="../inc/bottom.jsp" %>

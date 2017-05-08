@@ -38,9 +38,11 @@ public interface MemberService {
 	public String findUserid(MemberVO vo);
 	
 	public String findPwd(MemberVO vo);
-	
-	public String findPwd1(MemberVO vo);
+
+	public MemberVO findPwd1(MemberVO vo);
+
 	
 	public MemberVO adminLoginCheck(String userid);
+
 	
 }

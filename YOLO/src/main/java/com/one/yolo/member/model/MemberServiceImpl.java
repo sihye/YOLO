@@ -128,7 +128,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public String findPwd1(MemberVO vo) {
+	public MemberVO findPwd1(MemberVO vo) {
 		return memberDao.findPwd1(vo);
 	}
 

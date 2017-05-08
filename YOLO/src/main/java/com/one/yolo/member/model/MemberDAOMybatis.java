@@ -101,7 +101,7 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport implements MemberDAO{
 	}
 
 	@Override
-	public String findPwd1(MemberVO vo) {
+	public MemberVO findPwd1(MemberVO vo) {
 		return getSqlSession().selectOne(namespace+".findPwd1", vo);
 	}
 

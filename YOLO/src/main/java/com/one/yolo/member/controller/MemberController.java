@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.one.yolo.category.model.CategoryService;
 import com.one.yolo.category.model.CategoryVO;
@@ -39,9 +40,20 @@ public class MemberController {
 	@Autowired
 	private CategoryGroupService categoryGroupService;
 	
+	@RequestMapping("/agreement.do")
+	public String agreement(){
+		//1
+		logger.info("회원약관 화면 보여주기");
+
+		//2
+
+		//3
+		return "member/agreement";
+	}
+	
 
 	@RequestMapping(value="/register.do", method=RequestMethod.GET)
-	public String register(Model model){
+	public String register11(Model model){
 		logger.info("회원가입 화면 보여주기");
 		
 
@@ -219,7 +231,7 @@ public class MemberController {
 	      
 	      String msg="", url="/index2.do";
 			if(result!=null){
-				msg=mName+ "님 " +result;	
+				msg=mName+ "님의 아이디는 " +result+" 입니다. 로그인 해주세요.";	
 			}else{
 				msg="이름 또는 이메일이 일치하지 않습니다";
 				url="/member/findUserid.do";
@@ -293,52 +305,39 @@ public class MemberController {
 		return "member/findPwd1";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/findPwd1.do")
-	   public String findPwd1_post(@RequestParam String mEmail1, @RequestParam String mEmail2 , @RequestParam String mQuestionanswer,
-			   Model model){
+	   public MemberVO findPwd1_post(@ModelAttribute MemberVO memberVo, Model model){
+			   
 	      logger.info("비밀번호 찾기");
-	      MemberVO memberVo = new MemberVO();
+	      /*MemberVO memberVo = new MemberVO();
 	      memberVo.setmQuestionanswer(mQuestionanswer);
 	      memberVo.setmEmail1(mEmail1);
-	      memberVo.setmEmail2(mEmail2);
+	      memberVo.setmEmail2(mEmail2);*/
 	      
-	      String result1 = memberService.findPwd1(memberVo);
-	      
+	      MemberVO result1 = memberService.findPwd1(memberVo);
 	      logger.info("결과 result1 = {}",result1);
 	      
-	      MemberVO vo = new MemberVO();
-
-	   
-	      model.addAttribute("result1", result1);
-	      model.addAttribute("mQuestionanswer", mQuestionanswer);
-	      model.addAttribute("mEmail1", mEmail1);
-	      model.addAttribute("mEmail2", mEmail2);
+	      //MemberVO vo = new MemberVO();
+	      /*model.addAttribute("result1", result1);
+	      model.addAttribute("mQuestionanswer", memberVo.getmQuestionanswer());
+	      model.addAttribute("mEmail1", memberVo.getmEmail1());
+	      model.addAttribute("mEmail2", memberVo.getmEmail2());*/
 	      
-	      logger.info(mQuestionanswer);
-	      logger.info(mEmail1);
-	      logger.info(mEmail2);
-	      
+	      logger.info(memberVo.getmQuestionanswer());
+	      logger.info(memberVo.getmEmail1());
+	      logger.info(memberVo.getmEmail2());
+	     //url="/index2.do"; 
 	    String msg="", url="";
-			if(result1==null){
-				msg="답변 또는 이메일이 틀렸습니다";
-				url="/member/findPwd1.do";
-				
-				model.addAttribute("msg", msg);
-				model.addAttribute("url", url);
-				
-				return "common/message";
-			}else{
-				msg=result1;
-				url="/index2.do";
-				
+	    	
+			if(result1 != null){
+
+				return result1;
 			}
-			
 			//3
-			model.addAttribute("msg", msg);
-			model.addAttribute("url", url);
-			
-			return "common/message";
-	    
+			/*model.addAttribute("msg", msg);
+			model.addAttribute("url", url);*/
+			return null;
 	   }
 	
 	@RequestMapping(value="/memberEdit.do", method=RequestMethod.GET)
