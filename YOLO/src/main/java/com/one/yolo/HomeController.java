@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -29,6 +30,8 @@ import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
 import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.crecla.model.ClassVO;
+import com.one.yolo.member.model.MemberService;
+import com.one.yolo.member.model.MemberVO;
 
 /**
  * Handles requests for the application home page.
@@ -47,6 +50,9 @@ public class HomeController {
 	OperAtorService oService;
 	@Autowired
 	ClassService claService;
+	@Autowired
+	MemberService memberService;
+	
 	
 	@RequestMapping(value = "/hello.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -125,9 +131,43 @@ public class HomeController {
 		return "contact";
 	}
 	
-	@RequestMapping("/adminLogin.do")
-	public String adminLogin(){
+	@RequestMapping(value="/adminLogin.do", method=RequestMethod.GET)
+	public String adminLogin_get(){
 		logger.info("어드민 로그인 페이지 show");
 		return "login/adminLogin";
+	}
+	@RequestMapping(value="/adminLogin.do", method=RequestMethod.POST)
+	public String adminLogin_post(@RequestParam String userid, @RequestParam String pwd,@RequestParam(required=false)String chkSaveId ,HttpServletRequest request ,HttpSession session,HttpServletResponse response ,Model model){
+		logger.info("로그인 시작 userid={},pwd{}",userid,pwd);
+		MemberVO vo = memberService.adminLoginCheck(userid);
+		
+		String msg="",url="/adminLogin.do";
+		
+		if(vo != null){
+			if(!vo.getmPwd().equals(pwd)){
+				msg="비밀번호가 틀렸습니다.";
+			}else{
+				session.setAttribute("userid",userid);
+				Cookie ck = new Cookie("ck_userid", userid);
+				ck.setPath("/");
+				if(chkSaveId!=null){
+					ck.setMaxAge(1000*24*60*60); //1000일
+					response.addCookie(ck);
+				}else{
+					ck.setMaxAge(0);
+					response.addCookie(ck);
+				}
+				msg=userid+"님 환영 합니다!";
+				url="/admin/operator.do";
+			}
+			
+		}else{
+			msg="존재하지 않는 아이디 입니다.";
+			
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
 	}
 }

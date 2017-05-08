@@ -131,6 +131,13 @@ public class MemberServiceImpl implements MemberService{
 	public String findPwd1(MemberVO vo) {
 		return memberDao.findPwd1(vo);
 	}
+
+	@Override
+	public MemberVO adminLoginCheck(String userid) {
+		return memberDao.adminLoginCheck(userid);
+	}
+	
+	
 	
 	
 }

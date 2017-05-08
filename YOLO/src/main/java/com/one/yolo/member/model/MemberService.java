@@ -41,4 +41,6 @@ public interface MemberService {
 	
 	public String findPwd1(MemberVO vo);
 	
+	public MemberVO adminLoginCheck(String userid);
+	
 }

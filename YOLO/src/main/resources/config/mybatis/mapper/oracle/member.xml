@@ -249,7 +249,9 @@
 
 			
 	</insert>
-	
+	<select id="adminLoginCheck" parameterType="String" resultType="MemberVO">
+		select *from member where m_userid=#{userid} and mg_no2=1
+	</select>
 	
 
 </mapper>

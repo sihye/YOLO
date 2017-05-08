@@ -28,5 +28,7 @@ public interface MemberDAO {
 	
 	public String findPwd(MemberVO vo);
 	public String findPwd1(MemberVO vo);
+	
+	public MemberVO adminLoginCheck(String userid);
 
 }
