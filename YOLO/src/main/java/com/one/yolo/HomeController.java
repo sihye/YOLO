@@ -125,4 +125,9 @@ public class HomeController {
 		return "contact";
 	}
 	
+	@RequestMapping("/adminLogin.do")
+	public String adminLogin(){
+		logger.info("어드민 로그인 페이지 show");
+		return "login/adminLogin";
+	}
 }
