@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../inc/top.jsp" %>
+<%@ include file="../member/findtop2.jsp" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
@@ -45,7 +47,7 @@
 			<label for="userid">아이디</label>
 			<input type="text" name="mUserid" id="mUserid" 
 				value="${param.userid}">
-			<button type="submit" class="btn btn-primary btn-sm">아이디 확인</button>
+			<button type="submit" class="btn btn-primary btn-sm">비밀번호 찾기</button>
 			<c:if test="${result!=null}">
 				<p>${result}</p>
 				<input type="text" name="mQuestionanswer" id="mQuestionanswer">
@@ -56,4 +58,4 @@
 
 </body>
 </html>
-
+<%@ include file="../inc/bottom.jsp" %>
