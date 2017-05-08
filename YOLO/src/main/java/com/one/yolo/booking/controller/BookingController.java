@@ -1,7 +1,10 @@
 package com.one.yolo.booking.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.util.PngUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.one.yolo.booking.model.BookingService;
 import com.one.yolo.booking.model.BookingVO;
 import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.crecla.model.ClassVO;
@@ -30,7 +34,10 @@ public class BookingController {
 	private ClassService claService;
 	@Autowired
 	private PaymentService payService;
+	@Autowired
+	private BookingService bookService;
 	
+	//예약페이지 보여주기
 	@RequestMapping("/booking.do")
 	public String booking(HttpSession session,@RequestParam int cNo,@ModelAttribute BookingVO bookVO, Model model){
 		String userid=(String)session.getAttribute("userid");
@@ -48,6 +55,8 @@ public class BookingController {
 		
 		return "class/booking";
 	}
+	
+	//ajax 예약하기
 	@RequestMapping("/bookingOk.do")
 	@ResponseBody
 	public boolean bookingOk(HttpSession session,@RequestParam int cNo, @ModelAttribute BookingVO bVo, @ModelAttribute PaymentVO pVo){
@@ -66,9 +75,22 @@ public class BookingController {
 		return b;
 	
 	}
+	
+	//결제완료 페이지 보여주기
 	@RequestMapping("/payOk.do")
-	public String payOk(@RequestParam int cNo){
-		logger.info("결제완료 페이지 보여주기 파람 cno={}",cNo);
+	public String payOk(@RequestParam String pmNo,HttpSession session,Model model){
+		String userid=(String)session.getAttribute("userid");
+		logger.info("userid={}",userid);
+		logger.info("param pmno={}",pmNo);
+		//회원정보
+		MemberVO memVo=memService.selectByUserid(userid);
+		model.addAttribute("memVo", memVo);
+		//예약정보
+		Map<String, Object> bookPayVO=bookService.selForHostByPmNo(pmNo);
+
+		logger.info("bookPayvo={}",bookPayVO);
+		model.addAttribute("vo", bookPayVO);
+		model.addAttribute("userid", userid);
 		return "class/payOk";
 	}
 }

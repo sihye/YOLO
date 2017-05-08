@@ -41,7 +41,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		String userid = (String) session.getAttribute("userid");
 		if(userid==null || userid.isEmpty()){
 			request.setAttribute("msg", "먼저 로그인하세요");
-			request.setAttribute("url", "/index2.do");
+			request.setAttribute("url", "/index2.do?loginCheck=Y");
 			
 			RequestDispatcher dispatcher 
 = request.getRequestDispatcher("/WEB-INF/views/common/message.jsp");
