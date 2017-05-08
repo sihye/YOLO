@@ -41,7 +41,7 @@ public class AdminLoginInerceptor extends HandlerInterceptorAdapter{
 		}
 		
 		String adminUserid 
-		= (String) request.getSession().getAttribute("adminUserid");
+		= (String) request.getSession().getAttribute("userid");
 		if(adminUserid==null || adminUserid.isEmpty()){
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
@@ -50,7 +50,6 @@ public class AdminLoginInerceptor extends HandlerInterceptorAdapter{
 			out.println("location.href='"+request.getContextPath()
 				+"/admin/adminLogin.do';");			
 			out.println("</script>");
-			
 			return false;
 		}else{		
 			return true;

@@ -78,6 +78,18 @@ public class ClassBoardVO extends SearchVO{
 	public void setfNo3(int fNo3) {
 		this.fNo3 = fNo3;
 	}
+	@Override
+	public String toString() {
+		return "ClassBoardVO [cbNo=" + cbNo + ", cNo=" + cNo + ", mUserid=" + mUserid + ", cbTitle=" + cbTitle
+				+ ", cbRegdate=" + cbRegdate + ", cbReadcount=" + cbReadcount + ", cbContent=" + cbContent + ", fNo1="
+				+ fNo1 + ", fNo2=" + fNo2 + ", fNo3=" + fNo3 + ", getSearchStartDate()=" + getSearchStartDate()
+				+ ", getSearchEndDate()=" + getSearchEndDate() + ", getSearchCondition()=" + getSearchCondition()
+				+ ", getSearchKeyword()=" + getSearchKeyword() + "]";
+	}
+	
+	
+	
+	
 	
 	
 	

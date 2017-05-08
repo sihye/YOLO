@@ -137,7 +137,7 @@ public class ClaController {
 
 
 	@RequestMapping("/claDetail.do")
-	public String claDetail(@RequestParam int cNo,@RequestParam(value="boardtype",required=false, defaultValue="") String boardtype,@ModelAttribute ClassBoardVO claboardvo  ,HttpSession session, Model model, HttpServletResponse response){
+	public String claDetail(@RequestParam int cNo,@RequestParam(value="boardtype",required=false, defaultValue="") String boardtype,@ModelAttribute ClassBoardVO claboardvo ,HttpSession session, Model model, HttpServletResponse response){
 		String userid=(String)session.getAttribute("userid");
 	
 		logger.info("클래스 디테일 파람no={}, session userid={}",cNo,userid);
@@ -146,7 +146,7 @@ public class ClaController {
 		}
 		logger.info("type ={}",boardtype);
 		claboardvo.setcNo(cNo);
-		
+		logger.info("classBoard VO= {}",claboardvo);
 		//디테일 조회수 증가
 		int cnt=claService.hitUpdate(cNo);
 		logger.info("hit update cnt={}",cnt);
@@ -169,7 +169,7 @@ public class ClaController {
 		List<ClassBoardVO> claBoardList = claBoardService.selectClassBoard(claboardvo);
 		logger.info("클래스  classList.size()={}",claBoardList.size());
 		int totalRecord = claBoardService.selectClassBoardCount(claboardvo);
-		logger.info("클래스 목록 조회-전체레코드 개수조회 결과, totalRecord={}",			
+		logger.info("클래스 board 목록 조회-전체레코드 개수조회 결과, totalRecord={}",			
 				totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 		
