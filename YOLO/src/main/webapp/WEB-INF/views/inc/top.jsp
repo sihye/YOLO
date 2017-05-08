@@ -55,7 +55,13 @@
       $("#cancle").click(function() {
          $('#myModal').modal('hide')
       })
+      if($("#loginCheck").val()=="Y"){
+    	  $('#Login').trigger('click'); 
+      }
    }); 
+   
+	   
+
 </script>
 <style type="text/css">
 #SEARCHDIV {
@@ -65,6 +71,7 @@
 <title>:: YOLO ::</title>
 </head>
 <body>
+	<input type="hidden" id="loginCheck" name="loginCheck" value="${param.loginCheck }">
    <section class="hero"> <header>
    <div class="wrapper">
       <%-- <a href="${pageContext.request.contextPath}/index2.do" class="logo"
@@ -113,7 +120,7 @@
 
 
 
-         <a class="btn btn-primary btn-lg login_btn" data-toggle="modal"
+         <a class="btn btn-primary btn-lg login_btn" id="Login" data-toggle="modal"
             data-target="#myModal">Login</a>
 
          <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
