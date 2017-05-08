@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.one.yolo.common.FileUploadWebUtil;
 import com.one.yolo.common.PaginationInfo;
 import com.one.yolo.common.Utility;
+import com.one.yolo.member.model.MemberService;
+import com.one.yolo.member.model.MemberVO;
 import com.one.yolo.common.SearchVO;
 import com.one.yolo.noticeboard.model.NoticeboardService;
 import com.one.yolo.noticeboard.model.NoticeboardVO;
@@ -39,6 +42,9 @@ public class NoticeboardController {
 
 	@Autowired
 	private UpfileService upFileservice;
+	
+	@Autowired
+	private MemberService memberService;  
 
 	@RequestMapping("/list.do")
 	public String noticeboardlist(@ModelAttribute SearchVO searchVo, Model model) {
@@ -74,7 +80,7 @@ public class NoticeboardController {
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
 	public String write_get() {
 		logger.info("공지사항 글쓰기 화면 보여주기");
-
+			
 		return "noticeboard/write";
 	}
 

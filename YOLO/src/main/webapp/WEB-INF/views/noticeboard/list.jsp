@@ -7,47 +7,35 @@
 		document.frmPage.currentPage.value=curPage;
 		frmPage.submit();
 	}
-</script>	
-<style>
-.divList,.divList table {
-     width: 100%;
-}
+</script>
 
-</style>
 <!-- 페이징 처리를 위한 form 시작-->
-<form name="frmPage" method="post" 
-	action='<c:url value="/noticeboard/list.do"/>'>
-	<input type="hidden" name="currentPage">
-	<input type="hidden" name="searchCondition" value="${param.searchCondition }">
-	<input type="hidden" name="searchKeyword" value="${param.searchKeyword}">
-</form>
+		<form name="frmPage" method="post"
+			action='<c:url value="/noticeboard/list.do"/>'>
+			<input type="hidden" name="currentPage"> <input type="hidden"
+				name="searchCondition" value="${param.searchCondition }"> <input
+				type="hidden" name="searchKeyword" value="${param.searchKeyword}">
+		</form>
+<%-- <c:if test="${!empty param.searchKeyword }">
+<p>검색어 : ${param.searchKeyword}, 
+${pagingInfo.totalRecord}건 검색되었습니다</p>
+	</c:if> --%>	
 
-<c:if test="${!empty param.searchKeyword }">
-	<p>검색어 : ${param.searchKeyword}, 
-	${pagingInfo.totalRecord}건 검색되었습니다</p>
-</c:if>
-
-<!-- 페이징 처리 form 끝 -->	
-
-<!-- <body> -->
-<!-- <h2>공지사항</h2> -->	
-</head>	
-
-<div class="col-md-12">
+<div class="col-md-10">
+	<div class="container">
 	<div class="col-md-2" align="left"></div>
+	<h2>공지사항</h2>	
 	<div class="col-md-10">
-	<h2 align="center">공지사항</h2>
-		<br>
-		<br>
+		
 		<table class="table table-hover"
 		 	summary="공지사항 게시판이며  번호, 제목, 내용, 작성자, 작성일, 조회수에 대한 정보를 제공">
 		
 		<thead>
-		  <tr>
+		  <tr style="background: skyblue">
 		    <th width="10%" style="text-align: center;">번호</th>
-		    <th width="20%" style="text-align: center;">제목</th>
-		    <th width="45%" style="text-align: center;">내용</th>
-		    <th width="15%" style="text-align: center;">작성일</th>
+		    <th width="30%" style="text-align: center;">제목</th>
+		    <th width="40%" style="text-align: center;">내용</th>
+		    <th width="10%" style="text-align: center;">작성일</th>
 		    <th width="10%" style="text-align: center;">조회수</th>
 		  </tr>
 		</thead> 
@@ -62,11 +50,32 @@
 		  <c:forEach var="vo" items="${nList }">	
 			<tr  style="text-align:center">
 				<td>${vo.nbNo}</td>
-				<td>
+				<%-- <td>
 					<a href
 					='<c:url value="/noticeboard/updateCount.do?no=${vo.nbNo}"/>'>${vo.nbTitle}</a>
+				</td> --%>
+			   	<td>
+				<!-- 제목이 긴 경우 일부만 보여주기 -->
+					<a href
+					='<c:url value="/noticeboard/updateCount.do?no=${vo.nbNo}"/>'>
+						<c:if test="${fn:length(vo.nbTitle)>30 }">
+							${fn:substring(vo.nbTitle, 0, 30) }...
+						</c:if>
+						<c:if test="${fn:length(vo.nbTitle)<=30 }">
+							${vo.nbTitle}
+						</c:if>
+					</a>	
 				</td>
-				<td style="text-align: left;">${vo.nbContent}</td>	
+				<td style="text-align: left;">
+					<c:if test="${fn:length(vo.nbContent)>50 }">
+						${fn:substring(vo.nbContent, 0, 50) }
+					</c:if>
+					<c:if test="${fn:length(vo.nbTitle)<=30 }">
+							${vo.nbTitle}
+					</c:if>
+				</td>
+				
+					
 				<td><fmt:formatDate value="${vo.nbRegdate}" pattern="yyyy-MM-dd"/> </td>
 				<td>${vo.nbReadcount}</td>		
 			</tr>
@@ -75,7 +84,7 @@
 		  </tbody>
 	</table>	   
 	</div>
-	<div class="col-md-12">
+	<div class="col-md-8">
 	<div align="left" class="col-md-2"></div>
 	<div class="divPage" style="text-align: center" >
 		<!-- 페이지 번호 추가 -->
@@ -113,8 +122,9 @@
 		</div>
 	</div>
 </div>
+</div>
 
-<div class="col-md-12">
+<div class="col-md-10">
 	<div class="col-md-2" align="left"></div>
 		<div class="col-md-10">
 	   	<form name="frmSearch" method="post" align="center"
@@ -139,7 +149,7 @@
 	        <%-- searchCondition option 제거함 --%>
 	        <input class="btn btn-default" type="text" name="searchKeyword" title="검색어 입력" placeholder="Notice Search..."
 	        	value="${param.searchKeyword }">
-	        <input class="btn btn-default" type="submit" value="검색">
+	        <input class="btn btn-primary" type="submit" value="검색">
 	
 			<!-- <input type="submit" value="검색"> -->
 

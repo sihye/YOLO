@@ -25,6 +25,14 @@
 	
 </script>
 
+<style>
+ul{
+   list-style:none;
+   padding-left:0px;
+   }
+</style>
+
+
 <!-- 페이징 처리를 위한 form 시작-->
 <form name="frmPage" method="post" 
 	action='<c:url value="/useboard/list.do"/>'>
@@ -40,21 +48,14 @@
 	${pagingInfo.totalRecord}건 검색되었습니다</p>
 </c:if>
 
-<!-- 페이징 처리 form 끝 -->	
-
-<!-- <body> -->
-<!-- <h2>공지사항</h2> -->
 <style>
 .tab-pane table{width:100%;}
 </style>
-</head>	
-<br>
-<br>
+
 <div class="col-md-10">
-<h2 align="center">이용안내</h2>
-	<br>
-	<br>
 	<div class="container">
+		<div class="col-md-2" align="left"></div>
+		<h2>이용안내</h2>
 		<div class="col-md-10">
 			<ul class="nav nav-tabs nav-justified">
 				<li class="active"><a href='<c:url value="/useboard/list.do"/>'  role="tab" data-toggle="tab" 
@@ -93,21 +94,23 @@
 
 						<!-- div role="tabpanel" class="tab-pane" id="pay"> -->
 						
-						</div>
-						</div>
-						</div>
-						</div>
-						</div>
+			</div>
+		</div>
+	</div>
+</div>
+						
 						
 						
 						
 
 
-<div class="col-md-10" align="center">
-   	<form name="frmSearch" method="post" 
+<div class="col-md-10">
+	<div class="col-md-2" align="left"></div>
+	<div class="col-md-10">
+   	<form name="frmSearch" method="post" align="center"
    		action="<c:url value='/useboard/list.do' />" >
-        <select name="searchCondition">
-            <option value="ub_title" class="btn btn-default"
+        <select name="searchCondition" class="btn btn-default">
+            <option value="ub_title" 
             	<c:if test="${'ub_title'==param.searchCondition }">
             		selected            	
             	</c:if>
@@ -122,17 +125,19 @@
         
         <input class="btn btn-default" type="text" name="searchKeyword" title="검색어 입력" placeholder="Use Search..."
         	value="${param.searchKeyword }">
-        <input class="btn btn-default" type="submit" value="검색">
+        <input class="btn btn-primary" type="submit" value="검색">
 
 		<!-- <input type="submit" value="검색"> -->
-	
+		<div style="text-align:right;">
+		    <a href="<c:url value='/useboard/write.do'/>" >이용안내추가</a>
+		</div>
+
     </form>
 </div>
-
-
-<div style="text-align:right;">
-    <a href="<c:url value='/useboard/write.do'/>" >이용안내추가</a>
 </div>
+</div>
+
+
 
 <%@ include file="../noticeboard/boardbottom.jsp" %>
 </body>

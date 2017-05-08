@@ -10,7 +10,11 @@
 				alert("제목을 입력하세요");
 				$('#title').focus();
 				event.preventDefault();
-			}	
+			}else if($('#nbContent').val()==""){
+				alert("내용를 입력하세요");
+				$('#nbContent').focus();
+				event.preventDefault();
+			}				
 		});
 	});
 		
@@ -23,14 +27,15 @@
 	});
 </script>
 
-</head>
+
+
+
+
 
 <div class="col-md-10">
-<h2 align="center">공지사항 수정</h2>
-<br>
-<br>
+<h2>공지사항 수정</h2>
 <form id="frmEdit" name="frmEdit" method="post" 
-	action='<c:url value="/noticeboard/edit.do" />'> 
+	action='<c:url value="/noticeboard/edit.do" />' enctype="multipart/form-data"> 
 	<input type="hidden" name="nbNo" 
             	value="${vo.nbNo}" />
    	<input type="hidden" name="bgNo" 
@@ -41,7 +46,7 @@
     <fieldset>
         <div class="col-md-12">
             <label class="col-sm-1 control-label" for="title">제목</label>
-            <div class="col-sm-10">
+            <div class="col-sm-11">
             <input type="text" id="nbTitle" name="nbTitle" class="form-control" placeholder="제목"
             	value="${vo.nbTitle}" />
             </div>
@@ -49,7 +54,7 @@
       	<br><br>
         <div class="col-md-12">
             <label class="col-sm-1 control-label" for="mUserid">작성자</label>
-            <div class="col-sm-10">
+            <div class="col-sm-11">
             <input type="text" id="mUserid" name="mUserid" class="form-control" placeholder="작성자" readonly
             	value="${vo.mUserid}"/>
             </div>
