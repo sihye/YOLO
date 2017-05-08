@@ -9,7 +9,6 @@ function delFunc() {
 	location.href='<c:url value="/mypage/Favorite/seeClassdelete.do" />';
 } 
 
-
 </script>
 <div class="col-md-10">
 	<ul class="nav nav-tabs nav-justified">
