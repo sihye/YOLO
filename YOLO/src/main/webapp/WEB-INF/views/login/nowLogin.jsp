@@ -48,9 +48,9 @@ hr{
 			<tr><td>
 			<hr>
 			<div  id="findid" style="text-align: center;   margin-top: 15px;">
-				<a href="#">아이디 찾기</a>  |
-				<a href="#">비밀번호 찾기</a>   |
-				<a href="#">회원가입</a>
+				<a href="${pageContext.request.contextPath}/member/findUserid.do">아이디 찾기</a>  |
+				<a href="${pageContext.request.contextPath}/member/findPwd.do">비밀번호 찾기</a>   |
+				<a href="${pageContext.request.contextPath}/member/register.do">회원가입</a>
 			</div>
 			<td></tr>
 			<tr><td>

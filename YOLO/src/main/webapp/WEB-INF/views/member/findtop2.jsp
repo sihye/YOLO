@@ -7,7 +7,7 @@
 			<div class="col-md-2">
 				<ul class="nav nav-pills nav-stacked">
 					<li ><a href='<c:url value="/member/findUserid.do"/>'>아이디 찾기</a></li>
-					<li class="active"><a href='<c:url value="/useboard/list.do"/>'>비밀번호 찾기
+					<li class="active"><a href='<c:url value="/member/findPwd.do"/>'>비밀번호 찾기
 						</a></li>		
 				</ul>
 			</div>
