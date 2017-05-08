@@ -121,11 +121,16 @@ public class MemberServiceImpl implements MemberService{
 	public String findUserid(MemberVO vo) {
 		return memberDao.findUserid(vo);
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public String findPwd(MemberVO vo) {
+		return memberDao.findPwd(vo);
+	}
+
+	@Override
+	public String findPwd1(MemberVO vo) {
+		return memberDao.findPwd1(vo);
+	}
 	
 	
 }

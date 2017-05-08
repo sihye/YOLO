@@ -17,6 +17,7 @@ import com.one.yolo.common.PaginationInfo;
 import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
 import com.one.yolo.qnaboard.model.QnaBoardService;
+import com.one.yolo.qnaboard.model.QnaRepayVO;
 import com.one.yolo.reviewboard.model.ReviewBoardService;
 
 @Controller
@@ -48,8 +49,11 @@ public class MybbsController {
 		searchVO.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 
 		List<Map<String, Object>> alist = qnaboardService.selectQnaBoard(searchVO);
-		logger.info("문의게시판 조회 결과 alist.size()={}",alist.size());
-
+		logger.info("문의게시판 질문 조회 결과 alist.size()={}",alist.size());
+		
+		List<QnaRepayVO> repayList = qnaboardService.selectRepay();
+		logger.info("문의게시판 답변 조회 결과 repayList.size()={}",repayList.size());
+		
 		int totalRecord =qnaboardService.selectTotalRecord(searchVO);
 		logger.info("글목록 조회-전체레코드 개수조회 결과, totalRecord={}",			
 				totalRecord);
@@ -57,6 +61,7 @@ public class MybbsController {
 		pagingInfo.setTotalRecord(totalRecord);
 
 		model.addAttribute("alist",alist);
+		model.addAttribute("repayList",repayList);
 		model.addAttribute("pagingInfo", pagingInfo);
 		return "mypage/Mybbs/qnaboard";
 	}

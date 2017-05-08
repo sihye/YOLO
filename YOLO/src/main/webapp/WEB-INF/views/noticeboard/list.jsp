@@ -32,8 +32,7 @@
 <!-- <body> -->
 <!-- <h2>공지사항</h2> -->	
 </head>	
-<br>
-<br>
+
 <div class="col-md-12">
 	<div class="col-md-2" align="left"></div>
 	<div class="col-md-10">

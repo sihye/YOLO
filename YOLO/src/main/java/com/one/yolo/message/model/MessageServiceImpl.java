@@ -73,6 +73,10 @@ public class MessageServiceImpl implements MessageService{
 		}		
 		return cnt;
 	}
+	@Override
+	public int messageCheck(int msNo) {
+		return messageDao.messageCheck(msNo);
+	}
 	
 }
 

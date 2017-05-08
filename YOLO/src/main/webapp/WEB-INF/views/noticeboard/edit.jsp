@@ -24,8 +24,7 @@
 </script>
 
 </head>
-<br>
-<br>
+
 <div class="col-md-10">
 <h2 align="center">공지사항 수정</h2>
 <br>
@@ -102,7 +101,7 @@
 	            	${uv2.fOriginalfilename }</i> 은 삭제됩니다.	
 	            </span>
             </c:if>
-		</div>
+		</div> 
 		</div>
 		<div class="col-md-12">
 		<div class="col-md-1"></div>
@@ -118,11 +117,10 @@
             </c:if>
 		</div>
 		</div>
-	</div>	
-	
 	</fieldset>
 </form>    
 </div>
+
 
 <%@ include file="boardbottom.jsp" %> 
 </body>

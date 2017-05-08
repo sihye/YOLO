@@ -52,6 +52,11 @@ public class MessageDAOMybatis extends SqlSessionDaoSupport implements MessageDA
 		return getSqlSession().selectList(namespace+".selectMessageGet",searchVO);
 	}
 
+	@Override
+	public int messageCheck(int msNo) {
+		return getSqlSession().update(namespace+".messageCheck",msNo);
+	}
+
 	
 
 }

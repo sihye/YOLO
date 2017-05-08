@@ -6,7 +6,15 @@
 	width: 100%;
 	width: 100%;
 }
-
+h3{
+		font-size: 20px;
+		webkit-margin-before: 1.67em;
+	    webkit-margin-after: 1.67em;
+	    webkit-margin-start: 0px;
+	    webkit-margin-end: 0px;
+	    font-weight: bold;
+	    color: blue;
+	}
 </style>
 <script>
 function addNode() {

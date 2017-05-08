@@ -20,6 +20,11 @@ public class ClassBoardDAOMybatis extends SqlSessionDaoSupport implements ClassB
 	public int selectClassBoardCount(ClassBoardVO vo) {
 		return getSqlSession().selectOne(namespace+".selectClassBoardCount",vo);
 	}
+
+	@Override
+	public int insertClassBoard(ClassBoardVO vo) {
+		return getSqlSession().insert(namespace+".insertClassBoard",vo);
+	}
 	
 	
 	

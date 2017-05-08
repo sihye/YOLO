@@ -47,6 +47,16 @@
 			}				
 		});
 		
+		$("#reason1").change(function(){
+			if($("#reason1").val()=="etc"){
+				$('#reason2').css("visibility","visible");
+				$("#reason2").val("");
+				$("#reason2").focus();
+			}else{
+				$('#reason2').css("visibility","hidden");
+			}
+		});
+		
 		$("#no").click(function() {
 			history.back();
 		})
@@ -74,19 +84,7 @@
 	
 	.simpleForm { display: table; margin-left: auto; margin-right: auto; } 
 </style>
-<!-- <script type="text/javascript">
-	$(function(){
-		$("#pwd").focus();
-		
-		$("#frmOut").submit(function(){
-			if($("#pwd").val()==''){
-				alert('비밀번호를 입력하세요');
-				$("#pwd").focus();
-				return false;
-			}			
-		});
-	});
-</script> -->
+
 
 <article class="simpleForm">
 			<legend>회원탈퇴</legend>
@@ -107,7 +105,7 @@
 		
 		<div class="container"> 
 		<h3>탈퇴 사유</h3> 
-		<select class="form-control" style="width: 60%" id="email2" name="mReason"> 
+		<select class="form-control" style="width: 60%" id="reason1" name="mReason"> 
 		<option value="서비스 불만">서비스 불만</option> 
 		<option value="그냥">그냥</option> 
 		<option value="쏘쏘">쏘쏘</option> 
@@ -115,7 +113,7 @@
 		<option value="트와이스">트와이스</option> 
 		<option value="etc">직접입력</option>
 		</select><br>
-		<input type="text" style="visibility:hidden; width: 60%" name="mReason" id="email3" >
+		<input type="text" style="visibility:hidden; width: 60%" name="mReason" id="reason2" >
 		</div>
 		<br>
 	

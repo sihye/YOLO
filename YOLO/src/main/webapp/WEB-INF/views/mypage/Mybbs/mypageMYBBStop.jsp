@@ -2,6 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../../inc/top.jsp" %>
+<style>
+	h2{
+		font-size: 25px;
+		webkit-margin-before: 1.67em;
+	    webkit-margin-after: 1.67em;
+	    webkit-margin-start: 0px;
+	    webkit-margin-end: 0px;
+	    font-weight: bold;
+	    color: rgb(63, 148, 7);
+	}
+</style>
 <link rel="stylesheet" type="text/css" href='<c:url value="/css/mypage.css" />'>
 	<div class="container" style="margin-top: 40px;">
 		<div class="row">

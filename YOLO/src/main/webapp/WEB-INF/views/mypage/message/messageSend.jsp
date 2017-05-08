@@ -49,6 +49,10 @@ $(document).ready(function() {
 			alert('받는사람을 입력하세요');
 			$("#msgUserid").focus();
 			return false;
+		}else if($("#msTitle").val().length>20){
+			alert('제목이 너무 깁니다');
+			$("#msTitle").focus();
+			return false;
 		}else if($("#msTitle").val().length<1){
 			alert('제목을 입력하세요');
 			$("#msTitle").focus();

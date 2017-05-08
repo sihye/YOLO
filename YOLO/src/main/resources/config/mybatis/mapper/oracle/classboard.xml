@@ -56,6 +56,38 @@
 		where c_no=#{cNo} 
 	   <include refid="searchWhere"></include>
 	</select>
+	
+	<insert id="insertClassBoard" parameterType="ClassBoardVO">
+		<selectKey keyProperty="cbNo" resultType="int" order="BEFORE">
+			select classboard_seq.nextval from dual
+		</selectKey>
+		
+		<choose>
+		<when test="fNo1!=0 and fNo2!=0 and fNo3!=0">
+			insert into classboard(cb_no,c_no,m_userid,cb_title,cb_regdate,cb_readcount,cb_content,f_no1,f_no2,f_no3)
+			values(#{cbNo},#{cNo},#{mUserid},#{cbTitle},sysdate,0,#{cbContent},#{fNo1},#{fNo2},#{fNo3})
+		</when>
+		<when test="fNo1!=0 and fNo2!=0 and fNo3==0">
+			insert into classboard(cb_no,c_no,m_userid,cb_title,cb_regdate,cb_readcount,cb_content,f_no1,f_no2)
+			values(#{cbNo},#{cNo},#{mUserid},#{cbTitle},sysdate,0,#{cbContent},#{fNo1},#{fNo2})
+		</when>
+		<when test="fNo1!=0 and fNo2==0 and fNo3==0">
+			insert into classboard(cb_no,c_no,m_userid,cb_title,cb_regdate,cb_readcount,cb_content,f_no1)
+			values(#{cbNo},#{cNo},#{mUserid},#{cbTitle},sysdate,0,#{cbContent},#{fNo1})
+		</when>
+		<when test="fNo1==0 and fNo2==0 and fNo3==0">
+			insert into classboard(cb_no,c_no,m_userid,cb_title,cb_regdate,cb_readcount,cb_content)
+			values(#{cbNo},#{cNo},#{mUserid},#{cbTitle},sysdate,0,#{cbContent})
+		</when>
+		
+		<otherwise>
+		
+		</otherwise>
+		</choose>
+		
+	</insert>
+	
+	
 </mapper>
 
 

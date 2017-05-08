@@ -236,4 +236,16 @@ public class MessageController {
 		return bool;
 		
 	}
+	
+	@RequestMapping("/messageCheck.do")
+	@ResponseBody
+	public int messageCheck(@RequestParam int msNo){
+		logger.info("메세지 상태 업데이트,파라미터 msNo={}",msNo);
+		 
+	    int cnt=messageService.messageCheck(msNo);
+		
+		return cnt;
+		
+	}
+	
 }

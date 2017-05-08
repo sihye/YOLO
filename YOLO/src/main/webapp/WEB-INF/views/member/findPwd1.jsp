@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
-<%@ include file="../member/findtop.jsp" %>
+<%@ include file="../member/findtop2.jsp" %>       
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
@@ -19,18 +19,14 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#frm1").submit(function(){
+		$("#frm2").submit(function(){
 			if($("#mName").val()==''){
 				alert('이름을 입력하세요');
 				$("#mName").focus();
 				return false;
-			}else if($("#mEmail1").val()==''){
-				alert('이메일 @ 앞자리를 입력하세요');
-				$("#mEmail1").focus();
-				return false;
-			}else if($("#mEmail2").val()==''){
-				alert('이메일 @ 뒷자리를 입력하세요');
-				$("#mEmail1").focus();
+			}else if($("#mUserid").val()==''){
+				alert('아이디를 입력하세요');
+				$("#mUserid").focus();
 				return false;
 			}		
 		});
@@ -40,21 +36,17 @@
 </script>
 </head>
 <body>
-<article style="padding-left: 30%">
-	<h2>아이디 찾기</h2>
+
+	<h2>비밀번호 찾기</h2>
 	<div>
-		<div>
-			아이디와 이메일을 입력하세요
-		</div>
-		<br>
-		<form name="frmId" method="post" id="frm1"
-		action="<c:url value='/member/findUserid.do'/>">
-		<DIV>
-			<label for="mName">이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-			<input type="text" name="mName" id="mName" 
-				value="${param.name}"><br><br>
-		</DIV>
-		<div>		
+	<a>${result}</a>
+		<form name="frm2" method="post" id="frm2" 
+		action="<c:url value='/member/findPwd1.do'/>">
+			
+			<label for="questionanswer">답변</label>
+			<input type="text" name="mQuestionanswer" id="mQuestionanswer" 
+				value="${param.questionanswer}">
+			<div>		
 			<label for="email1">이메일&nbsp;&nbsp;</label>
 			<input type="text" name="mEmail1" id="mEmail1" 
 				value="${param.email1}">
@@ -63,12 +55,12 @@
 			<input type="text" name="mEmail2" id="mEmail2" 
 				value="${param.email2}">
 		</div><br>
-		<div style="padding-left: 25%">				
-			<button type="submit" class="btn btn-primary btn-sm">아이디 찾기</button>
-		</div>
-		</form><br>
+			<button type="submit" class="btn btn-primary btn-sm">비밀번호 확인</button>
+
+			
+		</form>
 	</div>
-</article>
+
 </body>
 </html>
 <%@ include file="../inc/bottom.jsp" %>

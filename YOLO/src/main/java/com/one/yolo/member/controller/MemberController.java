@@ -112,7 +112,7 @@ public class MemberController {
 	
 	@RequestMapping("/join.do")
 	public String join(@ModelAttribute MemberVO memberVo,
-			@RequestParam(value="email3" ,required=false) String email3,
+			@RequestParam(value="mEmail3" ,required=false) String email3,
 			@RequestParam int[] kno,Model model){
 		
 		for(int i:kno){
@@ -233,6 +233,112 @@ public class MemberController {
 	      
 	      
 	   
+	   }
+	
+	@RequestMapping(value="/findPwd.do",method=RequestMethod.GET)
+	public String findPwd_get(){
+		logger.info("비밀번호찾기 보여주기");
+		
+		return "member/findPwd";
+	}
+	
+	@RequestMapping(value="/findPwd.do")
+	   public String findPwd_post(@RequestParam String mName, @RequestParam String mUserid,
+			   Model model){
+	      logger.info("비밀번호 찾기");
+	      MemberVO memberVo = new MemberVO();
+	      memberVo.setmName(mName);
+	      memberVo.setmUserid(mUserid);
+	      
+	      String result = memberService.findPwd(memberVo);
+	      
+	      logger.info("결과 result = {}",result);
+	      
+	      MemberVO vo = new MemberVO();
+
+	   
+	      model.addAttribute("result", result);
+	      model.addAttribute("mName", mName);
+	      model.addAttribute("mUserid", mUserid);
+	      
+	      logger.info(mName);
+	      logger.info(mUserid);
+	      
+	    String msg="", url="";
+			if(result==null){
+				msg="이름 또는 이메일이 일치하지 않습니다";
+				url="/member/findPwd.do";
+				
+				model.addAttribute("msg", msg);
+				model.addAttribute("url", url);
+				
+				return "common/message";
+			}else{
+				msg="이름 또는 이메일이 일치";
+				
+			}
+			
+			//3
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			
+			return "member/findPwd1";
+	    
+	   }
+	
+	@RequestMapping(value="/findPwd1.do",method=RequestMethod.GET)
+	public String findPwd1_get(){
+		logger.info("비밀번호찾기 질문 보여주기");
+		
+		return "member/findPwd1";
+	}
+	
+	@RequestMapping(value="/findPwd1.do")
+	   public String findPwd1_post(@RequestParam String mEmail1, @RequestParam String mEmail2 , @RequestParam String mQuestionanswer,
+			   Model model){
+	      logger.info("비밀번호 찾기");
+	      MemberVO memberVo = new MemberVO();
+	      memberVo.setmQuestionanswer(mQuestionanswer);
+	      memberVo.setmEmail1(mEmail1);
+	      memberVo.setmEmail2(mEmail2);
+	      
+	      String result1 = memberService.findPwd1(memberVo);
+	      
+	      logger.info("결과 result1 = {}",result1);
+	      
+	      MemberVO vo = new MemberVO();
+
+	   
+	      model.addAttribute("result1", result1);
+	      model.addAttribute("mQuestionanswer", mQuestionanswer);
+	      model.addAttribute("mEmail1", mEmail1);
+	      model.addAttribute("mEmail2", mEmail2);
+	      
+	      logger.info(mQuestionanswer);
+	      logger.info(mEmail1);
+	      logger.info(mEmail2);
+	      
+	    String msg="", url="";
+			if(result1==null){
+				msg="답변 또는 이메일이 틀렸습니다";
+				url="/member/findPwd1.do";
+				
+				model.addAttribute("msg", msg);
+				model.addAttribute("url", url);
+				
+				return "common/message";
+			}else{
+				msg=result1;
+				url="/index2.do";
+				
+			}
+			
+			//3
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			
+			return "common/message";
+	    
 	   }
 	
 	@RequestMapping(value="/memberEdit.do", method=RequestMethod.GET)

@@ -25,5 +25,8 @@ public interface MemberDAO {
 	public int hostInsert(MemberVO vo);
 	
 	public String findUserid(MemberVO vo);
+	
+	public String findPwd(MemberVO vo);
+	public String findPwd1(MemberVO vo);
 
 }

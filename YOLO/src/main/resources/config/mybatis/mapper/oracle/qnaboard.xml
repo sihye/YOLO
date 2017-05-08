@@ -48,6 +48,7 @@
 		    (
 		        select * from qnaboard 
 		        <include refid="searchWhere"></include>
+		        order by CQ_NO desc
 		    )LIST
 		)	
 		<![CDATA[
