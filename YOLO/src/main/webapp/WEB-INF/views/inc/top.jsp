@@ -119,13 +119,13 @@
          <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
             aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
-               <div class="modal-content" style="width: 500px; height: 600px;">
-                  <div class="modal-header">
+               <div class="modal-content" style="width: 500px; height: 480px;">
+                  <div class="modal-header" style="height: 110px">
                      <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span> <span class="sr-only">Close</span>
                      </button>
                      <h4 class="modal-title" id="myModalLabel"><img style="width: 170px;
-    margin-left: 160px;" alt="" src="${pageContext.request.contextPath}/img/3.png"></h4>
+    margin-left: 140px;" alt="" src="${pageContext.request.contextPath}/img/3.png"></h4>
                   </div>
                   <div class="modal-body">
                      <form name="frmLogin" id="frmLogin" method="post"
@@ -133,7 +133,7 @@
                         <%@ include file="../login/nowLogin.jsp" %> 
                           <fieldset>
 
-                           <div>
+                           <%-- <div>
                               <label for="userid" style="margin-right: 14px">&nbsp;&nbsp;&nbsp;아이디</label>
                               <input type="text" name="userid" id="userid"
                                  style="width: 160px" value="${cookie.ck_userid.value}">
@@ -155,7 +155,7 @@
                                  취소 <span class="sr-only">Close</span>
                               </button>
 
-                           </div>
+                           </div> --%>
 
                         </fieldset>  
                      </form>
