@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
+<link rel="stylesheet" type="text/css" href='<c:url value="/css/mypage.css" />'>
 <link href="<c:url value='/css/lightbox.css'/>" rel="stylesheet">
 <script src="<c:url value='/js/lightbox.js'/>"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -133,7 +134,7 @@ $(document).ready(function() {
 		frmPage.submit();
 	}
 
-	
+
 	
 </script>
 <script>
@@ -232,15 +233,15 @@ hr{
 
 </style>
 <form name="frmPage" method="post"
-action='<c:url value="/class/claDetail.do?cNo=${claVo.cNo }" />'>
-<input type="hidden" name="currentPage"> <input type="hidden"
+action='<c:url value="/class/claDetail.do?cNo=${claVo.cNo }" />' >
+<input type="hidden" name="currentPage" value="${param.currentPage }"> <input type="hidden"
 name="searchCondition" value="${param.searchCondition }"> <input
 type="hidden" name="searchKeyword" value="${param.searchKeyword}">
 <input type="hidden" name="searchStartDate"
 value="${param.searchStartDate}"> <input type="hidden"
-name="searchEndDate" value="${param.searchEndDate}">
-<input type="hidden" name="boardtype" id="boardtype">
+name="searchEndDate" value="${param.searchEndDate}"> 
 
+<input type="hidden" name="boardtype" id="boardtype" >
 </form>
 <!-- 헤더 이미지 -->
 <div class="mainImg">
@@ -361,20 +362,20 @@ name="searchEndDate" value="${param.searchEndDate}">
 <script type="text/javascript">
 			$(function(){
 				$("#booking").click(function(){
-					console.log("펑션들어옴")
-					console.log(${sch.scNo})
-					$("#scNo").val(${sch.scNo});
+					console.log("펑션들어옴");
+					console.log('${sch.scNo}');
+					$("#scNo").val('${sch.scNo}');
 					$("#dateSel").change(function(){
 						var selDate=$("#dateSel").val();
 						$("#bkBdate").val(selDate);
 						console.log(selDate);
-					})
+					});
 					$("#timeSel").change(function(){
-						$("#bkTime").val($("#timeSel").val())
-					})
-				})
+						$("#bkTime").val($("#timeSel").val());
+					});
+				});
 			
-			})
+			});
 </script>
 	</div>
 
@@ -568,7 +569,7 @@ name="searchEndDate" value="${param.searchEndDate}">
 	<br>
 	<h2>후기</h2>
 	<br>
-	<form>
+	<form name="frmsearch" action='<c:url value="/class/claDetail.do?cNo=${claVo.cNo }" />' method="post">
 		<!-- search -->
 		<table class="searchBox">
 			<caption>조회</caption>
@@ -629,14 +630,16 @@ name="searchEndDate" value="${param.searchEndDate}">
 								<option value="CB_TITLE">제목</option>
 								<option value="CB_CONTENT">내용</option>
 							</select> <input class="txt" id="searchKeyword" name="searchKeyword"
-								type="text" /> <input type="submit" value="조회하기">
+								type="text" /> 
+								<input type="hidden" name="boardtype" id="boardtype" value="cb">
+								<input type="submit" value="조회하기">
 						</div>
 					</td>
 				</tr>
 			<tbody>
 		</table>
-	</form>
 	<br>
+	</form>
 	<!-- //기간별조회 -->
 	
 	<table class="table table-hover">
@@ -669,8 +672,10 @@ name="searchEndDate" value="${param.searchEndDate}">
 		</tbody>
 	</table>
 	<c:if test="${!empty sessionScope.userid }">
-	<input type="button" value="후기쓰기" onclick="location.href='<c:url value='/class/classBoardWrith.do?cNo=${claVo.cNo }'/>'">
+	<button type="button" class="btn btn-default" style="float: right;" onclick="location.href='<c:url value='/class/classBoardWrith.do?cNo=${claVo.cNo }'/>'">후기쓰기</button>
 	</c:if>
+	<br><br>
+	
 	<div class="divList">
 	<div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->
