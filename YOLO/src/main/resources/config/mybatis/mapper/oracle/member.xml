@@ -83,7 +83,7 @@
 	<select id="findPwd1" parameterType="memberVO" resultType="String">
 		select m_pwd 
 		from member
-		where m_birth=#{mBirth} and m_questionanswer=#{mQuestionanswer}
+		where m_questionanswer=#{mQuestionanswer} and m_email1=#{mEmail1} and m_email2=#{mEmail2}
 	</select>
 	
 	<select id="duplicateUserid" parameterType="string" 

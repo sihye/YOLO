@@ -294,12 +294,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/findPwd1.do")
-	   public String findPwd1_post(@RequestParam String mBirth, @RequestParam String mQuestionanswer,
+	   public String findPwd1_post(@RequestParam String mEmail1, @RequestParam String mEmail2 , @RequestParam String mQuestionanswer,
 			   Model model){
 	      logger.info("비밀번호 찾기");
 	      MemberVO memberVo = new MemberVO();
 	      memberVo.setmQuestionanswer(mQuestionanswer);
-	      memberVo.setmBirth(mBirth);
+	      memberVo.setmEmail1(mEmail1);
+	      memberVo.setmEmail2(mEmail2);
 	      
 	      String result1 = memberService.findPwd1(memberVo);
 	      
@@ -308,16 +309,18 @@ public class MemberController {
 	      MemberVO vo = new MemberVO();
 
 	   
-	      model.addAttribute("result", result1);
+	      model.addAttribute("result1", result1);
 	      model.addAttribute("mQuestionanswer", mQuestionanswer);
-	      model.addAttribute("mUserid", mBirth);
+	      model.addAttribute("mEmail1", mEmail1);
+	      model.addAttribute("mEmail2", mEmail2);
 	      
 	      logger.info(mQuestionanswer);
-	      logger.info(mBirth);
+	      logger.info(mEmail1);
+	      logger.info(mEmail2);
 	      
 	    String msg="", url="";
 			if(result1==null){
-				msg="생년월일 또는 답변이 틀렸습니다";
+				msg="답변 또는 이메일이 틀렸습니다";
 				url="/member/findPwd1.do";
 				
 				model.addAttribute("msg", msg);

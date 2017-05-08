@@ -41,13 +41,19 @@
 		<form name="frm2" method="post" id="frm2" 
 		action="<c:url value='/member/findPwd1.do'/>">
 			
-			<label for="questionanswer">아이디</label>
+			<label for="questionanswer">답변</label>
 			<input type="text" name="mQuestionanswer" id="mQuestionanswer" 
 				value="${param.questionanswer}">
-			<label for="birth">아이디</label>
-			<input type="text" name="mBirth" id="mBirth" 
-				value="${param.birth}">	
-			<button type="submit" class="btn btn-primary btn-sm">아이디 확인</button>
+			<div>		
+			<label for="email1">이메일&nbsp;&nbsp;</label>
+			<input type="text" name="mEmail1" id="mEmail1" 
+				value="${param.email1}">
+				
+			<label for="email2">@</label>
+			<input type="text" name="mEmail2" id="mEmail2" 
+				value="${param.email2}">
+		</div><br>
+			<button type="submit" class="btn btn-primary btn-sm">비밀번호 확인</button>
 
 			
 		</form>
