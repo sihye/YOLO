@@ -37,7 +37,7 @@ hr{
 				<input name="pwd" class="form-control" placeholder="비밀번호" >
 			<td></tr>
 			<tr><td>
-				<button name="login" class="button" value="로그인"></button>
+				<button name="login" class="button" value="로그인">로그인</button>
 			<td></tr>
 			<tr><td>
 				<input type="checkbox" name="chkSaveId" id="chkId"<c:if test="${!empty cookie.ck_userid }">

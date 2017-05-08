@@ -62,7 +62,7 @@ margin-top: 10px;
 <!-- 결제 -->
 <script src="https://service.iamport.kr/js/iamport.payment-1.1.4.js" type="text/javascript"></script>
 
-
+<form action="<c:url value='/class/payOk.do'/>" method="post" id="payFrm" name="payFrm" >
 <div class="wrp">
 	<div class="container">
 		<div class="container divInfo " id="member" style="height: 200px;">
@@ -192,7 +192,7 @@ margin-top: 10px;
 		</div>
 		
 		<div class="divInfo container" id="booking">
-			<button class="button" id="bookingGo">예약하기</button>
+			<button class="button" type="button" id="bookingGo">예약하기</button>
 		</div> 
 		<!-- 결제 연동 ajax -->
 		<script type="text/javascript">
@@ -224,7 +224,10 @@ margin-top: 10px;
 							    		dataType:'json',
 							    		success:function(res){
 							    			alert('결제가 완료됐습니다.');
-							    			location.href="<c:url value='/class/payOk.do?cNo=${claVo.cNo}'/>";
+							    			/* location.href="<c:url value='/class/payOk.do?pmNo="+rsp.merchant_uid+"'/>"; */
+							    			$("#pmNo").val(rsp.merchant_uid);
+							    			/* conlose.log(rsp.merchant_uid); */
+							    			$("#payFrm").submit();
 							    		},error:function(xhr, status, error){
 							    			alert('결제가 정보 입력 실패! 다시 시도해 주세요.');
 							    			console.log(error)
@@ -243,13 +246,20 @@ margin-top: 10px;
 							        alert(msg);
 							    }			    
 							});
+						}else{
+							alert("결제방법을 선택하세요.")
 						}//결제수단 카드이면
+						
+					}else{
+						alert("개인정보 이용 동의에 체크하셔야 결제 가능합니다.")
 					}//동의 체크 if
 				})
 			});
 		</script>
-
+		<input type="text" value="" name="pmNo" id="pmNo">
+		<input type="text" value="${claVo.cNo}" name="cNo" id="cNo"  >
 	</div>
 </div>
+</form>
 
 <%@ include file="../inc/bottom.jsp"%>

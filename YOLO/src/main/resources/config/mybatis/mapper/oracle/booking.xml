@@ -15,6 +15,11 @@
 		select count(*) from booking
 where sc_no=#{scNo}
 	</select>
+	
+	<select id="selForHostByPmNo" parameterType="string" resultType="map">
+		select * from classforhost
+where PM_NO=#{pmNo}
+	</select>
 
 
 </mapper>
