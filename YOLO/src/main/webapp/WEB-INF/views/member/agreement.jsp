@@ -29,7 +29,7 @@
 	#divAgree{
 		width: 700px;
 		margin-top: 10px;
-		margin-left: 33%;
+		margin-left: 29%;
 	}
 </style>
 <style> 
