@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hy.herb.reboard.model.ReBoardVO;
 import com.one.yolo.booking.model.BookingService;
 import com.one.yolo.category.model.CategoryGroupVO;
 import com.one.yolo.category.model.CategoryService;
@@ -349,5 +350,13 @@ public class ClaController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		return "common/message";
+	}
+	@RequestMapping("/boardDetail.do")
+	public String boardDetail(){
+		logger.info("글 상세보기, 파라미터");
+
+
+		return "class/boardDetail";
+
 	}
 }
