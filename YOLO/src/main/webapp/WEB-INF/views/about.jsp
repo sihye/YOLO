@@ -18,7 +18,7 @@
 	background-size: 100%;
 }
 .about1{
-	padding-left: 26%;
+	padding-left: 29%;
 }
 
 </style>
@@ -29,8 +29,8 @@
 	<!-- 헤더 위에 기본정보 -->
 	<div id="onHeader" style="padding-top: 5%;">
 				
-				<h1 style="color: white; font-size: 50px; padding-left: 34%; letter-spacing:1px;">You Only Live Once!!</h1><br>
-				<span style="color: white; font-size: 50px; padding-left: 35%;">YOLO를 소개합니다</span>
+				<h1 style="color: white; font-size: 50px; padding-left: 37%; letter-spacing:1px;">You Only Live Once!!</h1><br>
+				<span style="color: white; font-size: 50px; padding-left: 38%;">YOLO를 소개합니다</span>
 		
 	</div>
 
