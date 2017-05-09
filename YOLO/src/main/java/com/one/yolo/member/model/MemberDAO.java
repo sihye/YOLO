@@ -31,6 +31,9 @@ public interface MemberDAO {
 	public MemberVO findPwd1(MemberVO vo);
 
 	public MemberVO adminLoginCheck(String userid);
+	
+	public int operatorMemberUpdate(MemberVO vo);
+	public int operatorHostUpdate(MemberVO vo);
 
 
 }

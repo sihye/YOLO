@@ -28,6 +28,11 @@ public class MemberVO {
 	private String mBirth;
 	private String mGender;
 	private String mReason;
+	
+
+	
+	
+	
 	public String getmUserid() {
 		return mUserid;
 	}

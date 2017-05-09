@@ -277,7 +277,7 @@ a{
   		<c:forEach var="map" items="${alist }">
   		<tr>
   			<td>${map["M_NO"]}</td>
-  			<td><a href="<c:url value='/admin/memberDetail.do?userid=${map["M_USERID"]}' />">${map["M_NAME"]}</a></td>
+  			<td><a href="<c:url value='/admin/memberDetail.do?mUserid=${map["M_USERID"]}' />">${map["M_NAME"]}</a></td>
   			<td>${map["M_USERID"]}</td>
   			<td>${map["M_AGE"] }</td>
   			<td>${map["M_GENDER"] }</td>

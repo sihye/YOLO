@@ -683,10 +683,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/memberDetail.do")
-	public String memberDetail(@RequestParam String userid,Model model){
+	public String memberDetail(@RequestParam String mUserid,Model model){
 		
-		logger.info("멤버 디테일 userid = {}",userid);
-		MemberVO memberVo = memberService.selectByUserid(userid);
+		logger.info("멤버 디테일 userid = {}",mUserid);
+		MemberVO memberVo = memberService.selectByUserid(mUserid);
 		
 		model.addAttribute("memberVo",memberVo);
 		
@@ -721,10 +721,86 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/memberEdit.do" ,method=RequestMethod.GET)
-		public String memberEdit_get(@RequestParam int mNo , Model model){
+		public String memberEdit_get(@RequestParam String mUserid , Model model){
+		logger.info("멤버 디테일 userid = {}",mUserid);
+		MemberVO memberVo = memberService.selectByUserid(mUserid);
 		
-		return "/admin/memberEdit";
+		model.addAttribute("memberVo",memberVo);
+		
+		return "admin/memberEdit";
 	}
+	
+	
+	
+	@RequestMapping(value="/memberEdit.do" ,method=RequestMethod.POST)
+	public String memberEdit_get(@ModelAttribute MemberVO memberVo , Model model){
+	logger.info("멤버 edit vo = {}, id={}",memberVo,memberVo.getmUserid());
+	if(memberVo.getmEmail1()==null||memberVo.getmEmail1().isEmpty()||memberVo.getmEmail2()==null||memberVo.getmEmail2().isEmpty()){
+		memberVo.setmEmail1("");
+		memberVo.setmEmail2("");
+	}
+	
+	
+	int cnt = memberService.operatorMemberUpdate(memberVo);
+
+	String msg="",url="/admin/memberDetail.do?mUserid="+memberVo.getmUserid();
+	
+	if(cnt>0){
+		msg="회원정보 수정 완료";
+	}else{
+		msg="회원정보 수정 실패";
+	}
+	
+	model.addAttribute("msg",msg);
+	model.addAttribute("url",url);
+	return "common/message";
+	}
+	
+	@RequestMapping("/hostDetail.do")
+	public String hostDetail(@RequestParam String mUserid,Model model){
+		
+		logger.info("호스트 디테일 userid = {}",mUserid);
+		MemberVO memberVo = memberService.selectByUserid(mUserid);
+		
+		model.addAttribute("memberVo",memberVo);
+		
+		return "admin/hostDetail";
+	}
+	
+	@RequestMapping(value="/hostEdit.do" ,method=RequestMethod.GET)
+	public String hostEdit_get(@RequestParam String mUserid , Model model){
+	logger.info("호스트 디테일 userid = {}",mUserid);
+	MemberVO memberVo = memberService.selectByUserid(mUserid);
+	
+	model.addAttribute("memberVo",memberVo);
+	
+	return "admin/hostEdit";
+	}
+	
+	@RequestMapping(value="/hostEdit.do" ,method=RequestMethod.POST)
+	public String hostEdit_get(@ModelAttribute MemberVO memberVo , Model model){
+	logger.info("멤버 edit vo = {}, id={}",memberVo,memberVo.getmUserid());
+	if(memberVo.getmEmail1()==null||memberVo.getmEmail1().isEmpty()||memberVo.getmEmail2()==null||memberVo.getmEmail2().isEmpty()){
+		memberVo.setmEmail1("");
+		memberVo.setmEmail2("");
+	}
+	
+	
+	int cnt = memberService.operatorHostUpdate(memberVo);
+
+	String msg="",url="/admin/hostDetail.do?mUserid="+memberVo.getmUserid();
+	
+	if(cnt>0){
+		msg="회원정보 수정 완료";
+	}else{
+		msg="회원정보 수정 실패";
+	}
+	
+	model.addAttribute("msg",msg);
+	model.addAttribute("url",url);
+	return "common/message";
+	}
+	
 }
 
 

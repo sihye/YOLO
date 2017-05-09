@@ -109,6 +109,18 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport implements MemberDAO{
 	public MemberVO adminLoginCheck(String userid) {
 		return getSqlSession().selectOne(namespace+".adminLoginCheck",userid);
 	}
+
+	@Override
+	public int operatorMemberUpdate(MemberVO vo) {
+		return getSqlSession().update(namespace+".operatorMemberUpdate",vo);
+	}
+
+	@Override
+	public int operatorHostUpdate(MemberVO vo) {
+		return getSqlSession().update(namespace+".operatorHostUpdate",vo);
+	}
+	
+	
 	
 	
 	

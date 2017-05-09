@@ -43,6 +43,7 @@ public interface MemberService {
 
 	
 	public MemberVO adminLoginCheck(String userid);
-
+	public int operatorMemberUpdate(MemberVO vo);
+	public int operatorHostUpdate(MemberVO vo);
 	
 }

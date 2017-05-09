@@ -26,9 +26,17 @@
 				alert('전화번호를 입력하세요');
 				$("#mTel1").focus();
 				return false;
-			}else if($("zipcode").val()=='' || $("mAddressdetail").val()==''){
+			}else if($("#zipcode").val()=='' || $("#mAddressdetail").val()==''){
 				alert('주소를 입력해주세요 ');
 				$("#mAddressdetail").focus();
+				return false;
+			}else if($("#mBankname").val()==''){
+				alert("은행명을 입력해주세요");
+				$("#mBankname").focus();
+				return false;
+			}else if($("#mAccount").val()==''){
+				alert("계좌번호를 입력해주세요");
+				$("mAccount").focus();
 				return false;
 			}
 			 $("#mAddress").val($("#zipcode").val()+"/"+$("#address").val());
@@ -40,7 +48,7 @@
 
 <h2>회원 정보수정</h2>
 <br><br>
-<form class="form-inline" id="frm1" name="frm1" method="post" action='<c:url value="/admin/memberEdit.do"/>' >
+<form class="form-inline" id="frm1" name="frm1" method="post" action='<c:url value="/admin/hostEdit.do"/>' >
 <input type="hidden" name="mNo" value="${memberVo.mNo }">
 <input type="hidden" name="mUserid" value="${memberVo.mUserid }">
   <div class="form-group">
@@ -92,6 +100,20 @@
 				<input type="hidden" name="mAddress" id="mAddress" value="">
         <br><br>
 			</div>
+			
+		<div class="col-md-1" style="text-align: center;"><label for="exampleInputName2">은행명</label></div>
+        <div class="col-md-11">
+        <input type="text" class="form-control" id="mBankname" name="mBankname" value="${memberVo.mBankname }">
+        </div>	
+        <br><br>
+        
+		<div class="col-md-1" style="text-align: center;"><label for="exampleInputName2">계좌번호</label></div>
+        <div class="col-md-11">
+        <input type="text" class="form-control" id="mAccount" name="mAccount" value="${memberVo.mAccount }">
+        </div>	
+      
+			
+			
         <script> $(function(){ $("#postcodify_search_button").postcodifyPopUp(); }); </script>
   	</div>  
     </div>
@@ -99,7 +121,7 @@
 	<br><br>
 	<div style="margin-left: 250px">
 	<input class="btn btn-default" type="submit" value="정보수정">
-	<a class="btn btn-default" href="<c:url value= '/admin/memberDetail.do?mUserid=${memberVo.mUserid }'/>" role="button">이전화면</a>
+	<a class="btn btn-default" href="<c:url value= '/admin/hostDetail.do?mUserid=${memberVo.mUserid }'/>" role="button">이전화면</a>
   	</div>
  </form>
 

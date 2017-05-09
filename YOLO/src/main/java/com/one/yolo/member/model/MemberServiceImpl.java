@@ -136,6 +136,17 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO adminLoginCheck(String userid) {
 		return memberDao.adminLoginCheck(userid);
 	}
+
+	@Override
+	public int operatorMemberUpdate(MemberVO vo) {
+		return memberDao.operatorMemberUpdate(vo);
+	}
+
+	@Override
+	public int operatorHostUpdate(MemberVO vo) {
+		return memberDao.operatorHostUpdate(vo);
+	}
+	
 	
 	
 	

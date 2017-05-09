@@ -33,7 +33,7 @@
         <br><br>
         
         <div class="col-md-1" style="text-align: center;"><label for="exampleInputName2">회원구분</label></div>
-        <div class="col-md-11"><input type="text" class="form-control" id="exampleInputName2" disabled="disabled" value="MEMBER"></div>
+        <div class="col-md-11"><input type="text" class="form-control" id="exampleInputName2" disabled="disabled" value="HOST"></div>
         
         <br><br>
         
@@ -93,16 +93,26 @@
     	<input type="text" class="form-control" id="exampleInputName2" disabled="disabled" style="width: 410px" value="${memberVo.mAddressdetail }">
         </div>           
         
-        <br><br>
+        <br><br><br>
         <div class="col-md-1" style="text-align: center;"><label for="exampleInputName2">가입일자</label></div>
         <div class="col-md-11"><input type="text" class="form-control" id="exampleInputName2" disabled="disabled" value='<fmt:formatDate value="${memberVo.mJoindate }" pattern="yyyy-MM-dd" />'>
+        </div>
+        
+        <br><br>
+        <div class="col-md-1" style="text-align: center;"><label for="exampleInputName2">은행명</label></div>
+        <div class="col-md-11"><input type="text" class="form-control" id="exampleInputName2" disabled="disabled" value='${memberVo.mBankname }'>
+        </div>
+        
+        <br><br>
+        <div class="col-md-1" style="text-align: center;"><label for="exampleInputName2">계좌번호</label></div>
+        <div class="col-md-11"><input type="text" class="form-control" id="exampleInputName2" disabled="disabled" value='${memberVo.mAccount } '>
         </div>
   	</div>  
     </div>
 	</div>
 	<br><br>
 	<div style="margin-left: 250px">
-  		<a class="btn btn-default" href="<c:url value= '/admin/memberEdit.do?mUserid=${memberVo.mUserid }'/>" role="button">정보수정</a>
+  		<a class="btn btn-default" href="<c:url value= '/admin/hostEdit.do?mUserid=${memberVo.mUserid }'/>" role="button">정보수정</a>
   		<a class="btn btn-default" href="<c:url value= '/admin/memberDelPage.do?mUserid=${memberVo.mUserid }'/>" role="button"
   		 onclick="return confirm(&quot;정말  ${memberVo.mName}회원님을 삭제 하시겠습니까 ?&quot;)">회원삭제</a>
   	</div>

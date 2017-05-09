@@ -253,5 +253,22 @@
 		select *from member where m_userid=#{userid} and mg_no2=1
 	</select>
 	
-
+	<update id="operatorMemberUpdate" parameterType="MemberVO">
+	update member
+	set m_name=#{mName} , m_tel1=#{mTel1},m_tel2=#{mTel2},m_tel3=#{mTel3},m_address=#{mAddress},m_addressdetail=#{mAddressdetail}
+	<if test="mEmail1 !=null">
+	,m_Email1=#{mEmail1},m_email2=#{mEmail2}
+	</if>
+	where m_no=#{mNo}
+	</update>
+	
+	<update id="operatorHostUpdate" parameterType="MemberVO">
+	update member
+	set m_name=#{mName} , m_tel1=#{mTel1},m_tel2=#{mTel2},m_tel3=#{mTel3},m_address=#{mAddress},m_addressdetail=#{mAddressdetail},
+	m_account=#{mAccount},m_bankName=#{mBankname}
+	<if test="mEmail1 !=null">
+	,m_Email1=#{mEmail1},m_email2=#{mEmail2}
+	</if>
+	where m_no=#{mNo}
+	</update>
 </mapper>
