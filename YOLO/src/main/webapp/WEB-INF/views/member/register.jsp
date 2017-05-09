@@ -72,7 +72,7 @@
 				return false;
 			}
 			
-			 $("#mAddress").val($("#zipcode").val()+" - "+$("#address").val()+" / ");
+			 $("#mAddress").val($("#zipcode").val()+" / "+$("#address").val());
 			 
 			 $("#mBirth").val($("#birth1").val()+$("#birth2").val()+$("#birth3").val());
 			

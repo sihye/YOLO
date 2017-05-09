@@ -23,6 +23,13 @@
 			
 			self.close();
 		});
+		
+		if($("#userid").val()==''){
+			alert('아이디 입력이 안되었습니다.');
+			$("#userid").focus();
+			return false;
+		}
+
 	});
 
 	
