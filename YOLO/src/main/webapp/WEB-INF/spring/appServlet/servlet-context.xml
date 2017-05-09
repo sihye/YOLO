@@ -43,6 +43,9 @@
 	        <mapping path="/mypage/myedit/*" />
 	        <mapping path="/member/memberEdit.do" />
 	        <mapping path="/member/memberOut.do" />
+	        <mapping path="/class/clacre.do" />
+	        <mapping path="/class/edit.do" />
+	        <mapping path="/class/booking.do" />
 	        <!-- <exclude-mapping path="/info/**"/>	 -->        
 	        <beans:ref bean ="loginInterceptor" />
 	    </interceptor>

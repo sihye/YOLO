@@ -6,55 +6,26 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>::YOLO - 클래스 등록하기::</title>
+<title>::YOLO - 클래스 수정하기::</title>
 <meta name="Resource-type" content="Document" />
 
-<%-- <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/jquery.fullpage.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/examples.css" />  --%>
 
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-<!-- <link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-
-
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-
-<!--[if IE]>
-		<script type="text/javascript">
-			 var console = { log: function() {} };
-		</script>
-	<![endif]-->
 
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 
-<%-- <script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/scrolloverflow.js"></script>
-
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/jquery.fullpage.js"></script> --%>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/examples.js"></script>
-<%-- <script type="text/javascript"
-	src="${pageContext.request.contextPath}/css/bootstrap.min.css"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>  --%>
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <!-- 시간선택 -->
@@ -62,19 +33,7 @@
 	src="${pageContext.request.contextPath}/js/jquery.clockpick.1.2.9.js"></script>
 <link rel="stylesheet"
 	href="<c:url value='/css/jquery.clockpick.1.2.9.css'/>" type="text/css">
-<!-- <script type="text/javascript">
-	$(document).ready(
-			
-			function() {
-				/* $('#fullpage').fullpage(
-						/* {
-							anchors : [ 'firstPage', 'secondPage', '3rdPage',
-									'4thpage'],
-							menu : '#menu',
-							continuousVertical : false
-						}); */
-			});
-</script> -->
+
 
 <script type="text/javascript">
 	$(function(){
@@ -132,24 +91,6 @@
 				alert("메인 사진은 꼭 등록해야 합니다!");
 				$("#image").focus();
 				return false;
-			}else if($("#searchStartDate").val()==''){
-				alert("클래스 실행 기간을 입력해주세요!");
-				$("#searchStartDate").focus();
-				return false;
-			}else if($("#searchEndDate").val()==''){
-				alert("클래스 실행 기간을 입력해주세요!");
-				$("#searchEndDate").focus();
-				return false;
-			}else if($("#scStarttime1").val()==''){
-				alert("하나 이상의 시간을 등록해야 합니다!");
-				$("#scStarttime1").focus();
-				return false;
-			}else if($("#scEndtime1").val()==''){
-				alert("하나 이상의 시간을 등록해야 합니다!");
-				$("#scEndtime1").focus();
-				return false;
-			}else if(st1){
-				
 			}
 		})
 		
@@ -226,7 +167,7 @@ body {
 		<li data-menuanchor="3rdPage"><a href="#section2">클래스 갤러리 등록</a></li>
 		<li data-menuanchor="4thpage"><a href="#section3">클래스 스케줄 등록</a></li>
 	</ul> -->
-	<form action="<c:url value="/class/clacre.do"/>"
+	<form action="<c:url value="/class/edit.do"/>"
 		enctype="multipart/form-data" method="post" id="claCre" name="claCre">
 
 		<div id="fullpage">
@@ -238,7 +179,7 @@ body {
 						이름 </label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="cName"
-							name="cName" placeholder="Class Name">
+							name="cName" placeholder="Class Name" value="${vo.cName }">
 					</div>
 				</div>
 				<div class="form-group">
@@ -277,7 +218,7 @@ body {
 					</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="cPrice"
-							name="cPrice" placeholder="0원 입력시 협의">
+							name="cPrice" placeholder="0원 입력시 협의" value="${vo.cPrice}">
 					</div>
 				</div>
 				<div class="form-group">
@@ -314,7 +255,7 @@ body {
 					</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="cSpevialty"
-							name="cSpevialty" placeholder="">
+							name="cSpevialty" placeholder="" value="${vo.cSpevialty}">
 					</div>
 				</div>
 				<div class="form-group">
@@ -322,49 +263,28 @@ body {
 						인원 </label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="cMaxperson"
-							name="cMaxperson" placeholder="">
+							name="cMaxperson" placeholder="" value="${vo.cMaxperson}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">목표
 					</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputEmail3"
-							name="cGoal" placeholder="">
+						<input type="text" class="form-control" id="cGoal"
+							name="cGoal" placeholder="" value="${vo.cGoal}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">상세설명
 					</label>
 					<div class="col-sm-10">
-						<textarea id="introContents" class="form-control"
+						<textarea id="introContents" class="form-control" 
 							name="cDetailinfo" rows="10"
 							placeholder="
 						• 강사님을 소개해주세요.(이력, 자기소개 등).
 						• 커리큘럼, 경력, 장점을 표현해주세요.
 						• 회원님의 모꼬지의 대해 설명해주세요.
-						• 비교 선택시 중요한 정보입니다.">
-	Q.수업에 어떤 분들이 참여하면 좋을까요?
-	A. 
-	
-	Q.일정에 대해 알려주세요.(날짜, 시간, 소요시간, 횟수 등)
-	A. 
-	
-	Q.참여시 준비물이 필요한가요?
-	A. 
-	
-	Q.참여하는 인원이 보통 몇 명인가요?
-	A. 
-	
-	Q.결제는 어떤 방식으로 이루어지나요?
-	A. 
-	
-	Q.수업 내용을 소개해주세요.(커리큘럼, 결과물 등)
-	A. 
-	
-	Q. 강사님을 소개해주세요.(이력, 자기소개 등)
-	A. 
-					</textarea>
+						• 비교 선택시 중요한 정보입니다.">${vo.cDetailinfo}</textarea>
 					</div>
 				</div>
 				<a class="btn btn-default" id="single" href="#section1">다음</a>
@@ -375,7 +295,7 @@ body {
 					<h1>02. 클래스 주소 등록</h1>
 					<br>
 					<div class="form-group">
-						<input type="text" id="sample5_address" placeholder="주소">
+						<input type="text" id="sample5_address" placeholder="주소" value="${vo.cPlace}">
 						<input type="button" class="btn btn-default btn-lg btn-block" id="cPlace"
 							onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 						<div id="map"
@@ -486,14 +406,14 @@ body {
 						</script>
 						<label for="inputEmail3" class="col-sm-2 control-label">주소</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="add" name="cPlace">
+							<input type="text" class="form-control" id="add" name="cPlace" value="${vo.cPlace}">
 						</div>
 						<label for="inputEmail3" class="col-sm-2 control-label">상세주소</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="addDetail"
-								name="cplacedetail">
+								name="cplacedetail" value="${vo.cplacedetail}">
 						</div>
-						좌표: <input type="text" id="location" name="cCoordinate">
+						좌표: <input type="text" id="location" name="cCoordinate" value="${vo.cCoordinate}">
 					</div>
 
 				</div>
@@ -666,310 +586,8 @@ body {
 			<a class="btn btn-default" href="#section3">다음</a>
 			</div>
 			
-			
-			<div class="section container" style="height: 500px;" id="section3">
-				<div class="intro">
-					<h1>04. 스케줄 등록하기</h1>
-					<br>
-					<div id="oneDay" class="sch">
-						<!-- 기간 -->
-						<script>
-							$(document).ready(function() {	
-								//datepicker 한국어로 사용하기 위한 언어설정
-								$.datepicker.setDefaults($.datepicker.regional['ko']);
-								// Datepicker            
-								$(".datepicker").datepicker({
-									showButtonPanel : true,
-									dateFormat : "yy-mm-dd",
-									onClose : function(selectedDate) {
-										var eleId = $(this).attr("id");
-										var optionName = "";
-										if (eleId.indexOf("StartDate") > 0) {
-											eleId = eleId.replace("StartDate","EndDate");
-											optionName = "minDate";
-										} else {
-											eleId = eleId.replace("EndDate","StartDate");
-											optionName = "maxDate";
-										}
-
-										$("#"+ eleId).datepicker("option",optionName,selectedDate);
-										$(".searchDate").find(".chkbox2").removeClass("on");
-									}
-								});
-								
-								$(".dateclick").dateclick(); // DateClick
-								$(".searchDate").schDate(); // searchDate
-
-							});
-
-							// Search Date
-							jQuery.fn.schDate = function() {
-								var $obj = $(this);
-								var $chk = $obj.find("input[type=radio]");
-								$chk.click(function() {
-									$('input:not(:checked)').parent(".chkbox2")
-											.removeClass("on");
-									$('input:checked').parent(".chkbox2")
-											.addClass("on");
-								});
-							};
-
-							// DateClick
-							jQuery.fn.dateclick = function() {
-								var $obj = $(this);
-								$obj.click(function() {
-									$(this).parent().find("input").focus();
-								});
-							}
-
-							function setSearchDate(start) {
-
-								var num = start.substring(0, 1);
-								var str = start.substring(1, 2);
-
-								var today = new Date();
-								var endDate = $.datepicker.formatDate('yy-mm-dd', today);
-								$('#searchEndDate').val(endDate);
-
-								if (str == 'd') {
-									today.setDate(today.getDate() - num);
-								} else if (str == 'w') {
-									today.setDate(today.getDate() - (num * 7));
-								} else if (str == 'm') {
-									today.setMonth(today.getMonth() - num);
-									today.setDate(today.getDate() + 1);
-								}
-
-								var startDate = $.datepicker.formatDate(
-										'yy-mm-dd', today);
-								$('#searchStartDate').val(startDate);
-
-								// 종료일은 시작일 이전 날짜 선택하지 못하도록 비활성화
-								$("#searchEndDate").datepicker("option",
-										"minDate", startDate);
-
-								// 시작일은 종료일 이후 날짜 선택하지 못하도록 비활성화
-								$("#searchStartDate").datepicker("option",
-										"maxDate", endDate);
-								var now = $.datepicker.formatDate('yy-mm-dd',
-										new Date());
-								$("#searchStartDate").datepicker("option",
-										"minDate", now);
-
-							}
-						</script>
-
-						<div class="clearfix container">
-							<!-- 시작일 -->
-							<span class="dset"> 
-							<label for="searchStartDate" class="col-sm-1 control-label">기간</label>
-							<input type="text"
-								class="datepicker inpType" name="scStartdate"
-								id="searchStartDate">
-							</span> <span class="demi">~</span>
-							<!-- 종료일 -->
-							<span class="dset"> <input type="text"
-								class="datepicker inpType" name="scEnddate"
-								id="searchEndDate">
-							</span>
-						</div>
-						<!-- 요일 -->
-						<bR>
-						<div class="container">
-							<label for="blankCheckbox" class="col-sm-1 control-label">요일</label>
-							<div class="checkbox" style="">
-								<label><input type="checkbox" id="blankCheckbox"
-									value="월" aria-label="...">월 </label> <label><input
-									type="checkbox" id="blankCheckbox" value="화" name="scWeek"
-									aria-label="...">화 </label> <label><input
-									type="checkbox" id="blankCheckbox" value="수" name="scWeek"
-									aria-label="...">수 </label> <label><input
-									type="checkbox" id="blankCheckbox" value="목" name="scWeek"
-									aria-label="...">목 </label> <label><input
-									type="checkbox" id="blankCheckbox" value="금" name="scWeek"
-									aria-label="...">금 </label> <label><input
-									type="checkbox" id="blankCheckbox" value="토" name="scWeek"
-									aria-label="...">토 </label> <label><input
-									type="checkbox" id="blankCheckbox" value="일" name="scWeek"
-									aria-label="...">일 </label>
-							</div>
-						</div>
-						<!-- 시간 -->
-
-						<script type="text/javascript">
-							var i = 2;
-							$(function() {
-								$("#remove").click(function() {
-									if($(".wrp > div") .size()==1){
-										alert("최소 하나의 시간은 입력해야 합니다.");
-										return false;
-									}
-									$(".wrp div:last").last().remove();
-									i--;
-								})
-								$("#add1").click(function() {
-									if($(".wrp > div") .size()==3){
-										alert("시간은 최대 3개까지 입력할 수 있습니다.");
-										return false;
-									}
-									$(".wrp").append($("#clock").html());
-									$(".wrp div:last input:first").attr({'name':"scStarttime"+ i,'id':"scStarttime"+ i});
-									$(".wrp div:last input:last").attr({'name':"scEndtime"+ i,'id':"scEndtime"+ i});
-									i++;
-									$(".clockpick").clockpick({
-										starthour : 0,
-										endhour : 23,
-										showminutes : false,
-										layout : 'Horizontal'
-									});
-									$("#scEndtime2").click(function(){
-										var sTime=0;	
-										var arr=$("#scStarttime2").val().split(' ');//12:00 , PM
-										console.log(arr);
-										if(arr[1]=='PM'){
-											var arr2=arr[0].split(":");//12,00
-											sTime=Number(arr2[0])+13;
-											console.log(sTime);
-										}else if(arr[1]=='AM'){
-											var arr2=arr[0].split(":");//12,00											
-											sTime=Number(arr2[0])+1;
-										}
-										$("#scEndtime2").clockpick({
-											starthour : sTime,
-											endhour : 23,
-											showminutes : false,
-											layout : 'Horizontal'
-										});
-									})
-									$("#scEndtime3").click(function(){
-										var sTime=0;	
-										var arr=$("#scStarttime3").val().split(' ');//12:00 , PM
-										console.log(arr);
-										if(arr[1]=='PM'){
-											var arr2=arr[0].split(":");//12,00
-											sTime=Number(arr2[0])+13;
-											console.log(sTime);
-										}else if(arr[1]=='AM'){
-											var arr2=arr[0].split(":");//12,00											
-											sTime=Number(arr2[0])+1;
-										}
-										$("#scEndtime3").clockpick({
-											starthour : sTime,
-											endhour : 23,
-											showminutes : false,
-											layout : 'Horizontal'
-										});
-									})
-									
-								})
-								$(".clockpick").clockpick({
-									starthour : 0,
-									endhour : 23,
-									showminutes : false,
-									layout : 'Horizontal'
-								});
-								
-								$("#scEndtime1").click(function(){
-									var sTime=0;
-									
-									var arr=$("#scStarttime1").val().split(' ');//12:00 , PM
-									console.log(arr);
-									if(arr[1]=='PM'){
-										var arr2=arr[0].split(":");//12,00
-										console.log(arr2);
-										sTime=Number(arr2[0])+13;
-										console.log(sTime);
-									}else if(arr[1]=='AM'){
-										var arr2=arr[0].split(":");//12,00
-										
-										sTime=Number(arr2[0])+1;
-										console.log(sTime);
-									}
-									$("#scEndtime1").clockpick({
-										starthour : sTime,
-										endhour : 23,
-										showminutes : false,
-										layout : 'Horizontal'
-									});
-								})
-								/* $("#scEndtime2").click(function(){
-									var sTime=0;
-									
-									var arr=$("#scStarttime2").val().split(' ');//12:00 , PM
-									console.log(arr);
-									if(arr[1]=='PM'){
-										var arr2=arr[0].split(":");//12,00
-										console.log(arr2);
-										sTime=Number(arr2[0])+13;
-										console.log(sTime);
-									}else if(arr[1]=='AM'){
-										var arr2=arr[0].split(":");//12,00
-										
-										sTime=Number(arr2[0])+1;
-										console.log(sTime);
-									}
-									$("#scEndtime2").clockpick({
-										starthour : sTime,
-										endhour : 23,
-										showminutes : false,
-										layout : 'Horizontal'
-									});
-								})
-								$("#scEndtime3").click(function(){
-									var sTime=0;
-									
-									var arr=$("#scStarttime3").val().split(' ');//12:00 , PM
-									console.log(arr);
-									if(arr[1]=='PM'){
-										var arr2=arr[0].split(":");//12,00
-										console.log(arr2);
-										sTime=Number(arr2[0])+13;
-										console.log(sTime);
-									}else if(arr[1]=='AM'){
-										var arr2=arr[0].split(":");//12,00
-										
-										sTime=Number(arr2[0])+1;
-										console.log(sTime);
-									}
-									$("#scEndtime3").clockpick({
-										starthour : sTime,
-										endhour : 23,
-										showminutes : false,
-										layout : 'Horizontal'
-									});
-								}) */
-								
-								
-							})
-						</script>
-						<div class="wrp" style="margin: 0 auto;">
-							<div class="container" id="clock">
-							
-								<div id="clock1" class="container"><br>
-									<label for="scStarttime1" class="col-sm-1 control-label">시작시간</label>
-									<input type="text" class="form-control clockpick" id="scStarttime1" style="width: 100px;"
-										name="scStarttime1">
-									<label for="scStarttime1" class="col-sm-1 control-label">끝시간</label>
-									<input type="text" class="form-control endClockpick" id="scEndtime1" style="width: 100px;"
-										name="scEndtime1">
-								</div>
-								<!-- <div id="clock1" class="container">
-									시작시간 <input class="clockpick form-control" name="scStarttime1" value="dd">
-									끝나는 시간<input class="clockpick form-control" name="scEndtime1">
-								</div> -->
-							</div>
-						</div>
-					
-						<!-- <input type="button" id="add" value="추가">	 -->
-						<input type="button" id="add1" class="btn btn-default" value="추가"> 
-						<input type="button" id="remove"  class="btn btn-default" value="삭제">
-					</div>
-					<a class="btn btn-default before" href="#section2">이전</a>
-					<input type="submit" id="classSub" name="classSub" class="btn btn-info" value="제출">
-				</div>
-			</div>
+			<input type="submit" id="classSub" name="classSub" class="btn btn-info" value="수정완료">
 		</div>
-
 	</form>
 
 

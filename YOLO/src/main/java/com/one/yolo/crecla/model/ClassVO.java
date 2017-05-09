@@ -3,6 +3,29 @@ package com.one.yolo.crecla.model;
 import java.sql.Timestamp;
 
 public class ClassVO {
+	/*CREATE TABLE Class (
+   C_NO         NUMBER        NOT NULL, -- 클래스번호
+   M_USERID     VARCHAR2(500) NOT NULL, -- 호스트아이디
+   K_NO         NUMBER        NOT NULL, -- 카테고리번호
+   C_NAME       VARCHAR2(500) NOT NULL, -- 클래스명
+   C_PRICE      NUMBER        DEFAULT 0 not NULL     , -- 비용
+   C_GOAL       VARCHAR2(500) NULL,     -- 목표
+   C_TARGET     VARCHAR2(500) NULL,     -- 대상
+   C_SPEVIALTY  VARCHAR2(500) NULL,     -- 특기사항
+   C_DETAILINFO clob NULL,     -- 상세정보
+   C_PLACE     VARCHAR2(500) NOT NULL, -- 장소
+   C_PLACEDETAIL   VARCHAR2(500) NOT NULL, -- 상세주소
+   C_coordinate VARCHAR2(500) NOT NULL, --좌표
+   C_MAINIMG    VARCHAR2(500) not null,     -- 메인이미지
+   C_DETAILIMG1 VARCHAR2(500) NULL,     -- 상세이미지1
+   C_DETAILIMG2 VARCHAR2(500) NULL,     -- 상세이미지2
+   C_DETAILIMG3 VARCHAR2(500) NULL,     -- 상세이미지3
+   C_PAYMENTWAY VARCHAR2(500) not null,     -- 결제방법
+   C_MAXPERSON  VARCHAR2(500) NULL,     -- 최대인원
+   C_HITS       NUMBER        DEFAULT 0, -- 조회수
+   C_DEL        VARCHAR2(5)   DEFAULT 'N', -- 삭제여부
+   C_REGDATE    DATE          DEFAULT sysdate-- 등록일
+);*/
 	private int cNo;
 	private String mUserid;
 	private int kNo;

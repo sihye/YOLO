@@ -73,7 +73,15 @@ public class ClassDAOMybatis extends SqlSessionDaoSupport implements ClassDAO{
 	public List<ClassVO> selClaById(String userid) {
 		return getSqlSession().selectList(nameSpace+".selClaById", userid);
 	}
-	
+	@Override
+	public int updateCla(ClassVO vo) {
+		return getSqlSession().update(nameSpace+".updateCla", vo);
+	}
+	@Override
+	public int updateSch(ScheduleVO vo) {
+		return getSqlSession().update(nameSpace+".updateSch", vo);
+	}
+
 	
 	
 

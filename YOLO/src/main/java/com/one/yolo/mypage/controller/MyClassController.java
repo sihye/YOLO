@@ -51,6 +51,8 @@ public class MyClassController {
 		model.addAttribute("claList", claList);
 		
 		logger.info("호스트 클래스 sel hoclaList size={},claList size={}",hoClaList.size(),claList.size());
+		
+		
 		return "mypage/MyClass/HostClass";
 	}
 	

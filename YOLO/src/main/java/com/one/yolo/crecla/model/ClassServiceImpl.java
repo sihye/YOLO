@@ -80,6 +80,19 @@ public class ClassServiceImpl implements ClassService {
 	public List<ClassVO> selClaById(String userid) {
 		return dao.selClaById(userid);
 	}
+	@Override
+	public int updateCla(ClassVO vo) {
+		return dao.updateCla(vo);
+	}
+	@Override
+	public int updateSch(ScheduleVO vo) {
+		return dao.updateSch(vo);
+	}
+	@Override
+	public int deleteCla(int cNo) {
+		return dao.delClass(cNo);
+	}
+
 	
 	
 

@@ -65,7 +65,7 @@
 		#{cMainimg},#{cDetailimg1},#{cDetailimg2},#{cDetailimg3},#{cMaxperson},#{cPaymentway},#{cCoordinate})
 	</insert>
 	<select id="selClass" parameterType="int" resultType="ClassVO">
-		select * from class where c_no=#{c_no}
+		select * from class where c_no=#{c_no} and C_DEL='N'
 	</select>
 	
 	<select id="badClassView" parameterType="SearchVO" resultType="hashmap" >
@@ -97,7 +97,7 @@
 		on m.K_NO1=c.K_NO
 		where m.M_USERID=#{userid}),(select m.K_NO3 from member m join category c
 		on m.K_NO1=c.K_NO
-		where m.M_USERID=#{userid}))
+		where m.M_USERID=#{userid})) and C_DEL='N'
 	</select>
 
 	<update id="hitUpdate" parameterType="int">
@@ -158,8 +158,49 @@
 	
 	<select id="selClaById" parameterType="String" resultType="ClassVO">
 		select * from class
-where m_userid=#{userid}
+where m_userid=#{userid} and C_DEL='N'
 	</select>
+	
+	<update id="updateCla" parameterType="ClassVO">
+		update class
+		set k_no=#{kNo},c_name=#{cName},c_price=#{cPrice},C_PLACE=#{cPlace},C_PLACEDETAIL=#{cplacedetail},C_COORDINATE=#{cCoordinate},C_MAINIMG=#{cMainimg}
+		C_PAYMENTWAY=#{cPaymentway},C_MAXPERSON=#{cMaxperson}		
+		<if test="cGoal!=null and cGoal!=''">
+		,c_goal=#{cGoal}
+		</if>
+		<if test="cTarget!=null and cTarget!=''">
+		,C_TARGET=#{cTarget}
+		</if>
+		<if test="cSpevialty!=null and cSpevialty!=''">
+		,C_SPEVIALTY=#{cSpevialty}
+		</if>
+		<if test="cDetailinfo!=null and cDetailinfo!=''">
+		,c_detailinfo=#{cDetailinfo}
+		</if>
+		<if test="cDetailimg1!=null and cDetailimg1!=''">
+		,C_DETAILIMG1=#{cDetailimg1}
+		</if>
+		<if test="cDetailimg2!=null and cDetailimg2!=''">
+		,C_DETAILIMG2=#{cDetailimg2}
+		</if>
+		<if test="cDetailimg3!=null and cDetailimg3!=''">
+		,C_DETAILIMG3=#{cDetailimg3}
+		</if>	
+		where c_no=#{cNo};
+	</update>
+	
+	<update id="updateSch" parameterType="ScheduleVO">
+		update CLASSSCHEDULE
+		set SC_STARTDATE=#{scStartdate},SC_ENDDATE=#{scEnddate},SC_WEEK=#{scWeek},SC_STARTTIME1=#{scStarttime1},SC_ENDTIME1=#{scEndtime1}
+		<if test="scStarttime2!=null and scStarttime2!=''">
+		,SC_STARTTIME2=#{scStarttime2},SC_ENDTIME2=#{scEndtime2}
+		</if>
+		<if test="scStarttime3!=null and scStarttime3!=''">
+		,SC_STARTTIME3=#{scStarttime3},SC_ENDTIME3=#{scStarttime3}
+		</if>
+		where c_no=#{cNo}
+	</update>
+
  	
 </mapper>
 

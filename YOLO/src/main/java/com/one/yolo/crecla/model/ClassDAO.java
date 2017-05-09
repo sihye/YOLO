@@ -20,4 +20,6 @@ public interface ClassDAO {
 	public int selectClassCount(SearchVO vo);
 	public ScheduleVO selSch(int cNo);
 	public List<ClassVO> selClaById(String userid);
+	public int updateCla(ClassVO vo);
+	public int updateSch(ScheduleVO vo);
 }

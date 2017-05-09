@@ -63,7 +63,7 @@ public class ClaController {
 
 	//클래스 생성 페이지 보여주기
 	@RequestMapping(value="/clacre.do", method=RequestMethod.GET)
-	public String showClaCre_get(@RequestParam(defaultValue="0", required=false)int kgNo,Model model){
+	public String showClaCre_get(Model model){
 		logger.info("클래스생성페이지 보여주기");
 		List<CategoryGroupVO> gCateList=cService.selCateGroupAll();
 		List<CategoryVO> cateList =cService.selectCateAll();
@@ -81,7 +81,7 @@ public class ClaController {
 		String userid=(String)session.getAttribute("userid");		
 		logger.info("session userid={}",userid);
 		vo.setmUserid(userid);
-		vo.setmUserid("test");
+		//vo.setmUserid("test");
 		//파일 업로드 처리
 		List<Map<String, Object>> fileList= fileUploadWebUtil.fileUpload(req, FileUploadWebUtil.IMAGE_UPLOAD);
 		logger.info("업로드 이미지 filelist size={}",fileList.size());
@@ -135,7 +135,7 @@ public class ClaController {
 	}
 	
 
-
+	//디테일 페이지 보여주기
 	@RequestMapping("/claDetail.do")
 	public String claDetail(@RequestParam int cNo,@RequestParam(value="boardtype",required=false, defaultValue="") String boardtype,@ModelAttribute ClassBoardVO claboardvo ,HttpSession session, Model model, HttpServletResponse response){
 		String userid=(String)session.getAttribute("userid");
@@ -151,11 +151,13 @@ public class ClaController {
 		int cnt=claService.hitUpdate(cNo);
 		logger.info("hit update cnt={}",cnt);
 		//최근본 클래스
-		String claNo = Integer.toString(cNo);
-		Cookie cookie =new Cookie("classNo"+userid+claNo,claNo);
-		cookie.setPath("/");
-		cookie.setMaxAge(60*60*24);
-		response.addCookie(cookie);
+		if(userid!=null&&!userid.isEmpty()){
+			String claNo = Integer.toString(cNo);
+			Cookie cookie =new Cookie("classNo"+userid+claNo,claNo);
+			cookie.setPath("/");
+			cookie.setMaxAge(60*60*24);
+			response.addCookie(cookie);
+		}
 		
 		//페이징 처리
 		PaginationInfo pagingInfo = new PaginationInfo();
@@ -178,10 +180,13 @@ public class ClaController {
 		String kName=cService.selCateNameByNo(vo.getkNo());
 		
 		//회원이 관심있을만한 클래스
-		userid="hong";
-		List<ClassVO> alist=claService.selInterCla(userid);
-		model.addAttribute("inClaList",	alist);
-		logger.info("관심클래스 list size={}",alist.size());
+		//userid="hong";
+		if(userid!=null&&!userid.isEmpty()){
+			List<ClassVO> alist=claService.selInterCla(userid);
+			model.addAttribute("inClaList",	alist);
+			logger.info("관심클래스 list size={}",alist.size());
+		}
+		
 		
 		//클래스 스케줄
 		ScheduleVO schVo=claService.selSch(cNo);
@@ -247,7 +252,6 @@ public class ClaController {
 		
 		
 		
-		model.addAttribute("inClaList",	alist);
 		model.addAttribute("claVo", vo);
 		model.addAttribute("kName", kName);
 		model.addAttribute("claBoardList",claBoardList);
@@ -357,5 +361,70 @@ public class ClaController {
 
 		return "class/boardDetail";
 
+	}
+	
+	//클래스 수정페이지 보여주기
+	@RequestMapping(value="/edit.do", method=RequestMethod.GET)
+	public String editCla(@RequestParam(defaultValue="0") int cNo,Model model){
+		logger.info("클래스 수정 파람={}",cNo);
+		if(cNo==0){
+			model.addAttribute("msg", "클래스를 선택해주세요!");
+			model.addAttribute("url", "/mypage/MyClass/HostClass.do");
+			return"common/message";
+		}
+		ClassVO claVo=claService.selClass(cNo);		
+		List<CategoryGroupVO> gCateList=cService.selCateGroupAll();
+		List<CategoryVO> cateList =cService.selectCateAll();
+		model.addAttribute("vo", claVo);
+		model.addAttribute("gCateList", gCateList);
+		model.addAttribute("cateList", cateList);
+		return"class/classEdit";
+	}
+	//클래스 기본정보 수정하기
+	@RequestMapping(value="/edit.do", method=RequestMethod.POST)
+	public String editClaOk(@ModelAttribute ClassVO vo){
+		logger.info("클래스 기본정보 수정 파람 vo={}",vo);
+		
+		int cnt=claService.updateCla(vo);
+		logger.info("기본정보 수정 cnt={}",cnt);
+		int cNo=0;
+		if(cnt>0){
+			cNo=vo.getcNo();
+		}
+		return"redirect:/class/claDetail.do?cNo="+cNo;
+	}
+	//클래스 스케줄 수정페이지 보여주기
+	@RequestMapping(value="/schEdit.do", method=RequestMethod.GET)
+	public String schEdit(@RequestParam(defaultValue="0") int cNo, Model model){
+		logger.info("스케줄 수정페이지 보여주기 파람 cno={}",cNo);
+		if(cNo==0){
+			model.addAttribute("msg", "클래스를 선택해주세요!");
+			model.addAttribute("url", "/mypage/MyClass/HostClass.do");
+			return"common/message";
+		}
+		model.addAttribute("cNo", cNo);
+		return"class/editSch";
+	}
+	//스케줄 수정하기
+	@RequestMapping(value="/schEdit.do", method=RequestMethod.POST)
+	public String schEditOk(@RequestParam ScheduleVO vo){
+		return"";
+	}
+	
+	//클래스 삭제
+	@RequestMapping("delete.do")
+	public String deleteCla(@RequestParam(defaultValue="0") int cNo, Model model){
+		logger.info("클래스 삭제 파람 cno={}",cNo);
+		if(cNo==0){
+			model.addAttribute("msg", "클래스를 선택해주세요!");
+			model.addAttribute("url", "/mypage/MyClass/HostClass.do");
+			return"common/message";
+		}
+		int cnt=claService.deleteCla(cNo);
+		if(cnt>0){
+			model.addAttribute("msg", "선택한 클래스가 삭제되었습니다.");
+			model.addAttribute("url", "/mypage/MyClass/HostClass.do");
+		}
+		return"common/message";
 	}
 }

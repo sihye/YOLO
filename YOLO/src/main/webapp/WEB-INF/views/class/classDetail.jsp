@@ -267,9 +267,49 @@ name="searchEndDate" value="${param.searchEndDate}">
 				</div>
 			</div>
 		</div>
-		<a>
-			<img src="<c:url value='/img/classDetail/icon_report_n.png'/>">
-		</a>
+		
+		<button type="button" class="btn btn-lg" id="" data-toggle="modal" data-target="#myModal2" style="margin-left: 70%; margin-top: 50px; font-weight: bolder; font-size: 2em;">
+<img src="<c:url value='/img/classDetail/icon_report_n.png'/>">
+</button>
+<!-- Modal -->
+<form action="<c:url value='/class/notify.do?cNo=${claVo.cNo }'/>" method="post" name="" id="">
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"
+      aria-label="Close" aria-hidden="true">×</button>
+        
+        <h4 class="modal-title" id="myModalLabel" style="color: black;">신고하기</h4>
+      </div>
+      <div class="modal-body" style="height: 150px;" >
+  		<table>
+  			<tr>
+  				<th>신고항목</th>
+  				<th>
+  					<select>
+  						<option value="0">신고유형을 선택하세요</option>
+  					</select>
+  				</th>
+  			</tr>
+  			<tr>
+  				<th>신고내용</th>
+  				<th>
+  					<textarea rows="10" cols="20" placeholder="허위 신고시 불이익을 당할 수 있으니, 직접 경험한 내용만 신고해주세요."></textarea>
+  				</th>
+  			</tr>
+  		</table>
+      	
+      </div>
+		
+      <div class="modal-footer">
+      	<button type="submit" class="btn btn-default" id="pay">삭제하기</button>        
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
 	</div>
 	<!-- 아이콘끝 -->
 	
@@ -289,23 +329,6 @@ name="searchEndDate" value="${param.searchEndDate}">
 <button type="button" class="btn btn-lg" id="booking" data-toggle="modal" data-target="#myModal1" style="margin-left: 70%; margin-top: 50px; font-weight: bolder; font-size: 2em;">
   예약하기
 </button>
-<!-- <style>
-#booking {
-    background-color: #95badf;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    margin: 10px 2px 20px 30px;
-    cursor: pointer;
-    border-radius: 4px;
-    width: 20%;
-}
-</style> -->
-
 <!-- Modal -->
 <form action="<c:url value='/class/booking.do?cNo=${claVo.cNo }'/>" method="post" name="bookingFrm" id="bookingFrm">
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -517,7 +540,19 @@ name="searchEndDate" value="${param.searchEndDate}">
 									}
 								});
 			</script>
+			<div class="contents-title">환불 규정</div><hr>
+			<pre>
+- 클래스 시작일 5일 이전 취소시 : 결제 금액 전액 환불
+- 클래스 시작일 4일 이전 취소시 : 결제 금액의 20% 배상 후 환불
+- 클래스 시작일 3일 이전 취소시 : 결제 금액의 30% 배상 후 환불
+- 클래스 시작일 2일 이전 취소시 : 결제 금액의 50% 배상 후 환불
+- 클래스 시작일 1일 이전 및 당일 취소 불가 
 
+[환불 신청 방법]
+1. 클래스를 신청한 계정으로 로그인
+2. 마이페이지-나의 결제내역 클릭
+3. 취소를 원하는 클래스의 신청 취소 버튼 클릭
+4. 최초 결제 수단으로 자동 환불 (단, 환불 규정에 따라 배상 후 환불 될 수 있습니다.)</pre>
 			<div class="contents-title">비슷한 클래스</div>
 			<hr>
 			<!-- 게시판 반복 -->
