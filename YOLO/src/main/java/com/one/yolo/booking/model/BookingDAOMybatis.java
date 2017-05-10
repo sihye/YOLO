@@ -1,5 +1,6 @@
 package com.one.yolo.booking.model;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -18,6 +19,13 @@ public class BookingDAOMybatis extends SqlSessionDaoSupport implements BookingDA
 	@Override
 	public Map<String, Object> selForHostByPmNo(String pmNo) {
 		return getSqlSession().selectOne(nameSpace+".selForHostByPmNo", pmNo);
+	}
+	@Override
+	public List<Map<String, Object>> selMemBybook(BookingVO vo) {
+		System.out.println("dao book vo="+vo);
+		List<Map<String, Object>> alist=getSqlSession().selectList(nameSpace+".selMemBybook", vo);
+		System.out.println("alist size="+alist.size());
+		return getSqlSession().selectList(nameSpace+".selMemBybook", vo);
 	}
 
 }

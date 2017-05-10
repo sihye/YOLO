@@ -621,7 +621,7 @@ ALTER TABLE payment
 -- 결제취소
 CREATE TABLE paymentcancel (
 	PMC_NO       NUMBER        NOT NULL, -- 결제취소번호
-	PM_NO        NUMBER        NOT NULL, -- 결제번호
+	PM_NO        varchar2(100)        NOT NULL, -- 결제번호
 	PMC_DATE     DATE          NULL,     -- 취소일
 	PMC_PROQRESS VARCHAR2(500) DEFAULT '진행중' , -- 결제진행상황
 	PMC_CALCEL   VARCHAR2(500) NULL,     -- 취소유형
@@ -1005,16 +1005,18 @@ ALTER TABLE messagemaga
 		);
 -- 신고
 CREATE TABLE notify (
+    n_no    number not null,
 	C_NO      NUMBER        NOT NULL, -- 클래스번호
 	N_CODE    VARCHAR2(500) NOT NULL, -- 신고항목
-	N_REGDEAT DATE		DEFAULT SYSDATE,
+	N_REGDATE DATE		DEFAULT SYSDATE,
+	n_userid    VARCHAR2(500) NOT NULL,
 	N_CONTENT VARCHAR2(500) NOT NULL  -- 신고내용
 );
 
 -- 신고 기본키
 CREATE UNIQUE INDEX PK_notify
 	ON notify ( -- 신고
-		C_NO ASC -- 클래스번호
+		n_no ASC -- 클래스번호
 	);
 
 -- 신고
@@ -1022,13 +1024,23 @@ ALTER TABLE notify
 	ADD
 		CONSTRAINT PK_notify -- 신고 기본키
 		PRIMARY KEY (
-			C_NO -- 클래스번호
+			n_no -- 클래스번호
 		);
 
 -- 신고
 ALTER TABLE notify
 	ADD
 		CONSTRAINT FK_Class_TO_notify -- 클래스 -> 신고
+		FOREIGN KEY (
+			n_userid -- 클래스번호
+		)
+		REFERENCES member ( -- 클래스
+			M_USERID -- 클래스번호
+		);
+
+ALTER TABLE notify
+	ADD
+		CONSTRAINT FK_member_TO_notify -- 클래스 -> 신고
 		FOREIGN KEY (
 			C_NO -- 클래스번호
 		)
@@ -1173,6 +1185,12 @@ nomaxvalue
 nocache;
 
 create sequence FOLLOW_seq
+increment by 1
+start with 1
+nomaxvalue
+nocache;
+
+create sequence notify_seq
 increment by 1
 start with 1
 nomaxvalue

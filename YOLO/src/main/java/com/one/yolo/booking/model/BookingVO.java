@@ -2,7 +2,9 @@ package com.one.yolo.booking.model;
 
 import java.sql.Timestamp;
 
-public class BookingVO {
+import com.one.yolo.common.SearchVO;
+
+public class BookingVO extends SearchVO{
 	/*CREATE TABLE booking (
 	BK_NO       NUMBER        NOT NULL, -- 예약번호
 	BK_USERID   VARCHAR2(500) NOT NULL, -- 아이디
@@ -20,6 +22,10 @@ public class BookingVO {
 	private String bkBdate;
 	private String bkTime;
 	private String bkEndchek;
+	
+	
+	
+	
 	public int getBkNo() {
 		return bkNo;
 	}
@@ -65,8 +71,17 @@ public class BookingVO {
 	@Override
 	public String toString() {
 		return "BookingVO [bkNo=" + bkNo + ", bk_Userid=" + bk_Userid + ", scNo=" + scNo + ", bkDate=" + bkDate
-				+ ", bkBdate=" + bkBdate + ", bkTime=" + bkTime + ", bkEndchek=" + bkEndchek + "]";
+				+ ", bkBdate=" + bkBdate + ", bkTime=" + bkTime + ", bkEndchek=" + bkEndchek + ", getFlNo()="
+				+ getFlNo() + ", getUserid()=" + getUserid() + ", getPmCancelcheck()=" + getPmCancelcheck()
+				+ ", getSearchStartDate()=" + getSearchStartDate() + ", getSearchEndDate()=" + getSearchEndDate()
+				+ ", getSearchCondition()=" + getSearchCondition() + ", getSearchKeyword()=" + getSearchKeyword()
+				+ ", getSearchUseYn()=" + getSearchUseYn() + ", getCurrentPage()=" + getCurrentPage()
+				+ ", getBlockSize()=" + getBlockSize() + ", getFirstRecordIndex()=" + getFirstRecordIndex()
+				+ ", getLastRecordIndex()=" + getLastRecordIndex() + ", getRecordCountPerPage()="
+				+ getRecordCountPerPage() + ", toString()=" + super.toString() + ", getSearchKno()=" + getSearchKno()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
+	
 
 
 }

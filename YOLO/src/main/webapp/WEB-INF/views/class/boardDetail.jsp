@@ -25,7 +25,7 @@
 				<table style="width: 100%;">
 					<tbody>
 						<tr>
-							<th><span class="b m-tcol-c" style="margin-left: 5px;">제목</span>
+							<th><span class="b m-tcol-c" style="margin-left: 5px;">${vo.cbTitle }</span>
 								<p style="float: right; margin-right: 10px;">2017.03.21.
 									17:15</p></th>
 						</tr>

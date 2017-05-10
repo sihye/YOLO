@@ -92,6 +92,10 @@ public class ClassServiceImpl implements ClassService {
 	public int deleteCla(int cNo) {
 		return dao.delClass(cNo);
 	}
+	@Override
+	public int notyInsert(NotifyVO vo) {
+		return dao.notyInsert(vo);
+	}
 
 	
 	

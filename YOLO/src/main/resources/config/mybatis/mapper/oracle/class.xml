@@ -200,7 +200,14 @@ where m_userid=#{userid} and C_DEL='N'
 		</if>
 		where c_no=#{cNo}
 	</update>
-
+	
+	<insert id="notyInsert" parameterType="NotifyVO">
+		<selectKey keyProperty="nNo" order="BEFORE" resultType="int">
+			select notify_seq.nextval from dual
+		</selectKey>
+		insert into notify (n_no,c_no,n_code,n_content,n_userid)
+		values(#{nNo},#{cNo},#{nCode},#{nContent},#{nUserid})
+	</insert>
  	
 </mapper>
 
