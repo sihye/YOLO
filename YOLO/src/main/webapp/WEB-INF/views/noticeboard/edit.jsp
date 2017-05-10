@@ -27,13 +27,8 @@
 	});
 </script>
 
-
-
-
-
-
 <div class="col-md-10">
-<h2>공지사항 수정</h2>
+<h2>공지사항수정</h2>
 <form id="frmEdit" name="frmEdit" method="post" 
 	action='<c:url value="/noticeboard/edit.do" />' enctype="multipart/form-data"> 
 	<input type="hidden" name="nbNo" 

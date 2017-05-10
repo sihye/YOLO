@@ -37,7 +37,7 @@ public class UseboardDAOMybatis extends SqlSessionDaoSupport
 		return getSqlSession().update(namespace+".updateReadCount", no);
 	}
 
-	@Override
+	/*@Override
 	public int updateUse(UseboardVO vo) {
 		return getSqlSession().update(namespace+".updateUse", vo);
 	}
@@ -45,7 +45,7 @@ public class UseboardDAOMybatis extends SqlSessionDaoSupport
 	@Override
 	public int deleteUseboard(int no) {
 		return getSqlSession().update(namespace+".deleteUseboard", no);
-	}
+	}*/
 
 
 

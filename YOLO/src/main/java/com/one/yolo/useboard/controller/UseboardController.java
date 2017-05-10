@@ -131,7 +131,7 @@ public class UseboardController {
 		return "redirect:/useboard/list.do";		
 	}
 	
-	@RequestMapping(value="/updateCount.do")
+	/*@RequestMapping(value="/updateCount.do")
 	public String updateCount(
 			@RequestParam(value="no", defaultValue="0")
 			int no, Model model){
@@ -147,11 +147,11 @@ public class UseboardController {
 		logger.info("조회수 증가 결과, cnt={}", cnt);
 		
 		return "redirect:/useboard/detail.do?no="+no;
-	}
+	}*/
 	
 	
 	
-	@RequestMapping(value="/detail.do")
+	/*@RequestMapping(value="/detail.do")
 	public String detail(@RequestParam
 			(value="no", defaultValue="0") int no, 
 			Model model){
@@ -170,9 +170,9 @@ public class UseboardController {
 		
 		return "useboard/detail";
 		
-	}
+	}*/
 	
-	@RequestMapping(value="/edit.do", method=RequestMethod.GET)
+/*	@RequestMapping(value="/edit.do", method=RequestMethod.GET)
 	public String edit_get(@RequestParam (value="no", defaultValue="0") int no,
 			Model model){
 		logger.info("공지사항 수정화면, 파라미터no={}", no );
@@ -189,9 +189,9 @@ public class UseboardController {
 		model.addAttribute("vo",vo);
 		
 		return "useboard/edit";
-	}
+	}*/
 	
-	@RequestMapping(value="/edit.do", method=RequestMethod.POST)
+	/*@RequestMapping(value="/edit.do", method=RequestMethod.POST)
 	public String edit_post(@ModelAttribute UseboardVO vo, 
 			Model model){
 		logger.info("공지사항 수정 처리, 파라미터 vo={}", vo);
@@ -211,9 +211,9 @@ public class UseboardController {
 		model.addAttribute("url", url);
 		
 		return "common/message";
-	}
+	}*/
 	
-	@RequestMapping(value="/delete.do", method=RequestMethod.GET)
+	/*@RequestMapping(value="/delete.do", method=RequestMethod.GET)
 	public String delete_get(
 			@RequestParam(value="no", defaultValue="0") int no,
 			Model model){
@@ -228,9 +228,9 @@ public class UseboardController {
 		
 		return "useboard/delete";
 	
-	}
+	}*/
 	
-	@RequestMapping(value="/delete.do", method=RequestMethod.POST)
+	/*@RequestMapping(value="/delete.do", method=RequestMethod.POST)
 	public String delete_post(@RequestParam (value="no", defaultValue="0") int no, 
 			Model model){
 		
@@ -248,7 +248,7 @@ public class UseboardController {
 		model.addAttribute("url", url);
 
 		return "common/message";		
-	}
+	}*/
 	
 	
 	

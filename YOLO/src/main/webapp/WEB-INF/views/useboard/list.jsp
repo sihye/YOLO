@@ -10,6 +10,18 @@
 	 function typeFunc(type) {
 		document.frmPage.ubType.value=type;
 		document.frmPage.currentPage.value=1;
+		if(type == 1) {
+			document.frmPage.action = $("#context").val() + "/useboard/list.do";
+		}
+		if(type == 2) {
+			document.frmPage.action = $("#context").val() + "/useboard/uselist.do";
+		}
+		if(type == 3) {
+			document.frmPage.action = $("#context").val() + "/useboard/paylist.do";
+			///useboard/paylist.do
+		}
+		
+		
 		frmPage.submit(); 
 	} 
 	
@@ -58,11 +70,11 @@ ul{
 		<h2>이용안내</h2>
 		<div class="col-md-10">
 			<ul class="nav nav-tabs nav-justified">
-				<li class="active"><a href='<c:url value="/useboard/list.do"/>'  role="tab" data-toggle="tab" 
+				<li class="active"><a role="tab" data-toggle="tab" 
 				onclick="typeFunc(1);"> 자주묻는 질문</a></li>
-				<li><a href='<c:url value="/useboard/uselistedDDDDDDDD.do"/>'  role="tab" data-toggle="tab" 
+				<li><a role="tab" data-toggle="tab" 
 				onclick="typeFunc(2);">이용 관련</a></li>
-				<li><a href='<c:url value="/useboard/paylist.do"/>'  role="tab" data-toggle="tab" 
+				<li><a role="tab" data-toggle="tab" 
 				onclick="typeFunc(3);">결제 관련</a></li>
 			</ul>
 

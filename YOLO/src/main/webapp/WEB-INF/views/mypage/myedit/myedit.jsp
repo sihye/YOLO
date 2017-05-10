@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../../inc/top.jsp" %>
 
 <style>
@@ -14,22 +13,6 @@
 	    color: rgb(63, 148, 7);
 	}
 </style>
-
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/mainstyle.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/clear.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/layout.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/mystyle.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/bootstrap-select.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/bootstrap.min.css" /> 
-	
-	<script type="text/javascript" src='<c:url value="/jquery/jquery-3.1.1.min.js" />'></script>
-<script type="text/javascript" src='<c:url value="/js/member.js" />'></script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
@@ -76,12 +59,12 @@ $(document).ready(function(){
 				alert('이메일을 입력하세요');
 				$("#email3").focus();
 				return false;
-			};
+			}
 			
 		}else if(!$("input:checkbox[id='hobby']").is(":checked") == true){
 			alert("관심사는 하나 이상 체크하셔야 합니다");	
 			return false;
-		};
+		}
 		
 		 $("#mAddress").val($("#zipcode").val()+" / "+$("#address").val());
 		 
@@ -90,42 +73,17 @@ $(document).ready(function(){
 	});
 
 	$("#btnChkId").click(function(){
-		window.open("<c:url value='/member/checkUserid.do?userid="+$("#useridreg").val()+ "'/>", 'chk',
+		window.open("<c:url value='../member/checkUserid.do?userid="+$("#useridreg").val()+ "'/>", 'chk',
 		'width=400,height=300,left=10,top=10,location=yes,resizable=yes');
 	});
 	
 	
 	$("#cancle1").click(function() {
 		location.href="<c:url value='../../index2.do'/>"
-	});
+	})
 	
 });
 
-</script>
-
-<scRIPT language=Javascript>
-<!--
-	var maxChecked = 3; //선택가능 갯수
-	var totalChecked = 0; // 설정 끝
-	function CountChecked(field) {
-		if (field.checked)
-			totalChecked += 1;
-		else
-			totalChecked -= 1;
-		if (totalChecked > maxChecked) {
-			alert("최대 3개 까지만 가능합니다.");
-			field.checked = false;
-			totalChecked -= 1;
-		}
-
-	}
-	function ResetCount() {
-		totalChecked = 0;
-	}
-//-->
-</scRIPT>
-<script>
-	/* document.write(maxChecked); */
 </script>
 
 
@@ -142,13 +100,11 @@ $(document).ready(function(){
 			</div>	
 			
 			<br>
-			<div class="col-md-10">
-				<h2>회원정보수정</h2>
-				<div>
-	<div class="divForm">
-	<!-- <div class="col-md-2" align="left"></div> -->
-	
-	<div class="col-md-12" style="padding-top: 5px">
+			<h2>회원정보수정</h2>
+			<br>
+			<div class="divForm">
+	<div class="col-md-2" align="left"></div>
+	<div class="col-md-10">
 	<form id="frm1" name="frm1" method="post"
 		action='<c:url value="/mypage/myedit/myedit.do" />'>
 
@@ -169,11 +125,16 @@ $(document).ready(function(){
 				<input type="Password" name="mPwd2" id="pwd2"> 
 			</div>
 			<div>
+				<c:set var="add" value="${vo.mAddress }" />
+	            <c:set var="addArr" value="${fn:split(add,'/')[1]}" />
+	           <%-- 	<input type="text" value="${fn:split(address,'/')[0]}" />
+	            <input type="text" value="${fn:split(address,'/')[1]}" />  --%>
+     
 				<label for="zipcode" name="zipcode">주소</label> 
-				<input type="text" name="zipcode" id="zipcode" ReadOnly title="우편번호" class="width_80 postcodify_postcode" value="${vo.mAddress}"> 
+				<input type="text" name="zipcode" id="zipcode" ReadOnly title="우편번호" class="width_80 postcodify_postcode" value="${fn:split(add,'/')[0]}"> 
 				<button type="button" class="btn btn-primary" id="postcodify_search_button" title="새창열림">우편번호 찾기</button><br />
 				<span class="sp1">&nbsp;</span> 
-				<input type="text" name="address" ReadOnly title="주소" class="width_350 postcodify_address" id="address" value=""><br /> 
+				<input type="text" name="address" ReadOnly title="주소" class="width_350 postcodify_address" id="address" value="${fn:split(add,'/')[1]}"><br /> 
 				<span class="sp1">&nbsp;</span> 
 				<input type="text" name="mAddressdetail" title="상세주소" class="width_350 postcodify_details" value="${vo.mAddressdetail}">
 			</div>
@@ -217,92 +178,305 @@ $(document).ready(function(){
 				title="휴대폰 뒷자리" class="width_80" value="${vo.mTel3}">
 			</div>
 			<div>
+			
+			<!-- 01234567
+			19901111 -->
+				<c:set var="birth" value="${vo.mBirth }" />
+	            <c:set var="year" value="${birth.substring(0,4	) }" />
+	            <c:set var="month" value="${birth.substring(4,6	) }" />
+	            <c:set var="day" value="${birth.substring(6	) }" />
+	        
+				
 				<label for="birth">생년월일</label> 
-				<input type="text" name="mBirth1" id="birth1" title="생년" style="width: 50px" maxlength="4">&nbsp;년&nbsp;
+				<input type="text" name="mBirth1" id="birth1" title="생년" style="width: 50px" maxlength="4"
+					value="${year }"
+				>&nbsp;년&nbsp;
 				<select name="mBirth2" id="birth2" title="월" style="width: 50px; height: 22px;"
-					title="월">
-					<option value="01">1</option>
-					<option value="02">2</option>
-					<option value="03">3</option>
-					<option value="04">4</option>
-					<option value="05">5</option>
-					<option value="06">6</option>
-					<option value="07">7</option>
-					<option value="08">8</option>
-					<option value="09">9</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
+					title="월" value="${month }">
+					<option value="01"
+						<c:if test="${month == '01'}">
+	            		selected="selected"
+	            		</c:if>
+					>1</option>
+					<option value="02"
+						<c:if test="${month == '02'}">
+	            		selected="selected"
+	            		</c:if>
+					>2</option>
+					<option value="03"
+						<c:if test="${month == '03'}">
+	            		selected="selected"
+	            		</c:if>
+					>3</option>
+					<option value="04"
+						<c:if test="${month == '04'}">
+	            		selected="selected"
+	            		</c:if>
+					>4</option>
+					<option value="05"
+						<c:if test="${month == '05'}">
+	            		selected="selected"
+	            		</c:if>
+					>5</option>
+					<option value="06"
+						<c:if test="${month == '06'}">
+	            		selected="selected"
+	            		</c:if>
+					>6</option>
+					<option value="07"
+						<c:if test="${month == '07'}">
+	            		selected="selected"
+	            		</c:if>
+					>7</option>
+					<option value="08"
+						<c:if test="${month == '08'}">
+	            		selected="selected"
+	            		</c:if>
+					>8</option>
+					<option value="09"
+						<c:if test="${month == '09'}">
+	            		selected="selected"
+	            		</c:if>
+					>9</option>
+					<option value="10"
+						<c:if test="${month == '10'}">
+	            		selected="selected"
+	            		</c:if>
+					>10</option>
+					<option value="11"
+						<c:if test="${month == '11'}">
+	            		selected="selected"
+	            		</c:if>
+					>11</option>
+					<option value="12"
+						<c:if test="${month == '12'}">
+	            		selected="selected"
+	            		</c:if>
+					>12</option>
 				</select>&nbsp;월&nbsp;
 				<select name="mBirth3" id="birth3" title="일" style="width: 50px; height: 22px;"
-					title="월">
-					<option value="01">1</option>
-					<option value="02">2</option>
-					<option value="03">3</option>
-					<option value="04">4</option>
-					<option value="05">5</option>
-					<option value="06">6</option>
-					<option value="07">7</option>
-					<option value="08">8</option>
-					<option value="09">9</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-					<option value="14">14</option>
-					<option value="15">15</option>
-					<option value="16">16</option>
-					<option value="17">17</option>
-					<option value="18">18</option>
-					<option value="19">19</option>
-					<option value="20">20</option>
-					<option value="21">21</option>
-					<option value="22">22</option>
-					<option value="23">23</option>
-					<option value="24">24</option>
-					<option value="25">25</option>
-					<option value="26">26</option>
-					<option value="27">27</option>
-					<option value="28">28</option>
-					<option value="29">29</option>
-					<option value="30">30</option>
-					<option value="31">31</option>
-				</select>&nbsp;월&nbsp;
+					 value="${day }">
+					<option value="01"
+						<c:if test="${day == '01'}">
+	            		selected="selected"
+	            		</c:if>
+					>1</option>
+					<option value="02"
+						<c:if test="${day == '02'}">
+	            		selected="selected"
+	            		</c:if>
+					>2</option>
+					<option value="03"
+						<c:if test="${day == '03'}">
+	            		selected="selected"
+	            		</c:if>
+					>3</option>
+					<option value="04"
+						<c:if test="${day == '04'}">
+	            		selected="selected"
+	            		</c:if>
+					>4</option>
+					<option value="05"
+						<c:if test="${day == '05'}">
+	            		selected="selected"
+	            		</c:if>
+					>5</option>
+					<option value="06"
+						<c:if test="${day == '06'}">
+	            		selected="selected"
+	            		</c:if>
+					>6</option>
+					<option value="07"
+						<c:if test="${day == '07'}">
+	            		selected="selected"
+	            		</c:if>
+					>7</option>
+					<option value="08"
+						<c:if test="${day == '08'}">
+	            		selected="selected"
+	            		</c:if>
+					>8</option>
+					<option value="09"
+						<c:if test="${day == '09'}">
+	            		selected="selected"
+	            		</c:if>
+					>9</option>
+					<option value="10"
+						<c:if test="${day == '10'}">
+	            		selected="selected"
+	            		</c:if>
+					>10</option>
+					<option value="11"
+						<c:if test="${day == '11'}">
+	            		selected="selected"
+	            		</c:if>
+					>11</option>
+					<option value="12"
+						<c:if test="${day == '12'}">
+	            		selected="selected"
+	            		</c:if>
+					>12</option>
+					<option value="13"
+						<c:if test="${day == '13'}">
+	            		selected="selected"
+	            		</c:if>
+					>13</option>
+					<option value="14"
+						<c:if test="${day == '14'}">
+	            		selected="selected"
+	            		</c:if>
+					>14</option>
+					<option value="15"
+						<c:if test="${day == '15'}">
+	            		selected="selected"
+	            		</c:if>
+					>15</option>
+					<option value="16"
+						<c:if test="${day == '16'}">
+	            		selected="selected"
+	            		</c:if>
+					>16</option>
+					<option value="17"
+						<c:if test="${day == '17'}">
+	            		selected="selected"
+	            		</c:if>
+					>17</option>
+					<option value="18"
+						<c:if test="${day == '18'}">
+	            		selected="selected"
+	            		</c:if>
+					>18</option>
+					<option value="19"
+						<c:if test="${day == '19'}">
+	            		selected="selected"
+	            		</c:if>
+					>19</option>
+					<option value="20"
+						<c:if test="${day == '20'}">
+	            		selected="selected"
+	            		</c:if>
+					>20</option>
+					<option value="21"
+						<c:if test="${day == '21'}">
+	            		selected="selected"
+	            		</c:if>
+					>21</option>
+					<option value="22"
+						<c:if test="${day == '22'}">
+	            		selected="selected"
+	            		</c:if>
+					>22</option>
+					<option value="23"
+						<c:if test="${day == '23'}">
+	            		selected="selected"
+	            		</c:if>
+					>23</option>
+					<option value="24"
+						<c:if test="${day == '24'}">
+	            		selected="selected"
+	            		</c:if>
+					>24</option>
+					<option value="25"
+						<c:if test="${day == '25'}">
+	            		selected="selected"
+	            		</c:if>
+					>25</option>
+					<option value="26"
+						<c:if test="${day == '26'}">
+	            		selected="selected"
+	            		</c:if>	
+					>26</option>
+					<option value="27"
+						<c:if test="${day == '27'}">
+	            		selected="selected"
+	            		</c:if>
+					>27</option>
+					<option value="28"
+						<c:if test="${day == '28'}">
+	            		selected="selected"
+	            		</c:if>
+					>28</option>
+					<option value="29"
+						<c:if test="${day == '29'}">
+	            		selected="selected"
+	            		</c:if>
+					>29</option>
+					<option value="30"
+						<c:if test="${day == '30'}">
+	            		selected="selected"
+	            		</c:if>
+					>30</option>
+					<option value="31"
+						<c:if test="${day == '31'}">
+	            		selected="selected"
+	            		</c:if>
+					>31</option>
+				</select>&nbsp;일&nbsp;
 				<!-- <input type="text" name="mBirth3" id="birth3" title="일" style="width: 25px" maxlength="2">&nbsp;일&nbsp; -->
 				<input type="hidden" name="mBirth" id="mBirth" value="">
 			</div>
 			<div>
 				<label for="gender">성별</label>
-				<input type="radio" name="mGender" value="M">&nbsp;남자&nbsp; 
-				<input type="radio" name="mGender" value="F">&nbsp;여자&nbsp; 
+				<input type="radio" name="mGender" value="M"
+					<c:if test="${vo.mGender == 'M'}">
+	            		checked="checked"
+	            	</c:if>
+				>&nbsp;남자&nbsp; 
+				<input type="radio" name="mGender" value="F"
+					<c:if test="${vo.mGender == 'F'}">
+	            		checked="checked"
+	            	</c:if>
+				>&nbsp;여자&nbsp; 
 			</div>
 			<div>
-				<label for="email1">이메일 주소</label> <input type="text" name="mEmail1"
-					id="email1" title="이메일주소 앞자리">@ <select name="mEmail2"
-					id="email2" title="이메일주소 뒷자리" style="height: 25px">
-					<option value="naver.com">naver.com</option>
-					<option value="hanmail.net">hanmail.net</option>
-					<option value="nate.com">nate.com</option>
-					<option value="gmail.com">gmail.com</option>
+				
+		    
+			
+				<label for="email1">이메일 주소</label> 
+				<input type="text" name="mEmail1" id="email1" title="이메일주소 앞자리" 
+					value="${vo.mEmail1 }">@ 
+					<select name="mEmail2" id="email2" title="이메일주소 뒷자리" style="height: 25px">
+					<option value="naver.com"
+						<c:if test="${vo.mEmail2 == 'naver.com'}">
+		            		selected="selected"
+		            	</c:if>
+					>naver.com</option>
+					<option value="hanmail.net"
+						<c:if test="${vo.mEmail2 == 'hanmail.net'}">
+		            		selected="selected"
+		            	</c:if>
+					>hanmail.net</option>
+					<option value="nate.com"
+						<c:if test="${vo.mEmail2 == 'nate.com'}">
+		            		selected="selected"
+		            	</c:if>
+					>nate.com</option>
+					<option value="gmail.com"
+						<c:if test="${vo.mEmail2 == 'gmail.com'}">
+		            		selected="selected"
+		            	</c:if>
+					>gmail.com</option>
 					<option value="etc">직접입력</option>
-				</select> <input type="text" name="mEmail3" id="email3"
+	        </select>
+	        
+	        <input type="text" name="mEmail3" id="email3"
 					title="직접입력인 경우 이메일주소 뒷자리" style="visibility: hidden">
+	        
+  
 			</div>
 			<div>
-				<label for="hobby">관심사</label> 3개까지 선택 가능
+				<label for="hobby">관심사</label> 3개까지 선택 가능(최소 1개 선택바람)
 			</div>
 			<div>
 				<FORM action=# method=post name="kNo">
 				<c:forEach var="cg" items="${cgList }">
-					<table>
-					<label for="hobby" style="padding-top: 14px">${cg.kgName}</label>	
-					<tr><c:forEach var="c" items="${cList }">
-						<td><c:if test ="${cg.kgNo == c.kgNo}"><br>
+					<label for="hobby">${cg.kgName}</label>	
+					<c:forEach var="c" items="${cList }">
+						<c:if test ="${cg.kgNo == c.kgNo}">
 							<input value='${c.kNo}' onclick=CountChecked(this) id="hobby"
 							type=checkbox name="kno">${c.kName}
-						</c:if></td>
-					</c:forEach></tr>
-					</table>
+						</c:if>
+					</c:forEach><br>
 				</c:forEach><br>
 				</FORM>
 			<div> 
@@ -332,18 +506,8 @@ $(document).ready(function(){
 
 	</form>
 	</div>
-	
-</div>
-<!-- </article> -->
-</div>
-			</div>
-			
-			
-			
-			
-			
-
-
 </div>
 
+</div>
+</div>		
 <%@ include file="../mypagebottom.jsp"%>

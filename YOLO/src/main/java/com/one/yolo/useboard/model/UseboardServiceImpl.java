@@ -37,7 +37,7 @@ public class UseboardServiceImpl
 		return dao.updateReadCount(no);
 	}
 	
-	@Override
+/*	@Override
 	public int updateUse(UseboardVO vo){
 		return dao.updateUse(vo);
 	}
@@ -45,7 +45,7 @@ public class UseboardServiceImpl
 	@Override
 	public int deleteUseboard(int no) {
 		return dao.deleteUseboard(no);
-	}
+	}*/
 
 	
 

@@ -9,7 +9,7 @@ public interface UseboardDAO {
 	public int insertUseboard(UseboardVO vo);
 	public UseboardVO selectNo(int no);
 	public int updateReadCount(int no);
-	public int updateUse(UseboardVO vo);
-	public int deleteUseboard(int no);
+	/*public int updateUse(UseboardVO vo);
+	public int deleteUseboard(int no);*/
 
 }

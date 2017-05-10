@@ -67,11 +67,11 @@ ${pagingInfo.totalRecord}건 검색되었습니다</p>
 					</a>	
 				</td>
 				<td style="text-align: left;">
-					<c:if test="${fn:length(vo.nbContent)>50 }">
-						${fn:substring(vo.nbContent, 0, 50) }
+					<c:if test="${fn:length(vo.nbContent)>45 }">
+						${fn:substring(vo.nbContent, 0, 45) }..
 					</c:if>
-					<c:if test="${fn:length(vo.nbTitle)<=30 }">
-							${vo.nbTitle}
+					<c:if test="${fn:length(vo.nbContent)<=45 }">
+							${vo.nbContent}
 					</c:if>
 				</td>
 				
