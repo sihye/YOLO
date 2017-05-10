@@ -104,9 +104,7 @@ public class MemberController {
 		return "member/register";
 	}
 
-	
-	
-	
+
 	@RequestMapping(value="/register.do",method=RequestMethod.POST)
 	public String register(@ModelAttribute MemberVO vo, @RequestParam int[] kNo){
 		logger.info("회원가입 화면 보여주기");
