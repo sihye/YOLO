@@ -81,6 +81,10 @@ public class ClassDAOMybatis extends SqlSessionDaoSupport implements ClassDAO{
 	public int updateSch(ScheduleVO vo) {
 		return getSqlSession().update(nameSpace+".updateSch", vo);
 	}
+	@Override
+	public int notyInsert(NotifyVO vo) {
+		return getSqlSession().insert(nameSpace+".notyInsert", vo);
+	}
 
 	
 	

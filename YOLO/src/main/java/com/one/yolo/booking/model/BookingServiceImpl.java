@@ -1,5 +1,6 @@
 package com.one.yolo.booking.model;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public Map<String, Object> selForHostByPmNo(String pmNo) {
 		return bDAO.selForHostByPmNo(pmNo);
+	}
+	@Override
+	public List<Map<String, Object>> selMemBybook(BookingVO vo) {
+		return bDAO.selMemBybook(vo);
 	}
 
 }

@@ -230,6 +230,10 @@ hr{
 	width: 500px;
 	height: 300px;
 }
+.title{
+		width: 70px;
+		padding-top: 20px;
+}
 
 </style>
 <form name="frmPage" method="post"
@@ -247,16 +251,19 @@ name="searchEndDate" value="${param.searchEndDate}">
 <div class="mainImg">
 	<!-- 헤더아이콘 -->
  	<div class="header-wrap" id="headericon">
+ 		<!-- 찜하기 -->
 		<a href="#">
 			<img src="<c:url value='/img/classDetail/icon_heart_n.png'/>">
 		</a>
-		<button type="button" class="btn btn-primary" data-toggle="modal"
-			data-target=".bs-example-modal-sm"><img src="<c:url value='/img/classDetail/icon_share_n.png'/>"></button>
+		
+		<!-- 공유 -->
+		<button type="button" class="btn btn-lg" id="" data-toggle="modal" data-target=".bs-example-modal-sm">
+			<img src="<c:url value='/img/classDetail/icon_share_n.png'/>"></button>
 
 		<div class="modal fade bs-example-modal-sm" tabindex="-1"
 			role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
+				<div class="modal-content" style="height: 100px;">
 					<p>클래스를 친구와 공유해 보세요!</p>
 					<a href="http://www.facebook.com/sharer/sharer.php?u=http://localhost:9090/yolo/class/claDetail.do?cNo=${claVo.cNo }">
 						<img class="sharerimg" alt="facebook공유하기" src="<c:url value='/img/classDetail/facebook_logo.jpg'/>">
@@ -268,9 +275,10 @@ name="searchEndDate" value="${param.searchEndDate}">
 			</div>
 		</div>
 		
-		<button type="button" class="btn btn-lg" id="" data-toggle="modal" data-target="#myModal2" style="margin-left: 70%; margin-top: 50px; font-weight: bolder; font-size: 2em;">
-<img src="<c:url value='/img/classDetail/icon_report_n.png'/>">
-</button>
+		<!-- 신고 -->
+		<button type="button" class="btn btn-lg" id="" data-toggle="modal" data-target="#myModal2">
+			<img src="<c:url value='/img/classDetail/icon_report_n.png'/>">
+		</button>
 <!-- Modal -->
 <form action="<c:url value='/class/notify.do?cNo=${claVo.cNo }'/>" method="post" name="" id="">
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -282,20 +290,24 @@ name="searchEndDate" value="${param.searchEndDate}">
         
         <h4 class="modal-title" id="myModalLabel" style="color: black;">신고하기</h4>
       </div>
-      <div class="modal-body" style="height: 150px;" >
-  		<table>
+      <div class="modal-body" style="height: 300px;" >
+  		<table id="notify">
   			<tr>
-  				<th>신고항목</th>
+  				<th class="title">신고항목</th>
   				<th>
-  					<select>
+  					<input type="text" name="cNo" value="${claVo.cNo }"> 
+  					<select class="form-control" name="nCode">
   						<option value="0">신고유형을 선택하세요</option>
+  						<option value="허위정보">허위정보</option>
+  						<option value="욕설">욕설</option>
+  						<option value="기타">기타</option>
   					</select>
   				</th>
   			</tr>
   			<tr>
-  				<th>신고내용</th>
+  				<th class="title">신고내용</th>
   				<th>
-  					<textarea rows="10" cols="20" placeholder="허위 신고시 불이익을 당할 수 있으니, 직접 경험한 내용만 신고해주세요."></textarea>
+  					<textarea name="nContent" class="form-control" rows="10" cols="20" placeholder="허위 신고시 불이익을 당할 수 있으니, 직접 경험한 내용만 신고해주세요."></textarea>
   				</th>
   			</tr>
   		</table>
@@ -303,7 +315,7 @@ name="searchEndDate" value="${param.searchEndDate}">
       </div>
 		
       <div class="modal-footer">
-      	<button type="submit" class="btn btn-default" id="pay">삭제하기</button>        
+      	<button type="submit" class="btn btn-default" id="pay">신고하기</button>        
       </div>
     </div>
   </div>

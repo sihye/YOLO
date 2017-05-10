@@ -36,6 +36,7 @@ import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
 import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.crecla.model.ClassVO;
+import com.one.yolo.crecla.model.NotifyVO;
 import com.one.yolo.crecla.model.ScheduleVO;
 import com.one.yolo.upfile.model.UpfileService;
 import com.one.yolo.upfile.model.UpfileVO;
@@ -424,6 +425,26 @@ public class ClaController {
 		if(cnt>0){
 			model.addAttribute("msg", "선택한 클래스가 삭제되었습니다.");
 			model.addAttribute("url", "/mypage/MyClass/HostClass.do");
+		}
+		return"common/message";
+	}
+	
+	//클래스 신고
+	@RequestMapping("/notify.do")
+	public String notify(HttpSession session, @ModelAttribute NotifyVO vo, Model model){
+		String userid=(String)session.getAttribute("userid");		
+		vo.setnUserid(userid);
+		logger.info("신고 파람 noty vo={}",vo);
+		
+		int cnt=claService.notyInsert(vo);
+		logger.info("신고 cnt={}",cnt);
+		int cNo=vo.getcNo();
+		if(cnt>0){
+			model.addAttribute("msg", "신고되었습니다.");
+			model.addAttribute("url", "/class/claDetail.do?cNo="+cNo);
+		}else{
+			model.addAttribute("msg", "신고등록 실패. 다시 시도해주세요.");
+			model.addAttribute("url", "/class/claDetail.do?cNo="+cNo);
 		}
 		return"common/message";
 	}

@@ -21,4 +21,5 @@ public interface ClassService {
 	public int updateCla(ClassVO vo);
 	public int updateSch(ScheduleVO vo);
 	public int deleteCla(int cNo);
+	public int notyInsert(NotifyVO vo);
 }

@@ -621,7 +621,7 @@ ALTER TABLE payment
 -- 결제취소
 CREATE TABLE paymentcancel (
 	PMC_NO       NUMBER        NOT NULL, -- 결제취소번호
-	PM_NO        NUMBER        NOT NULL, -- 결제번호
+	PM_NO        varchar2(100)        NOT NULL, -- 결제번호
 	PMC_DATE     DATE          NULL,     -- 취소일
 	PMC_PROQRESS VARCHAR2(500) DEFAULT '진행중' , -- 결제진행상황
 	PMC_CALCEL   VARCHAR2(500) NULL,     -- 취소유형

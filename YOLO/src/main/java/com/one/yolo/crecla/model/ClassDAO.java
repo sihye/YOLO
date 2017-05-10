@@ -22,4 +22,5 @@ public interface ClassDAO {
 	public List<ClassVO> selClaById(String userid);
 	public int updateCla(ClassVO vo);
 	public int updateSch(ScheduleVO vo);
+	public int notyInsert(NotifyVO vo);
 }
