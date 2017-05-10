@@ -35,6 +35,26 @@ public class ClassBoardServiceImpl implements ClassBoardService{
 	public ClassBoardVO selectClassBoardBycbNo(int cbNo) {
 		return dao.selectClassBoardBycbNo(cbNo);
 	}
+
+
+	@Override
+	public int readCountUp(int cbNo) {
+		return dao.readCountUp(cbNo);
+	}
+
+
+	@Override
+	public int deleteClassBoard(int cbNo) {
+		return dao.deleteClassBoard(cbNo);
+	}
+
+
+	@Override
+	public int updateClassBoard(ClassBoardVO vo) {
+		return dao.updateClassBoard(vo);
+	}
+	
+	
 	
 	
 	

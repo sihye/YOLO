@@ -30,6 +30,23 @@ public class ClassBoardDAOMybatis extends SqlSessionDaoSupport implements ClassB
 	public ClassBoardVO selectClassBoardBycbNo(int cbNo) {
 		return getSqlSession().selectOne(namespace+".selectClassBoardBycbNo",cbNo);
 	}
+
+	@Override
+	public int readCountUp(int cbNo) {
+		return getSqlSession().update(namespace+".readCountUp",cbNo);
+	}
+
+	@Override
+	public int deleteClassBoard(int cbNo) {
+		return getSqlSession().delete(namespace+".deleteClassBoard",cbNo);
+	}
+
+	@Override
+	public int updateClassBoard(ClassBoardVO vo) {
+		
+		return getSqlSession().update(namespace+".updateClassBoard",vo);
+	}
+	
 	
 	
 	

@@ -1,10 +1,14 @@
 package com.one.yolo.crecla.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +27,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.one.yolo.admin.model.OperAtorVO;
 import com.one.yolo.booking.model.BookingService;
 import com.one.yolo.category.model.CategoryGroupVO;
 import com.one.yolo.category.model.CategoryService;
@@ -334,7 +340,7 @@ public class ClaController {
 						claVo.setfNo2(upvo.getfNo());
 					}else if(i==2){
 						upvo=upfileService.selectByOname(upfileList.get(i).getfFilename());
-						logger.info("fno1={}",upvo.getfNo());
+						logger.info("fno3={}",upvo.getfNo());
 						claVo.setfNo3(upvo.getfNo());
 					}
 				}//for
@@ -448,10 +454,195 @@ public class ClaController {
 	@RequestMapping("/boardDetail.do")
 	public String boadrdDetail(@RequestParam int cbNo, Model model){
 		logger.info("후기 디테일 파라미터 cbNo={}",cbNo);
+		claBoardService.readCountUp(cbNo);
 	    ClassBoardVO vo=claBoardService.selectClassBoardBycbNo(cbNo);
+	    List<UpfileVO> fileList = new ArrayList<UpfileVO>();
+	    if(vo!=null){
+	    	if(vo.getfNo1()+""!=null && !(vo.getfNo1()+"").isEmpty()){
+	    		fileList.add(upfileService.selectByFno(vo.getfNo1()));
+	    	}
+	    	if(vo.getfNo2()+""!=null && !(vo.getfNo2()+"").isEmpty()){
+	    		fileList.add(upfileService.selectByFno(vo.getfNo2()));
+	    	}
+	    	if(vo.getfNo3()+""!=null && !(vo.getfNo3()+"").isEmpty()){
+	    		fileList.add(upfileService.selectByFno(vo.getfNo3()));
+	    	}
+	    }
 	    
+	    logger.info("이미지 size ={}, 3번쨰 ={}",fileList.size());
 	    model.addAttribute("vo",vo);
+	    model.addAttribute("fileList",fileList);
 	    return "class/boardDetail";
 		
 	}
+	
+	//게시글 삭제
+	@RequestMapping("/boardDel.do")
+	public String boardDel(@RequestParam int cbNo,@RequestParam int cNo,HttpServletRequest request,Model model){
+		logger.info("삭제 파라미터  = {}",cbNo);
+		ClassBoardVO vo = claBoardService.selectClassBoardBycbNo(cbNo);
+		int cnt = claBoardService.deleteClassBoard(cbNo);
+		if(!(vo.getfNo1()+"").isEmpty() && (vo.getfNo1()+"") !=null){
+			UpfileVO fvo = upfileService.selectByFno(vo.getfNo1());
+				if(fvo !=null){
+				String oldFileName=fvo.getfFilename();
+				logger.info("old파일 네임 = {}",oldFileName);
+				//=> [2] 기존 파일이 있다면 삭제
+				if(oldFileName!=null && !oldFileName.isEmpty()){
+					String upPath = upfileService.getUploadPath(request,"File");
+					File oldFile = new File(upPath, oldFileName);
+					if(oldFile.exists()){
+						boolean bool =oldFile.delete();
+						logger.info("기존 파일 삭제 여부:{}", bool);
+					}
+				}
+				upfileService.deleteByFno(vo.getfNo1());
+			}
+		}
+
+		if(!(vo.getfNo2()+"").isEmpty() && (vo.getfNo2()+"") !=null){
+			UpfileVO fvo = upfileService.selectByFno(vo.getfNo2());
+			if(fvo !=null){
+			String oldFileName=fvo.getfFilename();
+			logger.info("old파일 네임 = {}",oldFileName);
+			//=> [2] 기존 파일이 있다면 삭제
+			if(oldFileName!=null && !oldFileName.isEmpty()){
+				String upPath = upfileService.getUploadPath(request,"File");
+				File oldFile = new File(upPath, oldFileName);
+				if(oldFile.exists()){
+					boolean bool =oldFile.delete();
+					logger.info("기존 파일 삭제 여부:{}", bool);
+				}
+			}
+			upfileService.deleteByFno(vo.getfNo2());
+			}
+		}
+
+		if(!(vo.getfNo3()+"").isEmpty() && (vo.getfNo3()+"") !=null){
+			UpfileVO fvo = upfileService.selectByFno(vo.getfNo3());
+			if(fvo !=null){
+				String oldFileName=fvo.getfFilename();
+				logger.info("old파일 네임 = {}",oldFileName);
+				//=> [2] 기존 파일이 있다면 삭제
+				if(oldFileName!=null && !oldFileName.isEmpty()){
+					String upPath = upfileService.getUploadPath(request,"File");
+					File oldFile = new File(upPath, oldFileName);
+					if(oldFile.exists()){
+						boolean bool =oldFile.delete();
+						logger.info("기존 파일 삭제 여부:{}", bool);
+					}
+				}
+				upfileService.deleteByFno(vo.getfNo3());
+			}
+		}
+		
+		
+		
+		String msg ="",url="/class/claDetail.do?cNo="+cNo+"&boardtype=cb";
+		
+		if(cnt>0){
+			msg="게시글 삭제 완료";
+		}
+		else{
+			msg="게시글 삭제 실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+		
+		
+	}
+	
+	
+	@RequestMapping(value="/classBoardEdit.do", method=RequestMethod.GET)
+	public String classBoardEdit_get(@RequestParam int cbNo,Model model){
+		ClassBoardVO vo =claBoardService.selectClassBoardBycbNo(cbNo);
+		List<UpfileVO> fileList = new ArrayList<UpfileVO>();
+		 if(vo!=null){
+			 
+		    	if(vo.getfNo1()+""!=null && !(vo.getfNo1()+"").isEmpty()){
+		    		fileList.add(upfileService.selectByFno(vo.getfNo1()));
+		    	}
+		    	if(vo.getfNo2()+""!=null && !(vo.getfNo2()+"").isEmpty()){
+		    		fileList.add(upfileService.selectByFno(vo.getfNo2()));
+		    	}
+		    	if(vo.getfNo3()+""!=null && !(vo.getfNo3()+"").isEmpty()){
+		    		fileList.add(upfileService.selectByFno(vo.getfNo3()));
+		    	}
+		    }
+		model.addAttribute("vo",vo);
+		model.addAttribute("fileList",fileList);
+		return "class/classBoardEdit";
+		
+	}
+	@RequestMapping(value="/classBoardEdit.do", method=RequestMethod.POST)
+	public String classBoardEdit_POST(@ModelAttribute ClassBoardVO claVo,HttpServletRequest request, Model model){
+		List<Map<String, Object>> fileList= fileUploadWebUtil.fileUpload(request, FileUploadWebUtil.IMAGE_UPLOAD);
+		logger.info("업로드 이미지 filelist size={}",fileList.size());
+		ClassBoardVO oldClaVo= claBoardService.selectClassBoardBycbNo(claVo.getCbNo());
+		logger.info("이전 vo ={}", oldClaVo);
+		claVo.setfNo1(0);
+		claVo.setfNo2(0);
+		claVo.setfNo3(0);
+		//수정을 위한 수정 파일 위치 알아내기
+		MultipartHttpServletRequest multiRequest
+		=(MultipartHttpServletRequest) request;
+		Map<String, MultipartFile> fileMap =multiRequest.getFileMap();
+		Iterator<String> iter = fileMap.keySet().iterator();
+		List<UpfileVO> upfileList = new ArrayList<UpfileVO>();
+		if(fileList !=null && !fileList.isEmpty()){
+			for(int i =0; i<fileList.size(); i++){
+				UpfileVO fvo = new UpfileVO();
+				fvo.setfFilename((String)fileList.get(i).get("fileName"));
+				logger.info("filesize ={}",(Long)fileList.get(i).get("fileSize"));
+				fvo.setfFilesize((Long) fileList.get(i).get("fileSize"));
+				fvo.setfOriginalfilename((String)fileList.get(i).get("originalFileName"));
+				upfileList.add(fvo);
+				upfileService.insertUpfile(fvo);
+			}
+		}
+		int filecount = 0;
+		int cont =0;
+		while(iter.hasNext()){
+ 			String key = iter.next();
+  			MultipartFile tempFile = fileMap.get(key);
+  			if(!tempFile.isEmpty()){
+  							UpfileVO upvo = new UpfileVO();
+  							if(filecount==0){
+  								upvo=upfileService.selectByOname(upfileList.get(cont).getfFilename());
+  								claVo.setfNo1(upvo.getfNo());
+  								cont++;
+  							}else if(filecount==1){
+  								upvo=upfileService.selectByOname(upfileList.get(cont).getfFilename());
+  								claVo.setfNo2(upvo.getfNo());
+  								cont++;
+  							}else if(filecount==2){
+  								upvo=upfileService.selectByOname(upfileList.get(cont).getfFilename());
+  								claVo.setfNo3(upvo.getfNo());
+  								cont++;
+  							}
+  				}
+  				filecount++;
+  				System.out.println("filecount = " +filecount);
+  			}//while
+		logger.info("calVo 값 = {}",claVo);
+		int cnt = claBoardService.updateClassBoard(claVo);
+		String msg ="",url="/class/boardDetail.do?cbNo="+claVo.getCbNo();
+			if(cnt>0){
+				msg="게시글 수정 완료!";
+			}else{
+				msg="게시글 수정 실패 !";
+			}
+		
+			model.addAttribute("msg",msg);
+			model.addAttribute("url",url);
+			
+			return "common/message";
+ 		}
+
+
+		
+	
 }

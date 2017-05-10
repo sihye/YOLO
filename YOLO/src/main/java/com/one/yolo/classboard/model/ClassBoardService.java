@@ -9,4 +9,7 @@ public interface ClassBoardService {
 	public int selectClassBoardCount(ClassBoardVO vo);
 	public int insertClassBoard(ClassBoardVO vo);
 	public ClassBoardVO selectClassBoardBycbNo(int cbNo);
+	public int readCountUp(int cbNo);
+	public int deleteClassBoard(int cbNo);
+	public int updateClassBoard(ClassBoardVO vo);
 }

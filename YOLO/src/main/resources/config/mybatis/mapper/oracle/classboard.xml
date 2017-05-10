@@ -90,7 +90,68 @@
 	<select id="selectClassBoardBycbNo" parameterType="int" resultType="ClassBoardVO">
 		select *from classboard where cb_no = #{cbNo}
 	</select>
+	<update id="readCountUp" parameterType="int">
+		update 	classboard
+		set 	CB_READCOUNT = CB_READCOUNT+1
+		where cb_no = #{cbNo}
+	</update>
+	<delete id="deleteClassBoard" parameterType="int">
+		delete from classboard
+		where cb_no=#{cbNo}
+	</delete>
 	
+	<update id="updateClassBoard" parameterType="ClassBoardVO">
+	
+	<choose>
+		<when test="fNo1!=0 and fNo2!=0 and fNo3!=0">
+			update classboard
+			set cb_title=#{cbTitle},cb_content=#{cbContent},f_no1=#{fNo1},f_no2=#{fNo2},f_no3=#{fNo3}
+			where cb_no=#{cbNo}
+		</when>
+		<when test="fNo1!=0 and fNo2!=0 and fNo3==0">
+			update classboard
+			set cb_title=#{cbTitle},cb_content=#{cbContent},f_no1=#{fNo1},f_no2=#{fNo2}
+			where cb_no=#{cbNo}
+		</when>
+		<when test="fNo1!=0 and fNo2==0 and fNo3==0">
+			update classboard
+			set cb_title=#{cbTitle},cb_content=#{cbContent},f_no1=#{fNo1}
+			where cb_no=#{cbNo}
+		</when>
+		<when test="fNo1!=0 and fNo2==0 and fNo3!=0">
+			update classboard
+			set cb_title=#{cbTitle},cb_content=#{cbContent},f_no1=#{fNo1},f_no3=#{fNo3}
+			where cb_no=#{cbNo}
+		</when>
+		<when test="fNo1==0 and fNo2!=0 and fNo3==0">
+			update classboard
+			set cb_title=#{cbTitle},cb_content=#{cbContent},f_no2=#{fNo2}
+			where cb_no=#{cbNo}
+		</when>
+		<when test="fNo1==0 and fNo2!=0 and fNo3!=0">
+			update classboard
+			set cb_title=#{cbTitle},cb_content=#{cbContent},f_no2=#{fNo2},f_no3=#{fNo3}
+			where cb_no=#{cbNo}
+		</when>
+		<when test="fNo1==0 and fNo2==0 and fNo3!=0">
+			update classboard
+			set cb_title=#{cbTitle},cb_content=#{cbContent},f_no3=#{fNo3}
+			where cb_no=#{cbNo}
+		</when>
+
+		<when test="fNo1==0 and fNo2==0 and fNo3==0">
+			update classboard
+			set cb_title=#{cbTitle},cb_content=#{cbContent}
+			where cb_no=#{cbNo}
+		</when>
+		
+		<otherwise>
+		
+		</otherwise>
+		</choose>
+	
+	
+	</update>
 </mapper>
 
 

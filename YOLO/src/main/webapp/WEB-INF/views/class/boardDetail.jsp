@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../inc/top.jsp"%>
 <style>
 .total-box {
@@ -16,6 +18,23 @@
 	display: block;
 }
 </style>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#btDel").click(function(){
+		if(!confirm("삭제하시겠습니까?")){
+			history.back;
+		}else{
+			location.href="<c:url value='/class/boardDel.do?cNo=${vo.cNo}&cbNo=${vo.cbNo}' />"; 
+		}
+	
+	});
+	$("#btEdit").click(function(){
+		location.href="<c:url value='/class/classBoardEdit.do?cbNo=${vo.cbNo}' />"; 
+
+	});
+});
+</script>
 <div class="container">
 	<div class="row">
 		<div class="col-md-1"></div>
@@ -26,19 +45,33 @@
 					<tbody>
 						<tr>
 							<th><span class="b m-tcol-c" style="margin-left: 5px;">${vo.cbTitle }</span>
-								<p style="float: right; margin-right: 10px;">2017.03.21.
-									17:15</p></th>
+								<p style="float: right; margin-right: 10px;"><fmt:formatDate value="${vo.cbRegdate }" pattern='yyyy-MM-dd'/>
+									</p></th>
 						</tr>
 						<tr>
 							<td><div class="board-box-line-dashed"></div></td>
 						</tr>
 						<tr style="font-weight: bold">
-							<td><label>아이디:</label><span style="color: #b6b6b6">hong</span>
-								<label>조회수:</label><span style="color: #b6b6b6">20</span></td>
+							<td><label>아이디:</label><span style="color: #b6b6b6">${vo.mUserid }</span>
+								<label>조회수:</label><span style="color: #b6b6b6">${vo.cbReadcount }</span></td>
 						</tr>
 						<tr>
-							<td><textarea rows="20"
-									style="width: 100%; resize: none; border: none;" readonly>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</textarea>
+							<td>
+							<div style="height: 400px">
+							<div class="row">
+								<c:if test="${!empty fileList}">
+									<c:forEach var="file" items="${fileList }">
+									<c:if test="${file.fFilename != '' && file.fFilename != null }">
+								    <div class="col-md-4">
+								    <img  src="../upload/${file.fFilename }">
+								    </div>
+								    </c:if>
+								    </c:forEach>
+								</c:if>
+    							</div>
+    							<br><br>
+									${vo.cbContent }
+							</div>
 							</td>
 						</tr>
 					</tbody>
@@ -47,14 +80,13 @@
 			<br>
 
 			<div id="btnAll">
-				<div class="btnLeft"  style="float: left;">
-					<button type="button" class="btn btn-default btn-xs">이전글</button>
-					<button type="button" class="btn btn-default btn-xs">다음글</button>
-				</div>
+		
 				<div class="btnRight" style="float: right;">
-					<button type="button" class="btn btn-default btn-xs">수정</button>
-					<button type="button" class="btn btn-default btn-xs">삭제</button>
-					<button type="button" class="btn btn-default btn-xs">목록</button>
+				<c:if test="${vo.mUserid  eq sessionScope.userid}">
+					<button type="button" class="btn btn-default btn-xs"  id="btEdit" >수정</button>
+					<button type="button" class="btn btn-default btn-xs" id="btDel" >삭제</button>
+				</c:if>
+					<button type="button" class="btn btn-default btn-xs" onclick="location.href='<c:url value="/class/claDetail.do?cNo=${vo.cNo }&boardtype=cb"/>'">목록</button>
 				</div>
 
 			</div>
