@@ -56,14 +56,14 @@ $(document).ready(function(){
 								<label>조회수:</label><span style="color: #b6b6b6">${vo.cbReadcount }</span></td>
 						</tr>
 						<tr>
-							<td>
+							<td height="800px">
 							<div style="height: 400px">
 							<div class="row">
 								<c:if test="${!empty fileList}">
 									<c:forEach var="file" items="${fileList }">
 									<c:if test="${file.fFilename != '' && file.fFilename != null }">
 								    <div class="col-md-4">
-								    <img  src="../upload/${file.fFilename }">
+								    <img  src="../upload/${file.fFilename }" height="300px">
 								    </div>
 								    </c:if>
 								    </c:forEach>

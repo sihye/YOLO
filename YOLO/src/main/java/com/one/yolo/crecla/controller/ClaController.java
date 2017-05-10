@@ -629,6 +629,60 @@ public class ClaController {
   			}//while
 		logger.info("calVo 값 = {}",claVo);
 		int cnt = claBoardService.updateClassBoard(claVo);
+		if(claVo.getfNo1() != 0){
+			UpfileVO fvo = upfileService.selectByFno(oldClaVo.getfNo1());
+				if(fvo !=null){
+				String oldFileName=fvo.getfFilename();
+				logger.info("old파일 네임 = {}",oldFileName);
+				//=> [2] 기존 파일이 있다면 삭제
+				if(oldFileName!=null && !oldFileName.isEmpty()){
+					String upPath = upfileService.getUploadPath(request,"File");
+					File oldFile = new File(upPath, oldFileName);
+					if(oldFile.exists()){
+						boolean bool =oldFile.delete();
+						logger.info("기존 파일 삭제 여부:{}", bool);
+						upfileService.deleteByFno(oldClaVo.getfNo1());
+					}
+				}
+			}
+		}
+		if(claVo.getfNo2() != 0){
+			UpfileVO fvo = upfileService.selectByFno(oldClaVo.getfNo2());
+			if(fvo !=null){
+			String oldFileName=fvo.getfFilename();
+			logger.info("old파일 네임 = {}",oldFileName);
+			//=> [2] 기존 파일이 있다면 삭제
+			if(oldFileName!=null && !oldFileName.isEmpty()){
+				String upPath = upfileService.getUploadPath(request,"File");
+				File oldFile = new File(upPath, oldFileName);
+				if(oldFile.exists()){
+					boolean bool =oldFile.delete();
+					logger.info("기존 파일 삭제 여부:{}", bool);
+					upfileService.deleteByFno(oldClaVo.getfNo2());
+				}
+			}
+			}
+		}
+
+		if(claVo.getfNo3() != 0){
+			UpfileVO fvo = upfileService.selectByFno(oldClaVo.getfNo3());
+			if(fvo !=null){
+				String oldFileName=fvo.getfFilename();
+				logger.info("old파일 네임 = {}",oldFileName);
+				//=> [2] 기존 파일이 있다면 삭제
+				if(oldFileName!=null && !oldFileName.isEmpty()){
+					String upPath = upfileService.getUploadPath(request,"File");
+					File oldFile = new File(upPath, oldFileName);
+					if(oldFile.exists()){
+						boolean bool =oldFile.delete();
+						logger.info("기존 파일 삭제 여부:{}", bool);
+						upfileService.deleteByFno(oldClaVo.getfNo3());
+					}
+				}
+			}
+		}
+
+		
 		String msg ="",url="/class/boardDetail.do?cbNo="+claVo.getCbNo();
 			if(cnt>0){
 				msg="게시글 수정 완료!";
