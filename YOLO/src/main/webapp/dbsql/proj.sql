@@ -1008,7 +1008,7 @@ CREATE TABLE notify (
     n_no    number not null,
 	C_NO      NUMBER        NOT NULL, -- 클래스번호
 	N_CODE    VARCHAR2(500) NOT NULL, -- 신고항목
-	N_REGDEAT DATE		DEFAULT SYSDATE,
+	N_REGDATE DATE		DEFAULT SYSDATE,
 	n_userid    VARCHAR2(500) NOT NULL,
 	N_CONTENT VARCHAR2(500) NOT NULL  -- 신고내용
 );

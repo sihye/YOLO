@@ -228,6 +228,7 @@ a {
 	<table class="table table-hover">
 		<tr>
 			<th>NO</th>
+			<th>신고자</th>
 			<th>카테고리</th>
 			<th>신고 클래스</th>
 			<th>클래스 호스트</th>
@@ -239,7 +240,8 @@ a {
 		<c:if test="${!empty alist }">
 			<c:forEach var="map" items="${alist }">
 				<tr>
-					<td>${map["C_NO"]}</td>
+					<td>${map["N_NO"]}</td>
+					<td>${map["N_USERID"] }</td>
 					<td>${map["K_NAME"]}</td>
 					<td>${map["C_NAME"]}</td>
 					<td>${map["M_USERID"] }</td>
