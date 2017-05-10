@@ -33,4 +33,19 @@ public class FavoriteClassDAOMybatis extends SqlSessionDaoSupport implements Fav
 		return getSqlSession().delete(namespace+".deleteIdFavoriteClass",userid);
 	}
 
+	@Override
+	public int favoriteclassinsert(FavoriteClassVO frclassVo) {
+		return getSqlSession().insert(namespace+".favoriteclassinsert",frclassVo);
+	}
+
+	@Override
+	public List<FavoriteClassVO> selectShoppingbasket(String userid) {
+		return getSqlSession().selectList(namespace+".selectShoppingbasket",userid);
+	}
+
+	@Override
+	public int selectsbCount(FavoriteClassVO faclassVo) {
+		return getSqlSession().selectOne(namespace+".selectsbCount",faclassVo);
+	}
+
 }

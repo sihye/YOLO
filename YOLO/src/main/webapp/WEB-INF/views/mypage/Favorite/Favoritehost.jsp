@@ -5,7 +5,7 @@
 <script type="text/javascript">
 function delNoFunc(delNo) { 
 	if (confirm("선택한 호스트 삭제하시겠습니까?") == true){    //확인
-		location.href='<c:url value="/mypage/Favorite/FollowDelete.do?flNo='+delNo+'" />';
+		location.href='<c:url value="/mypage/Favorite/FollowDelete.do?flNo='+delNo+'&viewName=mypage" />';
     }else{   //취소
         return;
     }

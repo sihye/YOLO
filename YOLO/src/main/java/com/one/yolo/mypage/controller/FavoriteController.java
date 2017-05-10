@@ -24,6 +24,7 @@ import com.one.yolo.common.Utility;
 import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.crecla.model.ClassVO;
 import com.one.yolo.favoriteclass.model.FavoriteClassService;
+import com.one.yolo.favoriteclass.model.FavoriteClassVO;
 import com.one.yolo.follow.model.FollowService;
 import com.one.yolo.follow.model.FollowVO;
 
@@ -40,7 +41,27 @@ public class FavoriteController {
 	
 	@Autowired
 	private FollowService followService;
-
+	
+	@RequestMapping("/insertshoppingbasket.do")
+	public String insertshoppingbasket(@ModelAttribute FavoriteClassVO foclassVo,Model model,HttpSession session){
+		String userid =(String)session.getAttribute("userid");
+		foclassVo.setSbUserid(userid);
+		logger.info("관심클래스 등록,파라미터 foclassVo={}",foclassVo);
+		int cnt= favoriteClassSerive.favoriteclassinsert(foclassVo);
+		
+		String msg="",url="";
+		if (cnt>0) {
+			msg="등록 성공";
+			url="/class/claDetail.do?cNo="+foclassVo.getcNo();
+		}else{
+			msg="등록 실패";
+			url="/class/claDetail.do?cNo="+foclassVo.getcNo();
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		return "common/message";
+	}
 	@RequestMapping("/FavoriteClass.do")
 	public String FavoriteClass(@ModelAttribute SearchVO searchVO
 			, Model model,HttpSession session){
@@ -81,8 +102,9 @@ public class FavoriteController {
 	}
 
 	@RequestMapping("/FavoriteClassdeleteNo.do")
-	public String FavoriteClassdeleteNo(@RequestParam(required=false,defaultValue="0") int SB_NO,Model model){
-		logger.info("찜하기 삭제 처리, 파라미터 SB_NO={} ", SB_NO);
+	public String FavoriteClassdeleteNo(@RequestParam(required=false,defaultValue="0") int SB_NO
+			,@RequestParam(required=false,defaultValue="0") int cNo,@RequestParam String viewName,Model model){
+		logger.info("찜하기 삭제 처리, 파라미터 SB_NO={},viewName={} ", SB_NO,viewName);
 		int cnt=0;
 
 		if(SB_NO!=0 ){
@@ -90,11 +112,23 @@ public class FavoriteController {
 		}
 
 		logger.info("찜하기 삭제 cnt={}", cnt);
-		String msg="",url="/mypage/Favorite/FavoriteClass.do";
+		String msg="",url="";
 		if(cnt==1){
 			msg="삭제 성공";
+			url="/mypage/Favorite/FavoriteClass.do";
 		}else{
 			msg="삭제 실패";
+			url="/mypage/Favorite/FavoriteClass.do";
+		}
+		
+		if(viewName.equals("class")){
+			if(cnt==1){
+				msg="삭제 성공";
+				url="/class/claDetail.do?cNo="+cNo;
+			}else{
+				msg="삭제 실패";
+				url="/class/claDetail.do?cNo="+cNo;
+			}
 		}
 
 		model.addAttribute("msg",msg);
@@ -158,11 +192,13 @@ public class FavoriteController {
 		followVo.setFlWuserid(userid);
 		logger.info("팔로우 등록,파라미터 followVo={}",followVo);
 		int cnt = followService.insertFollow(followVo);
-		String msg="",url="/class/claDetail.do?cNo="+cNo;
+		String msg="",url="";
 		if (cnt>0) {
 			msg="팔로우 성공";
+			url="/class/claDetail.do?cNo="+cNo;
 		}else{
 			msg="팔로우 실패";
+			url="/class/claDetail.do?cNo="+cNo;
 		}
 		
 		model.addAttribute("msg",msg);
@@ -170,8 +206,17 @@ public class FavoriteController {
 		return "common/message";
 	}
 	@RequestMapping("/FollowDelete.do")
-	public String FollowDelete(@RequestParam(required=false,defaultValue="0") int flNo,Model model){
-		logger.info("관심호스트 삭제 처리, 파라미터 flNo={} ", flNo);
+	public String FollowDelete(@RequestParam(value="flNo",defaultValue="0") int flNo
+			,@RequestParam String viewName,@RequestParam(required=false,defaultValue="0") int cNo,Model model){
+		logger.info("관심호스트 삭제 처리, 파라미터 flNo={},viewName={} ", flNo,viewName);
+		String msg="",url="";
+		if(flNo==0){
+			msg="삭제할 호스트 선택해주세요";
+			url="/mypage/Favorite/Favoritehost.do";
+			model.addAttribute("msg",msg);
+			model.addAttribute("url",url);
+			return "common/message";
+		}
 		int cnt=0;
 
 		if(flNo!=0 ){
@@ -179,11 +224,21 @@ public class FavoriteController {
 		}
 
 		logger.info("관심호스트 삭제 cnt={}", cnt);
-		String msg="",url="/mypage/Favorite/Favoritehost.do";
 		if(cnt==1){
 			msg="삭제 성공";
+			url="/mypage/Favorite/Favoritehost.do";
 		}else{
 			msg="삭제 실패";
+			url="/mypage/Favorite/Favoritehost.do";
+		}
+		if(viewName.equals("class")){
+			if(cnt==1){
+				msg="삭제 성공";
+				url="/class/claDetail.do?cNo="+cNo;
+			}else{
+				msg="삭제 실패";
+				url="/class/claDetail.do?cNo="+cNo;
+			}
 		}
 
 		model.addAttribute("msg",msg);

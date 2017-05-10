@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.one.yolo.common.SearchVO;
 
@@ -28,8 +29,20 @@ public class FollowServiceImpl implements FollowService{
 		return followDao.selectTotalRecord(searchVo);
 	}
 	@Override
+	@Transactional
 	public int insertFollow(FollowVO followVo) {
-		return followDao.insertFollow(followVo);
+		int cnt = 0;
+		cnt = followDao.selectFollowCount(followVo);
+		if(cnt>0){
+			cnt=-1;
+		}else{
+			cnt=followDao.insertFollow(followVo);
+		}
+		return cnt;
+	}
+	@Override
+	public int selectFollowCount(FollowVO followVo) {
+		return followDao.selectFollowCount(followVo);
 	}
 
 }

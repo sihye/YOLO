@@ -6,7 +6,7 @@
 
 function delNoFunc(delNo) { 
 	if (confirm("선택한클래스 삭제하시겠습니까?") == true){    //확인
-		location.href='<c:url value="/mypage/Favorite/FavoriteClassdeleteNo.do?SB_NO='+delNo+'" />';
+		location.href='<c:url value="/mypage/Favorite/FavoriteClassdeleteNo.do?SB_NO='+delNo+'&viewName=mypage" />';
     }else{   //취소
         return;
     }

@@ -27,5 +27,17 @@ public class FavoriteClassServiceImpl implements FavoriteClassService{
 	public int deleteIdFavoriteClass(String userid) {
 		return favoriteClassDao.deleteIdFavoriteClass(userid);
 	}
+	@Override
+	public int favoriteclassinsert(FavoriteClassVO frclassVo) {
+		return favoriteClassDao.favoriteclassinsert(frclassVo);
+	}
+	@Override
+	public List<FavoriteClassVO> selectShoppingbasket(String userid) {
+		return favoriteClassDao.selectShoppingbasket(userid);
+	}
+	@Override
+	public int selectsbCount(FavoriteClassVO faclassVo) {
+		return favoriteClassDao.selectsbCount(faclassVo);
+	}
 	
 }

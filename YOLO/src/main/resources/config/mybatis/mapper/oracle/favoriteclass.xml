@@ -3,6 +3,10 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.favoriteclass">
+	<select id="selectShoppingbasket" parameterType="String" resultType="FavoriteClassVO">
+		select * from shoppingbasket
+		where SB_USERID=#{userid}
+	</select>
 	<select id="selectFavoriteClass" parameterType="SearchVO" resultType="map">
 		select SB_NO, C_NO,SB_USERID, SC_REGDATE, C_PLACE, C_PRICE,
 			C_PAYMENTWAY, C_NAME
@@ -32,6 +36,20 @@
 	<delete id="deleteIdFavoriteClass" parameterType="String">
 		delete from SHOPPINGBASKET where SB_USERID=#{userid}
 	</delete>
+	<insert id="favoriteclassinsert" parameterType="FavoriteClassVO">
+		<selectKey keyProperty="sbNo" resultType="int" order="BEFORE">
+			select SHOPPINGBASKET_seq.nextval from dual
+		</selectKey>
+		insert into shoppingbasket
+		(SB_NO,SB_USERID,C_NO)
+		values(#{sbNo},#{sbUserid},#{cNo})
+	</insert>
+	<select id="selectsbCount" parameterType="FavoriteClassVO" resultType="int">
+		select count(*) from shoppingbasket
+		where SB_USERID=#{sbUserid}
+		and C_NO=#{cNo}
+	</select>
+	
 </mapper>
 
 

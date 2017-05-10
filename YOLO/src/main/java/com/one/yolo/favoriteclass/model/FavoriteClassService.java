@@ -10,4 +10,7 @@ public interface FavoriteClassService {
 	public int selectTotalRecord(SearchVO searchVo);
 	public int deleteNoFavoriteClass(int no);
 	public int deleteIdFavoriteClass(String userid);
+	public int favoriteclassinsert(FavoriteClassVO frclassVo);
+	public List<FavoriteClassVO> selectShoppingbasket(String userid); 
+	public int selectsbCount(FavoriteClassVO faclassVo);
 }

@@ -38,7 +38,7 @@
 		insert into follow(FL_NO,FL_USERID,FL_WUSERID)
 		values(#{flNo},#{flUserid},#{flWuserid})
 	</insert>
-	<select id="selectFollowCount" parameterType="FollowVO">
+	<select id="selectFollowCount" parameterType="FollowVO" resultType="int">
 		select count(*) from follow
 		where FL_USERID=#{flUserid}
 		and FL_WUSERID=#{flWuserid}

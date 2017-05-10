@@ -126,12 +126,43 @@ $(document).ready(function() {
 		if (confirm("선택한 호스트 팔로우하시겠습니까?") == true){    //확인
 			var url = '<c:url value="/mypage/Favorite/insertFollow.do?flUserid=${claVo.mUserid }&cNo=${claVo.cNo }"/>'
 			$(location).attr('href',url);
+			
 	    }else{   //취소
 	        return;
 	    }
 		
 	});
-	
+	$(".btn3").click(function() {
+		if (confirm("팔로우 취소 하시겠습니까?") == true){    //확인
+			var flNo=$("#flNo").val();
+			var url = '<c:url value="/mypage/Favorite/FollowDelete.do?flNo='+flNo+'&cNo=${claVo.cNo }&viewName=class"/>'
+			$(location).attr('href',url);
+	    }else{   //취소
+	        return;
+	    }
+		
+	});
+	$("#shoppingbasket").click(function() {
+		if (confirm("관심클래스로 등록 하시겠습니까?") == true){    //확인
+			var url = '<c:url value="/mypage/Favorite/insertshoppingbasket.do?cNo=${claVo.cNo }"/>'
+			$(location).attr('href',url);
+			
+	    }else{   //취소
+	        return;
+	    }
+		
+	});
+	$("#shoppingbasket2").click(function() {
+		if (confirm("관심클래스 취소 하시겠습니까?") == true){    //확인
+			var sbNo=$("#sbNo").val();
+			var url = '<c:url value="/mypage/Favorite/FavoriteClassdeleteNo.do?SB_NO='+sbNo+'&cNo=${claVo.cNo }&viewName=class"/>'
+			$(location).attr('href',url);
+			
+	    }else{   //취소
+	        return;
+	    }
+		
+	});
 	
 	
 });
@@ -263,6 +294,27 @@ hr{
 	-webkit-font-smoothing: antialiased;
 	text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
 }
+.btn3 {
+	line-height: 36px;
+	margin-top: 12px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 100px;
+	height: 30px;
+	color: #fff;
+	background-color: green;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	vertical-align: baseline;
+	font-family: NanumBarunGothic, '나눔바른고딕', 'Apple SD Gothic Neo',
+		Helvetica, sans-serif, dotum, '돋움', arial;
+	font-size: 20px;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+	text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+}
 
 }
 
@@ -283,9 +335,22 @@ name="searchEndDate" value="${param.searchEndDate}">
 	<!-- 헤더아이콘 -->
  	<div class="header-wrap" id="headericon">
  		<!-- 찜하기 -->
-		<a href="#">
-			<img src="<c:url value='/img/classDetail/icon_heart_n.png'/>">
-		</a>
+ 		<c:if test="${faclassCheck=='N'}">
+			<a href="#" id="shoppingbasket">
+				<img src="<c:url value='/img/classDetail/icon_heart_n.png'/>">
+			</a>
+		</c:if>
+		<c:forEach var="faclassVo" items="${faList}">
+			<c:if test="${faclassVo.cNo == claVo.cNo }">
+			<input type="hidden" id="sbNo" value="${faclassVo.sbNo }">
+				<a href="#" id="shoppingbasket2">
+					<img src="<c:url value='/img/classDetail/icon_heart_s.png'/>">
+				</a>
+ 			</c:if>
+		</c:forEach>
+		
+		
+		
 		
 		<!-- 공유 -->
 		<button type="button" class="btn btn-lg" id="" data-toggle="modal" data-target=".bs-example-modal-sm">
@@ -365,9 +430,18 @@ name="searchEndDate" value="${param.searchEndDate}">
 				</td></tr>
 				<tr><td style="text-align: center; font-size: 50px;"><p style="color: white;">${claVo.cName}</p></td></tr>
 				<tr><td><span style="color: white; font-size: 24px; padding-top: 200px; ">${claVo.mUserid }
+				<c:if test="${followCheck=='N'}">
 				<button type="button" class="btn2">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-				팔로우</button>
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							팔로우</button>
+				</c:if>
+				<c:forEach var="followVo" items="${followList}">
+					<c:if test="${followVo.flWuserid == sessionScope.userid }">
+						<input type="hidden" id="flNo" value="${followVo.flNo }">
+						<button type="button" class="btn3">
+						팔로잉</button>
+   					</c:if>
+				</c:forEach>
 				</span><br><span style="color: white; font-size: 20px;">등록일 <fmt:formatDate value="${claVo.cRegdate}" type="date" pattern="yyyy/MM/dd (E)"/>
 	| 조회  ${claVo.cHits }</span></td></tr>
 			</tbody>
@@ -698,21 +772,35 @@ name="searchEndDate" value="${param.searchEndDate}">
 							<!-- 시작일 -->
 							<span class="dset"> <input type="text"
 								class="datepicker inpType" name="searchStartDate"
-								id="searchStartDate">
+								id="searchStartDate" value="${param.searchStartDate }">
 							</span> <span class="demi">~</span>
 							<!-- 종료일 -->
 							<span class="dset"> <input type="text"
 								class="datepicker inpType" name="searchEndDate"
-								id="searchEndDate">
+								id="searchEndDate" value="${param.searchEndDate}">
 							</span>
 						</div>
 						<div class="search1" style="margin-top: 10px;">
-							<select class="selec" id="searchCondition" name="searchCondition"><option
-									selected="selected" value="M_USERID">ID</option>
-								<option value="CB_TITLE">제목</option>
-								<option value="CB_CONTENT">내용</option>
+							<select class="selec" id="searchCondition" name="searchCondition">
+								<c:set var="condition" value="${param.searchCondition }" />
+								<option
+								selected="selected" value="M_USERID"
+								<c:if test="${condition eq M_USERID }">
+                          		 selected="selected"
+                        		</c:if>	
+									>ID</option>
+								<option value="CB_TITLE"
+								<c:if test="${condition eq CB_TITLE }">
+                          		 selected="selected"
+                        		</c:if>
+								>제목</option>
+								<option value="CB_CONTENT"
+								<c:if test="${condition eq CB_CONTENT }">
+                          		 selected="selected"
+                        		</c:if>	
+								>내용</option>
 							</select> <input class="txt" id="searchKeyword" name="searchKeyword"
-								type="text" /> 
+								type="text" value="${param.searchKeyword}"/> 
 								<input type="hidden" name="boardtype" id="boardtype" value="cb">
 								<input type="submit" value="조회하기">
 						</div>

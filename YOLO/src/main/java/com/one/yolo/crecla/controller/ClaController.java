@@ -44,6 +44,10 @@ import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.crecla.model.ClassVO;
 import com.one.yolo.crecla.model.NotifyVO;
 import com.one.yolo.crecla.model.ScheduleVO;
+import com.one.yolo.favoriteclass.model.FavoriteClassService;
+import com.one.yolo.favoriteclass.model.FavoriteClassVO;
+import com.one.yolo.follow.model.FollowService;
+import com.one.yolo.follow.model.FollowVO;
 import com.one.yolo.upfile.model.UpfileService;
 import com.one.yolo.upfile.model.UpfileVO;
 
@@ -67,6 +71,11 @@ public class ClaController {
 	
 	@Autowired
 	private UpfileService upfileService;
+	
+	@Autowired
+	private FollowService followService;
+	@Autowired
+	private FavoriteClassService faService;
 
 	//클래스 생성 페이지 보여주기
 	@RequestMapping(value="/clacre.do", method=RequestMethod.GET)
@@ -146,8 +155,8 @@ public class ClaController {
 	@RequestMapping("/claDetail.do")
 	public String claDetail(@RequestParam int cNo,@RequestParam(value="boardtype",required=false, defaultValue="") String boardtype,@ModelAttribute ClassBoardVO claboardvo ,HttpSession session, Model model, HttpServletResponse response){
 		String userid=(String)session.getAttribute("userid");
-	
 		logger.info("클래스 디테일 파람no={}, session userid={}",cNo,userid);
+		
 		if(boardtype.isEmpty() || boardtype.equals("")){
 			boardtype="main";
 		}
@@ -185,6 +194,35 @@ public class ClaController {
 		
 		ClassVO vo=claService.selClass(cNo);	
 		String kName=cService.selCateNameByNo(vo.getkNo());
+		
+		//팔로우 확인
+		List<FollowVO> followList = followService.selectFollow(vo.getmUserid());
+		logger.info("팔로우 목록 followList={}",followList);
+		FollowVO followVo = new FollowVO();
+		followVo.setFlUserid(vo.getmUserid());
+		followVo.setFlWuserid(userid);
+		cnt =followService.selectFollowCount(followVo);
+		String result="";
+		if(cnt>0){
+			result="Y";
+		}else{
+			result="N";
+		}
+		
+		
+		//찜하기
+		List<FavoriteClassVO> faList = faService.selectShoppingbasket(userid);
+		logger.info("찜하기 목록 faList={}",faList);
+		FavoriteClassVO faclassVo = new FavoriteClassVO();
+		faclassVo.setcNo(vo.getcNo());
+		faclassVo.setSbUserid(userid);
+		cnt =faService.selectsbCount(faclassVo);
+		String faclassCheck="";
+		if(cnt>0){
+			faclassCheck="Y";
+		}else{
+			faclassCheck="N";
+		}
 		
 		//회원이 관심있을만한 클래스
 		//userid="hong";
@@ -257,8 +295,10 @@ public class ClaController {
 		//신청자 수
 		int bookNum=bookService.bookNum(schVo.getScNo());
 		
-		
-		
+		model.addAttribute("faList",faList);
+		model.addAttribute("faclassCheck",faclassCheck);
+		model.addAttribute("followCheck",result);
+		model.addAttribute("followList",followList);
 		model.addAttribute("claVo", vo);
 		model.addAttribute("kName", kName);
 		model.addAttribute("claBoardList",claBoardList);

@@ -37,4 +37,9 @@ public class FollowDAOMybatis extends SqlSessionDaoSupport implements FollowDAO{
 		return getSqlSession().insert(namespace+".insertFollow",followVo);
 	}
 
+	@Override
+	public int selectFollowCount(FollowVO followVo) {
+		return getSqlSession().selectOne(namespace+".selectFollowCount",followVo);
+	}
+
 }
