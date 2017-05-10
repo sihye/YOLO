@@ -15,6 +15,22 @@
 	}
 </style>
 
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/mainstyle.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/clear.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/layout.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/mystyle.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/bootstrap-select.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css" /> 
+	
+	<script type="text/javascript" src='<c:url value="/jquery/jquery-3.1.1.min.js" />'></script>
+<script type="text/javascript" src='<c:url value="/js/member.js" />'></script>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 
@@ -60,12 +76,12 @@ $(document).ready(function(){
 				alert('이메일을 입력하세요');
 				$("#email3").focus();
 				return false;
-			}
+			};
 			
 		}else if(!$("input:checkbox[id='hobby']").is(":checked") == true){
 			alert("관심사는 하나 이상 체크하셔야 합니다");	
 			return false;
-		}
+		};
 		
 		 $("#mAddress").val($("#zipcode").val()+" / "+$("#address").val());
 		 
@@ -81,10 +97,35 @@ $(document).ready(function(){
 	
 	$("#cancle1").click(function() {
 		location.href="<c:url value='../../index2.do'/>"
-	})
+	});
 	
 });
 
+</script>
+
+<scRIPT language=Javascript>
+<!--
+	var maxChecked = 3; //선택가능 갯수
+	var totalChecked = 0; // 설정 끝
+	function CountChecked(field) {
+		if (field.checked)
+			totalChecked += 1;
+		else
+			totalChecked -= 1;
+		if (totalChecked > maxChecked) {
+			alert("최대 3개 까지만 가능합니다.");
+			field.checked = false;
+			totalChecked -= 1;
+		}
+
+	}
+	function ResetCount() {
+		totalChecked = 0;
+	}
+//-->
+</scRIPT>
+<script>
+	/* document.write(maxChecked); */
 </script>
 
 
@@ -101,11 +142,13 @@ $(document).ready(function(){
 			</div>	
 			
 			<br>
-			<h2>회원정보수정</h2>
-			<br>
-			<div class="divForm">
-	<div class="col-md-2" align="left"></div>
-	<div class="col-md-10">
+			<div class="col-md-10">
+				<h2>회원정보수정</h2>
+				<div>
+	<div class="divForm">
+	<!-- <div class="col-md-2" align="left"></div> -->
+	
+	<div class="col-md-12" style="padding-top: 5px">
 	<form id="frm1" name="frm1" method="post"
 		action='<c:url value="/mypage/myedit/myedit.do" />'>
 
@@ -251,13 +294,15 @@ $(document).ready(function(){
 			<div>
 				<FORM action=# method=post name="kNo">
 				<c:forEach var="cg" items="${cgList }">
-					<label for="hobby">${cg.kgName}</label>	
-					<c:forEach var="c" items="${cList }">
-						<c:if test ="${cg.kgNo == c.kgNo}">
+					<table>
+					<label for="hobby" style="padding-top: 14px">${cg.kgName}</label>	
+					<tr><c:forEach var="c" items="${cList }">
+						<td><c:if test ="${cg.kgNo == c.kgNo}"><br>
 							<input value='${c.kNo}' onclick=CountChecked(this) id="hobby"
 							type=checkbox name="kno">${c.kName}
-						</c:if>
-					</c:forEach><br>
+						</c:if></td>
+					</c:forEach></tr>
+					</table>
 				</c:forEach><br>
 				</FORM>
 			<div> 
@@ -287,8 +332,18 @@ $(document).ready(function(){
 
 	</form>
 	</div>
+	
 </div>
+<!-- </article> -->
+</div>
+			</div>
+			
+			
+			
+			
+			
+
 
 </div>
-</div>		
+
 <%@ include file="../mypagebottom.jsp"%>
