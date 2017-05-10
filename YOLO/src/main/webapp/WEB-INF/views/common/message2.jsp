@@ -22,7 +22,6 @@
 		<c:if test="${!empty msg}">		
 			alert("${msg}");	
 		</c:if>
-		
 		window.opener.close();
 		
 	</script>
