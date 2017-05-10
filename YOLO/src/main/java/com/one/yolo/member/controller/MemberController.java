@@ -330,6 +330,8 @@ public class MemberController {
 	      logger.info(memberVo.getmQuestionanswer());
 	      logger.info(memberVo.getmEmail1());
 	      logger.info(memberVo.getmEmail2());
+	      
+	      logger.info(memberVo.getmUserid());
 	     //url="/index2.do"; 
 	     
 	    String msg="", url="";
@@ -337,8 +339,8 @@ public class MemberController {
 			if(result1 != null){
 				
 				logger.info("이메일 발송 처리");
-			      String subject="비밀번호 문의에 대한 답변입니다.";
-			      String content=result1.getmName()+"님의 비밀번호는 [ "+result1.getmPwd()+" ] 입니다.";
+			      String subject="YOLO에서 당신의 비밀번호를 알려드립니다.";
+			      String content=result1.getmName()+"님의 YOLO 비밀번호는 [ "+result1.getmPwd()+" ] 입니다.";
 			      String receiver=memberVo.getmEmail1()+"@"+memberVo.getmEmail2();
 			      String sender="admin@herbmall.com";
 			      

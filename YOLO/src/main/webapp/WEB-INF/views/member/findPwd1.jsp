@@ -27,7 +27,7 @@
       action="<c:url value='/member/findPwd1.do'/>">
       <div>
       <br>
-      	<input type="hidden" value="mUserid">
+      	<input type="hidden" name="mUserid" value="${mUserid}">
         <input type="text" class="form-control" placeholder="답변을 입력하세요" aria-describedby="sizing-addon2" style="width: 50%"
               name="mQuestionanswer" id="mQuestionanswer" value="${param.mQuestionanswer}">
       </div><br>
@@ -53,7 +53,7 @@
   <div class="modal-dialog modal-fullsize">
     <div class="modal-content">
       <div class="modal-body">
-        <h3 style="font-size: 20px">비밀번호를 가입시 입력하신 이메일로 전송중입니다.</h3><br>
+        <h3 style="font-size: 20px">입력하신 내용으로 이메일 전송 준비중입니다.</h3><br>
         <h3 style="font-size: 20px">잠시만 기다려 주세요.</h3>
       </div>
     </div>

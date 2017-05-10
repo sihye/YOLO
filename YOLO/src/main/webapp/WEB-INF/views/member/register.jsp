@@ -79,8 +79,16 @@
 		});
 
 		$("#btnChkId").click(function(){
+			
+			if(!validate_userid($("#useridreg").val())){
+				alert('아이디는 영문대소문자, 숫자, 언더바만 가능합니다');
+				$("#useridreg").focus();
+				return false;
+			}else{
+			
 			window.open("<c:url value='/member/checkUserid.do?userid="+$("#useridreg").val()+ "'/>", 'chk',
 			'width=400,height=300,left=10,top=10,location=yes,resizable=yes');
+			}
 		});
 		
 		
