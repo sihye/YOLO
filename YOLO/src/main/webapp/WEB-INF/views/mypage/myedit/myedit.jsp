@@ -14,6 +14,80 @@
 	    color: rgb(63, 148, 7);
 	}
 </style>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+
+<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#name").focus();
+	
+	$("#frm1").submit(function(){
+		if($("#name").val()==''){
+			alert('이름을 입력하세요');
+			$("#name").focus();
+			return false;
+		}else if(!validate_userid($("#useridreg").val())){
+			alert('아이디는 영문대소문자, 숫자, 언더바만 가능합니다');
+			$("#useridreg").focus();
+			return false;
+		}else if(!$("#pwdreg").val()){
+			alert('비밀번호를 입력하세요');
+			$("#pwdreg").focus();
+			return false;
+		}else if($("#pwdreg").val()!=$("#pwd2").val()){
+			alert('비밀번호가 일치하지 않습니다');
+			$("#pwd2").focus();
+			return false;
+		}else if($("#chkId").val()!='Y'){
+			alert('아이디 중복검사를 해야 합니다.');
+			$('#btnChkId').focus();
+			return false;
+		}else if(!validate_hp($("#hp2").val()) || 
+				!validate_hp($("#hp3").val())){
+			alert('휴대폰은 숫자를 입력하셔야 합니다');
+			$("#hp2").focus();
+			return false;
+		}else if(!$("#email1").val()){
+			alert('이메일을 입력하세요');
+			$("#email1").focus();
+			return false;
+		}else if($("#email2").val()=="etc"){
+			if(!$("#email3").val()){
+				alert('이메일을 입력하세요');
+				$("#email3").focus();
+				return false;
+			}
+			
+		}else if(!$("input:checkbox[id='hobby']").is(":checked") == true){
+			alert("관심사는 하나 이상 체크하셔야 합니다");	
+			return false;
+		}
+		
+		 $("#mAddress").val($("#zipcode").val()+" / "+$("#address").val());
+		 
+		 $("#mBirth").val($("#birth1").val()+$("#birth2").val()+$("#birth3").val());
+		
+	});
+
+	$("#btnChkId").click(function(){
+		window.open("<c:url value='/member/checkUserid.do?userid="+$("#useridreg").val()+ "'/>", 'chk',
+		'width=400,height=300,left=10,top=10,location=yes,resizable=yes');
+	});
+	
+	
+	$("#cancle1").click(function() {
+		location.href="<c:url value='../../index2.do'/>"
+	})
+	
+});
+
+</script>
+
+
 	<div class="container" style="margin-top: 40px;">
 		<div class="row">
 			<div class="col-md-2">
@@ -33,7 +107,7 @@
 	<div class="col-md-2" align="left"></div>
 	<div class="col-md-10">
 	<form id="frm1" name="frm1" method="post"
-		action='<c:url value="/member/join.do" />'>
+		action='<c:url value="/mypage/myedit/myedit.do" />'>
 
 			<div>
 				<label for="name">성명</label> 
@@ -41,11 +115,11 @@
 			</div>
 			<div>
 				<label for="userid">회원ID</label> 
-				<span>${sessionScope.userid}${vo.mName}</span>
+				<span>${sessionScope.userid}</span>
 			</div>
 			<div>
 				<label for="pwd">비밀번호</label> 
-				<input type="Password" name="mPwd" id="pwdreg">
+				<input type="Password" name="mPwd" id="pwdreg" value="${vo.mPwd}">
 			</div>
 			<div>
 				<label for="pwd2">비밀번호 확인</label> 
@@ -94,8 +168,10 @@
 	            	</c:if>
 	            >019</option>
 				</select> - 
-				<input type="text" name="mTel2" id="hp2" maxlength="4" title="휴대폰 가운데자리" class="width_80">- 
-				<input type="text" name="mTel3" id="hp3" maxlength="4" title="휴대폰 뒷자리" class="width_80">
+				<input type="text" name="mTel2" id="hp2" maxlength="4" 
+				title="휴대폰 가운데자리" class="width_80" value="${vo.mTel2}">- 
+				<input type="text" name="mTel3" id="hp3" maxlength="4" 
+				title="휴대폰 뒷자리" class="width_80" value="${vo.mTel3}">
 			</div>
 			<div>
 				<label for="birth">생년월일</label> 
