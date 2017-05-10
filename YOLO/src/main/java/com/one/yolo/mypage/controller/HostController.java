@@ -25,6 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.one.yolo.booking.model.BookingService;
 import com.one.yolo.booking.model.BookingVO;
+import com.one.yolo.common.PaginationInfo;
+import com.one.yolo.common.Utility;
 import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.crecla.model.ClassVO;
 import com.one.yolo.crecla.model.ScheduleVO;
@@ -155,11 +157,22 @@ public class HostController {
 	
 	@RequestMapping("/selMem.do")
 	@ResponseBody
-	public List<Map<String, Object>>selMem(@ModelAttribute BookingVO vo){
+	public List<Object> selMem(@ModelAttribute BookingVO vo){
+		//페이징 처리
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		pagingInfo.setCurrentPage(vo.getCurrentPage());
+	
+		vo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		logger.info("host mem sele param booking vo={}",vo);
-		List<Map<String, Object>> bookMemList=bookService.selMemBybook(vo);
-		logger.info("booking mem size={}", bookMemList.size());
-		return bookMemList;
+		List<Map<String, Object>> map=bookService.selMemBybook(vo);
+		logger.info("booking mem size={}", map.size());
+		List<Object> alist=new ArrayList<Object>();
+		alist.add(pagingInfo);
+		alist.add(map);
+		return alist;
 	}
 	
 	

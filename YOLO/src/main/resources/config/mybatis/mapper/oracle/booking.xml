@@ -37,8 +37,8 @@ on b.BK_NO = p.BK_NO
 		    )LIST
 		)		
 		<![CDATA[
-		where RNUM>0
-		and RNUM <=5
+		where RNUM>#{firstRecordIndex}
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
 		]]>
 	</select>
 	

@@ -96,26 +96,11 @@
 			    			history.back();
 			    		}			    		
 					})
-					var formData = $("#multiForm").serialize();
-					$.ajax({
+					
+					/* if($("#bkBdate").val()!=null&&$("#bkBdate").val()!=''&&$("#bkTime").val()!=null&&$("#bkTime").val()!=''){ */
+					
 						
-						url:'<c:url value="/mypage/MyClass/selMem.do"/>',
-						type:"POST",
-						data : formData,	    		
-			    		success:function(res){
-			    			$.each(res, function(i, item) {
-			    				$("#bookMem").append("<tr><td>"+iem['M_NAME']+"</td></tr>")
-			    				$("#info").append()
-								$("#dateSel").append("<option>"+item+"</option>");
-						   });
-			    			
-			    		},
-			    		error:function(xhr, status, error){
-			    			alert('멤버 select 실패!.');
-			    			/* console.log(error) */
-			    			/* history.back(); */
-			    		}			    		
-					})
+					
 				})
 				
 				$("#dateSel").change(function(){
@@ -123,8 +108,108 @@
 					
 				})
 				$("#timeSel").change(function(){
+					$("#info").find("td").remove();
 					$("#bkTime").val($(this).val())
+					if($("#bkBdate").val()!='0'&&$("#bkTime").val()!='0'){
+						var formData = $("#multiForm").serialize();
+						$.ajax({
+							url:'<c:url value="/mypage/MyClass/selMem.do"/>',
+							type:"POST",
+							data : formData,	    		
+				    		success:function(res){
+				    			var i=0;
+				    			$.each(res, function(i, item) {
+				    				alert("d")
+				    				if(res[1]!=null){
+				    					$.each(res[1], function(i, map) {
+				    						$("#searchCondition").val(map['searchCondition'])	
+					    					var time=$.foo(map['BK_DATE'])
+						    				var paychk='';
+						    				if(map['PM_COMPLETECHECK']=='Y'){
+						    					paychk='결제완료';
+						    				}else{
+						    					paychk='결제진행중';
+						    				}
+						    				
+						    				$("#info").after("<TR><td><input type='checkbox' id='chk_"+i+"' name='' value="+map['BK_NO']+"></td><td>"+map['M_NAME']+"</td><td>"+map['M_TEL1']+"-"+map['M_TEL2']+"-"+map['M_TEL3']+"</td><td>"+map['M_EMAIL1']+"@"+map['M_EMAIL2']+"</td><td>"+time+"</td><td>"+map['PM_PAYMENTWAY']+"</td><td>"+paychk+"</td></TR>")
+						    				i++;
+				    					});
+				    					
+				    				}else if(res[0]!=null){
+				    					$("#pagination").append("<c:if test="${pagingInfo.firstPage>1 }"><li><a href="#" aria-label="Previous"onclick="pageFunc(${pagingInfo.firstPage-1})"> <span
+				    							aria-hidden="true">&laquo;</span></a></li>
+				    				</c:if>
+
+				    				<c:forEach var="i" begin="${pagingInfo.firstPage }"
+				    					end="${pagingInfo.lastPage }">
+				    					<c:if test="${i==pagingInfo.currentPage }">
+				    						<li class="active"><a href="#"> ${i}<span class="sr-only">${i }</span></a></li>
+				    					</c:if>
+				    					<c:if test="${i!=pagingInfo.currentPage }">
+				    						<li><a href="#" onclick="pageFunc(${i})">${i}</a></li>
+				    					</c:if>
+				    				</c:forEach>
+
+				    				<!-- 다음 블럭으로 이동 ▶-->
+				    				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
+				    					<li><a href="#" aria-label="Previous"
+				    						onclick="pageFunc(${pagingInfo.lastPage+1})"> <span
+				    							aria-hidden="true">&raquo;</span></a></li>
+				    				</c:if>")
+				    					<c:if test="${pagingInfo.firstPage>1 }">
+				    					<li><a href="#" aria-label="Previous"
+				    						onclick="pageFunc(${pagingInfo.firstPage-1})"> <span
+				    							aria-hidden="true">&laquo;</span></a></li>
+				    				</c:if>
+
+				    				<c:forEach var="i" begin="${pagingInfo.firstPage }"
+				    					end="${pagingInfo.lastPage }">
+				    					<c:if test="${i==pagingInfo.currentPage }">
+				    						<li class="active"><a href="#"> ${i}<span class="sr-only">${i }</span></a></li>
+				    					</c:if>
+				    					<c:if test="${i!=pagingInfo.currentPage }">
+				    						<li><a href="#" onclick="pageFunc(${i})">${i}</a></li>
+				    					</c:if>
+				    				</c:forEach>
+
+				    				<!-- 다음 블럭으로 이동 ▶-->
+				    				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
+				    					<li><a href="#" aria-label="Previous"
+				    						onclick="pageFunc(${pagingInfo.lastPage+1})"> <span
+				    							aria-hidden="true">&raquo;</span></a></li>
+				    				</c:if>
+				    				}
+				    				
+				    				
+							   });
+				    			
+				    		},
+				    		error:function(xhr, status, error){
+				    			alert('멤버 select 실패!.');
+				    			/* console.log(error) */
+				    			/* history.back(); */
+				    		}			    		
+						})
+					}
 				})
+				$.foo=function (timestamp){
+					var date = new Date(timestamp);
+					var year = date.getFullYear();
+					var month = date.getMonth()+1;
+					var day = date.getDay();
+					var retVal =   year + "-" + (month < 10 ? "0" + month : month) + "-" 
+					                        + (day < 10 ? "0" + day : day);
+					return retVal
+				}
+				function pageFunc(curPage){
+		    		document.formData.currentPage.value=curPage;
+		    		formData.submit();
+		    	}
+				$("input[name='chkAll']").click(function(){
+	    			$("tbody input[type=checkbox]").prop("checked", this.checked);
+	    		});
+		
+
 			})
 			
 		</script>
@@ -153,6 +238,12 @@
 				</tr>
 			</tbody>
 		</table>
+		<!-- 페이징 처리를 위한 form 태그 -->
+		<form name="frmPage" method="post"
+			action='<c:url value="/mypage/MyClass/selMem.do" />'>
+			<input type="hidden" name="currentPage"> <input type="hidden" id="searchCondition"
+				name="searchCondition" value=""> 
+		</form>
 		<form method="post" name="multiForm" id="multiForm" >
 				<table class="searchBox">
 			<caption>조회</caption>
@@ -169,15 +260,15 @@
 						<label>스케줄:</label>
 						<div class="col-xs-4">
 							<select class="form-control" id="dateSel" name="bkBdate">
-								<option>날짜 선택하기</option>
+								<option value="0">날짜 선택하기</option>
 				     	 	</select>
-				     	 	<input type="text" name="bkBdate" id="bkBdate">
+				     	 	<!-- <input type="text" name="bkBdate" id="bkBdate"> -->
 				     	 </div>
 					<div class="col-xs-4">
       			<select class="form-control" id="timeSel" name="bkTime">
-      				<option>시간 선택하기</option>
+      				<option value="0">시간 선택하기</option>
       			</select>
-      			<input type="text" name="bkTime" id="bkTime">
+      			<!-- <input type="text" name="bkTime" id="bkTime"> -->
       	</div>
       	</div>
 
@@ -197,44 +288,28 @@
 		<form name="frmList" id="frmList" method="post">
 		<table class="table table-hover" id="bookMem">
 			<thead>
-				<tr style="background: skyblue">
-					<th width="10%"><input type="checkbox" value="None" id="chkAll"
+				<tr style="background: skyblue" ID="info">
+					<th width="5%"><input type="checkbox" value="None" id="chkAll"
 						name="chkAll" /></th>
-					<th width="10%"></th>
 					<th width="15%">이름</th>
-					<th width="20%">예약일</th>
-					<th width="30%">결제상태</th>
-					<th width="15%">결제취소</th>
+					<th width="25%">핸드폰</th>
+					<th width="20%">e-mail</th>
+					<th width="10%">예약일</th>
+					<th width="10%">결제방법</th>
+					<th width="15%">결제상태</th>
 					
 				</tr>
 			</thead>
 			<tbody>
 				
-				<c:set var="i" value="0" />
 				
-					<tr id="info">
-						<%-- <input type="hidden" value="${i }">
-						<input type="hidden" value="${map['MS_NO'] }">
-						<input type="hidden" value="${map['MS_CHECK'] }"> --%>
-						<td><input type="checkbox" id="chk_${i}"
-							name="bookinMem[${i}].msNo" value="${map['MS_NO'] }"></td>
-					</tr>
-					
-					<tr id="tr2${i }" style="display: none;">			
-					<td colspan="6">
-						<label>보낸사람:</label>&nbsp;${map["MSMG_USERID"] }<br>
-						<label>받은시간:</label>&nbsp;<fmt:formatDate value="${map['MS_REGDATE'] }" pattern="yyyy-MM-dd HH:mm:ss"/>
-						<hr>
-						<p style="margin-top: 10px;">${map["MS_CONTENT"] }</p>
-					</td>
-					</tr>
-					<c:set var="i" value="${i+1}" />
 
 			</tbody>
 			<tfoot>
 				<tr>
 					<td colspan="6" style="text-align: center">
-						<button id="btDeleteMulti" class="btn btn-primary" type="button">선택한 회원에게 이메일 보내기</button>
+						<button id="btDeleteMulti" class="btn btn-primary" type="button">이메일 보내기</button>
+						<button id="btDeleteMulti" class="btn btn-primary" type="button">입금 확인</button>
 					</td>
 				</tr>
 			</tfoot>
@@ -245,7 +320,7 @@
 	<!-- 페이지 번호 추가 -->
 	<!-- 이전 블럭으로 이동 ◀-->
 	<nav>
-		<ul class="pagination">
+		<ul class="pagination" id="pagination">
 
 			<c:if test="${pagingInfo.firstPage>1 }">
 				<li><a href="#" aria-label="Previous"
