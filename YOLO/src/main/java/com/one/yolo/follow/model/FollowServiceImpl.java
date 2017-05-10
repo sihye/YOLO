@@ -27,5 +27,9 @@ public class FollowServiceImpl implements FollowService{
 	public int selectTotalRecord(SearchVO searchVo){
 		return followDao.selectTotalRecord(searchVo);
 	}
+	@Override
+	public int insertFollow(FollowVO followVo) {
+		return followDao.insertFollow(followVo);
+	}
 
 }

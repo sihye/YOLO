@@ -32,4 +32,9 @@ public class FollowDAOMybatis extends SqlSessionDaoSupport implements FollowDAO{
 				+".selectTotalRecord", searchVo);
 	}
 
+	@Override
+	public int insertFollow(FollowVO followVo) {
+		return getSqlSession().insert(namespace+".insertFollow",followVo);
+	}
+
 }

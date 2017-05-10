@@ -152,9 +152,26 @@ public class FavoriteController {
 		model.addAttribute("pagingInfo", pagingInfo);
 		return "mypage/Favorite/Favoritehost";
 	}
+	@RequestMapping("/insertFollow.do")
+	public String insertFollow(@ModelAttribute FollowVO followVo,@RequestParam int cNo,HttpSession session,Model model){
+		String userid =(String)session.getAttribute("userid");
+		followVo.setFlWuserid(userid);
+		logger.info("팔로우 등록,파라미터 followVo={}",followVo);
+		int cnt = followService.insertFollow(followVo);
+		String msg="",url="/class/claDetail.do?cNo="+cNo;
+		if (cnt>0) {
+			msg="팔로우 성공";
+		}else{
+			msg="팔로우 실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		return "common/message";
+	}
 	@RequestMapping("/FollowDelete.do")
 	public String FollowDelete(@RequestParam(required=false,defaultValue="0") int flNo,Model model){
-		logger.info("찜하기 삭제 처리, 파라미터 flNo={} ", flNo);
+		logger.info("관심호스트 삭제 처리, 파라미터 flNo={} ", flNo);
 		int cnt=0;
 
 		if(flNo!=0 ){

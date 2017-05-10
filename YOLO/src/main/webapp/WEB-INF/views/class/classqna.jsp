@@ -150,7 +150,7 @@
 	});
 
 </script>
-<div class="title" style="text-align: center;">
+<div class="qnatitle" style="text-align: center;">
 	<h3 style="color: skyblue">궁금한 점이 있으신가요? 문의해 주시면 호스트가 답변을 해드립니다.</h3>
 </div>
 <hr>

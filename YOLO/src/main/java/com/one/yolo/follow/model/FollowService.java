@@ -10,4 +10,5 @@ public interface FollowService {
 	public int deleteFollow(int flNo);
 	public List<Map<String, Object>> selectFollowClass(SearchVO searchVO);
 	public int selectTotalRecord(SearchVO searchVo);
+	public int insertFollow(FollowVO followVo);
 }

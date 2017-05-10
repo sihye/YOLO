@@ -31,6 +31,18 @@
 		delete from FOLLOW where
 		FL_NO=#{no}
 	</delete>
+	<insert id="insertFollow" parameterType="FollowVO">
+		<selectKey keyProperty="flNo" resultType="int" order="BEFORE">
+			select FOLLOW_seq.nextval from dual
+		</selectKey>
+		insert into follow(FL_NO,FL_USERID,FL_WUSERID)
+		values(#{flNo},#{flUserid},#{flWuserid})
+	</insert>
+	<select id="selectFollowCount" parameterType="FollowVO">
+		select count(*) from follow
+		where FL_USERID=#{flUserid}
+		and FL_WUSERID=#{flWuserid}
+	</select>
 </mapper>
 
 

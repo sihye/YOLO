@@ -122,7 +122,15 @@ $(document).ready(function() {
 		active:show,
 	});
 	
-
+	$(".btn2").click(function() {
+		if (confirm("선택한 호스트 팔로우하시겠습니까?") == true){    //확인
+			var url = '<c:url value="/mypage/Favorite/insertFollow.do?flUserid=${claVo.mUserid }&cNo=${claVo.cNo }"/>'
+			$(location).attr('href',url);
+	    }else{   //취소
+	        return;
+	    }
+		
+	});
 	
 	
 	
@@ -233,6 +241,29 @@ hr{
 .title{
 		width: 70px;
 		padding-top: 20px;
+}	
+.btn2 {
+	line-height: 36px;
+	margin-top: 12px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 100px;
+	height: 30px;
+	color: #fff;
+	background-color: #2196f3;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	vertical-align: baseline;
+	font-family: NanumBarunGothic, '나눔바른고딕', 'Apple SD Gothic Neo',
+		Helvetica, sans-serif, dotum, '돋움', arial;
+	font-size: 20px;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+	text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+}
+
 }
 
 </style>
@@ -333,7 +364,11 @@ name="searchEndDate" value="${param.searchEndDate}">
 					<div id="cate" >${kName}</div>
 				</td></tr>
 				<tr><td style="text-align: center; font-size: 50px;"><p style="color: white;">${claVo.cName}</p></td></tr>
-				<tr><td><span style="color: white; font-size: 20px; padding-top: 200px; ">${claVo.mUserid }</span><br><span style="color: white; font-size: 20px;">등록일 <fmt:formatDate value="${claVo.cRegdate}" type="date" pattern="yyyy/MM/dd (E)"/>
+				<tr><td><span style="color: white; font-size: 24px; padding-top: 200px; ">${claVo.mUserid }
+				<button type="button" class="btn2">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				팔로우</button>
+				</span><br><span style="color: white; font-size: 20px;">등록일 <fmt:formatDate value="${claVo.cRegdate}" type="date" pattern="yyyy/MM/dd (E)"/>
 	| 조회  ${claVo.cHits }</span></td></tr>
 			</tbody>
 		</table>
