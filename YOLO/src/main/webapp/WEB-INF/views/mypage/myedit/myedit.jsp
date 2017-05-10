@@ -16,6 +16,7 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+<script type="text/javascript" src='<c:url value="/js/member.js" />'></script>
 
 <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 
@@ -23,6 +24,10 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#name").focus();
+	
+	$("#wr_submit").click(function(){
+		$("#frm1").submit();
+	});
 	
 	$("#frm1").submit(function(){
 		if($("#name").val()==''){
@@ -40,10 +45,6 @@ $(document).ready(function(){
 		}else if($("#pwdreg").val()!=$("#pwd2").val()){
 			alert('비밀번호가 일치하지 않습니다');
 			$("#pwd2").focus();
-			return false;
-		}else if($("#chkId").val()!='Y'){
-			alert('아이디 중복검사를 해야 합니다.');
-			$('#btnChkId').focus();
 			return false;
 		}else if(!validate_hp($("#hp2").val()) || 
 				!validate_hp($("#hp3").val())){
@@ -66,10 +67,12 @@ $(document).ready(function(){
 			return false;
 		}
 		
+		
 		 $("#mAddress").val($("#zipcode").val()+" / "+$("#address").val());
 		 
 		 $("#mBirth").val($("#birth1").val()+$("#birth2").val()+$("#birth3").val());
-		
+		 
+		 $("#qQuestionno").val($("select[name='qQuestionno']").val());
 	});
 
 	$("#btnChkId").click(function(){
@@ -106,7 +109,7 @@ $(document).ready(function(){
 	<div class="col-md-2" align="left"></div>
 	<div class="col-md-10">
 	<form id="frm1" name="frm1" method="post"
-		action='<c:url value="/mypage/myedit/myedit.do" />'>
+		action='<c:url value="/member/myedit/myedit.do" />'>
 
 			<div>
 				<label for="name">성명</label> 
@@ -468,7 +471,7 @@ $(document).ready(function(){
 				<label for="hobby">관심사</label> 3개까지 선택 가능(최소 1개 선택바람)
 			</div>
 			<div>
-				<FORM action=# method=post name="kNo">
+				<form action=# method=post name="kNo">
 				<c:forEach var="cg" items="${cgList }">
 					<label for="hobby">${cg.kgName}</label>	
 					<c:forEach var="c" items="${cList }">
@@ -478,9 +481,11 @@ $(document).ready(function(){
 						</c:if>
 					</c:forEach><br>
 				</c:forEach><br>
-				</FORM>
+				</form>
 			<div> 
 				<input type="hidden" name="mgNo2" id="mgNo2" style="ime-mode: active" value="2">
+				<input type="hidden" name="mName" value="${vo.mName}">
+				<input type="hidden" id="qQuestionno" name="qQuestionno">
 			</div>	
 				
 			</div>
