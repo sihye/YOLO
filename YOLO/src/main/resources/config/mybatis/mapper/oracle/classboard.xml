@@ -87,6 +87,9 @@
 		
 	</insert>
 	
+	<select id="selectClassBoardBycbNo" parameterType="int" resultType="ClassBoardVO">
+		select *from classboard where cb_no = #{cbNo}
+	</select>
 	
 </mapper>
 

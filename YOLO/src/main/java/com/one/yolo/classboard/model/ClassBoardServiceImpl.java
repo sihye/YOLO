@@ -29,6 +29,13 @@ public class ClassBoardServiceImpl implements ClassBoardService{
 	public int insertClassBoard(ClassBoardVO vo) {
 		return dao.insertClassBoard(vo);
 	}
+
+
+	@Override
+	public ClassBoardVO selectClassBoardBycbNo(int cbNo) {
+		return dao.selectClassBoardBycbNo(cbNo);
+	}
+	
 	
 	
 	

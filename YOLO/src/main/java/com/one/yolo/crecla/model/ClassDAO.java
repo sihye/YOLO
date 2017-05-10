@@ -23,4 +23,5 @@ public interface ClassDAO {
 	public int updateCla(ClassVO vo);
 	public int updateSch(ScheduleVO vo);
 	public int notyInsert(NotifyVO vo);
+	
 }

@@ -355,14 +355,7 @@ public class ClaController {
 		model.addAttribute("url", url);
 		return "common/message";
 	}
-	@RequestMapping("/boardDetail.do")
-	public String boardDetail(){
-		logger.info("글 상세보기, 파라미터");
 
-
-		return "class/boardDetail";
-
-	}
 	
 	//클래스 수정페이지 보여주기
 	@RequestMapping(value="/edit.do", method=RequestMethod.GET)
@@ -447,5 +440,18 @@ public class ClaController {
 			model.addAttribute("url", "/class/claDetail.do?cNo="+cNo);
 		}
 		return"common/message";
+		
+		}
+	
+	
+	//후기 게시판 디테일
+	@RequestMapping("/boardDetail.do")
+	public String boadrdDetail(@RequestParam int cbNo, Model model){
+		logger.info("후기 디테일 파라미터 cbNo={}",cbNo);
+	    ClassBoardVO vo=claBoardService.selectClassBoardBycbNo(cbNo);
+	    
+	    model.addAttribute("vo",vo);
+	    return "class/boardDetail";
+		
 	}
 }

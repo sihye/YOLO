@@ -8,4 +8,5 @@ public interface ClassBoardService {
 	public List<ClassBoardVO> selectClassBoard(ClassBoardVO vo);
 	public int selectClassBoardCount(ClassBoardVO vo);
 	public int insertClassBoard(ClassBoardVO vo);
+	public ClassBoardVO selectClassBoardBycbNo(int cbNo);
 }

@@ -709,7 +709,7 @@ name="searchEndDate" value="${param.searchEndDate}">
 			<c:forEach var="list" items="${claBoardList }">
 				<tr>
 					<td>${list.cbNo }</td>
-					<td><a href="#">${list.cbTitle }</a></td>
+					<td><a href="<c:url value='/class/boardDetail.do?cbNo=${list.cbNo }'/>">${list.cbTitle }</a></td>
 					<td>${list.mUserid }</td>
 					<td><fmt:formatDate value="${list.cbRegdate }" pattern="yyyy-MM-dd"/></td>
 					<td>${list.cbReadcount }</td>
