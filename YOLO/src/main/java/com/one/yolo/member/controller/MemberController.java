@@ -104,9 +104,7 @@ public class MemberController {
 		return "member/register";
 	}
 
-	
-	
-	
+
 	@RequestMapping(value="/register.do",method=RequestMethod.POST)
 	public String register(@ModelAttribute MemberVO vo, @RequestParam int[] kNo){
 		logger.info("회원가입 화면 보여주기");
@@ -339,78 +337,6 @@ public class MemberController {
 			model.addAttribute("url", url);*/
 			return null;
 	   }
-	
-	@RequestMapping(value="/memberEdit.do", method=RequestMethod.GET)
-	public String edit_get(HttpSession session, Model model){
-		String userid=(String) session.getAttribute("userid");
-		logger.info("회원수정화면 보여주기, 파라미터 userid={}", userid);
-	
-		MemberVO vo =memberService.selectByUserid(userid);
-		logger.info("회원수정화면 - 회원정보조회 결과, vo={}", vo);
-	
-		model.addAttribute("vo", vo);
-
-		return "member/memberEdit";
-	}
-	
-	@RequestMapping(value="/memberEdit.do", method=RequestMethod.POST)
-	public String edit_post(@ModelAttribute MemberVO vo,
-			@RequestParam String email3,
-			HttpSession session, Model model){
-		logger.info("회원수정 처리, 파라미터 vo={}", vo);
-		String userid=(String) session.getAttribute("userid");
-		vo.setmUserid(userid);
-
-		//휴대폰 입력하지 않은 경우 처리
-		String tel2=vo.getmTel2();
-		String tel3=vo.getmTel3();
-		if(tel2==null || tel2.isEmpty() || tel3==null || tel3.isEmpty()){
-			vo.setmTel1("");
-			vo.setmTel2("");
-			vo.setmTel3("");
-		}
-
-		//이메일 입력하지 않은 경우 처리
-		String email1=vo.getmEmail1();
-
-		if(email1==null || email1.isEmpty()){
-			vo.setmEmail2(""); 
-		}else{
-			//직접입력인 경우 
-			if(vo.getmEmail2().equals("etc")){
-				if(email3 !=null && !email3.isEmpty()){
-					vo.setmEmail2(email3);
-				}else{
-					vo.setmEmail1("");
-					vo.setmEmail2("");
-				}
-			}
-		}
-		
-		
-		int result 
-		= memberService.loginCheck(vo.getmUserid(), vo.getmPwd());
-		String msg="", url="/member/memberEdit.do";
-
-		if(result==MemberService.LOGIN_OK){
-			int cnt = memberService.updateMember(vo);
-			logger.info("회원수정 결과, cnt={}", cnt);
-			if(cnt>0){
-				msg="회원정보 수정 성공";
-			}else{
-				msg="회원정보 수정 실패";
-			}
-		}else if(result==MemberService.PWD_DISAGREE){
-			msg="비밀번호가 일치하지 않습니다.";
-		}else{
-			msg="비밀번호 체크 에러";
-		}
-
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
-
-		return "common/message";
-	}
 
 	@RequestMapping("/checkUserid.do")
 	public String checkUserid(@RequestParam String userid,
