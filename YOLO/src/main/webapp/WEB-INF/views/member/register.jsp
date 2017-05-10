@@ -272,15 +272,19 @@
 			</div>
 			<div>
 				<FORM action=# method=post name="kNo">
+				
 				<c:forEach var="cg" items="${cgList }">
-					<label for="hobby">${cg.kgName}</label>	
-					<c:forEach var="c" items="${cList }">
-						<c:if test ="${cg.kgNo == c.kgNo}">
+				<table>
+					<label for="hobby" style="padding-top: 14px">${cg.kgName}</label>	
+					<tr><c:forEach var="c" items="${cList }">
+						<td><c:if test ="${cg.kgNo == c.kgNo}"><br>
 							<input value='${c.kNo}' onclick=CountChecked(this) id="hobby"
 							type=checkbox name="kno">${c.kName}
-						</c:if>
-					</c:forEach><br>
-				</c:forEach><br>
+						</c:if></td>
+					</c:forEach></tr>
+					</table>
+				</c:forEach>
+				
 				</FORM>
 			<div> 
 				<input type="hidden" name="mgNo2" id="mgNo2" style="ime-mode: active" value="2">
