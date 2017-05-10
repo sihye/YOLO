@@ -27,6 +27,7 @@
       action="<c:url value='/member/findPwd1.do'/>">
       <div>
       <br>
+      	<input type="hidden" value="mUserid">
         <input type="text" class="form-control" placeholder="답변을 입력하세요" aria-describedby="sizing-addon2" style="width: 50%"
               name="mQuestionanswer" id="mQuestionanswer" value="${param.mQuestionanswer}">
       </div><br>
