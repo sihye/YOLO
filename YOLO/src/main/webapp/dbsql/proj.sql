@@ -519,7 +519,7 @@ CREATE TABLE shoppingbasket   (
 	SC_REGDATE DATE          DEFAULT sysdate  NULL-- 등록일
 );
 alter table shoppingbasket
-add (SC_NO NUMBER NOT NULL);
+add (SC_NO NUMBER  NULL);
 
 -- 찜하기 기본키
 CREATE UNIQUE INDEX PK_shoppingbasket  

@@ -92,14 +92,16 @@ values(3,3,'host');
 --Member
 select * from member ;
 
-insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2)
-values('admin','1',MEMBER_seq.nextval,'123','관리자',sysdate,'1',1,'테스트질문답','19990101','M','admin','naver.com');
-insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2)
-values('hong','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','20090101','M','admin','nate.com');
-insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2)
-values('kim','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','19900101','M','admin1','naver.com');
-insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2)
-values('chang','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','20120101','M','admin1','nate.com');
+insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2,M_TEL1,M_TEL2,M_TEL3)
+values('admin','1',MEMBER_seq.nextval,'123','관리자',sysdate,'1',1,'테스트질문답','19990101','M','admin','naver.com','010','1111','1111');
+insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2,M_TEL1,M_TEL2,M_TEL3)
+values('hong','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','20090101','M','hong','nate.com','010','1111','1111');
+insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2,M_TEL1,M_TEL2,M_TEL3)
+values('kim','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','19900101','M','kim','naver.com','010','1111','1111');
+insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2,M_TEL1,M_TEL2,M_TEL3)
+values('chang','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','20120101','M','chang','nate.com','010','1111','1111');
+insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2,M_TEL1,M_TEL2,M_TEL3)
+values('test','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','20120101','M','test','nate.com','010','1111','1111');
 
 --rollback;
 --class
@@ -125,12 +127,12 @@ values(CLASS_seq.nextval,'hong',1,'카타파하',20000,'abc','dasfasdf'
 select*from classschedule;
 
 insert into classschedule
-values(CLASSSCHEDULE_seq.nextval,1,'스케줄1','2017','2018','일','1234','134');
+values(CLASSSCHEDULE_seq.nextval,1,'스케줄1','2017','2018','일','1234','134','1234','134','1234','134');
 
 insert into classschedule
-values(CLASSSCHEDULE_seq.nextval,1,'스케줄2','2017','2018','일','1234','134');
+values(CLASSSCHEDULE_seq.nextval,1,'스케줄2','2017','2018','일','1234','134','1234','134','1234','134');
 insert into classschedule
-values(CLASSSCHEDULE_seq.nextval,1,'스케줄3','2017','2018','일','1234','134');
+values(CLASSSCHEDULE_seq.nextval,1,'스케줄3','2017','2018','일','1234','134','1234','134','1234','134');
 
 --upfile
 select*from upfile;
@@ -223,50 +225,48 @@ values(7,'hong',1,'M',sysdate,'5','내용1','Y',3);
 
 -- 찜하기
 select*from shoppingbasket ;
-
 insert into shoppingbasket
-(SB_NO,SB_USERID,C_NO,SC_REGDATE,sc_no)
-values(SHOPPINGBASKET_seq.nextval,'hong',2,sysdate,1);
+(SB_NO,SB_USERID,C_NO,SC_REGDATE)
+values(SHOPPINGBASKET_seq.nextval,'hong',1,sysdate);
 insert into shoppingbasket
-(SB_NO,SB_USERID,C_NO,SC_REGDATE,sc_no)
-values(SHOPPINGBASKET_seq.nextval,'hong',3,sysdate,2);
+(SB_NO,SB_USERID,C_NO,SC_REGDATE)
+values(SHOPPINGBASKET_seq.nextval,'hong',2,sysdate);
 insert into shoppingbasket
-(SB_NO,SB_USERID,C_NO,SC_REGDATE,sc_no)
-values(SHOPPINGBASKET_seq.nextval,'hong',4,sysdate,3);
+(SB_NO,SB_USERID,C_NO,SC_REGDATE)
+values(SHOPPINGBASKET_seq.nextval,'hong',3,sysdate);
 insert into shoppingbasket
-(SB_NO,SB_USERID,C_NO,SC_REGDATE,sc_no)
-values(SHOPPINGBASKET_seq.nextval,'hong',5,sysdate,1);
+(SB_NO,SB_USERID,C_NO,SC_REGDATE)
+values(SHOPPINGBASKET_seq.nextval,'hong',4,sysdate);
 insert into shoppingbasket
-(SB_NO,SB_USERID,C_NO,SC_REGDATE,sc_no)
-values(SHOPPINGBASKET_seq.nextval,'hong',3,sysdate,2);
+(SB_NO,SB_USERID,C_NO,SC_REGDATE)
+values(SHOPPINGBASKET_seq.nextval,'hong',5,sysdate);
+insert into shoppingbasket
+(SB_NO,SB_USERID,C_NO,SC_REGDATE)
+values(SHOPPINGBASKET_seq.nextval,'hong',3,sysdate);
 
+--booking
+select*from booking;
 
-
-
+insert into booking
+values(BOOKING_seq.nextval,'hong',1,sysdate,'2017-05-01','12:00:00','N');
+insert into booking
+values(BOOKING_seq.nextval,'kim',2,sysdate,'2017-05-01','12:00:00','N');
+insert into booking
+values(BOOKING_seq.nextval,'chang',3,sysdate,'2017-05-01','12:00:00','N');
 
 
 -- 결제
 select*from payment;
 
 insert into payment
-(PM_NO,C_NO,M_USERID,PM_PAYMENTWAY,PM_PAYMENTDATE,PM_COMPLETECHECK,PM_CANCELCHECK)
-values(PAYMENT_seq.nextval,1,'hong','카드',sysdate,'N','N');
+(PM_NO,C_NO,M_USERID,BK_NO,PM_PAYMENTWAY,PM_PAYMENTDATE,PM_COMPLETECHECK,PM_CANCELCHECK)
+values(PAYMENT_seq.nextval,1,'hong',1,'카드',sysdate,'N','N');
 insert into payment
-(PM_NO,C_NO,M_USERID,PM_PAYMENTWAY,PM_PAYMENTDATE,PM_COMPLETECHECK,PM_CANCELCHECK)
-values(PAYMENT_seq.nextval,2,'hong','현금',sysdate,'Y','Y');
+(PM_NO,C_NO,M_USERID,BK_NO,PM_PAYMENTWAY,PM_PAYMENTDATE,PM_COMPLETECHECK,PM_CANCELCHECK)
+values(PAYMENT_seq.nextval,2,'hong',3,'현금',sysdate,'Y','Y');
 insert into payment
-(PM_NO,C_NO,M_USERID,PM_PAYMENTWAY,PM_PAYMENTDATE,PM_COMPLETECHECK,PM_CANCELCHECK)
-values(PAYMENT_seq.nextval,3,'hong','수표',sysdate,'Y','N');
-
---booking
-select*from booking;
-
-insert into booking
-values(BOOKING_seq.nextval,1,'hong',1,sysdate,'N');
-insert into booking
-values(BOOKING_seq.nextval,1,'kim',1,sysdate,'N');
-insert into booking
-values(BOOKING_seq.nextval,1,'chang',1,sysdate,'N');
+(PM_NO,C_NO,M_USERID,BK_NO,PM_PAYMENTWAY,PM_PAYMENTDATE,PM_COMPLETECHECK,PM_CANCELCHECK)
+values(PAYMENT_seq.nextval,3,'hong',4,'수표',sysdate,'Y','N');
 
 -- 결제취소
 select*from paymentcancel;
@@ -323,17 +323,18 @@ values(MESSAGEMAGA_seq.nextval,'hong','y');
 select*from notify;
 
 insert into notify
-(C_NO,N_CODE,N_CONTENT)
-values(1,'신고1','개인취향');
+(N_NO,C_NO,N_CODE,N_USERID,N_CONTENT)
+values(notify_seq.nextval,1,'신고1','hong','개인취향');
 
 insert into notify
-(C_NO,N_CODE,N_CONTENT)
-values(2,'신고2','개인취향');
+(N_NO,C_NO,N_CODE,N_USERID,N_CONTENT)
+values(notify_seq.nextval,2,'신고2','kim','개인취향');
 
 insert into notify
-(C_NO,N_CODE,N_CONTENT)
-values(3,'신고3','개인취향');
+(N_NO,C_NO,N_CODE,N_USERID,N_CONTENT)
+values(notify_seq.nextval,3,'신고3','chang','개인취향');
 
+--팔로우 관심호스트
 insert into follow
 values(FOLLOW_seq.nextval,'test','kim',sysdate);
 insert into follow
