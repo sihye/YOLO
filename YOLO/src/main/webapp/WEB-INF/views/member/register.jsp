@@ -3,11 +3,7 @@
 <%-- <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core"%> --%>
 <%@ include file="../inc/top.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/mainstyle.css" />
 <link rel="stylesheet" type="text/css"
@@ -80,7 +76,11 @@
 
 		$("#btnChkId").click(function(){
 			
-			if(!validate_userid($("#useridreg").val())){
+			if($("#useridreg").val()==""){
+				alert('아이디를 입력하세요');
+				$("#useridreg").focus();
+				return false;
+			}else if(!validate_userid($("#useridreg").val())){
 				alert('아이디는 영문대소문자, 숫자, 언더바만 가능합니다');
 				$("#useridreg").focus();
 				return false;
@@ -279,7 +279,7 @@
 					<tr><c:forEach var="c" items="${cList }">
 						<td><c:if test ="${cg.kgNo == c.kgNo}"><br>
 							<input value='${c.kNo}' onclick=CountChecked(this) id="hobby"
-							type=checkbox name="kno">${c.kName}
+							type=checkbox name="kno">${c.kName}&nbsp;
 						</c:if></td>
 					</c:forEach></tr>
 					</table>
