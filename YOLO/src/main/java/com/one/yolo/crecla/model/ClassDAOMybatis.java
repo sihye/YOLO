@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.one.yolo.common.SearchClassVO;
 import com.one.yolo.common.SearchVO;
 @Repository
 public class ClassDAOMybatis extends SqlSessionDaoSupport implements ClassDAO{
@@ -84,6 +85,14 @@ public class ClassDAOMybatis extends SqlSessionDaoSupport implements ClassDAO{
 	@Override
 	public int notyInsert(NotifyVO vo) {
 		return getSqlSession().insert(nameSpace+".notyInsert", vo);
+	}
+	@Override
+	public List<Map<String, Object>> searchselectClass(SearchClassVO vo) {
+		return getSqlSession().selectList(nameSpace+".searchselectClass",vo);
+	}
+	@Override
+	public int searchselectClassCount(SearchClassVO vo) {
+		return getSqlSession().selectOne(nameSpace+".searchselectClassCount",vo);
 	}
 
 	

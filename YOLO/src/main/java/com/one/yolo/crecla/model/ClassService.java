@@ -3,6 +3,7 @@ package com.one.yolo.crecla.model;
 import java.util.List;
 import java.util.Map;
 
+import com.one.yolo.common.SearchClassVO;
 import com.one.yolo.common.SearchVO;
 
 public interface ClassService {
@@ -22,4 +23,6 @@ public interface ClassService {
 	public int updateSch(ScheduleVO vo);
 	public int deleteCla(int cNo);
 	public int notyInsert(NotifyVO vo);
+	public List<Map<String, Object>> searchselectClass(SearchClassVO vo);
+	public int searchselectClassCount(SearchClassVO vo);
 }

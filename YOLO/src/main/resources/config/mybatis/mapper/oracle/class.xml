@@ -43,15 +43,76 @@
 		</choose>
  
 </sql>
- 	
- 	
- 	
+
+ <sql id="searchClassWhere">
+ 		<choose>
+ 			<when test="searchKeyword !=null and searchKeyword !=''
+ 			and searchplace !=null and searchplace !=''
+ 			and searchKno!=0">
+ 				where C_NAME like '%'|| #{searchKeyword} ||'%'
+ 				and C_PLACE like '%'|| #{searchplace} ||'%'
+ 				and K_NO =#{searchKno}
+ 				and C_PRICE<![CDATA[ >=]]> #{searchStartPrice} and C_PRICE <![CDATA[<=]]> #{searchEndPrice}
+ 			</when>
+ 			<when test="searchKeyword !=null and searchKeyword !=''
+ 			and searchplace !=null and searchplace !=''">
+ 				where C_NAME like '%'|| #{searchKeyword} ||'%'
+ 				and C_PLACE like '%'|| #{searchplace} ||'%'
+ 				and C_PRICE<![CDATA[ >=]]> #{searchStartPrice} and C_PRICE <![CDATA[<=]]> #{searchEndPrice}
+ 			</when>
+ 			<when test="searchKeyword !=null and searchKeyword !=''
+ 			and searchKno!=0">
+ 				where C_NAME like '%'|| #{searchKeyword} ||'%'
+ 				and K_NO =#{searchKno}
+ 				and C_PRICE<![CDATA[ >=]]> #{searchStartPrice} and C_PRICE <![CDATA[<=]]> #{searchEndPrice}
+ 			</when>
+ 			<when test="searchplace !=null and searchplace !=''
+ 			and searchKno!=0">
+ 				where C_PLACE like '%'|| #{searchplace} ||'%'
+ 				and K_NO =#{searchKno}
+ 				and C_PRICE<![CDATA[ >=]]> #{searchStartPrice} and C_PRICE <![CDATA[<=]]> #{searchEndPrice}
+ 			</when>
+ 			<when test="searchKeyword !=null and searchKeyword !=''">
+ 				where C_NAME like '%'|| #{searchKeyword} ||'%'
+ 				and C_PRICE<![CDATA[ >=]]> #{searchStartPrice} and C_PRICE <![CDATA[<=]]> #{searchEndPrice}
+ 			</when>
+ 			<when test="searchplace !=null and searchplace !=''" >
+ 				where C_PLACE like '%'|| #{searchplace} ||'%'
+ 				and C_PRICE<![CDATA[ >=]]> #{searchStartPrice} and C_PRICE <![CDATA[<=]]> #{searchEndPrice}
+ 			</when>
+ 			<when test="searchKno!=0">
+ 				where K_NO =#{searchKno}
+ 				and C_PRICE<![CDATA[ >=]]> #{searchStartPrice} and C_PRICE <![CDATA[<=]]> #{searchEndPrice}
+ 			</when>
+ 			<otherwise>
+ 				where C_PRICE<![CDATA[ >=]]> #{searchStartPrice} and C_PRICE <![CDATA[<=]]> #{searchEndPrice}
+ 			</otherwise>
+ 		</choose>
+ 	</sql>	
  	
 
 
-
-
- 	
+<select id="searchselectClass" parameterType="SearchClassVO" resultType="hashmap">
+	select *
+		from
+		(
+		    select rownum as RNUM ,LIST.*
+		    from
+		    (
+		        select * from mainClassView 
+		       <include refid="searchClassWhere"></include>
+		        order by c_no desc
+		    )LIST
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
+		]]>
+</select>
+<select id="searchselectClassCount" parameterType="SearchClassVO" resultType="int">
+		select count(*) from mainClassView
+		<include refid="searchClassWhere"></include>
+</select> 	
  	
  
 	<insert id="claInsert" parameterType="ClassVO">

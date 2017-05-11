@@ -26,6 +26,7 @@ import com.one.yolo.category.model.CategoryGroupVO;
 import com.one.yolo.category.model.CategoryService;
 import com.one.yolo.category.model.CategoryVO;
 import com.one.yolo.common.PaginationInfo;
+import com.one.yolo.common.SearchClassVO;
 import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
 import com.one.yolo.crecla.model.ClassService;
@@ -172,8 +173,14 @@ public class HomeController {
 	}
 
 	@RequestMapping(value="/class/searchClass.do", method=RequestMethod.POST)
-	public String searchClass(Model model,@ModelAttribute SearchVO searchVo,HttpSession session,HttpServletResponse response,Model modle){
-		logger.info(" 화면 보여주기 ,파라미터 searchVO={}",searchVo);
+	public String searchClass(Model model,@ModelAttribute SearchClassVO searchclassVo,HttpSession session,HttpServletResponse response,Model modle){
+		if(searchclassVo.getSearchStartPrice()==null||searchclassVo.getSearchStartPrice().isEmpty()){
+			searchclassVo.setSearchStartPrice("0");
+		}
+		if(searchclassVo.getSearchEndPrice()==null||searchclassVo.getSearchEndPrice().isEmpty()){
+			searchclassVo.setSearchEndPrice("1000000");
+		}
+		logger.info(" 화면 보여주기 ,파라미터 searchclassVo={}",searchclassVo);
 		
 		List<CategoryGroupVO> gCateList=cService.selCateGroupAll();
 		List<CategoryVO> cateList =cService.selectCateAll();
@@ -185,32 +192,22 @@ public class HomeController {
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(Utility.BLOCKSIZE);
 		pagingInfo.setRecordCountPerPage(6);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setCurrentPage(searchclassVo.getCurrentPage());
 	
-		searchVo.setRecordCountPerPage(6);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		searchclassVo.setRecordCountPerPage(6);
+		searchclassVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		List<Map<String, Object>> classList= claService.selectClassBykNo(searchVo);
+		List<Map<String, Object>> classList= claService.searchselectClass(searchclassVo);
 		logger.info("클래스  classList.size()={}",classList.size());
-		int totalRecord = claService.selectClassCount(searchVo);
+		int totalRecord = claService.searchselectClassCount(searchclassVo);
 		logger.info("클래스 목록 조회-전체레코드 개수조회 결과, totalRecord={}",			
 				totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
-		
-		List<CategoryGroupVO> gList=cService.selCateGroupAll();
-		List<CategoryVO> cList=cService.selectCateAll();
-		List<Map<String, Object>>bannerList =oService.mainBannerList();
-	
-		
-			modle.addAttribute("gList", gList);
-			modle.addAttribute("cList", cList);
-			modle.addAttribute("bList",bannerList);
+
+
 			modle.addAttribute("classList",classList);
 			modle.addAttribute("pagingInfo", pagingInfo);
-			logger.info("glist size={}",gList.size());
-			logger.info("clist size={}",cList.size());	
 			logger.info("classList size={}",classList.size());
-			logger.info("bList size={}",bannerList.size());
 		
 		model.addAttribute("gCateList", gCateList);
 		model.addAttribute("cateList", cateList);

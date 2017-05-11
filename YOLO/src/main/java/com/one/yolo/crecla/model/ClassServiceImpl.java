@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.one.yolo.common.SearchClassVO;
 import com.one.yolo.common.SearchVO;
 
 @Service
@@ -95,6 +96,14 @@ public class ClassServiceImpl implements ClassService {
 	@Override
 	public int notyInsert(NotifyVO vo) {
 		return dao.notyInsert(vo);
+	}
+	@Override
+	public List<Map<String, Object>> searchselectClass(SearchClassVO vo) {
+		return dao.searchselectClass(vo);
+	}
+	@Override
+	public int searchselectClassCount(SearchClassVO vo) {
+		return dao.searchselectClassCount(vo);
 	}
 
 	

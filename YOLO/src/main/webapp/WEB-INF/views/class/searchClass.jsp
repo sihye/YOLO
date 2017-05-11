@@ -35,11 +35,13 @@ $( function() {
       values: [ 0,1000000 ],
       slide: function( event, ui ) {
         $( "#amount" ).val( ui.values[ 0 ] + "원 - " + ui.values[ 1 ]+"원" );
+        $( "#searchStartPrice" ).val(ui.values[ 0 ])
+        $( "#searchEndPrice" ).val(ui.values[ 1 ])
       }
     });
     $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
       "원 - " + $( "#slider-range" ).slider( "values", 1 )+"원" );
-  } );
+  });
   
 function pageFunc(curPage){
 	document.frmPage.currentPage.value=curPage;
@@ -48,28 +50,35 @@ function pageFunc(curPage){
 </script>
 <form name="frmPage" method="post"
 	action='<c:url value="/class/searchClass.do" />'>
-	<input type="hidden" name="currentPage"> <input type="hidden"
-		name="searchCondition" value="${param.searchCondition }"> <input
+	<input type="hidden" name="currentPage">  <input
 		type="hidden" name="searchKeyword" value="${param.searchKeyword}">
+	<input type="hidden" name="searchplace" id="searchplace" value="${param.searchplace}">
+	<input type="hidden" name="searchStartPrice" value="${param.searchStartPrice}">
+	<input type="hidden" name="searchEndPrice" value="${param.searchEndPrice}">
+	<input type="hidden" name="searchKno" value="${param.searchKno }">
 </form>
 <section class="searchClass">
 	<section class="searchDetail col-md-7" >
 		<form action="" class="" id="" method="post">
 			<div class="condition">
-		 	   <input type="text" class="form-control" placeholder="키워드" value="${param.searchKeyword}">
+		 	   <input type="text" name="searchKeyword" class="form-control" placeholder="키워드" value="${param.searchKeyword}">
 			</div>
 			<div class="condition">
-				 <input type="text" class="form-control" placeholder="장소">
+				 <input type="text" name="searchplace" class="form-control" placeholder="장소" value="${param.searchplace}">
 			</div>
 			<div class="condition">
-				<select class="form-control" name="kNo">
+				<select id="searchKno" class="form-control" name="searchKno">
 					<option value="0" style="color:#afafaf ">카테고리를 선택하세요</option>
 					<c:forEach var="cateG" items="${gCateList }">
 						<optgroup label="${cateG.kgName}">::${cateG.kgName}::
 						</optgroup>
 						<c:forEach var="cageVO" items="${cateList }">
-							<c:if test="${cateG.kgNo==cageVO.kgNo }">
-								<option value="${cageVO.kNo}">${cageVO.kName}</option>
+							<c:if test="${cateG.kgNo==cageVO.kgNo}">
+								<option value="${cageVO.kNo}"
+								<c:if test="${cageVO.kNo==param.searchKno}">
+									selected="selected"
+								</c:if>
+								>${cageVO.kName}</option>
 							</c:if>
 						</c:forEach>
 					</c:forEach>
@@ -82,7 +91,10 @@ function pageFunc(curPage){
 				</p>
 	 
 	<div id="slider-range"></div>
+	<input type="hidden" name="searchStartPrice" id="searchStartPrice">
+	<input type="hidden" name="searchEndPrice" id="searchEndPrice">
 			</div>
+			<button type="submit" class="btn btn-primary btn-lg btn-block">검색</button>
 		</form>
 		<section class="listings">
 		<div class="wrapper">
