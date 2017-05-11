@@ -548,6 +548,7 @@ public class MemberController {
 
 					return "common/message";
 				}
+		
 	}
 
 

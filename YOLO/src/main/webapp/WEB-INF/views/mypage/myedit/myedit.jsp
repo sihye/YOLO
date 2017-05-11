@@ -12,6 +12,7 @@
 	    font-weight: bold;
 	    color: rgb(63, 148, 7);
 	}
+	
 </style>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
