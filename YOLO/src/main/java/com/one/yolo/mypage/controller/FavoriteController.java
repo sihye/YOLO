@@ -209,20 +209,13 @@ public class FavoriteController {
 	public String FollowDelete(@RequestParam(value="flNo",defaultValue="0") int flNo
 			,@RequestParam String viewName,@RequestParam(required=false,defaultValue="0") int cNo,Model model){
 		logger.info("관심호스트 삭제 처리, 파라미터 flNo={},viewName={} ", flNo,viewName);
-		String msg="",url="";
-		if(flNo==0){
-			msg="삭제할 호스트 선택해주세요";
-			url="/mypage/Favorite/Favoritehost.do";
-			model.addAttribute("msg",msg);
-			model.addAttribute("url",url);
-			return "common/message";
-		}
+		
 		int cnt=0;
 
 		if(flNo!=0 ){
 			cnt =followService.deleteFollow(flNo);
 		}
-
+		String msg="",url="";
 		logger.info("관심호스트 삭제 cnt={}", cnt);
 		if(cnt==1){
 			msg="삭제 성공";

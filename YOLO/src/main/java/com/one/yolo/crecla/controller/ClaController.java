@@ -198,31 +198,37 @@ public class ClaController {
 		//팔로우 확인
 		List<FollowVO> followList = followService.selectFollow(vo.getmUserid());
 		logger.info("팔로우 목록 followList={}",followList);
-		FollowVO followVo = new FollowVO();
-		followVo.setFlUserid(vo.getmUserid());
-		followVo.setFlWuserid(userid);
-		cnt =followService.selectFollowCount(followVo);
-		String result="";
-		if(cnt>0){
-			result="Y";
-		}else{
-			result="N";
+		if(userid!=null&&!userid.isEmpty()){
+			FollowVO followVo = new FollowVO();
+			followVo.setFlUserid(vo.getmUserid());
+			followVo.setFlWuserid(userid);
+			cnt =followService.selectFollowCount(followVo);
+			String result="";
+			if(cnt>0){
+				result="Y";
+			}else{
+				result="N";
+			}
+			
+			
+			//찜하기
+			List<FavoriteClassVO> faList = faService.selectShoppingbasket(userid);
+			logger.info("찜하기 목록 faList={}",faList);
+			FavoriteClassVO faclassVo = new FavoriteClassVO();
+			faclassVo.setcNo(vo.getcNo());
+			faclassVo.setSbUserid(userid);
+			cnt =faService.selectsbCount(faclassVo);
+			String faclassCheck="";
+			if(cnt>0){
+				faclassCheck="Y";
+			}else{
+				faclassCheck="N";
+			}
+			model.addAttribute("faList",faList);
+			model.addAttribute("faclassCheck",faclassCheck);
+			model.addAttribute("followCheck",result);
 		}
 		
-		
-		//찜하기
-		List<FavoriteClassVO> faList = faService.selectShoppingbasket(userid);
-		logger.info("찜하기 목록 faList={}",faList);
-		FavoriteClassVO faclassVo = new FavoriteClassVO();
-		faclassVo.setcNo(vo.getcNo());
-		faclassVo.setSbUserid(userid);
-		cnt =faService.selectsbCount(faclassVo);
-		String faclassCheck="";
-		if(cnt>0){
-			faclassCheck="Y";
-		}else{
-			faclassCheck="N";
-		}
 		
 		//회원이 관심있을만한 클래스
 		//userid="hong";
@@ -295,9 +301,7 @@ public class ClaController {
 		//신청자 수
 		int bookNum=bookService.bookNum(schVo.getScNo());
 		
-		model.addAttribute("faList",faList);
-		model.addAttribute("faclassCheck",faclassCheck);
-		model.addAttribute("followCheck",result);
+		
 		model.addAttribute("followList",followList);
 		model.addAttribute("claVo", vo);
 		model.addAttribute("kName", kName);

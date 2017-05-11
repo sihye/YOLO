@@ -73,6 +73,35 @@ $( function() {
 	<div id="slider-range"></div>
 			</div>
 		</form>
+		<div>
+		<p>검색결과</p>
+		<div class="wrapper">
+			<ul class="properties_list">
+			<c:forEach var="map" items="${classList }">
+				<li>
+					<a href="<c:url value='/class/claDetail.do?cNo=${map["C_NO"] }' />">
+						<img src="<c:url value='/upload/${map["C_MAINIMG"] }' />" alt="" title="" width="100%" height="250px"/>
+					</a>
+					<span class="price"><fmt:formatNumber value="${map['C_PRICE'] }" />원</span>
+					<div class="property_details">
+						<h1>
+							${map["C_NAME"] }
+						</h1>
+						<c:set var="arr" value="${fn:split(map['C_PLACE'],'(') }" />
+						<h2><c:out value="${arr[0]}"/><br>(<c:out value="${arr[1]}"/></h2>
+						<h2 style="text-align: right;">
+											<i class="fa fa-eye " aria-hidden="true"></i>${map["C_HITS"]}
+											<i class="fa fa-heart-o" aria-hidden="true"></i>
+											<span class="property_size">${map["FCOUNT"] }</span>
+						</h2>
+
+						
+					</div>
+				</li>
+			</c:forEach>
+			</ul>
+		</div>
+		</div>
 	</section>
 	<section class="searchMap col-md-5">
 	지도지도

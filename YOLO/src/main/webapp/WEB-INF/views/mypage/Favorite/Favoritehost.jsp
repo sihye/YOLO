@@ -4,6 +4,10 @@
 
 <script type="text/javascript">
 function delNoFunc(delNo) { 
+	if(delNo==undefined){
+		alert("삭제할 호스트 선택해주세요");
+		return;
+	}
 	if (confirm("선택한 호스트 삭제하시겠습니까?") == true){    //확인
 		location.href='<c:url value="/mypage/Favorite/FollowDelete.do?flNo='+delNo+'&viewName=mypage" />';
     }else{   //취소
