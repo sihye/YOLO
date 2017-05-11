@@ -64,7 +64,7 @@
 <article class="simpleForm">
 <h2>회원약관</h2>
 <div style="border: 1px solid gray">
-<iframe src='<c:url value="/inc2/provision2.html" />' width="700" height="400"></iframe>
+<iframe src='<c:url value="/inc2/provision3.html" />' width="700" height="400"></iframe>
 </article>
 <div id="divAgree" >
 	<form id="frmAgree" name="frmAgree" method="get" 

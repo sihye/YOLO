@@ -54,7 +54,7 @@ public class LoginController {
 			msg=vo.getmName()+ "님, 로그인되었습니다.";
 			if(vo.getMgNo2()==1){
 				url="/admin/operator.do";
-				msg="관리자";
+				msg="관리자입니다.관리자 페이지로 이동합니다.";
 			}else{
 				url="/index2.do";
 				msg=vo.getmUserid()+"님 환영합니다."; 

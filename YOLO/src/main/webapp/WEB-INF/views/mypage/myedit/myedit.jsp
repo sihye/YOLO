@@ -15,6 +15,19 @@
 	
 </style>
 
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/mainstyle.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/clear.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/layout.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/mystyle.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/bootstrap-select.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css" /> 
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script type="text/javascript" src='<c:url value="/js/member.js" />'></script>

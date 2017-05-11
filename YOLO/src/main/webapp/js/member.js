@@ -44,3 +44,16 @@ function validate_hp(hp){
 	닫기 대괄호(]) 뒤의 * 기호는 0번 이상 반복  */
 }
 
+function validate_pwd(pwd){
+	var pattern = new RegExp( /^[a-z0-9]{5,19}$/g);
+	return pattern.test(pwd); //true이면 정규식을 만족,
+								 //false이면 에러 
+    /*
+   	정규식  /^[a-zA-Z0-9_]+$/g
+	a에서 z 사이의 문자, A~Z사이의 문자, 0 에서 9사이의 
+	숫자나 _로 시작하거나 끝나야 한다는 의미
+	닫기 대괄호(]) 뒤의 + 기호는 이 패턴이 한 번 또는 
+	그 이상 반복된다는 의미
+    */
+}
+

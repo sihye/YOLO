@@ -39,6 +39,10 @@
 				alert('비밀번호를 입력하세요');
 				$("#pwdreg").focus();
 				return false;
+			}else if(!validate_pwd($("#pwdreg").val())){
+				alert('비밀번호는 6자리 이상 영문이나 숫자로 입력해 주셔야 합니다.(대소문자 구별)');
+				$("#pwdreg").focus();
+				return false;
 			}else if($("#pwdreg").val()!=$("#pwd2").val()){
 				alert('비밀번호가 일치하지 않습니다');
 				$("#pwd2").focus();
@@ -166,11 +170,11 @@
 			</div>
 			<div>
 				<label for="pwd">비밀번호</label> 
-				<input type="Password" name="mPwd" id="pwdreg">
+				<input type="Password" name="mPwd" id="pwdreg"><br>&nbsp;비밀번호는 6자 이상 숫자나 영문자로 입력해주세요(대소문자 구별)
 			</div>
 			<div>
 				<label for="pwd2">비밀번호 확인</label> 
-				<input type="Password" name="mPwd2" id="pwd2"> 
+				<input type="Password" name="mPwd2" id="pwd2">
 			</div>
 			<div>
 				<label for="zipcode" name="zipcode">주소</label> 
