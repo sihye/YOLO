@@ -93,15 +93,15 @@ values(3,3,'host');
 select * from member ;
 
 insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2,M_TEL1,M_TEL2,M_TEL3)
-values('admin','1',MEMBER_seq.nextval,'123','관리자',sysdate,'1',1,'테스트질문답','19990101','M','admin','naver.com','010','1111','1111');
+values('admin','1',MEMBER_seq.nextval,'admin123','관리자',sysdate,'1',1,'당산','19900101','M','howgee12','naver.com','010','1234','1234');
 insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2,M_TEL1,M_TEL2,M_TEL3)
-values('hong','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','20090101','M','hong','nate.com','010','1111','1111');
+values('junjh','2',MEMBER_seq.nextval,'prettyjun','전지현',sysdate,'2',2,'김숙자','19811030','F','minyong85','nate.com','010','1111','2222');
 insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2,M_TEL1,M_TEL2,M_TEL3)
-values('kim','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','19900101','M','kim','naver.com','010','1111','1111');
+values('yoojy','2',MEMBER_seq.nextval,'twice123','유정연',sysdate,'3',3,'파란색','19961101','F','skalsgus85','gmail.com','010','1111','1234');
 insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2,M_TEL1,M_TEL2,M_TEL3)
-values('chang','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','20120101','M','chang','nate.com','010','1111','1111');
+values('moonji','2',MEMBER_seq.nextval,'Moon2017','문재인',sysdate,'4',4,'누렁이','19530124','M','howgee12','naver.com','010','1231','4321');
 insert into member(M_USERID,MG_NO2,M_NO,M_PWD,M_NAME,M_JOINDATE,K_NO1,Q_QUESTIONNO,M_QUESTIONANSWER,M_BIRTH,M_GENDER,M_EMAIL1,M_EMAIL2,M_TEL1,M_TEL2,M_TEL3)
-values('test','2',MEMBER_seq.nextval,'123','테스트홍',sysdate,'1',1,'테스트질문답','20120101','M','test','nate.com','010','1111','1111');
+values('doks','2',MEMBER_seq.nextval,'exoDOks1','도경수',sysdate,'5',5,'이수만','19930112','M','minyong85','nate.com','010','1111','1111');
 
 --rollback;
 --class
