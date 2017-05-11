@@ -15,4 +15,21 @@ public class HostClassServiceImpl implements HostClassService {
 	public List<Map<String, Object>> selClaForHost(String userid) {
 		return hDAO.selClaForHost(userid);
 	}
+
+	@Override
+	public List<Map<String, Object>> selForStatsGender(int cNo) {
+		return hDAO.selForStatsGender(cNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selForStatsAge(int cNo) {
+		// TODO Auto-generated method stub
+		return hDAO.selForStatsAge(cNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selForStatsSales(String userid) {
+		// TODO Auto-generated method stub
+		return hDAO.selForStatsSales(userid);
+	}
 }

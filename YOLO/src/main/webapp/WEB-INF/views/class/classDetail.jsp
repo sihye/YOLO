@@ -552,8 +552,10 @@ name="searchEndDate" value="${param.searchEndDate}">
 				</c:if>
 			</div>
 			<div class="row">
-				<div class="col-md-3">특기사항</div>
-				<div class="col-md-4">${claVo.cSpevialty}</div>
+				<c:if test="${!empty claVo.cSpevialty}">
+					<div class="col-md-3">특기사항</div>
+					<div class="col-md-4">${claVo.cSpevialty}</div>
+				</c:if>
 			</div>
 			<div class="row">
 				<div class="col-md-3">최대인원</div>
@@ -563,20 +565,26 @@ name="searchEndDate" value="${param.searchEndDate}">
 			<div class="contents-title">추가 정보</div>
 			<hr>
 			<div class="row">
+				<c:if test="${!empty claVo.cGoal}">
 				<div class="col-md-3">목표</div>
 				<div class="col-md-4">${claVo.cGoal }</div>
+				</c:if>
 			</div>
 			<div class="row">
+				
 				<div class="col-md-3">대상</div>
+				
 				<div class="col-md-4">${claVo.cTarget }</div>
+				<%-- <c:if test="${!empty claVo.cTarget[0] }">
+					<div class="col-md-4">${claVo.cTarget[0] }</div>
+				</c:if> --%>
 			</div>
 
 
 			<div class="contents-title">모꼬지 소개</div>
 			<hr>
 			<pre>${claVo.cDetailinfo }</pre>
-			<div class="contents-title">스케줄</div>
-			<hr>
+			
 			<div class="contents-title">갤러리</div>
 			<hr>
 

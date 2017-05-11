@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.regexp.recompile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +32,18 @@ import com.one.yolo.common.Utility;
 import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.crecla.model.ClassVO;
 import com.one.yolo.crecla.model.ScheduleVO;
+import com.one.yolo.mypage.model.HostClassService;
 
 @Controller
 @RequestMapping("/mypage/MyClass")
 public class HostController {
-	public static final Logger logger=LoggerFactory.getLogger(HostController.class);
+	private static final Logger logger=LoggerFactory.getLogger(HostController.class);
 	@Autowired
-	public ClassService claService;
+	private ClassService claService;
 	@Autowired
-	public BookingService bookService;
+	private BookingService bookService;
+	@Autowired
+	private HostClassService hostService;
 	
 	@RequestMapping("/claSel.do")
 	@ResponseBody
@@ -175,6 +180,44 @@ public class HostController {
 		return map;
 	}
 	
+	@RequestMapping("/stats.do")
+	@ResponseBody
+	public List<Map<String, Object>> ageStats(@RequestParam int cNo,@RequestParam int type,@RequestParam(required=false) String book, @RequestParam (required=false) String sales, Model model){
+		logger.info("통계 나이 cNo={}, type={}",cNo,type);
+		logger.info("조건book={}, 조건seles={}",book,sales);
+		List<Map<String, Object>> sList=new ArrayList<Map<String,Object>>();
+		if(type==1){//예약현황통계
+			if(book.equals("gen")){
+				sList=hostService.selForStatsGender(cNo);
+				logger.info("genList size={}",sList.size());
+				
+			}else if(book.equals("age")){
+				sList=hostService.selForStatsAge(cNo);
+				logger.info("ageList size={}",sList.size());
+			}
+		}else if(type==2){//매출통계
+			if(sales.equals("d")){
+				
+			}else if (sales.equals("m")) {
+				
+			}else if (sales.equals("y")) {
+				
+			}
+		}else{
+			
+		}
+		model.addAttribute("sList", sList);
+		return sList;
+	}
+	
+	@RequestMapping("/staSel.do")
+	@ResponseBody
+	public List<Map<String, Object>> staSel(HttpSession session){
+		String userid=(String)session.getAttribute("userid");
+		List<Map<String, Object>> slist=hostService.selForStatsSales(userid);
+		logger.info("slist size={}",slist);
+		return slist;
+	}
 	
 	
 }

@@ -36,6 +36,14 @@
 <link rel="stylesheet" type="text/css"
    href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- 시간선택 -->
+<script
+	src="${pageContext.request.contextPath}/js/jquery.clockpick.1.2.9.js"></script>
+<link rel="stylesheet"
+	href="<c:url value='/css/jquery.clockpick.1.2.9.css'/>" type="text/css">
 <script
    src="${pageContext.request.contextPath}/woocommerce-FlexSlider-0690ec2/jquery.flexslider-min.js"></script>
 <script type="text/javascript">   

@@ -13,4 +13,20 @@ public class HostClassDAOMybatis extends SqlSessionDaoSupport implements HostCla
 	public List<Map<String, Object>> selClaForHost(String userid) {
 		return getSqlSession().selectList(nameSpace+".selClaForHost", userid);
 	}
+
+	@Override
+	public List<Map<String, Object>> selForStatsGender(int cNo) {
+		return getSqlSession().selectList(nameSpace+".selForStatsGender", cNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selForStatsAge(int cNo) {
+		return getSqlSession().selectList(nameSpace+".selForStatsAge", cNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selForStatsSales(String userid) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList(nameSpace+".selForStatsSales", userid);
+	}
 }

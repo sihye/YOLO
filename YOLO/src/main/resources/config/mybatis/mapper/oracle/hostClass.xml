@@ -7,6 +7,33 @@
 		select * from classforhost
 where m_userid=#{userid}
 	</select>
+	
+	<select id="selForStatsGender" parameterType="int" resultType="map">
+		select m.M_GENDER, count(*)
+			from member m  join payment p
+			on p.M_USERID = m.M_USERID
+			where c_no=#{cNo}
+			group by m.M_GENDER
+	</select>
+	
+	<select id="selForStatsAge" parameterType="int" resultType="map">
+		select nvl(TRUNC(TRUNC(MONTHS_BETWEEN(sysdate, TO_DATE(substr(m_birth,0,4),'yyyy'))/12)/10)*10, 0) age,count(*)
+		from member m  join payment p
+		on p.M_USERID = m.M_USERID
+		where c_no=#{cNO}
+		group by nvl(TRUNC(TRUNC(MONTHS_BETWEEN(sysdate, TO_DATE(substr(m_birth,0,4),'yyyy'))/12)/10)*10, 0)	
+	</select>
+	
+	<select id="selForStatsSales" parameterType="string" resultType="map">
+		select c.C_NAME,to_char(pm_paymentdate,'yyyy/mm') SELDATE,sum(c.C_PRICE) salmonth 
+			from payment p join class c
+			on p.C_NO = c.C_NO
+			where pm_completecheck='Y'
+			and c.M_USERID=#{userid}
+			and to_char(pm_paymentdate,'yyyy/mm') >to_char(add_months(sysdate,-5),'yyyy/mm')
+			group by c.C_NAME, to_char(pm_paymentdate,'yyyy/mm')
+	</select>
+	
 </mapper>
 
 

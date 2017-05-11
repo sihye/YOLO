@@ -234,12 +234,90 @@ margin-top: 10px;
 							    			history.back();
 							    		}			    		
 							    	});			    	
-							    	/* 
-							        var msg = '결제가 완료되었습니다.';
-							        msg += '고유ID : ' + rsp.imp_uid;
-							        msg += '상점 거래ID : ' + rsp.merchant_uid;
-							        msg += '결제 금액 : ' + rsp.paid_amount;
-							        msg += '카드 승인번호 : ' + rsp.apply_num; */
+							    } else {
+							        var msg = '결제에 실패하였습니다.';
+							        msg += '에러내용 : ' + rsp.error_msg;
+							        alert(msg);
+							    }			    
+							});
+						}else if($("input[type=radio][name=payment]:checked").val()=='account'){
+							IMP.request_pay({
+								 pg : 'html5_inicis',
+								    pay_method : 'trans',
+								    merchant_uid : 'merchant_' + new Date().getTime(),
+								    name : '주문명:${claVo.cName}',
+								    amount : 100/* ${claVo.cPrice} 테스트100원*/,
+								    buyer_email : '${memVo.mEmail1}@${memVo.mEmail2}',
+								    buyer_name : '${memVo.mName}',
+								    buyer_tel : '${memVo.mTel1}-${memVo.mTel3}-${memVo.mTel3}',
+								    vbank_due :'2017-05-22'
+							}, function(rsp) {
+							    if ( rsp.success ) {		    	
+							    	$.ajax({
+							    		url:'<c:url value="/class/bookingOk.do"/>',
+							    		type:'POST',
+							    		data:{scNo:'${bookVo.scNo}',
+							    			bkBdate:'${bookVo.bkBdate}',
+							    			bkTime:'${bookVo.bkTime}',	
+							    			pmNo:rsp.merchant_uid,
+							    			pmPaymentway:'card',
+							    			cNo:'${claVo.cNo}',
+							    			pmCompletecheck:'N'
+						    			},
+							    		dataType:'json',
+							    		success:function(res){
+							    			alert('결제가 완료됐습니다.');
+							    			/* location.href="<c:url value='/class/payOk.do?pmNo="+rsp.merchant_uid+"'/>"; */
+							    			$("#pmNo").val(rsp.merchant_uid);
+							    			/* conlose.log(rsp.merchant_uid); */
+							    			$("#payFrm").submit();
+							    		},error:function(xhr, status, error){
+							    			alert('결제가 정보 입력 실패! 다시 시도해 주세요.');
+							    			console.log(error)
+							    			history.back();
+							    		}			    		
+							    	});			    	
+							    } else {
+							        var msg = '결제에 실패하였습니다.';
+							        msg += '에러내용 : ' + rsp.error_msg;
+							        alert(msg);
+							    }			    
+							});
+						}else if($("input[type=radio][name=payment]:checked").val()=='kakao'){
+							IMP.request_pay({
+								 pg : 'kakao',
+								    pay_method : 'card',
+								    merchant_uid : 'merchant_' + new Date().getTime(),
+								    name : '주문명:${claVo.cName}',
+								    amount : 100/* ${claVo.cPrice} 테스트100원*/,
+								    buyer_email : '${memVo.mEmail1}@${memVo.mEmail2}',
+								    buyer_name : '${memVo.mName}',
+								    buyer_tel : '${memVo.mTel1}-${memVo.mTel3}-${memVo.mTel3}'
+							}, function(rsp) {
+							    if ( rsp.success ) {		    	
+							    	$.ajax({
+							    		url:'<c:url value="/class/bookingOk.do"/>',
+							    		type:'POST',
+							    		data:{scNo:'${bookVo.scNo}',
+							    			bkBdate:'${bookVo.bkBdate}',
+							    			bkTime:'${bookVo.bkTime}',	
+							    			pmNo:rsp.merchant_uid,
+							    			pmPaymentway:'card',
+							    			cNo:'${claVo.cNo}'
+						    			},
+							    		dataType:'json',
+							    		success:function(res){
+							    			alert('결제가 완료됐습니다.');
+							    			/* location.href="<c:url value='/class/payOk.do?pmNo="+rsp.merchant_uid+"'/>"; */
+							    			$("#pmNo").val(rsp.merchant_uid);
+							    			/* conlose.log(rsp.merchant_uid); */
+							    			$("#payFrm").submit();
+							    		},error:function(xhr, status, error){
+							    			alert('결제가 정보 입력 실패! 다시 시도해 주세요.');
+							    			console.log(error)
+							    			history.back();
+							    		}			    		
+							    	});			    	
 							    } else {
 							        var msg = '결제에 실패하였습니다.';
 							        msg += '에러내용 : ' + rsp.error_msg;

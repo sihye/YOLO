@@ -44,9 +44,7 @@
 					$.ajax({
 						url:'<c:url value="/mypage/MyClass/claSel.do"/>',
 						type:"POST",
-			    		data:'cNo='+$(this).val(),
-			    		/* 
-			    		dataType:'json', */		    		
+			    		data:'cNo='+$(this).val(),		    		
 			    		success:function(res){
 			    			$("#cName").html("<span>"+res.cName+"</span>");
 			    			$("#img").html("<img style='width: 200px; height: 100px;' src='<c:url value='/upload/"+res.cMainimg+"'/>'>")
@@ -54,8 +52,8 @@
 			    			$("#schEdit").prop('href','<c:url value="/class/schEdit.do?cNo='+res.cNo+'"/>')
 			    			$("#del").prop('href','<c:url value="/class/delete.do?cNo='+res.cNo+'"/>')
 			    			$("#cNo").val(res.cNo);
-			    		},
-			    		error:function(xhr, status, error){
+			    			$("#staCno").val(res.cNo)
+			    		},error:function(xhr, status, error){
 			    			alert('클래스 불러오기 실패!.');
 			    			console.log(error)
 			    			history.back();
@@ -132,7 +130,7 @@
 						    					paychk='결제진행중';
 						    				}
 						    				
-						    				$("#info").after("<TR><td><input type='checkbox' id='chk_"+i+"' name='' value="+map['BK_NO']+"></td><td>"+map['M_NAME']+"</td><td>"+map['M_TEL1']+"-"+map['M_TEL2']+"-"+map['M_TEL3']+"</td><td>"+map['M_EMAIL1']+"@"+map['M_EMAIL2']+"</td><td>"+time+"</td><td>"+map['PM_PAYMENTWAY']+"</td><td>"+paychk+"</td></TR>")
+						    				$("#info").after("<TR><td><input type='checkbox' id='chk_"+i+"' name='' value="+map['BK_NO']+"></td><td>"+map['BK_USERID']+"</td><td>"+map['M_TEL1']+"-"+map['M_TEL2']+"-"+map['M_TEL3']+"</td><td>"+map['M_EMAIL1']+"@"+map['M_EMAIL2']+"</td><td>"+time+"</td><td>"+map['PM_PAYMENTWAY']+"</td><td>"+paychk+"</td></TR>")
 						    				i++;
 				    					});
 				    		},
@@ -155,8 +153,8 @@
 		    		document.formData.currentPage.value=curPage;
 		    		formData.submit();
 		    	}
-				$("input[name='chkAll']").click(function(){
-	    			$("tbody input[type=checkbox]").prop("checked", this.checked);
+				$("#chkAll").click(function(){
+	    			$("thead input[type=checkbox]").prop("checked", this.checked);
 	    		});
 		
 
@@ -275,7 +273,7 @@
 	</div>
 		
 		</c:if>
-
+<%@ include file="stats.jsp" %>
 </div>
 
 <%@ include file="../mypagebottom.jsp"%>

@@ -119,16 +119,16 @@ as
 select c.*,(select count(*) from SHOPPINGBASKET f where c.c_no = f.c_no) as FCOUNT from class c where c_del='N' ;
 
 --결제내역 뷰
-create view paymentView 
+create OR REPLACE VIEW paymentView 
 as
 select p.*,(select c_name from class c where c.c_no = p.c_no) as c_name, (select c_price from class c where c.c_no = p.c_no) as c_price from PAYMENt p;
 
 --결제내역 취소 뷰
-create view paymentcancelView
+create OR REPLACE VIEW paymentcancelView
 as
 select pc.* ,(select v.c_price from paymentview v where v.PM_NO = pc.pm_no) as price, 
 (select v.m_userid from paymentview v where v.PM_NO = pc.pm_no) as m_userid ,(select v.PM_PAYMENTWAY from paymentview v where v.PM_NO = pc.pm_no) as PM_PAYMENTWAY from paymentcancel pc
-
+;
 --호스트의 클래스 정보 셀렉트
 CREATE OR REPLACE VIEW classforhost
 as

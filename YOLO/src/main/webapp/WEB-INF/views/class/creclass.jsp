@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<%@ include file="../inc/top.jsp" %>
+<%-- <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -9,10 +10,10 @@
 <title>::YOLO - 클래스 등록하기::</title>
 <meta name="Resource-type" content="Document" />
 
-<%-- <link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/jquery.fullpage.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/examples.css" />  --%>
+	href="${pageContext.request.contextPath}/css/examples.css" /> 
 
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -28,7 +29,7 @@
 <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
 
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
 
 <!--[if IE]>
 		<script type="text/javascript">
@@ -41,27 +42,23 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 
-<%-- <script type="text/javascript"
+<script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/scrolloverflow.js"></script>
 
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/jquery.fullpage.js"></script> --%>
+	src="${pageContext.request.contextPath}/js/jquery.fullpage.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/examples.js"></script>
-<%-- <script type="text/javascript"
+<script type="text/javascript"
 	src="${pageContext.request.contextPath}/css/bootstrap.min.css"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>  --%>
+	src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script> 
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 <script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<!-- 시간선택 -->
-<script
-	src="${pageContext.request.contextPath}/js/jquery.clockpick.1.2.9.js"></script>
-<link rel="stylesheet"
-	href="<c:url value='/css/jquery.clockpick.1.2.9.css'/>" type="text/css">
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> --%>
+
 <!-- <script type="text/javascript">
 	$(document).ready(
 			
@@ -203,7 +200,7 @@ h1 {
 	padding-bottom: 5px;
 }
 
-body {
+body, #fullpage {
 	background-image: url("<c:url value='/img/images.jpg'/>");
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -216,8 +213,8 @@ body {
 	margin-left: 1000px;
 }
 </style>
-</head>
-<body>
+<!-- </head>
+<body> -->
 
 	<!-- <ul id="menu">
 		<li data-menuanchor="firstPage" class="active"><a
@@ -667,7 +664,7 @@ body {
 			</div>
 			
 			
-			<div class="section container" style="height: 500px;" id="section3">
+			<div class="section container" style="height: 700px;" id="section3">
 				<div class="intro">
 					<h1>04. 스케줄 등록하기</h1>
 					<br>
@@ -971,7 +968,7 @@ body {
 		</div>
 
 	</form>
-
-
+<%@ include file="../inc/bottom.jsp" %>
+<!-- 
 </body>
-</html>	
+</html>	 -->

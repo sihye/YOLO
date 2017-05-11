@@ -5,4 +5,7 @@ import java.util.Map;
 
 public interface HostClassService {
 	public List<Map<String, Object>> selClaForHost (String userid);
+	public List<Map<String, Object>>selForStatsGender(int cNo);
+	public List<Map<String, Object>>selForStatsAge(int cNo);
+	public List<Map<String, Object>>selForStatsSales(String userid);
 }
