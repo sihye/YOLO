@@ -2,6 +2,7 @@ package com.one.yolo.member.controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,7 @@ import com.one.yolo.category.model.CategoryService;
 import com.one.yolo.category.model.CategoryVO;
 import com.one.yolo.categorygroup.model.CategoryGroupService;
 import com.one.yolo.categorygroup.model.CategoryGroupVO;
+import com.one.yolo.email.EmailSender;
 import com.one.yolo.member.model.MemberService;
 import com.one.yolo.member.model.MemberVO;
 import com.one.yolo.mypage.controller.MyEditController;
@@ -40,6 +42,9 @@ public class MemberController {
 	
 	@Autowired
 	private CategoryGroupService categoryGroupService;
+	
+	@Autowired
+	private EmailSender emailSender;
 	
 	@RequestMapping("/agreement.do")
 	public String agreement(){
@@ -306,7 +311,7 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value="/findPwd1.do")
-	   public MemberVO findPwd1_post(@ModelAttribute MemberVO memberVo, Model model){
+	   public int findPwd1_post(@ModelAttribute MemberVO memberVo, Model model){
 			   
 	      logger.info("비밀번호 찾기");
 	      /*MemberVO memberVo = new MemberVO();
@@ -315,7 +320,7 @@ public class MemberController {
 	      memberVo.setmEmail2(mEmail2);*/
 	      
 	      MemberVO result1 = memberService.findPwd1(memberVo);
-	      logger.info("결과 result1 = {}",result1);
+	      /*logger.info("결과 result1 = {}",result1.getmPwd());*/
 	      
 	      //MemberVO vo = new MemberVO();
 	      /*model.addAttribute("result1", result1);
@@ -326,17 +331,42 @@ public class MemberController {
 	      logger.info(memberVo.getmQuestionanswer());
 	      logger.info(memberVo.getmEmail1());
 	      logger.info(memberVo.getmEmail2());
+	      
+	      logger.info(memberVo.getmUserid());
 	     //url="/index2.do"; 
+	     
 	    String msg="", url="";
 	    	
 			if(result1 != null){
+				
+				logger.info("이메일 발송 처리");
+			      String subject="YOLO에서 당신의 비밀번호를 알려드립니다.";
+			      String content=result1.getmName()+"님의 YOLO 비밀번호는 [ "+result1.getmPwd()+" ] 입니다.";
+			      String receiver=memberVo.getmEmail1()+"@"+memberVo.getmEmail2();
+			      String sender="admin@herbmall.com";
+			      
+			      try {
+			         emailSender.sendEmail(subject, content, receiver, sender);
+			         logger.info("이메일 발송 성공");
+			         
+			         model.addAttribute("msg", "asfgasgfasg");
+					 model.addAttribute("url", "/index2.do");
+					 
+					 return 1;
+			      } catch (MessagingException e) {
+			         logger.info("이메일 발송 실패");
+			         e.printStackTrace();
+			         
+			         return 2;
+			      }
 
-				return result1;
+			}else{
+				return 2;
 			}
 			//3
 			/*model.addAttribute("msg", msg);
 			model.addAttribute("url", url);*/
-			return null;
+
 	   }
 
 	@RequestMapping("/checkUserid.do")
