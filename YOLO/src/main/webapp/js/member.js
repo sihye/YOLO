@@ -45,7 +45,7 @@ function validate_hp(hp){
 }
 
 function validate_pwd(pwd){
-	var pattern = new RegExp( /^[a-z0-9]{5,19}$/g);
+	var pattern = new RegExp( /^[A-za-z0-9]{5,15}/g);
 	return pattern.test(pwd); //true이면 정규식을 만족,
 								 //false이면 에러 
     /*

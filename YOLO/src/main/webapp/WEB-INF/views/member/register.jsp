@@ -56,6 +56,14 @@
 				alert('휴대폰은 숫자를 입력하셔야 합니다');
 				$("#hp2").focus();
 				return false;
+			}else if(!$("#birth1").val()){
+				alert('생년월일을 입력해 주세요');
+				$('#btnChkId').focus();
+				return false;
+			}else if($("#birth1").val().length != 4){
+				alert('태어난 연도 4자리를 입력해주세요.');
+				$('#btnChkId').focus();
+				return false;
 			}else if(!$("#email1").val()){
 				alert('이메일을 입력하세요');
 				$("#email1").focus();
