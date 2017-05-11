@@ -83,8 +83,18 @@ $(document).ready(function(){
 	
 	$("#cancle1").click(function() {
 		location.href="<c:url value='../../index2.do'/>"
-	})
-	
+	});
+
+});
+
+</script>
+
+<script>
+var $checkedList = $("form[name=kNo] input[type=checkbox]").prop("selected", true);
+
+$.each($checkedList , function() {
+    alert($(this).text());
+    
 });
 
 </script>
@@ -115,7 +125,7 @@ $(document).ready(function(){
 				<label for="name">성명</label> 
 				<span>${vo.mName}</span> 
 			</div>
-			<div>
+			<div>	
 				<label for="userid">회원ID</label> 
 				<span>${sessionScope.userid}</span>
 			</div>

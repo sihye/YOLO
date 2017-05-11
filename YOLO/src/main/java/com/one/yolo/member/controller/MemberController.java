@@ -437,13 +437,13 @@ public class MemberController {
 			return "mypage/myedit/myedit";
 		}
 		@RequestMapping(value="/myedit/myedit.do", method=RequestMethod.POST)
-		public String myedit_post(@ModelAttribute MemberVO memberVo,
+		public String myedit_post(@ModelAttribute MemberVO vo,
 				@RequestParam(value="mEmail3" ,required=false) String email3,
 				@RequestParam int[] kno,
 				HttpSession session, Model model){
-			logger.info("회원수정 처리, 파라미터 vo={}", memberVo);
+			logger.info("회원수정 처리, 파라미터 vo={}", vo);
 			String userid=(String) session.getAttribute("userid");
-			memberVo.setmUserid(userid);
+			vo.setmUserid(userid);
 
 			for(int i:kno){
 				logger.info("kno="+i);
@@ -455,54 +455,54 @@ public class MemberController {
 			//체크박스 처리
 			switch(kno.length){
 			case 1:
-				memberVo.setkNo1(kno[0]);
+				vo.setkNo1(kno[0]);
 				break;
 			case 2:
-				memberVo.setkNo1(kno[0]);
-				memberVo.setkNo2(kno[1]);
+				vo.setkNo1(kno[0]);
+				vo.setkNo2(kno[1]);
 				break;
 			case 3:
-				memberVo.setkNo1(kno[0]);
-				memberVo.setkNo2(kno[1]);
-				memberVo.setkNo3(kno[2]);
+				vo.setkNo1(kno[0]);
+				vo.setkNo2(kno[1]);
+				vo.setkNo3(kno[2]);
 				break;
 			}
 
-			logger.info("kNo1"+memberVo.getkNo1());
-			logger.info("kNo2"+memberVo.getkNo2());
+			logger.info("kNo1"+vo.getkNo1());
+			logger.info("kNo2"+vo.getkNo2());
 			
 			//1
-			logger.info("회원수정 처리, 파라미터 vo={}", memberVo);
+			logger.info("회원수정 처리, 파라미터 vo={}", vo);
 			
 			//2
 			
 					//휴대폰 입력하지 않은 경우 처리
-					String hp2=memberVo.getmTel2();
-					String hp3=memberVo.getmTel3();
+					String hp2=vo.getmTel2();
+					String hp3=vo.getmTel3();
 					if(hp2==null || hp2.isEmpty() || hp3==null || hp3.isEmpty()){
-						memberVo.setmTel1("");
-						memberVo.setmTel2("");
-						memberVo.setmTel3("");
+						vo.setmTel1("");
+						vo.setmTel2("");
+						vo.setmTel3("");
 					}
 
 					//이메일 입력하지 않은 경우 처리
-					String email1=memberVo.getmEmail1();
+					String email1=vo.getmEmail1();;
 
 					if(email1==null || email1.isEmpty()){
-						memberVo.setmEmail2(""); 
+						vo.setmEmail2(""); 
 					}else{
 						//직접입력인 경우 
-						if(memberVo.getmEmail2().equals("etc")){
+						if(vo.getmEmail2().equals("etc")){
 							if(email3 !=null && !email3.isEmpty()){
-								memberVo.setmEmail2(email3);
+								vo.setmEmail2(email3);
 							}else{
-								memberVo.setmEmail1("");
-								memberVo.setmEmail2("");
+								vo.setmEmail1("");
+								vo.setmEmail2("");
 							}
 						}
 					}
-
-					int cnt = memberService.updateMember(memberVo);
+					logger.info("vvvooooo"+vo);
+					int cnt = memberService.updateMember(vo);
 					String msg="", url="";
 					if(cnt>0){
 						msg="회원정보 수정";

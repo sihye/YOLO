@@ -147,7 +147,7 @@
 		select *from operatorMemberView order by m_no
 	</select>
 	
-	<update id="memberUpdate" parameterType="MemberVO">
+	<update id="updateMember" parameterType="MemberVO">
 		 <choose>
 			<when test="kNo2==0 and kNo3==0">
 			update member set m_email1=#{mEmail1},m_email2=#{mEmail2},m_birth=#{mBirth},m_gender=#{mGender},m_address=#{mAddress},m_addressdetail=#{mAddressdetail},
