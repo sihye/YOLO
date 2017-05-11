@@ -150,28 +150,28 @@
 	<update id="updateMember" parameterType="MemberVO">
 		 <choose>
 			<when test="kNo2==0 and kNo3==0">
-			update member set m_email1=#{mEmail1},m_email2=#{mEmail2},m_birth=#{mBirth},m_gender=#{mGender},m_address=#{mAddress},m_addressdetail=#{mAddressdetail},
+			update member set m_email1=#{mEmail1},m_email2=#{mEmail2},m_birth=#{mBirth},m_gender=#{mGender},m_address=#{mAddress,jdbcType=VARCHAR},m_addressdetail=#{mAddressdetail},
 								k_no1=#{kNo1},m_tel1=#{mTel1},m_tel2=#{mTel2},m_tel3=#{mTel3},
-								q_questionno=#{qQuestionno},m_questionanswer=#{mQuestionanswer}
+								q_questionno=#{qQuestionno},m_questionanswer=#{mQuestionanswer,jdbcType=VARCHAR}
 			where m_userid=#{mUserid}
 			</when>
 			<when test="kNo2==0 and kNo3!=0">
-			update member set m_email1=#{mEmail1},m_email2=#{mEmail2},m_birth=#{mBirth},m_gender=#{mGender},m_address=#{mAddress},m_addressdetail=#{mAddressdetail},
+			update member set m_email1=#{mEmail1},m_email2=#{mEmail2},m_birth=#{mBirth},m_gender=#{mGender},m_address=#{mAddress,jdbcType=VARCHAR},m_addressdetail=#{mAddressdetail},
 								k_no1=#{kNo1},k_no3=#{kNo3},m_tel1=#{mTel1},m_tel2=#{mTel2},m_tel3=#{mTel3},
-								q_questionno=#{qQuestionno},m_questionanswer=#{mQuestionanswer}
+								q_questionno=#{qQuestionno},m_questionanswer=#{mQuestionanswer,jdbcType=VARCHAR}
 			where m_userid=#{mUserid}
 			</when>
 			<when test="kNo2!=0 and kNo3==0">
-			update member set m_email1=#{mEmail1},m_email2=#{mEmail2},m_birth=#{mBirth},m_gender=#{mGender},m_address=#{mAddress},m_addressdetail=#{mAddressdetail},
+			update member set m_email1=#{mEmail1},m_email2=#{mEmail2},m_birth=#{mBirth},m_gender=#{mGender},m_address=#{mAddress,jdbcType=VARCHAR},m_addressdetail=#{mAddressdetail},
 								k_no1=#{kNo1},k_no2=#{kNo2},m_tel1=#{mTel1},m_tel2=#{mTel2},m_tel3=#{mTel3},
-								q_questionno=#{qQuestionno},m_questionanswer=#{mQuestionanswer}
+								q_questionno=#{qQuestionno},m_questionanswer=#{mQuestionanswer,jdbcType=VARCHAR}
 			where m_userid=#{mUserid}
 			</when>
 			
 			<when test="kNo2!=0 and kNo3!=0">
-			update member set m_email1=#{mEmail1},m_email2=#{mEmail2},m_birth=#{mBirth},m_gender=#{mGender},m_address=#{mAddress},m_addressdetail=#{mAddressdetail},
+			update member set m_email1=#{mEmail1},m_email2=#{mEmail2},m_birth=#{mBirth},m_gender=#{mGender},m_address=#{mAddress,jdbcType=VARCHAR},m_addressdetail=#{mAddressdetail},
 								k_no1=#{kNo1},k_no2=#{kNo2},k_no3=#{kNo3},m_tel1=#{mTel1},m_tel2=#{mTel2},m_tel3=#{mTel3},
-								q_questionno=#{qQuestionno},m_questionanswer=#{mQuestionanswer}
+								q_questionno=#{qQuestionno},m_questionanswer=#{mQuestionanswer,jdbcType=VARCHAR}
 			where m_userid=#{mUserid}
 			</when>
 			<otherwise>

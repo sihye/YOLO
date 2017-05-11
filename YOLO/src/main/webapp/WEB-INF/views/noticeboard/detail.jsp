@@ -4,7 +4,30 @@
 <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 <!--파일 이미지  -->
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#file1").click(function(){
+			fileDownload($("#fileName1").val(), $("#oFileName1").val());
+		});
+		$("#file2").click(function(){
+			fileDownload($("#fileName2").val(), $("#oFileName2").val());
+		});
+		$("#file3").click(function(){
+			fileDownload($("#fileName3").val(), $("#oFileName3").val());
+		});
+	});
+	
+	function fileDownload(fileName, oFileName){
+		 var url = $("#context").val() + "/noticeboard/download.do";
+         inputHtmls = "<input type='text' name='fileName' value='"+ fileName +"'>"
+         inputHtmls += "<input type='text' name='oFileName' value='"+ oFileName +"'>"
+         $('<form action="'+ url +'" method="post">'+inputHtmls+'</form>').appendTo('body').submit();	
+		
+	}
+</script>
 </head>
+
+
 	
 <div class="col-md-10">
 	<div class="col-md-2" align="left"></div>
@@ -49,17 +72,27 @@
 					 
 					<span class="col-md-10">
 					<c:if test="${!empty uv1.fFilename }">
-						<a href="<c:url value='/noticeboard/download.do?no=${uv1.fOriginalfilename}'/>">
+						<span id="file1" style="cursor: pointer;">
 						<i class="fa fa-file-o" aria-hidden="true">
-						${uv1.fOriginalfilename }(${uv1.fFilesize }byte)</i></a>
+						${uv1.fOriginalfilename }(${uv1.fFilesize }byte)</i></span>
 					</c:if>	
 					<c:if test="${!empty uv2.fFilename }">	
-						<i class="fa fa-file-o" aria-hidden="true"> ${uv2.fOriginalfilename }(${uv2.fFilesize }byte)</i>
+						<span id="file2" style="cursor: pointer;">
+						<i class="fa fa-file-o" aria-hidden="true"> ${uv2.fOriginalfilename }(${uv2.fFilesize }byte)</i></span>
 					</c:if>	
 					<c:if test="${!empty uv3.fFilename }">
-						<i class="fa fa-file-o" aria-hidden="true"> ${uv3.fOriginalfilename }(${uv3.fFilesize }byte)</i>
+						<span id="file3" style="cursor: pointer;">
+						<i class="fa fa-file-o" aria-hidden="true"> ${uv3.fOriginalfilename }(${uv3.fFilesize }byte)</i></span>
 					</c:if>	
 					</span> 
+					<input type="hidden" id="fileName1" value= "${uv1.fFilename }">
+					<input type="hidden" id="oFileName1" value= "${uv1.fOriginalfilename }">
+					<input type="hidden" id="fileName2" value= "${uv2.fFilename }">
+					<input type="hidden" id="oFileName2" value= "${uv2.fOriginalfilename }">
+					<input type="hidden" id="fileName3" value= "${uv3.fFilename }">
+					<input type="hidden" id="oFileName3" value= "${uv3.fOriginalfilename }">
+					<input type="hidden" id="context" value="${pageContext.request.contextPath}">
+					
 				</div>
 			</td>
 			<td></td>

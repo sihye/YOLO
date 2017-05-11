@@ -1,11 +1,12 @@
 package com.one.yolo.noticeboard.controller;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,13 +17,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.one.yolo.common.FileDownloadUtil;
 import com.one.yolo.common.FileUploadWebUtil;
 import com.one.yolo.common.PaginationInfo;
+import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
 import com.one.yolo.member.model.MemberService;
-import com.one.yolo.member.model.MemberVO;
-import com.one.yolo.common.SearchVO;
 import com.one.yolo.noticeboard.model.NoticeboardService;
 import com.one.yolo.noticeboard.model.NoticeboardVO;
 import com.one.yolo.upfile.model.UpfileService;
@@ -45,6 +47,9 @@ public class NoticeboardController {
 	
 	@Autowired
 	private MemberService memberService;  
+	
+	@Resource(name="fileUploadProperties")
+	private Properties fileProperties;
 
 	@RequestMapping("/list.do")
 	public String noticeboardlist(@ModelAttribute SearchVO searchVo, Model model) {
@@ -347,6 +352,12 @@ public class NoticeboardController {
 		model.addAttribute("url", url);
 
 		return "common/message";
+	}
+	
+	@RequestMapping(value = "/download.do", method = RequestMethod.POST)
+	public @ResponseBody void fileDownload(HttpServletRequest request, HttpServletResponse response, @RequestParam String fileName, @RequestParam String oFileName, Model model) throws Exception {
+		String filePath = fileProperties.getProperty("file.upload.path.test");
+		FileDownloadUtil.download(request, response, filePath +"\\" +fileName, oFileName);
 	}
 
 }

@@ -160,7 +160,7 @@ $(document).ready(function() {
 
 
 
-function pageFunc(curPage){
+<%-- function pageFunc(curPage){
 	document.frmPage.currentPage.value=curPage;
 	frmPage.submit();
 }
@@ -260,7 +260,7 @@ a{
 	
 	
   
-	<%-- <form class="form-inline" role="form" name="frm1" id="frm1" method="post" action='<c:url value="/admin/operatorInsert.do"/>' enctype="multipart/form-data">
+	<form class="form-inline" role="form" name="frm1" id="frm1" method="post" action='<c:url value="/admin/operatorInsert.do"/>' enctype="multipart/form-data">
 	  <div class="form-group">
 	  </div>
 	  <div class="form-group">
@@ -282,7 +282,7 @@ a{
 		<input type="submit" id="btSubmit" value="검색">
 		
 	  </div>
-	</form> --%>
+	</form>
 	<div class="divList">
 	<div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->
@@ -352,8 +352,10 @@ a{
 	
 	
 </div>
-</form>
+</form> --%>
 
+
+<%@include file="../noticeboard/list.jsp" %>
 
 
 
