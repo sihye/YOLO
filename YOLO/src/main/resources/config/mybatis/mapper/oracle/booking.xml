@@ -22,24 +22,13 @@ where PM_NO=#{pmNo}
 	</select>
 	
 	<select id="selMemBybook" parameterType="BookingVO" resultType="hashmap">
-select *
-		from
-		(
-		    select rownum as RNUM ,LIST.*
-		    from
-		    (
-		        select * from booking b left join member m
-on b.BK_USERID=m.M_USERID left join payment p
-on b.BK_NO = p.BK_NO	       
-				where bk_bdate=#{bkBdate}
-				and bk_time= #{bkTime}
-		        order by bk_date
-		    )LIST
-		)		
-		<![CDATA[
-		where RNUM>#{firstRecordIndex}
-		and RNUM <=#{firstRecordIndex} + #{recordCountPerPage}
-		]]>
+		select * from booking b left join member m
+		on b.BK_USERID=m.M_USERID left join payment p
+		on b.BK_NO = p.BK_NO 
+		where bk_bdate=#{bkBdate}
+		and bk_time=#{bkTime}
+		and sc_no=#{scNo}
+		order by bk_date
 	</select>
 	
 	

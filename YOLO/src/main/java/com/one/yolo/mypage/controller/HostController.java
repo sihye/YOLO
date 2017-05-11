@@ -157,7 +157,7 @@ public class HostController {
 	
 	@RequestMapping("/selMem.do")
 	@ResponseBody
-	public List<Object> selMem(@ModelAttribute BookingVO vo){
+	public List<Map<String, Object>> selMem(@ModelAttribute BookingVO vo){
 		//페이징 처리
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(Utility.BLOCKSIZE);
@@ -172,7 +172,7 @@ public class HostController {
 		List<Object> alist=new ArrayList<Object>();
 		alist.add(pagingInfo);
 		alist.add(map);
-		return alist;
+		return map;
 	}
 	
 	

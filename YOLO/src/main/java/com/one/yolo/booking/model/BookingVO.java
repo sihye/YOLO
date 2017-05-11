@@ -17,7 +17,7 @@ public class BookingVO extends SearchVO{
 
 	private int bkNo;
 	private String bk_Userid;
-	private String scNo;
+	private int scNo;
 	private Timestamp bkDate;
 	private String bkBdate;
 	private String bkTime;
@@ -38,10 +38,10 @@ public class BookingVO extends SearchVO{
 	public void setBk_Userid(String bk_Userid) {
 		this.bk_Userid = bk_Userid;
 	}
-	public String getScNo() {
+	public int getScNo() {
 		return scNo;
 	}
-	public void setScNo(String scNo) {
+	public void setScNo(int scNo) {
 		this.scNo = scNo;
 	}
 	public Timestamp getBkDate() {

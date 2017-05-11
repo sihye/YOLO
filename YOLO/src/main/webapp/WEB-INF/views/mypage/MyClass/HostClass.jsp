@@ -37,9 +37,10 @@
 				$("#claName").change(function(){
 					$("#dateSel").find("option").remove();
 					$("#timeSel").find("option").remove();
-
+					$('#info').siblings().remove();
 					
-					var cla=$(this).val();
+					/* var cla=$(this).val(); */
+					//클래스 select
 					$.ajax({
 						url:'<c:url value="/mypage/MyClass/claSel.do"/>',
 						type:"POST",
@@ -52,6 +53,7 @@
 			    			$("#edit").prop('href','<c:url value="/class/edit.do?cNo='+res.cNo+'"/>')
 			    			$("#schEdit").prop('href','<c:url value="/class/schEdit.do?cNo='+res.cNo+'"/>')
 			    			$("#del").prop('href','<c:url value="/class/delete.do?cNo='+res.cNo+'"/>')
+			    			$("#cNo").val(res.cNo);
 			    		},
 			    		error:function(xhr, status, error){
 			    			alert('클래스 불러오기 실패!.');
@@ -60,6 +62,7 @@
 			    		}			    		
 					})
 					
+					//스케줄 날짜 select
 					$.ajax({
 						url:'<c:url value="/mypage/MyClass/schSel.do"/>',
 						type:"POST",
@@ -76,12 +79,20 @@
 			    			history.back();
 			    		}			    		
 					})
+										
+				})
+				
+				$("#dateSel").change(function(){
+					$("#timeSel").find("option").remove();
+					$('#info').siblings().remove();
+					//스케줄 시간 select
 					$.ajax({
 						url:'<c:url value="/mypage/MyClass/time.do"/>',
 						type:"POST",
-			    		data:'cNo='+$(this).val(),	    		
+			    		data:'cNo='+$("#cNo").val(),	    		
 			    		success:function(res){
-			    			$("#timeSel").append("<option>시간선택하기</option>");
+			    			$("#scNo").val(res.scNo)
+			    			$("#timeSel").append("<option id='timeOption'>시간선택하기</option>");
 			    			$("#timeSel").append("<option>"+res.scStarttime1+"~"+res.scEndtime1+"</option>");
 			    			if(res.scStarttime2!=null&&res.scStarttime2!=''){
 			    				$("#timeSel").append("<option>"+res.scStarttime2+"~"+res.scEndtime2+"</option>");
@@ -97,18 +108,10 @@
 			    		}			    		
 					})
 					
-					/* if($("#bkBdate").val()!=null&&$("#bkBdate").val()!=''&&$("#bkTime").val()!=null&&$("#bkTime").val()!=''){ */
-					
-						
-					
-				})
-				
-				$("#dateSel").change(function(){
-					$("#bkBdate").val($(this).val())
 					
 				})
 				$("#timeSel").change(function(){
-					$("#info").find("td").remove();
+					$('#info').siblings().remove();
 					$("#bkTime").val($(this).val())
 					if($("#bkBdate").val()!='0'&&$("#bkTime").val()!='0'){
 						var formData = $("#multiForm").serialize();
@@ -118,10 +121,8 @@
 							data : formData,	    		
 				    		success:function(res){
 				    			var i=0;
-				    			$.each(res, function(i, item) {
-				    				alert("d")
-				    				if(res[1]!=null){
-				    					$.each(res[1], function(i, map) {
+				    			$.each(res, function(i, map) {
+				    						$("#info").find("TR").remove();
 				    						$("#searchCondition").val(map['searchCondition'])	
 					    					var time=$.foo(map['BK_DATE'])
 						    				var paychk='';
@@ -134,60 +135,9 @@
 						    				$("#info").after("<TR><td><input type='checkbox' id='chk_"+i+"' name='' value="+map['BK_NO']+"></td><td>"+map['M_NAME']+"</td><td>"+map['M_TEL1']+"-"+map['M_TEL2']+"-"+map['M_TEL3']+"</td><td>"+map['M_EMAIL1']+"@"+map['M_EMAIL2']+"</td><td>"+time+"</td><td>"+map['PM_PAYMENTWAY']+"</td><td>"+paychk+"</td></TR>")
 						    				i++;
 				    					});
-				    					
-				    				}else if(res[0]!=null){
-				    					$("#pagination").append("<c:if test="${pagingInfo.firstPage>1 }"><li><a href="#" aria-label="Previous"onclick="pageFunc(${pagingInfo.firstPage-1})"> <span
-				    							aria-hidden="true">&laquo;</span></a></li>
-				    				</c:if>
-
-				    				<c:forEach var="i" begin="${pagingInfo.firstPage }"
-				    					end="${pagingInfo.lastPage }">
-				    					<c:if test="${i==pagingInfo.currentPage }">
-				    						<li class="active"><a href="#"> ${i}<span class="sr-only">${i }</span></a></li>
-				    					</c:if>
-				    					<c:if test="${i!=pagingInfo.currentPage }">
-				    						<li><a href="#" onclick="pageFunc(${i})">${i}</a></li>
-				    					</c:if>
-				    				</c:forEach>
-
-				    				<!-- 다음 블럭으로 이동 ▶-->
-				    				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
-				    					<li><a href="#" aria-label="Previous"
-				    						onclick="pageFunc(${pagingInfo.lastPage+1})"> <span
-				    							aria-hidden="true">&raquo;</span></a></li>
-				    				</c:if>")
-				    					<c:if test="${pagingInfo.firstPage>1 }">
-				    					<li><a href="#" aria-label="Previous"
-				    						onclick="pageFunc(${pagingInfo.firstPage-1})"> <span
-				    							aria-hidden="true">&laquo;</span></a></li>
-				    				</c:if>
-
-				    				<c:forEach var="i" begin="${pagingInfo.firstPage }"
-				    					end="${pagingInfo.lastPage }">
-				    					<c:if test="${i==pagingInfo.currentPage }">
-				    						<li class="active"><a href="#"> ${i}<span class="sr-only">${i }</span></a></li>
-				    					</c:if>
-				    					<c:if test="${i!=pagingInfo.currentPage }">
-				    						<li><a href="#" onclick="pageFunc(${i})">${i}</a></li>
-				    					</c:if>
-				    				</c:forEach>
-
-				    				<!-- 다음 블럭으로 이동 ▶-->
-				    				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
-				    					<li><a href="#" aria-label="Previous"
-				    						onclick="pageFunc(${pagingInfo.lastPage+1})"> <span
-				    							aria-hidden="true">&raquo;</span></a></li>
-				    				</c:if>
-				    				}
-				    				
-				    				
-							   });
-				    			
 				    		},
 				    		error:function(xhr, status, error){
 				    			alert('멤버 select 실패!.');
-				    			/* console.log(error) */
-				    			/* history.back(); */
 				    		}			    		
 						})
 					}
@@ -211,11 +161,10 @@
 		
 
 			})
-			
 		</script>
 		<br>
-		<input type="text" value="${cla }" >
-		<c:set var="cNo" value="" />
+		<input type="text" id="cNo"  >
+		
 		<%-- <c:if test="${cNo!=0}"> --%>
 		<h4>클래스 상세</h4>
 		<table class="table">
@@ -245,6 +194,7 @@
 				name="searchCondition" value=""> 
 		</form>
 		<form method="post" name="multiForm" id="multiForm" >
+		<input type="text" name="scNo" id="scNo">
 				<table class="searchBox">
 			<caption>조회</caption>
 			<colgroup>
@@ -266,7 +216,7 @@
 				     	 </div>
 					<div class="col-xs-4">
       			<select class="form-control" id="timeSel" name="bkTime">
-      				<option value="0">시간 선택하기</option>
+      				<option value="0" id="timeOption">시간 선택하기</option>
       			</select>
       			<!-- <input type="text" name="bkTime" id="bkTime"> -->
       	</div>
@@ -320,33 +270,7 @@
 	<!-- 페이지 번호 추가 -->
 	<!-- 이전 블럭으로 이동 ◀-->
 	<nav>
-		<ul class="pagination" id="pagination">
-
-			<c:if test="${pagingInfo.firstPage>1 }">
-				<li><a href="#" aria-label="Previous"
-					onclick="pageFunc(${pagingInfo.firstPage-1})"> <span
-						aria-hidden="true">&laquo;</span></a></li>
-			</c:if>
-
-			<c:forEach var="i" begin="${pagingInfo.firstPage }"
-				end="${pagingInfo.lastPage }">
-				<c:if test="${i==pagingInfo.currentPage }">
-					<li class="active"><a href="#"> ${i}<span class="sr-only">${i }</span></a></li>
-				</c:if>
-				<c:if test="${i!=pagingInfo.currentPage }">
-					<li><a href="#" onclick="pageFunc(${i})">${i}</a></li>
-				</c:if>
-			</c:forEach>
-
-			<!-- 다음 블럭으로 이동 ▶-->
-			<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
-				<li><a href="#" aria-label="Previous"
-					onclick="pageFunc(${pagingInfo.lastPage+1})"> <span
-						aria-hidden="true">&raquo;</span></a></li>
-			</c:if>
-
-			<!--  페이지 번호 끝 -->
-		</ul>
+		<ul class="pagination" id="pagination"></ul>
 	</nav>
 	</div>
 		
