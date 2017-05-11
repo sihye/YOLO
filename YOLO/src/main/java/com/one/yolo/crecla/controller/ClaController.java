@@ -321,21 +321,6 @@ public class ClaController {
 
 	}
 	
-	@RequestMapping(value="/searchClass.do", method=RequestMethod.POST)
-	public String searchClass(@RequestParam String search, Model model){
-		logger.info("클래스 검색 페이지 검색어={}",search);
-		
-		List<CategoryGroupVO> gCateList=cService.selCateGroupAll();
-		List<CategoryVO> cateList =cService.selectCateAll();
-		logger.info("☆☆☆gcateList size={}",gCateList.size());
-		
-		model.addAttribute("gCateList", gCateList);
-		model.addAttribute("cateList", cateList);
-		model.addAttribute("search", search);
-		
-		return "class/searchClass";
-	}
-	
 	@RequestMapping(value ="/classBoardWrith.do", method=RequestMethod.GET)
 	public String classBoardWrith(HttpSession session,@RequestParam int cNo,Model model){
 		String userid=(String)session.getAttribute("userid");

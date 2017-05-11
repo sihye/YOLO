@@ -56,7 +56,7 @@
 	<section class="search">
 		<div class="wrapper" ID="SEARCHDIV">
 			<form action="<c:url value='/class/searchClass.do'/>" method="post" name="searchClass" id="searchClass">
-				<input type="text" id="search" name="search" placeholder="What are you looking for?"  autocomplete="off"/>
+				<input type="text" id="search" name="searchKeyword" placeholder="What are you looking for?"  autocomplete="off"/>
 				<input type="submit" id="submit_search" name="submit_search"/>
 			</form>
 			<a href="#" class="advanced_search_icon" id="advanced_search_btn"></a>

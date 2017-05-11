@@ -40,12 +40,23 @@ $( function() {
     $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
       "원 - " + $( "#slider-range" ).slider( "values", 1 )+"원" );
   } );
+  
+function pageFunc(curPage){
+	document.frmPage.currentPage.value=curPage;
+	frmPage.submit();
+}
 </script>
+<form name="frmPage" method="post"
+	action='<c:url value="/class/searchClass.do" />'>
+	<input type="hidden" name="currentPage"> <input type="hidden"
+		name="searchCondition" value="${param.searchCondition }"> <input
+		type="hidden" name="searchKeyword" value="${param.searchKeyword}">
+</form>
 <section class="searchClass">
 	<section class="searchDetail col-md-7" >
 		<form action="" class="" id="" method="post">
 			<div class="condition">
-		 	   <input type="text" class="form-control" placeholder="키워드">
+		 	   <input type="text" class="form-control" placeholder="키워드" value="${param.searchKeyword}">
 			</div>
 			<div class="condition">
 				 <input type="text" class="form-control" placeholder="장소">
@@ -73,8 +84,7 @@ $( function() {
 	<div id="slider-range"></div>
 			</div>
 		</form>
-		<div>
-		<p>검색결과</p>
+		<section class="listings">
 		<div class="wrapper">
 			<ul class="properties_list">
 			<c:forEach var="map" items="${classList }">
@@ -101,7 +111,42 @@ $( function() {
 			</c:forEach>
 			</ul>
 		</div>
-		</div>
+	</section>	<!--  end listing section  -->
+	<div class="divList">
+	<div class="divPage" style="text-align: center">
+	<!-- 페이지 번호 추가 -->
+	<!-- 이전 블럭으로 이동 ◀-->
+	<nav>
+		<ul class="pagination">
+			<c:if test="${pagingInfo.firstPage>1 }">
+				<li><a href="#" aria-label="Previous" 
+				onclick="pageFunc(${pagingInfo.firstPage-1})">
+				<span aria-hidden="true">&laquo;</span></a></li>
+			</c:if>
+
+			<c:forEach var="i" begin="${pagingInfo.firstPage }"
+				end="${pagingInfo.lastPage }">
+				<c:if test="${i==pagingInfo.currentPage }">
+					<li class="active"><a href="#"> ${i}<span class="sr-only">${i }</span></a></li>
+				</c:if>
+				<c:if test="${i!=pagingInfo.currentPage }">
+					<li><a href="#" onclick="pageFunc(${i})">${i}</a></li>
+				</c:if>
+			</c:forEach>
+
+			<!-- 다음 블럭으로 이동 ▶-->
+			<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
+				<li><a href="#" aria-label="Previous" 
+				onclick="pageFunc(${pagingInfo.lastPage+1})">
+				<span aria-hidden="true">&raquo;</span></a></li>			
+			</c:if>
+
+			<!--  페이지 번호 끝 -->
+		</ul>
+	</nav>
+</div>
+
+	
 	</section>
 	<section class="searchMap col-md-5">
 	지도지도

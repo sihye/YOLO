@@ -170,6 +170,52 @@ public class HomeController {
 		
 		return "common/message";
 	}
+
+	@RequestMapping(value="/class/searchClass.do", method=RequestMethod.POST)
+	public String searchClass(Model model,@ModelAttribute SearchVO searchVo,HttpSession session,HttpServletResponse response,Model modle){
+		logger.info(" 화면 보여주기 ,파라미터 searchVO={}",searchVo);
+		
+		List<CategoryGroupVO> gCateList=cService.selCateGroupAll();
+		List<CategoryVO> cateList =cService.selectCateAll();
+		logger.info("☆☆☆gcateList size={}",gCateList.size());
+		
+		String userid = (String)session.getAttribute("userid");
+		//[1] PaginationInfo 객체 생성 
+		//=> firstRecordIndex 를 계산하기 위함
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(6);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 	
+		searchVo.setRecordCountPerPage(6);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		List<Map<String, Object>> classList= claService.selectClassBykNo(searchVo);
+		logger.info("클래스  classList.size()={}",classList.size());
+		int totalRecord = claService.selectClassCount(searchVo);
+		logger.info("클래스 목록 조회-전체레코드 개수조회 결과, totalRecord={}",			
+				totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		List<CategoryGroupVO> gList=cService.selCateGroupAll();
+		List<CategoryVO> cList=cService.selectCateAll();
+		List<Map<String, Object>>bannerList =oService.mainBannerList();
+	
+		
+			modle.addAttribute("gList", gList);
+			modle.addAttribute("cList", cList);
+			modle.addAttribute("bList",bannerList);
+			modle.addAttribute("classList",classList);
+			modle.addAttribute("pagingInfo", pagingInfo);
+			logger.info("glist size={}",gList.size());
+			logger.info("clist size={}",cList.size());	
+			logger.info("classList size={}",classList.size());
+			logger.info("bList size={}",bannerList.size());
+		
+		model.addAttribute("gCateList", gCateList);
+		model.addAttribute("cateList", cateList);
+		
+		return "class/searchClass";
+	}
 	
 }
