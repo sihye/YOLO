@@ -49,13 +49,13 @@
 		<include refid="searchWhere"></include>
 	</select> 	
 	
-	<insert id="insertUse" parameterType="useboardVO">
+	<insert id="insertUseboard" parameterType="useboardVO">
 		<selectKey keyProperty="ubNo" resultType="int" order="BEFORE">
 			select useboard_seq.nextval from dual
 		</selectKey>
 		 insert into useboard
-      	(ub_NO,M_USERID,BG_NO,ub_TITLE,ub_CONTENT)
-      	values(#{ubNo},#{mUserid},3,#{ubTitle},#{ubContent})
+      	(ub_NO,M_USERID,BG_NO,ub_TITLE,ub_CONTENT,ub_TYPE)
+      	values(#{ubNo},#{mUserid},2,#{ubTitle},#{ubContent},#{ubType})
 	</insert>
 	
 	<select id="selectNo" parameterType="int" resultType="useboardVO">

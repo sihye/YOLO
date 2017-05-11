@@ -49,7 +49,9 @@
 					 
 					<span class="col-md-10">
 					<c:if test="${!empty uv1.fFilename }">
-						<i class="fa fa-file-o" aria-hidden="true">${uv1.fOriginalfilename }(${uv1.fFilesize }byte)</i>
+						<a href="<c:url value='/noticeboard/download.do?no=${uv1.fOriginalfilename}'/>">
+						<i class="fa fa-file-o" aria-hidden="true">
+						${uv1.fOriginalfilename }(${uv1.fFilesize }byte)</i></a>
 					</c:if>	
 					<c:if test="${!empty uv2.fFilename }">	
 						<i class="fa fa-file-o" aria-hidden="true"> ${uv2.fOriginalfilename }(${uv2.fFilesize }byte)</i>

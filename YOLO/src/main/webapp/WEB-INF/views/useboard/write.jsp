@@ -37,7 +37,6 @@
 <form id="frmWrite" name="frmWrite" method="post" 
 		action='<c:url value="/useboard/write.do"/>' >
  
-		<%-- <input type="hidden" name="bgNo" value="${bgNo}" /> --%>
         <div class="col-md-12">
 	            <label class="col-md-1 control-label" for="ubTitle">제목</label>
 	            <span class="col-md-11">  
@@ -65,9 +64,10 @@
         <div align="left" class="col-md-4"></div>
         	<label value="Type">게시판분류</label>
 	        <select name="ubType" id="ubType" title="게시판분류" style="height: 25px">
-	        <option value="1">자주묻는 질문</option>  
-	        <option value="2">이용 관련</option> 
-	        <option value="3">결제 관련</option>
+		        <option value="1">자주묻는 질문</option>  
+		        <option value="2">이용 관련</option> 
+		        <option value="3">결제 관련</option>
+			</select>
             <input class="btn btn-primary" type = "submit" value="등록"/>
             <input class="btn btn-primary" type = "Button" value="글목록" 
             onclick

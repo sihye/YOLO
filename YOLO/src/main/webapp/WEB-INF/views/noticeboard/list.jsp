@@ -9,6 +9,10 @@
 	}
 </script>
 
+
+
+
+
 <!-- 페이징 처리를 위한 form 시작-->
 		<form name="frmPage" method="post"
 			action='<c:url value="/noticeboard/list.do"/>'>
