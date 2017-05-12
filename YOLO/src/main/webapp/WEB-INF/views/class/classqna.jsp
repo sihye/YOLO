@@ -57,10 +57,8 @@
 		$("#cqSecretcheck").click(function() {
 			if($(this).is(":checked")){
 				$(this).val('Y')
-				alert($(this).val());
 			}else{
 				$(this).val('N')
-				alert($(this).val());
 			}
 			
 		});

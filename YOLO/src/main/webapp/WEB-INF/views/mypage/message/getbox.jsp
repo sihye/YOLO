@@ -174,12 +174,8 @@
 						var msg="";
 						var msCheck="";
 						if(res>0){
-							msg="메세지 확인";
 							msCheck="확인";
-						}else{
-							msg="메세지 확인 실패";
 						}
-						alert(msg);
 						$("#td"+trNo).html(msCheck);
 					},
 					error:function(xhr, status, error){
