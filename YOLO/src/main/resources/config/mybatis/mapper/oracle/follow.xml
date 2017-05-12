@@ -14,7 +14,7 @@
 		from ( 
 		select rownum as RNUM ,LIST.* from ( 
 		select * from FOLLOWCLASS
-		where FL_NO=#{flNo}
+		where FL_NO=#{flNo} and C_DEL='N'
 		 )LIST ) 
 		<![CDATA[
 		 where RNUM>#{firstRecordIndex} and 
@@ -25,7 +25,7 @@
 	<select id="selectTotalRecord" parameterType="SearchVO"
 		resultType="int">
 		select count(*) from FOLLOWCLASS
-		where FL_NO=#{flNo}
+		where FL_NO=#{flNo} and C_DEL='N'
 	</select>
 	<delete id="deleteFollow" parameterType="int">
 		delete from FOLLOW where

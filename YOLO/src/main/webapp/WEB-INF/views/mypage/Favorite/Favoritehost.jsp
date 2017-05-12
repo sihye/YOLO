@@ -65,13 +65,13 @@ function pageFunc(curPage){
 		</thead>
 	</table>
 	<c:if test="${empty classList}">
-		<h2>선택 호스트 클래스(${param.flWuserid })</h2>
+		<h2>선택 호스트 클래스(${param.flUserid })</h2>
 	<br>	
 		<p>등록된 클래스가 없습니다</p>
 	</c:if>
 	
 	<c:if test="${!empty classList}">
-	<h2>선택 호스트 클래스(${param.flWuserid })</h2>
+	<h2>선택 호스트 클래스(${param.flUserid })</h2>
 	<br>
 	<form method="post"
 		action='<c:url value="/mypage/Favorite/Favoritehost.do" />'>
