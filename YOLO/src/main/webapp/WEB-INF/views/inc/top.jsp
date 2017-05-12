@@ -67,8 +67,6 @@
     	  $('#Login').trigger('click'); 
       }
    }); 
-   
-	   
 
 </script>
 <style type="text/css">
