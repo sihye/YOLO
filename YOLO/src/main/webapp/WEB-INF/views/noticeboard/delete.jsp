@@ -1,35 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp" %>
-
-
-
-
-<style type="text/css">
-	.divForm{
-		margin:20px 0;
-		margin-left: 200px;
-		margin-right: 200px;
-		font-size: 1.5em;	
-	 }
-	/* .divForm form{
-		width:650px;
-	} */
-	.divForm div	{
-		/* clear: both; */
-		border:none;
-		padding: 7px 0;
-		margin: 0;
-		overflow: auto;
-	}	
-	.sp{
-		font-size:0.9em;
-		color:#0056AC;			
-	}
-	.divForm fieldset	{
-		border:0;
-	}
-</style>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	
+<%@include file="../inc/admin/top.jsp" %>
 
 <script type="text/javascript" 
 	src='<c:url value="/jquery/jquery-3.1.1.min.js" />'></script>
@@ -45,8 +20,10 @@
 	
 	
 </script>
-</head>
-<body>
+<div class="container" id="cont1">
+
+<div class="col-md-10">
+
 <div class="divForm">
 	<h2>공지사항 삭제화면</h2>
 	<br>
@@ -58,15 +35,20 @@
 	        <div>           
 	        	<span class="sp">${param.no }번 글을 삭제하시겠습니까?</span>                        
 	        </div>
+	        <br><br>
 	        <div class="center">
 	            <input class="btn btn-default" type ="submit"  value="삭제" />
-	            <input class="btn btn-default" type = "Button" value="글목록" 
-           onclick ="location.href='<c:url value="/noticeboard/list.do"/>'" />
-	        </div>
+	             <input class="btn btn-primary" type = "Button" value="글목록" 
+            onclick
+           ="location.href='<c:url value="/admin/noticeBoard.do"/>'" /> 
+           </div>
 	    </fieldset>
     </form>
 </div>
+</div>
+</div>
 
-<%@ include file="../inc/bottom.jsp" %>	
+
+<%@ include file="../inc/admin/bottom.jsp" %>	
 </body>
 </html>

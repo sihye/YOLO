@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-
-
-<%@ include file="../inc/admin/top.jsp" %>
-
+<%@ include file="boardtop.jsp" %>
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 <!--파일 이미지  -->
 
 <script type="text/javascript">
@@ -31,10 +25,8 @@
 		
 	}
 </script>
+</head>
 
-
-
-<div class="container" id="cont1">
 
 	
 <div class="col-md-10">
@@ -108,13 +100,10 @@
 			<td></td>
 			<td></td>
 		</tr>
-		<tr>
 			<td>내용 : </td>
 			<td>
-			
 			<% pageContext.setAttribute("newLine", "\r\n"); %>
-			${fn:replace(vo.nbContent, newLine, "<br>")}
-		
+			<p> ${fn:replace(vo.nbContent, newLine, "<br>")}</p>
 			</td>
 			<td></td>
 			<td></td>
@@ -124,31 +113,32 @@
 	</tbody>
 	</table>
 
-
-</div>
-</div>
 		<div class="col-md-12">
 		<div class="col-md-1"></div>
 		<div align="center" class="col-md-7">
-			<input class="btn btn-primary" type = "Button" value="수정"
-			 onclick
-           ="location.href='<c:url value="/noticeboard/edit.do?no=${vo.nbNo}"/>'" /> 
-			<input class="btn btn-primary" type = "Button" value="삭제"
-			 onclick
-           ="location.href='<c:url value="/noticeboard/edit.do?no=${vo.nbNo}"/>'" /> 
-           <input class="btn btn-primary" type = "Button" value="글목록" 
+				<%-- <a href="<c:url value='/noticeboard/edit.do?no=${vo.nbNo}'/>">수정</a> |
+		      	<a href="<c:url value='/noticeboard/delete.do?no=${vo.nbNo}'/>">삭제</a> | --%>
+		      	<%-- 	<a href="<c:url value='/noticeboard/reply.do?no=${vo.nbNo}'/>">답변</a> | --%>
+		      	<%-- 	<a href="<c:url value='/noticeboard/list.do'/>">목록</a>	 --%>
+		      
+		       <input class="btn btn-primary" type = "Button" value="글목록" 
             onclick
-           ="location.href='<c:url value="/admin/noticeBoard.do"/>'" /> 
+           ="location.href='<c:url value="/noticeboard/list.do"/>'" /> 
+           
+           
 		</div>      	 			
 		</div>	
 
 </div>
+</div>
 
 
 
-<%@ include file="../inc/admin/bottom.jsp" %>	
 
 
+<%@ include file="boardbottom.jsp" %>	
+</body>
+</html>
 
 
 

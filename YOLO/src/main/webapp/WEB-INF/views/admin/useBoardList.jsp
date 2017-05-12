@@ -212,163 +212,156 @@ a{
 
 
 
-<div class="container" id="cont1">
+<script type="text/javascript">
+	function pageFunc(curPage) {
+		document.frmPage.currentPage.value=curPage;
+		frmPage.submit();
+	}
+	 function typeFunc(type) {
+		document.frmPage.ubType.value=type;
+		document.frmPage.currentPage.value=1;
+		if(type == 1) {
+			document.frmPage.action = $("#context").val() + "/useboard/list.do";
+		}
+		if(type == 2) {
+			document.frmPage.action = $("#context").val() + "/useboard/uselist.do";
+		}
+		if(type == 3) {
+			document.frmPage.action = $("#context").val() + "/useboard/paylist.do";
+			///useboard/paylist.do
+		}
+		
+		
+		frmPage.submit(); 
+	} 
+	
+	function showContent($obj) {
+		if($("pre", $obj).css('display') === 'none') {
+			$("pre", $obj).show();
+		}
+		else {
+			$("pre", $obj).hide();
+		}
+	}
 
-<!-- 페이징 처리를 위한 form 태그 -->
-<form name="frmPage" method="post"
-	action='<c:url value="/admin/operatorMember.do" />'>
-	<input type="hidden" name="currentPage"> <input type="hidden"
-		name="searchCondition" value="${param.searchCondition }"> <input
-		type="hidden" name="searchKeyword" value="${param.searchKeyword}">
-	<input type="hidden" name="searchStartDate"
-		value="${param.searchStartDate}"> <input type="hidden"
-		name="searchEndDate" value="${param.searchEndDate}">
+	
+</script>
+
+<style>
+ul{
+   list-style:none;
+   padding-left:0px;
+   }
+</style>
+
+
+<!-- 페이징 처리를 위한 form 시작-->
+<form name="frmPage" method="post" 
+	action='<c:url value="/useboard/list.do"/>'>
+	<input type="hidden" name="currentPage">
+	<input type="hidden" name="searchCondition" value="${param.searchCondition }">
+	<input type="hidden" name="searchKeyword" value="${param.searchKeyword}">
+	<input type="hidden" name="ubType" value="${param.ubType}">
+	<input type="hidden" id="context" value="${pageContext.request.contextPath}">
 </form>
 
+<c:if test="${!empty param.searchKeyword }">
+	<p>검색어 : ${param.searchKeyword}, 
+	${pagingInfo.totalRecord}건 검색되었습니다</p>
+</c:if>
 
-	<h2>공지사항 관리</h2>
+<style>
+.tab-pane table{width:100%;}
+</style>
 
-    <br><br>
-
-	<table class="table table-hover">
-  		<tr>
-  			<th>NO</th>
-  			<th>제목</th>
-  			<th>작성일</th>
-  			<th>조회수</th>
-  			<th>업로드파일1</th>
-  			<th>업로드파일2</th>
-  			<th>업로드파일3</th>
-  		</tr>
-  		<c:if test="${!empty alist }">
-  		<c:forEach var="MAP" items="${alist }">
-  		<tr>
-  			<td>${MAP["NB_NO"] }</td>
-  			<td>
-  			<a href						
-					='<c:url value="/noticeboard/detail.do?no=${MAP['NB_NO'] }"/>'>
-  			<c:if test="${fn:length(MAP['NB_TITLE'])>20 }">
-						${fn:substring(MAP["NB_TITLE"], 0, 20) }..
-			</c:if>
-			<c:if test="${fn:length(MAP['NB_TITLE'])<=20 }">
-						${MAP["NB_TITLE"]}
-			</c:if>
-			</a>
-  			<td><fmt:formatDate value='${MAP["NB_REGDATE"] }' pattern="yyyy-MM-dd"/></td>
- 			<td>${MAP["NB_READCOUNT"]}</td>
- 			<td>${MAP["F_1"]}</td>
- 			<td>${MAP["F_2"]}</td>
- 			<td>${MAP["F_3"]}</td>
-		</c:forEach>  		
-		</c:if>
-	</table>	
-			<c:if test="${empty alist }">
-				<span class="center">검색에 대한 정보가 존재하지 않습니다.</span>
-			</c:if>
-	
-	<hr>
-	<div style="text-align: right;">
-					<a href="<c:url value='/noticeboard/write.do'/>">공지사항추가</a>
-		</div>
-	
-	
-  
-	<%-- <form class="form-inline" role="form" name="frm1" id="frm1" method="post" action='<c:url value="/admin/operatorInsert.do"/>' enctype="multipart/form-data">
-	  <div class="form-group">
-	  </div>
-	  <div class="form-group">
-	   <select id="Select1" name="kNo" class="selectpicker" style="height:30px">
-	   <option value="">
-	   	검색 목록
-	   </option>
-	   <option value="M_USERID">
-	   ID 검색
-	   </option>
-	   <option value="M_NAME">
-	   이름 검색
-	   </option>
-		</select>
-		</div>
-	   <div class="form-group">
-	   <input type="text"> 
+<div class="col-md-10">
+	<div class="container">
+		<div class="col-md-2" align="left"></div>
+		<h2>이용안내</h2>
 		
-		<input type="submit" id="btSubmit" value="검색">
+		  <br><br>
 		
-	  </div>
-	</form> --%>
-	<div class="divList">
-	<div class="divPage" style="text-align: center">
-	<!-- 페이지 번호 추가 -->
-	<!-- 이전 블럭으로 이동 ◀-->
-	<nav>
-		<ul class="pagination">
-			<c:if test="${pagingInfo.firstPage>1 }">
-				<li><a href="#" aria-label="Previous" 
-				onclick="pageFunc(${pagingInfo.firstPage-1})">
-				<span aria-hidden="true">&laquo;</span></a></li>
-			</c:if>
+		
+		<div class="col-md-10">
+			<ul class="nav nav-tabs nav-justified">
+				<li class="active"><a role="tab" data-toggle="tab" 
+				onclick="typeFunc(1);"> 자주묻는 질문</a></li>
+				<li><a role="tab" data-toggle="tab" 
+				onclick="typeFunc(2);">이용 관련</a></li>
+				<li><a role="tab" data-toggle="tab" 
+				onclick="typeFunc(3);">결제 관련</a></li>
+			</ul>
 
-			<c:forEach var="i" begin="${pagingInfo.firstPage }"
-				end="${pagingInfo.lastPage }">
-				<c:if test="${i==pagingInfo.currentPage }">
-					<li class="active"><a href="#"> ${i}<span class="sr-only">${i }</span></a></li>
-				</c:if>
-				<c:if test="${i!=pagingInfo.currentPage }">
-					<li><a href="#" onclick="pageFunc(${i})">${i}</a></li>
-				</c:if>
-			</c:forEach>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="/useboard/list.do">
+							
+						
 
-			<!-- 다음 블럭으로 이동 ▶-->
-			<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage}">
-				<li><a href="#" aria-label="Previous" 
-				onclick="pageFunc(${pagingInfo.lastPage+1})">
-				<span aria-hidden="true">&raquo;</span></a></li>			
-			</c:if>
+						<!-- <div role="tabpanel" class="tab-pane" id="use"> -->
 
-			<!--  페이지 번호 끝 -->
-		</ul>
-	</nav>
-</div>
-</div>
-	
-	
-	
-	
-	
-	
-	<div class ="divlist">
-	<form  id="frm1" name ="frm1" method="post">
-		<select id="searchCondition" name="searchCondition" style="height: 26px">
-			<option value="NB_TITEL" <c:if test="${param.searchCondition eq 'NB_TITEL' }" >selected="selected"</c:if>>
-			제목 검색
-			</option>
-			<option value="NB_REGDATE" <c:if test="${param.searchCondition eq 'NB_REGDATE' }" >selected="selected"</c:if>>
-			작성일자 검색
-			</option> 
-		</select>
-		<input type="text"  id = "searchKeyword" name="searchKeyword" style="height: 25px" value="${param.searchKeyword}">
-			<div class="clearfix">
-							<!-- 시작일 -->
-							<span class="dset"> <input type="text"
-								class="datepicker inpType" name="searchStartDate"
-								id="searchStartDate" value="${param.searchStartDate}">
-							</span> <span class="demi">~</span>
-							<!-- 종료일 -->
-							<span class="dset"> <input type="text"
-								class="datepicker inpType" name="searchEndDate"
-								id="searchEndDate" value="${param.searchEndDate}">
-							</span>
+							
+					
+						<div class="tab-content">
+							
+						</div>
+						<br>
+						<br>
+						
+						<ul id="ulTemp">
+							<c:forEach var="vo" items="${uList }" varStatus="status">
+								<li onclick="showContent($(this))">
+									<span>0${status.index+1}  ${vo.ubTitle}</span>
+									<pre style="display: none;">${vo.ubContent}</pre>
+								</li>
+							</c:forEach>
+						</ul>
+						
+
+						<!-- div role="tabpanel" class="tab-pane" id="pay"> -->
+						
 			</div>
-			
-		<input type="submit" value="검색"  style="height: 25px">
-	
-	</form>
-		
-		
+		</div>
 	</div>
 </div>
+						
+						
+						
+						
 
-</form>
+
+<div class="col-md-10">
+	<div class="col-md-2" align="left"></div>
+	<div class="col-md-10">
+   	<form name="frmSearch" method="post" align="center"
+   		action="<c:url value='/useboard/list.do' />" >
+        <select name="searchCondition" class="btn btn-default">
+            <option value="ub_title" 
+            	<c:if test="${'ub_title'==param.searchCondition }">
+            		selected            	
+            	</c:if>
+            	>제목</option>
+            <option value="ub_content" class="btn btn-default"
+            	<c:if test="${'ub_content'==param.searchCondition }">
+            		selected            	
+            	</c:if>
+            >내용</option>
+        </select>
+        
+        
+        <input class="btn btn-default" type="text" name="searchKeyword" title="검색어 입력" placeholder="Use Search..."
+        	value="${param.searchKeyword }">
+        <input class="btn btn-primary" type="submit" value="검색">
+
+		<!-- <input type="submit" value="검색"> -->
+		<div style="text-align:right;">
+		    <a href="<c:url value='/useboard/write.do'/>" >이용안내추가</a>
+		</div>
+
+    </form>
+</div>
+</div>
+</div>
 
 
 

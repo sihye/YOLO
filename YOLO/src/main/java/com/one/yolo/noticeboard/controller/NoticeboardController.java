@@ -141,7 +141,7 @@ public class NoticeboardController {
 		int cnt = noticeboardService.updateReadCount(no);
 		logger.info("조회수 증가 결과, cnt={}", cnt);
 
-		return "redirect:/noticeboard/detail.do?no=" + no;
+		return "redirect:/noticeboard/detail2.do?no=" + no;
 	}
 
 	@RequestMapping(value = "detail.do")
@@ -168,6 +168,33 @@ public class NoticeboardController {
 		model.addAttribute("vo", vo);
 
 		return "noticeboard/detail";
+
+	}
+	
+	@RequestMapping(value = "detail2.do")
+	public String detail2(@RequestParam(value = "no", defaultValue = "0") int no, @ModelAttribute UpfileVO upfileVo,
+			Model model) {
+		logger.info("공지사항 글 상세보기, 파라미터 no={}", no);
+		if (no == 0) {
+			model.addAttribute("msg", "잘못된 url입니다");
+			model.addAttribute("url", "/noticeboard/list.do");
+
+			return "common/message";
+		}
+
+		NoticeboardVO vo = noticeboardService.selectNo(no);
+		logger.info("공지사항 상세보기 vo={}", vo);
+
+		UpfileVO uv1 = upFileservice.selectByFno(vo.getfNo1());
+		UpfileVO uv2 = upFileservice.selectByFno(vo.getfNo2());
+		UpfileVO uv3 = upFileservice.selectByFno(vo.getfNo3());
+
+		model.addAttribute("uv1", uv1);
+		model.addAttribute("uv2", uv2);
+		model.addAttribute("uv3", uv3);
+		model.addAttribute("vo", vo);
+
+		return "noticeboard/detail2";
 
 	}
 

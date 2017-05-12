@@ -157,9 +157,9 @@ ${pagingInfo.totalRecord}건 검색되었습니다</p>
 	
 			<!-- <input type="submit" value="검색"> -->
 
-				<div style="text-align: right;">
+				<%-- <div style="text-align: right;">
 					<a href="<c:url value='/noticeboard/write.do'/>">공지사항추가</a>
-				</div>
+				</div> --%>
 			</form>
 	</div>
 </div>

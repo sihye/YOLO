@@ -24,6 +24,7 @@ import com.one.yolo.admin.model.OperAtorVO;
 import com.one.yolo.category.model.CategoryService;
 import com.one.yolo.category.model.CategoryVO;
 import com.one.yolo.common.ExcelUtil;
+import com.one.yolo.common.FileUploadWebUtil;
 import com.one.yolo.common.PaginationInfo;
 import com.one.yolo.common.SearchVO;
 import com.one.yolo.common.Utility;
@@ -35,6 +36,8 @@ import com.one.yolo.noticeboard.model.NoticeboardVO;
 import com.one.yolo.payment.model.PaymentService;
 import com.one.yolo.upfile.model.UpfileService;
 import com.one.yolo.upfile.model.UpfileVO;
+import com.one.yolo.useboard.model.UseboardService;
+import com.one.yolo.useboard.model.UseboardVO;
 
 
 @Controller
@@ -44,8 +47,14 @@ public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
 	@Autowired
+	private UseboardService useboardService;
+	
+	@Autowired
+	private FileUploadWebUtil fileUploadWebUtil;
+	
+	@Autowired
 	private UpfileService upFileservice;
-
+	
 	@Autowired
 	private OperAtorService operAtorservice;
 
@@ -412,6 +421,35 @@ public class AdminController {
 		model.addAttribute("pagingInfo", pagingInfo);
 
 		return "admin/noticeBoardList";
+	}
+	
+	@RequestMapping(value="/useBoard.do")
+	public String Useboardlist(@ModelAttribute UseboardVO vo , Model model){
+		/*logger.info("Useboardlist화면목록 ");*/
+		logger.info("Useboardlist화면목록  vo={},  type={}", vo,vo.getUbType());
+		
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCKSIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		pagingInfo.setCurrentPage(vo.getCurrentPage());	
+		
+		vo.setRecordCountPerPage(Utility.RECORDCOUNT_PERPAGE);
+		vo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		List<UseboardVO> uList = useboardService.selectUseboard(vo);
+		logger.info("조회 결과 uList.size()={}", uList.size());
+		logger.info("조회 결과 uList={}", uList);
+		
+		int totalRecord =useboardService.selectTotalRecord(vo);
+		logger.info("조회 전체레코드 개수조회 결과, totalRecord={}",
+				totalRecord);
+		
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		model.addAttribute("uList",uList);
+		model.addAttribute("pagingInfo",pagingInfo);
+		
+		return "admin/useBoardList";
 	}
 
 	@RequestMapping("/operatorHost.do")

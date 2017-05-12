@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="boardtop.jsp" %>
-<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">	 
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
+<%@include file="../inc/admin/top.jsp" %>
+<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>		 
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -26,6 +29,8 @@
 		uiColor : '',
 	});
 </script>
+
+<div class="container" id="cont1">
 
 <div class="col-md-10">
 <h2>공지사항수정</h2>
@@ -68,9 +73,10 @@
      	<br>
      	<div align="left" class="col-md-5"></div>
      	<div class="col-md-5" align="center">
-            <input class="btn btn-default" type = "submit" value="수정"/>
-            <input class="btn btn-default"type = "Button" value="목록" 
-   onclick="location.href='<c:url value="/noticeboard/list.do"/>'" />         
+            <input class="btn btn-primary" type = "submit" value="수정"/>
+            <input class="btn btn-primary" type = "Button" value="글목록" 
+            onclick
+           ="location.href='<c:url value="/admin/noticeBoard.do"/>'" />       
         </div>
         </div>
   
@@ -122,6 +128,6 @@
 </div>
 
 
-<%@ include file="boardbottom.jsp" %> 
+<%@ include file="../inc/admin/bottom.jsp" %>
 </body>
 </html>

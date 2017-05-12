@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="boardtop.jsp" %>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
+<%@include file="../inc/admin/top.jsp" %>
 
 
 
@@ -67,6 +70,6 @@
     </form>
 </div>
 
-<%@ include file="../noticeboard/boardbottom.jsp" %>	
+<%@include file="../inc/admin/bottom.jsp" %>	
 </body>
 </html>
