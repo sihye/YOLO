@@ -72,7 +72,7 @@ hr{
 				<input name="userid" id="userid" value="${cookie.ck_userid.value}" class="form-control" placeholder="아이디" >
 			<td></tr>
 			<tr><td>
-				<input name="pwd" id="pwd" class="form-control" placeholder="비밀번호" >
+				<input name="pwd" id="pwd" type="password" class="form-control" placeholder="비밀번호" >
 			<td></tr>
 			<tr><td>
 				<button name="login" class="button" value="로그인" onclick="frmFunc()">로그인</button>

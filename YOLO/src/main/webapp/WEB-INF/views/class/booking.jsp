@@ -334,8 +334,8 @@ margin-top: 10px;
 				})
 			});
 		</script>
-		<input type="text" value="" name="pmNo" id="pmNo">
-		<input type="text" value="${claVo.cNo}" name="cNo" id="cNo"  >
+		<input type="hidden" value="" name="pmNo" id="pmNo">
+		<input type="hidden" value="${claVo.cNo}" name="cNo" id="cNo"  >
 	</div>
 </div>
 </form>

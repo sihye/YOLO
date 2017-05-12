@@ -491,9 +491,13 @@ name="searchEndDate" value="${param.searchEndDate}">
       </div>
 		
       <div class="modal-footer">
-      	<input type="text" name="bkBdate" id="bkBdate"  style="color: black;">
-      	<input type="text" name="bkTime" id="bkTime" style="color: black;">
-      	<input type="text"  name="scNo" id="scNo"  style="color: black;">
+      	<div class="col-md-5">
+      	<input type="text" class="form-control" name="bkBdate" id="bkBdate"  style="color: black;">
+      	</div>
+      	<div class="col-md-5">
+      	<input type="text" class="form-control" name="bkTime" id="bkTime" style="color: black;">
+      	</div>
+      	<input type="hidden"  name="scNo" id="scNo"  style="color: black;">
       	<button type="submit" class="btn btn-default" id="pay">예약하기</button>
         <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
         
