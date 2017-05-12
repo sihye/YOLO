@@ -64,7 +64,37 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("html").mouseover(function() {	
+	$("#msgUserid").keyup(function() {	
+		if($("#msgUserid").val()==''){		
+			$('#chkId').val("");
+			$("#error").hide();
+		}else{
+			$.ajax({
+				url:'<c:url value="/mypage/message/ajaxCheckId.do" />',
+				type:'post',
+				data:'msgUserid='+$("#msgUserid").val(),
+				success:function(res){
+					var msg="";
+					var chkId="";
+					if(res){
+						//아이디가 이미 존재
+						msg="보내기 가능한 아이디 입니다";
+						chkId="Y";
+					}else{
+						msg="존재하지 않는 아이디 입니다";
+											
+					}
+					$("#error").html(msg);
+					$("#chkId").val(chkId);
+					$("#error").show();
+				},
+				error:function(xhr,status,error){
+					alert("error"+error);
+				}
+			});
+		}
+	});
+	$("html").click(function() {	
 		if($("#msgUserid").val()==''){		
 			$('#chkId').val("");
 			$("#error").hide();
