@@ -209,7 +209,7 @@ public class ClaController {
 		String kName=cService.selCateNameByNo(vo.getkNo());
 		
 		//팔로우 확인
-		List<FollowVO> followList = followService.selectFollow(vo.getmUserid());
+		List<FollowVO> followList = followService.selectFollow(userid);
 		logger.info("팔로우 목록 followList={}",followList);
 		if(userid!=null&&!userid.isEmpty()){
 			FollowVO followVo = new FollowVO();
