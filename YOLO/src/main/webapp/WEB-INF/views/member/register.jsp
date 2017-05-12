@@ -61,7 +61,7 @@
 				$('#btnChkId').focus();
 				return false;
 			}else if($("#birth1").val().length != 4){
-				alert('태어난 연도 4자리를 입력해주세요.');
+				alert('태어난 연도를 4자리로 입력해주세요.');
 				$('#btnChkId').focus();
 				return false;
 			}else if(!$("#email1").val()){
