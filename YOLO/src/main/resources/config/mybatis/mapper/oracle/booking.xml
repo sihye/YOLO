@@ -31,6 +31,12 @@ where PM_NO=#{pmNo}
 		order by bk_date
 	</select>
 	
+	<update id="complete" parameterType="String">
+		update payment
+		set PM_COMPLETECHECK='Y'
+		where pm_no=#{pmNo}
+	</update>
+	
 	
 
 

@@ -26,5 +26,9 @@ public class BookingServiceImpl implements BookingService {
 	public List<Map<String, Object>> selMemBybook(BookingVO vo) {
 		return bDAO.selMemBybook(vo);
 	}
+	@Override
+	public int payComplete(String pmNo) {
+		return bDAO.complete(pmNo);
+	}
 
 }

@@ -37,6 +37,8 @@
 		    			var f=0;
 		    			var age='';
 		    			var n=0;
+		    			
+		    			
 		    			var total=0;
 		    			var a=new Array();
 		    			$.each(res, function(i, list){
@@ -182,22 +184,72 @@
 		    		}			    		
 				})
 			}}
-			if($("#type").val()=='2'){
+			 if($("#type").val()=='2'){
 				if($("#sales").val()=='m'){
 					$.ajax({
 						url:'<c:url value="/mypage/MyClass/staSel.do"/>',
 						type:"GET",		    		
 			    		success:function(res){
+			    			$.each(res, function(i, list){
+			    				
+			    			})
 			    			
+			    			
+			    			Highcharts.chart('container', {
+
+			                    title: {
+			                        text: '클래스별 월별 매출 조회'
+			                    },
+
+			                    subtitle: {
+			                        text: 'Source: thesolarfoundation.com'
+			                    },
+
+			                    yAxis: {
+			                        title: {
+			                            text: '매출액'
+			                        }
+			                    },
+			                    legend: {
+			                        layout: 'vertical',
+			                        align: 'right',
+			                        verticalAlign: 'middle'
+			                    },
+
+			                    plotOptions: {
+			                        series: {
+			                            pointStart: 2010
+			                        }
+			                    },
+
+			                    series: [{
+			                       	
+			                    	name: 'Installation',
+			                        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+			                    }, {
+			                        name: 'Manufacturing',
+			                        data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+			                    }, {
+			                        name: 'Sales & Distribution',
+			                        data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+			                    }, {
+			                        name: 'Project Development',
+			                        data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+			                    }, {
+			                        name: 'Other',
+			                        data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+			                    }]
+
+			                });
 			    		},error:function(xhr, status, error){
 			    			alert('매출 통계 실패!.');
 			    			console.log(error)
 			    			
 			    		}			    		
 					})
-				}
-			}
+				} 
 			
+			}
 		})
 		//차트
 		
@@ -205,7 +257,7 @@
 </script>
 <form action="<c:url value='/mypage/MyClass/stats.do'/>" method="post" id="frm">
 <div class="col-xs-4">
-<input type="text" id="staCno" name="cNo">
+<input type="hidden" id="staCno" name="cNo">
 <select class="form-control "  id="type" name="type">
 	<option>통계 옵션을 선택하세요.</option>
 	<option value="1">예약현황 통계</option>
@@ -226,9 +278,21 @@
 	<option value="m">월별</option>
 	<option value="y">연도별</option>
 </select>
+
 </div>
-<br>
-<button type="button" id="submit">통계보기</button>
+<button type="button" id="submit" class="btn btn-primary">통계보기</button>
+<script type="text/javascript">
+	$(function() {
+		$("#submit").click(function() {
+			if($("#staCno").val()==''||$("#booking").val()==''||$("#sales").val()==''){
+				alert("통계조건을 선택하세요!")
+				$("#claName").focus()
+				return false;
+			}
+		})
+	})
+	
+</script>
 
 </form>
 <hr>

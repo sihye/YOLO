@@ -33,6 +33,8 @@ import com.one.yolo.crecla.model.ClassService;
 import com.one.yolo.crecla.model.ClassVO;
 import com.one.yolo.crecla.model.ScheduleVO;
 import com.one.yolo.mypage.model.HostClassService;
+import com.one.yolo.payment.model.PaymentListVO;
+import com.one.yolo.payment.model.PaymentVO;
 
 @Controller
 @RequestMapping("/mypage/MyClass")
@@ -217,6 +219,26 @@ public class HostController {
 		List<Map<String, Object>> slist=hostService.selForStatsSales(userid);
 		logger.info("slist size={}",slist);
 		return slist;
+	}
+	
+	@RequestMapping("/payComplete.do")
+	public String payComp(@RequestParam String[]paychk, Model model){
+		logger.info("입금확인 vo={}",paychk.length);
+		int cnt=0;
+		if(paychk!=null){
+			for(String pmNo:paychk){
+				if(pmNo!=null&&!pmNo.isEmpty()){
+					cnt=bookService.payComplete(pmNo);
+				}
+			}
+		}
+		
+		if(cnt>0){
+			model.addAttribute("msg", "입금처리 되었습니다.");
+			model.addAttribute("url", "/mypage/MyClass/HostClass.do");
+		}
+		return"common/message";
+		
 	}
 	
 	

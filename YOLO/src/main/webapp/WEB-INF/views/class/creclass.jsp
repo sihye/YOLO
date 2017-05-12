@@ -227,6 +227,7 @@ body, #fullpage {
 		enctype="multipart/form-data" method="post" id="claCre" name="claCre">
 
 		<div id="fullpage">
+			
 			<div class="section container" id="section0">
 				<h1>01. 클래스 기본정보</h1>
 				<br>
@@ -330,6 +331,16 @@ body, #fullpage {
 							name="cGoal" placeholder="">
 					</div>
 				</div>
+				<label for="mBankname" class="col-sm-2 control-label">은행명</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="mBankname"
+							name="mBankname" placeholder="은행명">
+					</div>
+				<label for="mAccount" class="col-sm-2 control-label">은행명</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="mAccount"
+							name="mAccount" placeholder="ex) 312-0005-1006-31">
+					</div>
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">상세설명
 					</label>

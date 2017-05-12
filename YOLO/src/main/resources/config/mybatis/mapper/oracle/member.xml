@@ -270,4 +270,11 @@
 	</if>
 	where m_no=#{mNo}
 	</update>
+	
+	<update id="hostUpdate" parameterType="MemberVO" >
+		update member
+			set MG_NO2=3,M_BANKNAME=#{mBankname},M_ACCOUNT=#{mAccount}
+			where m_userid=#{mUserid}
+	</update>
+	
 </mapper>

@@ -46,4 +46,6 @@ public interface MemberService {
 	public int operatorMemberUpdate(MemberVO vo);
 	public int operatorHostUpdate(MemberVO vo);
 	
+	public int hostUpdate(MemberVO vo);
+	
 }

@@ -2,7 +2,9 @@ package com.one.yolo.crecla.model;
 
 import java.sql.Timestamp;
 
-public class ClassVO {
+import com.one.yolo.member.model.MemberVO;
+
+public class ClassVO extends MemberVO {
 	/*CREATE TABLE Class (
    C_NO         NUMBER        NOT NULL, -- 클래스번호
    M_USERID     VARCHAR2(500) NOT NULL, -- 호스트아이디
@@ -181,8 +183,19 @@ public class ClassVO {
 				+ cDetailinfo + ", cPlace=" + cPlace + ", cplacedetail=" + cplacedetail + ", cMainimg=" + cMainimg
 				+ ", cDetailimg1=" + cDetailimg1 + ", cDetailimg2=" + cDetailimg2 + ", cDetailimg3=" + cDetailimg3
 				+ ", cPaymentway=" + cPaymentway + ", cMaxperson=" + cMaxperson + ", cRegdate=" + cRegdate + ", cHits="
-				+ cHits + ", cDel=" + cDel + ", cCoordinate=" + cCoordinate + "]";
+				+ cHits + ", cDel=" + cDel + ", cCoordinate=" + cCoordinate + ", getMgNo2()=" + getMgNo2()
+				+ ", getmNo()=" + getmNo() + ", getmPwd()=" + getmPwd() + ", getmName()=" + getmName()
+				+ ", getmEmail1()=" + getmEmail1() + ", getmEmail2()=" + getmEmail2() + ", getmAddress()="
+				+ getmAddress() + ", getmAddressdetail()=" + getmAddressdetail() + ", getmBankname()=" + getmBankname()
+				+ ", getmAccount()=" + getmAccount() + ", getmJoindate()=" + getmJoindate() + ", getmLeavedate()="
+				+ getmLeavedate() + ", getkNo1()=" + getkNo1() + ", getkNo2()=" + getkNo2() + ", getkNo3()=" + getkNo3()
+				+ ", getmTel1()=" + getmTel1() + ", getmTel2()=" + getmTel2() + ", getmTel3()=" + getmTel3()
+				+ ", getqQuestionno()=" + getqQuestionno() + ", getmQuestionanswer()=" + getmQuestionanswer()
+				+ ", getmBirth()=" + getmBirth() + ", getmGender()=" + getmGender() + ", getmReason()=" + getmReason()
+				+ ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ "]";
 	}
+	
 	
 	
 	

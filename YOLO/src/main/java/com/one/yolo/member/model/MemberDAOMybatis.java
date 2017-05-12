@@ -119,6 +119,12 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport implements MemberDAO{
 	public int operatorHostUpdate(MemberVO vo) {
 		return getSqlSession().update(namespace+".operatorHostUpdate",vo);
 	}
+
+	@Override
+	public int hostUpdate(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return getSqlSession().update(namespace+".hostUpdate", vo);
+	}
 	
 	
 	

@@ -146,6 +146,12 @@ public class MemberServiceImpl implements MemberService{
 	public int operatorHostUpdate(MemberVO vo) {
 		return memberDao.operatorHostUpdate(vo);
 	}
+
+	@Override
+	public int hostUpdate(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return memberDao.hostUpdate(vo);
+	}
 	
 	
 	

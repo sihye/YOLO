@@ -5,8 +5,13 @@
 <script type="text/javascript">
 	$(function() {
 		$("#del").click(function() {
-			confirm("정말 삭제하시겠습니까? 삭제된 클래스는 복구되지 않습니다.")
+			if(confirm("정말 삭제하시겠습니까? 삭제된 클래스는 복구되지 않습니다.")==true){
+				return true;
+			}else{
+				return false;
+			}
 		})
+
 	})
 
 </script>
@@ -90,6 +95,7 @@
 			    		data:'cNo='+$("#cNo").val(),	    		
 			    		success:function(res){
 			    			$("#scNo").val(res.scNo)
+			    			$("#term").append("기간: "+res.scStartdate+"~"+res.scEnddate)
 			    			$("#timeSel").append("<option id='timeOption'>시간선택하기</option>");
 			    			$("#timeSel").append("<option>"+res.scStarttime1+"~"+res.scEndtime1+"</option>");
 			    			if(res.scStarttime2!=null&&res.scStarttime2!=''){
@@ -130,7 +136,7 @@
 						    					paychk='결제진행중';
 						    				}
 						    				
-						    				$("#info").after("<TR><td><input type='checkbox' id='chk_"+i+"' name='' value="+map['BK_NO']+"></td><td>"+map['BK_USERID']+"</td><td>"+map['M_TEL1']+"-"+map['M_TEL2']+"-"+map['M_TEL3']+"</td><td>"+map['M_EMAIL1']+"@"+map['M_EMAIL2']+"</td><td>"+time+"</td><td>"+map['PM_PAYMENTWAY']+"</td><td>"+paychk+"</td></TR>")
+						    				$("#info").after("<TR><td><input type='checkbox' id='chk_"+i+"' name='paychk' value="+map['BK_NO']+"></td><td>"+map['BK_USERID']+"</td><td>"+map['M_TEL1']+"-"+map['M_TEL2']+"-"+map['M_TEL3']+"</td><td>"+map['M_EMAIL1']+"@"+map['M_EMAIL2']+"</td><td>"+time+"</td><td>"+map['PM_PAYMENTWAY']+"</td><td>"+paychk+"</td></TR>")
 						    				i++;
 				    					});
 				    		},
@@ -161,7 +167,7 @@
 			})
 		</script>
 		<br>
-		<input type="text" id="cNo"  >
+		<input type="hidden" id="cNo"  >
 		
 		<%-- <c:if test="${cNo!=0}"> --%>
 		<h4>클래스 상세</h4>
@@ -172,13 +178,15 @@
 					<td id="cName" style="text-align:center; padding: 15px 0 0 0"></td>
 					<td rowspan="2"><a id="edit" class="btn btn-info" >클래스수정</a>					
 					<a class="btn btn-info" id="del" >클래스 삭제</a>
-					<a id="schEdit" class="btn btn-info" >클래스 스케줄 수정</a></td>
+					</td>
 					
 				</tr>
 				<tr>
-					<td>
+					<td id="term" style="    text-align: center;">
+						<!-- <a id="schEdit" class="btn btn-info" >클래스 스케줄 수정</a> -->
 						
 					</td>
+					
 				</tr>			
 				<tr>
 					<td colspan="3">신청자리스트</td>
@@ -192,7 +200,7 @@
 				name="searchCondition" value=""> 
 		</form>
 		<form method="post" name="multiForm" id="multiForm" >
-		<input type="text" name="scNo" id="scNo">
+		<input type="hidden" name="scNo" id="scNo">
 				<table class="searchBox">
 			<caption>조회</caption>
 			<colgroup>
@@ -256,13 +264,26 @@
 			<tfoot>
 				<tr>
 					<td colspan="6" style="text-align: center">
-						<button id="btDeleteMulti" class="btn btn-primary" type="button">이메일 보내기</button>
-						<button id="btDeleteMulti" class="btn btn-primary" type="button">입금 확인</button>
+						<button  class="btn btn-primary" type="button" id="email">이메일 보내기</button>
+						<button  class="btn btn-primary" type="button" id="payCom">입금 확인</button>
 					</td>
 				</tr>
 			</tfoot>
 		</table>
 		</form>
+		<script type="text/javascript">
+			$(function() {
+				$("#payCom").click(function() {
+					console.log("입금확인")
+					$("#frmList").prop("action","<c:url value='/mypage/MyClass/payComplete.do'/>");
+					$("#frmList").submit();
+					
+					/* $("#frmList").prop("action", 
+    				"<c:url value='/mypage/message/deleteMultiGet.do'/>");
+    				$("#frmList").submit(); */
+				})
+			})
+		</script>
 		
 		<div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->

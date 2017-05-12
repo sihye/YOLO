@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +49,8 @@ import com.one.yolo.favoriteclass.model.FavoriteClassService;
 import com.one.yolo.favoriteclass.model.FavoriteClassVO;
 import com.one.yolo.follow.model.FollowService;
 import com.one.yolo.follow.model.FollowVO;
+import com.one.yolo.member.model.MemberService;
+import com.one.yolo.member.model.MemberVO;
 import com.one.yolo.upfile.model.UpfileService;
 import com.one.yolo.upfile.model.UpfileVO;
 
@@ -76,7 +79,8 @@ public class ClaController {
 	private FollowService followService;
 	@Autowired
 	private FavoriteClassService faService;
-
+	@Autowired
+	private MemberService memService;
 	//클래스 생성 페이지 보여주기
 	@RequestMapping(value="/clacre.do", method=RequestMethod.GET)
 	public String showClaCre_get(Model model){
@@ -92,6 +96,7 @@ public class ClaController {
 	
 	//클래스 인서트
 	@RequestMapping(value="/clacre.do", method=RequestMethod.POST)
+	@Transactional
 	public String insertCla(HttpSession session,HttpServletRequest req,@ModelAttribute ScheduleVO sVO , @ModelAttribute ClassVO vo, Model model){
 		logger.info("클래스 insert param vo={}",vo);
 		String userid=(String)session.getAttribute("userid");		
@@ -147,6 +152,14 @@ public class ClaController {
 		}
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
+		
+		//멤버 호스트로 변경
+		MemberVO memVO=new MemberVO();
+		memVO.setmUserid((String)session.getAttribute("userid"));
+		memVO.setmAccount(vo.getmAccount());
+		memVO.setmBankname(vo.getmBankname());
+		memVO.setMgNo2(3);
+		memService.hostUpdate(memVO);
 		return "common/message";
 	}
 	
@@ -255,44 +268,30 @@ public class ClaController {
 		
 		
 		SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd/E");
-		logger.info(sdf2.format(sDay));
 		String sday=sdf2.format(sDay);
 		Calendar c1 = Calendar.getInstance();
 		Calendar c2 = Calendar.getInstance();
 		//Calendar 타입으로 변경 add()메소드로 1일씩 추가해 주기위해 변경
 		c1.setTime( sDay );
 		c2.setTime( eDay );
-		logger.info("c1={},c2={}",sdf2.format(c1.getTime()),sdf2.format(c2.getTime()));
 		List<Date> dayList=new ArrayList<Date>();
 		//시작날짜와 끝 날짜를 비교해, 시작날짜가 작거나 같은 경우 출력
 		while( c1.compareTo( c2 ) !=1 ){
 			dayList.add(c1.getTime());
-			logger.info("while add={}",sdf2.format(c1.getTime()));
 			//시작날짜 + 1 일
 			c1.add(Calendar.DATE, 1);
-			logger.info("while +1={}",sdf2.format(c1.getTime()));
 			
 		}
-		for(int i=0;i<dayList.size();i++){
-			logger.info("for=>> daylist={}",sdf2.format(dayList.get(i).getTime()));
-		}
-
-		logger.info("daylist size={}",dayList.size());
+		
 		String week=schVo.getScWeek();
-		logger.info("week={}",week);
 		String[] weeks=week.split(",");
-		logger.info("weeks[0]={}, size={}",weeks[0], weeks.length);
 		List<String> daysList=new ArrayList<String>();
 		for(Date c:dayList){
 			String day=sdf2.format(c);
-			logger.info("tostring day={}",day);
 			String[] days=day.split("/");
-			logger.info("days[1]={}",days[1]);
 			for(int i=0;i<weeks.length;i++){
-				logger.info("weeks[i]={}",weeks[i]);
 				if(days[1].equals(weeks[i])){
 					daysList.add(day);
-					logger.info("add되는 day={}",day);
 				}
 			}
 		}

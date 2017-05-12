@@ -27,5 +27,9 @@ public class BookingDAOMybatis extends SqlSessionDaoSupport implements BookingDA
 		System.out.println("alist size="+alist.size());
 		return getSqlSession().selectList(nameSpace+".selMemBybook", vo);
 	}
+	@Override
+	public int complete(String pmNo) {
+		return getSqlSession().update(nameSpace+".complete", pmNo);
+	}
 
 }

@@ -8,4 +8,5 @@ public interface BookingService {
 	public int bookNum(int scNo);
 	public Map<String, Object> selForHostByPmNo(String pmNo);
 	public List<Map<String, Object>>selMemBybook(BookingVO vo);
+	public int payComplete(String pmNo);
 }
