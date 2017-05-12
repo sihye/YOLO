@@ -245,7 +245,7 @@
 			<c:forEach var="map" items="${alist }">
 				<tr>
 					<td>${map["CQ_NO"] }</td>
-					<td><a href='<c:url value="/class/claDetail.do?cNo=${map['C_NO'] }"/>'>${map["C_NAME"] }</a></td>
+					<td><a href='<c:url value="/class/claDetail.do?cNo=${map['C_NO'] }&boardtype=qna"/>'>${map["C_NAME"] }</a></td>
 					<td><a href="#"  onclick="onFunc(${i})">
 					<c:if test="${fn:length(map['CQ_CONTENT'])>15 }">
 							${fn:substring(map["CQ_CONTENT"], 0, 15) }...</a></td>
