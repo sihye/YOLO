@@ -232,7 +232,7 @@
 				<tr>
 					<td>${map["CB_NO"] }</td>
 					<td>
-					<a href='<c:url value="/class/claDetail.do?cNo=${map['C_NO'] }"/>'>${map["C_NAME"] }</a>
+					<a href='<c:url value="/class/boardDetail.do?cbNo=${map['CB_NO'] }"/>'>${map["C_NAME"] }</a>
 					</td>
 					<c:if test="${fn:length(map['CB_CONTENT'])>15 }">
 							<td>${fn:substring(map["CB_CONTENT"], 0, 15) }...</a></td>
