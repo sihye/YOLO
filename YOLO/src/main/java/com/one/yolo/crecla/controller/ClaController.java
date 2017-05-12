@@ -209,9 +209,11 @@ public class ClaController {
 		String kName=cService.selCateNameByNo(vo.getkNo());
 		
 		//팔로우 확인
-		List<FollowVO> followList = followService.selectFollow(userid);
-		logger.info("팔로우 목록 followList={}",followList);
+		
+		
 		if(userid!=null&&!userid.isEmpty()){
+			List<FollowVO> followList = followService.selectFollow(userid);
+			logger.info("팔로우 목록 followList={}",followList);
 			FollowVO followVo = new FollowVO();
 			followVo.setFlUserid(vo.getmUserid());
 			followVo.setFlWuserid(userid);
@@ -237,6 +239,7 @@ public class ClaController {
 			}else{
 				faclassCheck="N";
 			}
+			model.addAttribute("followList",followList);
 			model.addAttribute("faList",faList);
 			model.addAttribute("faclassCheck",faclassCheck);
 			model.addAttribute("followCheck",result);
@@ -301,7 +304,7 @@ public class ClaController {
 		int bookNum=bookService.bookNum(schVo.getScNo());
 		
 		
-		model.addAttribute("followList",followList);
+		
 		model.addAttribute("claVo", vo);
 		model.addAttribute("kName", kName);
 		model.addAttribute("claBoardList",claBoardList);

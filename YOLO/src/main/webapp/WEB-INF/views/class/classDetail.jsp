@@ -430,13 +430,13 @@ name="searchEndDate" value="${param.searchEndDate}">
 				</td></tr>
 				<tr><td style="text-align: center; font-size: 50px;"><p style="color: white;">${claVo.cName}</p></td></tr>
 				<tr><td><span style="color: white; font-size: 24px; padding-top: 200px; ">${claVo.mUserid }
-				<c:if test="${followCheck=='N'}">
+				<c:if test="${followCheck=='N'&&sessionScope.userid!=claVo.mUserid}">
 				<button type="button" class="btn2">
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 							팔로우</button>
 				</c:if>
 				<c:forEach var="followVo" items="${followList}">
-					<c:if test="${followVo.flWuserid == sessionScope.userid }">
+					<c:if test="${followVo.flWuserid == sessionScope.userid &&claVo.mUserid==followVo.flUserid }">
 						<input type="hidden" id="flNo" value="${followVo.flNo }">
 						<button type="button" class="btn3">
 						팔로잉</button>
