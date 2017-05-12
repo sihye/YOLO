@@ -420,7 +420,6 @@ name="searchEndDate" value="${param.searchEndDate}">
 
 	</div>
 	<!-- 아이콘끝 -->
-	
 	<!-- 헤더 위에 기본정보 -->
 	<div id="onHeader">
 		<table>
