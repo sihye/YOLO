@@ -59,13 +59,13 @@
 				<input type="text" id="search" name="searchKeyword" placeholder="What are you looking for?"  autocomplete="off"/>
 				<input type="submit" id="submit_search" name="submit_search"/>
 			</form>
-			<a href="#" class="advanced_search_icon" id="advanced_search_btn"></a>
+			<!-- <a href="#" class="advanced_search_icon" id="advanced_search_btn"></a> -->
 		</div>
 
 		<div class="advanced_search">
 			<div class="wrapper">
-				<span class="arrow"></span>
-				<form action="#" method="post">
+				<!-- <span class="arrow"></span> -->
+				<!-- <form action="#" method="post">
 					<div class="search_fields">
 						<input type="text" class="float" id="check_in_date" name="check_in_date" placeholder="Check In Date"  autocomplete="off">
 
@@ -82,13 +82,13 @@
 					</div>
 					<input type="text" id="keywords" name="keywords" placeholder="Keywords"  autocomplete="off">
 					<input type="submit" id="submit_search" name="submit_search"/>
-				</form>
+				</form> -->
 			</div>
 		</div><!--  end advanced search section  -->
 	</section><!--  end search section  -->
 	<div class="container">
 		<div class="col-md-2"></div>   
-		<div class="dropdown">
+		<%-- <div class="dropdown">
 			<ul class="nav nav-pills">
 				<c:forEach var="gvo" items="${gList}">
 				<li class="dropdown col-md-2"><a data-toggle="dropdown"
@@ -102,7 +102,7 @@
 				</li>
 				</c:forEach>
 			</ul>
-		</div>
+		</div> --%>
 		<div class="col-md-2"></div>
 	</div>
 	<section class="listings">

@@ -95,7 +95,6 @@
 
          <li><a href="${pageContext.request.contextPath}/about.do">About</a></li>
          <li><a href="${pageContext.request.contextPath}/noticeboard/list.do">Notice</a></li>
-         <li><a href="${pageContext.request.contextPath}/useboard/list.do">Guide</a></li>
          <li><a href="${pageContext.request.contextPath}/contact.do">Contact</a></li>
       </ul>
 

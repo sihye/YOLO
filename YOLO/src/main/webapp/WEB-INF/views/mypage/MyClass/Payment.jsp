@@ -267,6 +267,13 @@
 		</tbody>
 	</table>
 </div>
+<script type="text/javascript">
+	$(function() {
+		$(".btn").click(function() {
+
+	})
+	
+</script>
 <div class="divPage" style="text-align: center">
 	<!-- 페이지 번호 추가 -->
 	<!-- 이전 블럭으로 이동 ◀-->

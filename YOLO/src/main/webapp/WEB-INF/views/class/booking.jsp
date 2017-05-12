@@ -205,7 +205,7 @@ margin-top: 10px;
 								    pay_method : 'card',
 								    merchant_uid : 'merchant_' + new Date().getTime(),
 								    name : '주문명:${claVo.cName}',
-								    amount : 100/* ${claVo.cPrice} 테스트100원*/,
+								    amount : ${claVo.cPrice}/* ${claVo.cPrice} 테스트100원*/,
 								    buyer_email : '${memVo.mEmail1}@${memVo.mEmail2}',
 								    buyer_name : '${memVo.mName}',
 								    buyer_tel : '${memVo.mTel1}-${memVo.mTel3}-${memVo.mTel3}'
@@ -246,7 +246,7 @@ margin-top: 10px;
 								    pay_method : 'trans',
 								    merchant_uid : 'merchant_' + new Date().getTime(),
 								    name : '주문명:${claVo.cName}',
-								    amount : 100/* ${claVo.cPrice} 테스트100원*/,
+								    amount : 1000/* ${claVo.cPrice} 테스트100원*/,
 								    buyer_email : '${memVo.mEmail1}@${memVo.mEmail2}',
 								    buyer_name : '${memVo.mName}',
 								    buyer_tel : '${memVo.mTel1}-${memVo.mTel3}-${memVo.mTel3}',
@@ -289,7 +289,7 @@ margin-top: 10px;
 								    pay_method : 'card',
 								    merchant_uid : 'merchant_' + new Date().getTime(),
 								    name : '주문명:${claVo.cName}',
-								    amount : 100/* ${claVo.cPrice} 테스트100원*/,
+								    amount : 1000/* ${claVo.cPrice} 테스트100원*/,
 								    buyer_email : '${memVo.mEmail1}@${memVo.mEmail2}',
 								    buyer_name : '${memVo.mName}',
 								    buyer_tel : '${memVo.mTel1}-${memVo.mTel3}-${memVo.mTel3}'
