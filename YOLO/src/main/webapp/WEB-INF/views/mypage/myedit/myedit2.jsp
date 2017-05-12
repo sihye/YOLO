@@ -1,9 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../../inc/top.jsp" %>
+<%-- <head>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/mainstyle.css" /> 
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/clear.css" /> 
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/layout.css" />  
+ 	<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/mystyle.css" /> 
 
+</head> --%>
 
-
+<head>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/layout.css" />
+</head>
 
 <style>
 	h2{
@@ -16,8 +29,6 @@
 	    color: rgb(63, 148, 7);
 	}
 	
-</style>
-
 </style>
 <scRIPT language=Javascript>
 <!--
@@ -44,8 +55,6 @@
 	/* document.write(maxChecked); */
 </script>
 
-
-
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script type="text/javascript" src='<c:url value="/js/member.js" />'></script>
@@ -54,71 +63,66 @@
 
 
 <script type="text/javascript">
-$(document).ready(function(){
-	$("#name").focus();
-	
-	$("#wr_submit").click(function(){
-		$("#frm1").submit();
-	});
-	
-	$("#frm1").submit(function(){
-		if($("#name").val()==''){
-			alert('이름을 입력하세요');
-			$("#name").focus();
-			return false;
-		}else if(!validate_userid($("#useridreg").val())){
-			alert('아이디는 영문대소문자, 숫자, 언더바만 가능합니다');
-			$("#useridreg").focus();
-			return false;
-		}else if(!$("#pwdreg").val()){
-			alert('비밀번호를 입력하세요');
-			$("#pwdreg").focus();
-			return false;
-		}else if($("#pwdreg").val()!=$("#pwd2").val()){
-			alert('비밀번호가 일치하지 않습니다');
-			$("#pwd2").focus();
-			return false;
-		}else if(!validate_hp($("#hp2").val()) || 
-				!validate_hp($("#hp3").val())){
-			alert('휴대폰은 숫자를 입력하셔야 합니다');
-			$("#hp2").focus();
-			return false;
-		}else if(!$("#email1").val()){
-			alert('이메일을 입력하세요');
-			$("#email1").focus();
-			return false;
-		}else if($("#email2").val()=="etc"){
-			if(!$("#email3").val()){
+	$(document).ready(function(){		
+		$("#frm1").submit(function(){
+			if(!$("#pwdreg").val()){
+				alert('비밀번호를 입력하세요');
+				$("#pwdreg").focus();
+				return false;
+			}else if(!validate_pwd($("#pwdreg").val())){
+				alert('비밀번호는 6자리 이상 영문이나 숫자로 입력해 주셔야 합니다.(대소문자 구별)');
+				$("#pwdreg").focus();
+				return false;
+			}else if($("#pwdreg").val()!=$("#pwd2").val()){
+				alert('비밀번호가 일치하지 않습니다');
+				$("#pwd2").focus();
+				return false;
+			}else if(!validate_hp($("#hp2").val()) || 
+					!validate_hp($("#hp3").val())){
+				alert('휴대폰은 숫자를 입력하셔야 합니다');
+				$("#hp2").focus();
+				return false;
+			}else if(!$("#birth1").val()){
+				alert('생년월일을 입력해 주세요');
+				$('#btnChkId').focus();
+				return false;
+			}else if($("#birth1").val().length != 4){
+				alert('태어난 연도를 4자리로 입력해주세요.');
+				$('#btnChkId').focus();
+				return false;
+			}else if(!$("#email1").val()){
 				alert('이메일을 입력하세요');
-				$("#email3").focus();
+				$("#email1").focus();
+				return false;
+			}else if($("#email2").val()=="etc"){
+				if(!$("#email3").val()){
+					alert('이메일을 입력하세요');
+					$("#email3").focus();
+					return false;
+				}
+				
+			}else if(!$("input:checkbox[id='hobby']").is(":checked") == true){
+				alert("관심사는 하나 이상 체크하셔야 합니다");	
 				return false;
 			}
 			
-		}else if(!$("input:checkbox[id='hobby']").is(":checked") == true){
-			alert("관심사는 하나 이상 체크하셔야 합니다");	
-			return false;
-		}
+			 $("#mAddress").val($("#zipcode").val()+" / "+$("#address").val());
+			 
+			 $("#mBirth").val($("#birth1").val()+$("#birth2").val()+$("#birth3").val());
+			
+		});
+
 		
 		
-		 $("#mAddress").val($("#zipcode").val()+" / "+$("#address").val());
-		 
-		 $("#mBirth").val($("#birth1").val()+$("#birth2").val()+$("#birth3").val());
-		 
-		 $("#qQuestionno").val($("select[name='qQuestionno']").val());
+		
+		$("#cancle1").click(function() {
+			location.href="<c:url value='/index2.do'/>"
+		})
+		
 	});
-
-	$("#btnChkId").click(function(){
-		window.open("<c:url value='../member/checkUserid.do?userid="+$("#useridreg").val()+ "'/>", 'chk',
-		'width=400,height=300,left=10,top=10,location=yes,resizable=yes');
-	});
+	 
 	
-	
-	$("#cancle1").click(function() {
-		location.href="<c:url value='../../index2.do'/>"
-	});
-
-});
-
+	 
 </script>
 
 <script>
@@ -132,7 +136,7 @@ $.each($checkedList , function() {
 </script>
 
 
-	<div class="container" style="margin-top: 40px;">
+<div class="container" style="margin-top: 40px; font-size: 14px;">
 		<div class="row">
 			<div class="col-md-2">
 				<ul class="nav nav-pills nav-stacked">
@@ -144,14 +148,13 @@ $.each($checkedList , function() {
 				</ul>
 			</div>	
 			
-			<br>
-			<h2>회원정보수정</h2>
-			<br>
-			<div class="divForm">
-	<div class="col-md-2" align="left"></div>
-	<div class="col-md-10">
-	<form id="frm1" name="frm1" method="post"
-		action='<c:url value="/member/myedit/myedit.do" />'>
+			<div class="col-md-10">
+				<h2>회원정보수정</h2>
+				<div class="divForm">
+			<!-- <div class="col-md-2" align="left"></div> -->
+			<div class="col-md-12">
+			<form id="frm1" name="frm1" method="post"
+						action='<c:url value="/mypage/myedit/myedit.do" />'>
 
 			<div>
 				<label for="name">성명</label> 
@@ -179,9 +182,9 @@ $.each($checkedList , function() {
 				<input type="text" name="zipcode" id="zipcode" ReadOnly title="우편번호" class="width_80 postcodify_postcode" value="${fn:split(add,'/')[0]}"> 
 				<button type="button" class="btn btn-primary" id="postcodify_search_button" title="새창열림">우편번호 찾기</button><br />
 				<span class="sp1">&nbsp;</span> 
-				<input type="text" name="address" ReadOnly title="주소" class="width_350 postcodify_address" id="address" value="${fn:split(add,'/')[1]}"><br /> 
+				<input type="text" name="address" ReadOnly title="주소" style="width: 55%" class="width_350 postcodify_address" id="address" value="${fn:split(add,'/')[1]}"><br /> 
 				<span class="sp1">&nbsp;</span> 
-				<input type="text" name="mAddressdetail" title="상세주소" class="width_350 postcodify_details" value="${vo.mAddressdetail}">
+				<input type="text" name="mAddressdetail" title="상세주소" style="width: 55%" class="width_350 postcodify_details" value="${vo.mAddressdetail}">
 			</div>
 			<div>
 				<label for="hp1">핸드폰</label>&nbsp; <select name="mTel1" id="hp1"
@@ -513,21 +516,23 @@ $.each($checkedList , function() {
 				<label for="hobby">관심사</label> 3개까지 선택 가능(최소 1개 선택바람)
 			</div>
 			<div>
-				<form action=# method=post name="kNo">
+				<FORM action=# method=post name="kNo">
+				
 				<c:forEach var="cg" items="${cgList }">
-					<label for="hobby">${cg.kgName}</label>	
-					<c:forEach var="c" items="${cList }">
-						<c:if test ="${cg.kgNo == c.kgNo}">
+				<table>
+					<label for="hobby" style="padding-top: 14px">${cg.kgName}</label>	
+					<tr><c:forEach var="c" items="${cList }">
+						<td><c:if test ="${cg.kgNo == c.kgNo}"><br>
 							<input value='${c.kNo}' onclick=CountChecked(this) id="hobby"
-							type=checkbox name="kno">${c.kName}
-						</c:if>
-					</c:forEach><br>
-				</c:forEach><br>
-				</form>
+							type=checkbox name="kno">${c.kName}&nbsp;
+						</c:if></td>
+					</c:forEach></tr>
+					</table>
+				</c:forEach>
+				
+				</FORM>
 			<div> 
 				<input type="hidden" name="mgNo2" id="mgNo2" style="ime-mode: active" value="2">
-				<input type="hidden" name="mName" value="${vo.mName}">
-				<input type="hidden" id="qQuestionno" name="qQuestionno">
 			</div>	
 				
 			</div>
@@ -543,7 +548,7 @@ $.each($checkedList , function() {
 			</div>
 
 			<div class="center">
-				<button type="submit" class="btn btn-primary" id="wr_submit">회원 수정</button>
+				<button type="submit" class="btn btn-primary">회원 수정</button>
 				<button type="button" class="btn btn-primary" id="cancle1">취소</button>	 		
 			</div>
 
@@ -552,9 +557,12 @@ $.each($checkedList , function() {
 		<input type="hidden" name="chkId" id="chkId" >
 
 	</form>
+	
+	
 	</div>
-</div>
-
-</div>
+</div><!--  -->
+				
+		   </div>
+	</div>
 </div>		
 <%@ include file="../mypagebottom.jsp"%>
