@@ -19,7 +19,7 @@ select*from reviewboard;
 
 --관심클래스 조회 뷰
 CREATE OR REPLACE VIEW favoriteclass
-AS select sb.*,c.C_NAME,c.C_PLACE,c.C_PRICE,c.C_PAYMENTWAY
+AS select sb.*,c.C_NAME,c.C_PLACE,c.C_PRICE,c.C_PAYMENTWAY,c_del
 from MEMBER m,CLASS c,SHOPPINGBASKET sb
 where m.M_USERID = sb.SB_USERID
 and c.C_NO = sb.C_NO;
@@ -83,7 +83,7 @@ select*from messagsend;
 CREATE OR REPLACE VIEW FOLLOWCLASS
 AS SELECT f.*,c.*
 FROM FOLLOW  f,CLASS  c
-WHERE f.FL_WUSERID=c.M_USERID;
+WHERE f.FL_USERID=c.M_USERID;
 select*from FOLLOWCLASS;
 select*from follow;
 

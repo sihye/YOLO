@@ -71,7 +71,7 @@ function pageFunc(curPage){
 	</c:if>
 	
 	<c:if test="${!empty classList}">
-	<h2>선택 호스트 클래스(${param.flWuserid })</h2>
+	<h2>선택 호스트 클래스(${param.flUserid })</h2>
 	<br>
 	<form method="post"
 		action='<c:url value="/mypage/Favorite/Favoritehost.do" />'>

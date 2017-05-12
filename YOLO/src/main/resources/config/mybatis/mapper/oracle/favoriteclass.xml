@@ -16,7 +16,7 @@
 		    from
 		    (
 		        select * from favoriteclass 
-		        where SB_USERID=#{userid} 
+		        where SB_USERID=#{userid} and C_DEL='N'
 		    )LIST
 		)	
 		<![CDATA[
@@ -28,7 +28,7 @@
 	<select id="selectTotalRecord" parameterType="SearchVO"
 		resultType="int">
 		select count(*) from favoriteclass 
-		where SB_USERID=#{userid}
+		where SB_USERID=#{userid} and C_DEL='N'
 	</select>
 	<delete id="deleteNoFavoriteClass" parameterType="int">
 		delete from SHOPPINGBASKET where SB_NO=#{no}
