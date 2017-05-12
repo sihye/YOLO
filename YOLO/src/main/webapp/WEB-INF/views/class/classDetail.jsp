@@ -335,13 +335,13 @@ name="searchEndDate" value="${param.searchEndDate}">
 	<!-- 헤더아이콘 -->
  	<div class="header-wrap" id="headericon">
  		<!-- 찜하기 -->
- 		<c:if test="${faclassCheck=='N'}">
+ 		<c:if test="${faclassCheck=='N'&&sessionScope.userid!=claVo.mUserid}">
 			<a href="#" id="shoppingbasket">
 				<img src="<c:url value='/img/classDetail/icon_heart_n.png'/>">
 			</a>
 		</c:if>
 		<c:forEach var="faclassVo" items="${faList}">
-			<c:if test="${faclassVo.cNo == claVo.cNo }">
+			<c:if test="${faclassVo.cNo == claVo.cNo&&sessionScope.userid!=claVo.mUserid }">
 			<input type="hidden" id="sbNo" value="${faclassVo.sbNo }">
 				<a href="#" id="shoppingbasket2">
 					<img src="<c:url value='/img/classDetail/icon_heart_s.png'/>">
