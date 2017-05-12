@@ -22,7 +22,7 @@ function pageFunc(curPage){
 </script>
 <!-- 페이징 처리를 위한 form 태그 -->
 <form name="frmPage" method="post"
-	action='<c:url value="/mypage/Favorite/Favoritehost.do?flNo=${param.flNo }&flWuserid=${param.flWuserid }"/>'>
+	action='<c:url value="/mypage/Favorite/Favoritehost.do?flNo=${param.flNo }&flUserid=${param.flUserid }"/>'>
 	<input type="hidden" name="currentPage">
 </form>
 <div class="col-md-10">
@@ -54,7 +54,7 @@ function pageFunc(curPage){
 						<c:forEach var="alist" items="${alist }">		
 							<li id="li${i }" role="presentation" style="width: 19.5%;">	
 							 	 <a href='<c:url value="/mypage/Favorite/Favoritehost.do?flNo=${alist.flNo }
-									&flWuserid=${alist.flWuserid }"/>'>${alist.flWuserid }
+									&flUserid=${alist.flUserid }"/>'>${alist.flUserid }
 								</a>
 							</li>
 							<c:set var="i" value="${i+1}" />
