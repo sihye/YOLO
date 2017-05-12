@@ -132,10 +132,10 @@
 		<div align="center" class="col-md-7">
 			<input class="btn btn-primary" type = "Button" value="수정"
 			 onclick
-           ="location.href='<c:url value="/noticeboard/edit.do?no=${vo.nbNo}"/>'" /> 
+           ="location.href='<c:url  value="/noticeboard/edit.do?no=${vo.nbNo}"/>'" />
 			<input class="btn btn-primary" type = "Button" value="삭제"
 			 onclick
-           ="location.href='<c:url value="/noticeboard/edit.do?no=${vo.nbNo}"/>'" /> 
+           ="location.href='<c:url value="/noticeboard/delete.do?no=${vo.nbNo}"/>'" /> 
            <input class="btn btn-primary" type = "Button" value="글목록" 
             onclick
            ="location.href='<c:url value="/admin/noticeBoard.do"/>'" /> 
