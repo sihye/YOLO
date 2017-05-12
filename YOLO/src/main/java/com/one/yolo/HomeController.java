@@ -211,6 +211,7 @@ public class HomeController {
 		
 		model.addAttribute("gCateList", gCateList);
 		model.addAttribute("cateList", cateList);
+		model.addAttribute("searchclassVo", searchclassVo);
 		
 		return "class/searchClass";
 	}
