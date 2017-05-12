@@ -124,7 +124,7 @@ function Apply()
 					<select name="candidate" id="candidate" multiple="multiple"
 						class="multiple">
 						<c:forEach var="alist" items="${flList }">	
-							<option value="${alist.flWuserid}">${alist.flWuserid}</option>
+							<option value="${alist.flUserid}">${alist.flUserid}</option>
 						</c:forEach>
 					</select>
 					
